@@ -1,0 +1,4 @@
+*.txt
+!*.ipynb
+32books/
+*.zip
