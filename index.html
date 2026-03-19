@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML Books Reader / 机器学习书库阅读器</title>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.0/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="reader_data.js"></script>
+<style>
+:root {
+  --bg: #FFF8F0;
+  --sidebar-bg: #FDF2E9;
+  --sidebar-hover: #F5E6D3;
+  --sidebar-active: #EDCEB0;
+  --card-bg: #FFFFFF;
+  --border: #E8D5C4;
+  --text: #4A3728;
+  --text-light: #8B7355;
+  --accent: #C67B4B;
+  --accent-light: #E8A87C;
+  --code-bg: #FFF5ED;
+  --heading: #6B4226;
+  --link: #B85C38;
+  --shadow: rgba(139, 115, 85, 0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ===== Sidebar ===== */
+#sidebar {
+  width: 320px; min-width: 320px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  height: 100vh; overflow: hidden;
+}
+#sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #F5E6D3, #FDF2E9);
+}
+#sidebar-header h1 { font-size: 18px; color: var(--heading); margin-bottom: 4px; letter-spacing: 0.5px; }
+#sidebar-header .subtitle { font-size: 12px; color: var(--text-light); }
+#search-box {
+  margin: 12px 16px 8px; padding: 8px 12px;
+  border: 1px solid var(--border); border-radius: 20px;
+  font-size: 13px; background: white; outline: none;
+  width: calc(100% - 32px); transition: border-color 0.2s;
+}
+#search-box:focus { border-color: var(--accent); }
+#search-box::placeholder { color: #C4A882; }
+#sidebar-tree { flex: 1; overflow-y: auto; padding: 8px 0; }
+#sidebar-tree::-webkit-scrollbar { width: 5px; }
+#sidebar-tree::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+.tree-book { user-select: none; }
+.tree-book-header {
+  display: flex; align-items: center; padding: 8px 16px;
+  cursor: pointer; font-size: 13px; font-weight: 600;
+  color: var(--heading); transition: background 0.15s; gap: 8px;
+}
+.tree-book-header:hover { background: var(--sidebar-hover); }
+.tree-book-header .arrow { font-size: 10px; transition: transform 0.2s; color: var(--text-light); width: 14px; text-align: center; }
+.tree-book-header .arrow.open { transform: rotate(90deg); }
+.tree-book-header .num { background: var(--accent); color: white; border-radius: 10px; padding: 1px 7px; font-size: 11px; font-weight: 500; min-width: 24px; text-align: center; }
+.tree-book-header .no-code { background: var(--border); color: var(--text-light); }
+.tree-book-header .book-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tree-book-header .count { font-size: 11px; color: var(--text-light); font-weight: 400; }
+.tree-children { display: none; padding-left: 12px; }
+.tree-children.open { display: block; }
+.tree-chapter-header {
+  display: flex; align-items: center; padding: 5px 16px 5px 20px;
+  cursor: pointer; font-size: 12px; color: var(--text); transition: background 0.15s; gap: 6px;
+}
+.tree-chapter-header:hover { background: var(--sidebar-hover); }
+.tree-chapter-header .arrow { font-size: 9px; transition: transform 0.2s; color: var(--text-light); width: 12px; }
+.tree-chapter-header .arrow.open { transform: rotate(90deg); }
+.tree-chapter-header .ch-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.tree-chapter-header .count { font-size: 11px; color: var(--text-light); }
+.tree-file {
+  padding: 4px 16px 4px 44px; cursor: pointer; font-size: 12px;
+  color: var(--text-light); transition: all 0.15s;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tree-file:hover { background: var(--sidebar-hover); color: var(--text); }
+.tree-file.active { background: var(--sidebar-active); color: var(--heading); font-weight: 600; border-right: 3px solid var(--accent); }
+
+/* ===== Main ===== */
+#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+#topbar {
+  padding: 12px 24px; border-bottom: 1px solid var(--border);
+  background: white; display: flex; align-items: center; gap: 12px; min-height: 48px;
+}
+#breadcrumb { flex: 1; font-size: 13px; color: var(--text-light); }
+#breadcrumb span { cursor: pointer; }
+#breadcrumb span:hover { color: var(--accent); }
+#breadcrumb .sep { margin: 0 6px; color: var(--border); }
+#nav-buttons { display: flex; gap: 8px; }
+#nav-buttons button {
+  padding: 6px 16px; border: 1px solid var(--border); background: white;
+  border-radius: 16px; font-size: 12px; cursor: pointer; color: var(--text); transition: all 0.2s;
+}
+#nav-buttons button:hover:not(:disabled) { background: var(--accent); color: white; border-color: var(--accent); }
+#nav-buttons button:disabled { opacity: 0.3; cursor: not-allowed; }
+#content { flex: 1; overflow-y: auto; padding: 32px; }
+#content::-webkit-scrollbar { width: 6px; }
+#content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ===== Welcome ===== */
+#welcome { max-width: 700px; margin: 0 auto; text-align: center; padding-top: 80px; }
+#welcome h2 { font-size: 28px; color: var(--heading); margin-bottom: 8px; font-weight: 300; }
+#welcome .sub { color: var(--text-light); font-size: 15px; margin-bottom: 40px; }
+.stats-row { display: flex; justify-content: center; gap: 40px; margin-bottom: 48px; }
+.stat-item .num { font-size: 36px; font-weight: 700; color: var(--accent); }
+.stat-item .label { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+.quick-start { text-align: left; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+.quick-start h3 { font-size: 15px; color: var(--heading); margin-bottom: 12px; }
+.book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.book-card { padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 12px; }
+.book-card:hover { background: var(--sidebar-hover); border-color: var(--accent-light); transform: translateY(-1px); }
+.book-card .bc-num { color: var(--accent); font-weight: 700; font-size: 14px; }
+.book-card .bc-name { color: var(--text); margin-top: 2px; }
+.book-card.no-code { opacity: 0.4; cursor: default; }
+.book-card.no-code:hover { background: transparent; transform: none; }
+
+/* ===== Notebook ===== */
+#notebook-view { max-width: 900px; margin: 0 auto; }
+.nb-cell { margin-bottom: 16px; }
+.nb-md { padding: 4px 0; }
+.nb-md h1 { font-size: 24px; color: var(--heading); margin: 16px 0 10px; font-weight: 600; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+.nb-md h2 { font-size: 19px; color: var(--heading); margin: 20px 0 8px; font-weight: 600; }
+.nb-md h3 { font-size: 16px; color: var(--heading); margin: 12px 0 6px; }
+.nb-md p { margin: 6px 0; }
+.nb-md strong { color: var(--heading); }
+.nb-md em { color: var(--text-light); }
+.nb-md hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+.nb-md ul, .nb-md ol { padding-left: 24px; margin: 6px 0; }
+.nb-md li { margin: 3px 0; }
+.nb-md table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+.nb-md th, .nb-md td { border: 1px solid var(--border); padding: 6px 12px; font-size: 13px; text-align: left; }
+.nb-md th { background: var(--sidebar-bg); font-weight: 600; }
+.nb-md code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: "SF Mono","Fira Code",monospace; }
+.nb-md a { color: var(--link); text-decoration: none; }
+.nb-md a:hover { text-decoration: underline; }
+.nb-code { background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.nb-code-header {
+  background: linear-gradient(to right, #F0E0D0, #F5E6D3);
+  padding: 4px 14px; font-size: 11px; color: var(--text-light);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nb-code-header .copy-btn {
+  background: none; border: 1px solid var(--border); border-radius: 4px;
+  padding: 2px 8px; font-size: 11px; cursor: pointer; color: var(--text-light); transition: all 0.2s;
+}
+.nb-code-header .copy-btn:hover { background: white; color: var(--accent); }
+.nb-code pre { padding: 14px; overflow-x: auto; font-size: 13px; line-height: 1.5; font-family: "SF Mono","Fira Code","Consolas",monospace; }
+.nb-code pre code { background: none !important; padding: 0 !important; }
+
+/* ===== Page Nav ===== */
+.page-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+.page-nav a {
+  display: flex; align-items: center; gap: 8px; padding: 12px 20px;
+  border: 1px solid var(--border); border-radius: 12px; text-decoration: none;
+  color: var(--text); font-size: 13px; cursor: pointer; transition: all 0.2s; max-width: 45%;
+}
+.page-nav a:hover { background: var(--sidebar-hover); border-color: var(--accent-light); }
+.page-nav a .dir { font-size: 11px; color: var(--text-light); }
+.page-nav a .title { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ===== Progress & Misc ===== */
+#progress-bar { height: 3px; background: var(--border); }
+#progress-fill { height: 100%; background: linear-gradient(to right, var(--accent-light), var(--accent)); transition: width 0.3s; width: 0%; }
+#scroll-top {
+  position: fixed; bottom: 24px; right: 24px; width: 40px; height: 40px;
+  border-radius: 50%; background: var(--accent); color: white; border: none;
+  cursor: pointer; font-size: 18px; display: none; align-items: center;
+  justify-content: center; box-shadow: 0 2px 8px var(--shadow); z-index: 100;
+}
+#scroll-top:hover { opacity: 0.85; }
+#loading {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg); display: flex; align-items: center;
+  justify-content: center; z-index: 9999; flex-direction: column; gap: 16px;
+}
+#loading .spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+#loading p { color: var(--text-light); font-size: 14px; }
+#loading.hidden { display: none; }
+.katex { font-size: 1em !important; }
+@media (max-width: 768px) { #sidebar { width: 260px; min-width: 260px; } #content { padding: 20px; } }
+</style>
+</head>
+<body>
+
+<div id="loading"><div class="spinner"></div><p>Loading notebooks / 加载笔记中...</p></div>
+
+<div id="sidebar">
+  <div id="sidebar-header">
+    <h1>ML Books Reader</h1>
+    <div class="subtitle">机器学习书库 · 双语注释笔记</div>
+  </div>
+  <input type="text" id="search-box" placeholder="搜索书名、章节...">
+  <div id="sidebar-tree"></div>
+</div>
+
+<div id="main">
+  <div id="topbar">
+    <div id="breadcrumb"><span>首页</span></div>
+    <div id="nav-buttons">
+      <button id="btn-prev" disabled>← 上一页</button>
+      <button id="btn-next" disabled>下一页 →</button>
+    </div>
+  </div>
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+  <div id="content">
+    <div id="welcome"></div>
+    <div id="notebook-view" style="display:none"></div>
+  </div>
+</div>
+
+<button id="scroll-top" onclick="document.getElementById('content').scrollTop=0">↑</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof NOTEBOOK_DATA === 'undefined') {
+    document.getElementById('loading').innerHTML = '<p style="color:#C67B4B;font-size:16px">reader_data.js 加载失败<br>请确保 index.html 和 reader_data.js 在同一目录下</p>';
+    return;
+  }
+  document.getElementById('loading').classList.add('hidden');
+
+  var D = NOTEBOOK_DATA;
+  var currentPath = null;
+  var flatFiles = [];
+
+  D.books.forEach(function(b, bi) {
+    b.chapters.forEach(function(ch, ci) {
+      ch.files.forEach(function(f, fi) {
+        flatFiles.push({bi:bi, ci:ci, fi:fi, bookName:b.name_cn, chName:ch.name, fileName:f.name});
+      });
+    });
+  });
+
+  function buildTree() {
+    var tree = document.getElementById('sidebar-tree');
+    tree.innerHTML = '';
+    D.books.forEach(function(book, bi) {
+      var div = document.createElement('div');
+      div.className = 'tree-book';
+      div.dataset.bi = bi;
+      var totalFiles = book.chapters.reduce(function(s,c){return s+c.files.length;}, 0);
+      var hdr = document.createElement('div');
+      hdr.className = 'tree-book-header';
+      hdr.innerHTML = '<span class="arrow">\u25b6</span><span class="num '+(book.has_code?'':'no-code')+'">'+book.num+'</span><span class="book-title" title="'+book.name_en+'">'+book.name_cn+'</span>'+(book.has_code?'<span class="count">'+totalFiles+'</span>':'<span class="count" style="color:#ccc">\u65e0\u4ee3\u7801</span>');
+      if (book.has_code && book.chapters.length > 0) {
+        hdr.onclick = (function(d){ return function(){ toggleChildren(d); }; })(div);
+      }
+      div.appendChild(hdr);
+      if (book.has_code) {
+        var children = document.createElement('div');
+        children.className = 'tree-children';
+        book.chapters.forEach(function(ch, ci) {
+          var chDiv = document.createElement('div');
+          var chHdr = document.createElement('div');
+          chHdr.className = 'tree-chapter-header';
+          chHdr.innerHTML = '<span class="arrow">\u25b6</span><span class="ch-name">'+ch.name+'</span><span class="count">'+ch.files.length+'</span>';
+          chHdr.onclick = (function(d){ return function(e){ e.stopPropagation(); toggleChildren(d); }; })(chDiv);
+          chDiv.appendChild(chHdr);
+          var chCh = document.createElement('div');
+          chCh.className = 'tree-children';
+          ch.files.forEach(function(f, fi) {
+            var fDiv = document.createElement('div');
+            fDiv.className = 'tree-file';
+            fDiv.textContent = f.name;
+            fDiv.dataset.path = bi+'-'+ci+'-'+fi;
+            fDiv.onclick = (function(a,b,c){ return function(e){ e.stopPropagation(); showFile(a,b,c); }; })(bi,ci,fi);
+            chCh.appendChild(fDiv);
+          });
+          chDiv.appendChild(chCh);
+          children.appendChild(chDiv);
+        });
+        div.appendChild(children);
+      }
+      tree.appendChild(div);
+    });
+  }
+
+  function toggleChildren(parent) {
+    var ch = parent.querySelector(':scope > .tree-children');
+    var arrow = parent.children[0].querySelector('.arrow');
+    if (ch) ch.classList.toggle('open');
+    if (arrow) arrow.classList.toggle('open');
+  }
+
+  document.getElementById('search-box').addEventListener('input', function() {
+    var q = this.value.toLowerCase().trim();
+    document.querySelectorAll('.tree-book').forEach(function(el) {
+      var bi = parseInt(el.dataset.bi);
+      var book = D.books[bi];
+      var bookMatch = book.name_cn.toLowerCase().indexOf(q)>=0 || book.name_en.toLowerCase().indexOf(q)>=0 || book.num.indexOf(q)>=0;
+      if (!q) { el.style.display=''; el.querySelectorAll('.tree-children').forEach(function(c){c.classList.remove('open');}); el.querySelectorAll('.arrow').forEach(function(a){a.classList.remove('open');}); return; }
+      var hasMatch = bookMatch;
+      if (!bookMatch && book.has_code) {
+        book.chapters.forEach(function(ch){ ch.files.forEach(function(f){ if(f.name.toLowerCase().indexOf(q)>=0||ch.name.toLowerCase().indexOf(q)>=0) hasMatch=true; }); });
+      }
+      el.style.display = hasMatch ? '' : 'none';
+      if (hasMatch && q) { el.querySelectorAll('.tree-children').forEach(function(c){c.classList.add('open');}); el.querySelectorAll('.arrow').forEach(function(a){a.classList.add('open');}); }
+    });
+  });
+
+  function renderMd(src) {
+    var h = src;
+    h = h.replace(/\$\$([\s\S]*?)\$\$/g, function(_,tex) {
+      try { return '<div class="katex-block">'+katex.renderToString(tex.trim(),{displayMode:true,throwOnError:false})+'</div>'; }
+      catch(e){ return '<code>'+tex+'</code>'; }
+    });
+    h = h.replace(/\$([^\$\n]+?)\$/g, function(_,tex) {
+      try { return katex.renderToString(tex.trim(),{displayMode:false,throwOnError:false}); }
+      catch(e){ return '<code>'+tex+'</code>'; }
+    });
+    return marked.parse(h);
+  }
+
+  function showFile(bi, ci, fi) {
+    var book = D.books[bi], ch = book.chapters[ci], file = ch.files[fi];
+    currentPath = {bi:bi, ci:ci, fi:fi};
+
+    document.getElementById('breadcrumb').innerHTML =
+      '<span onclick="window._showWelcome()">\u9996\u9875</span><span class="sep">/</span>'+
+      '<span onclick="window._expandBook('+bi+')">'+book.name_cn+'</span><span class="sep">/</span>'+
+      '<span>'+ch.name+'</span><span class="sep">/</span>'+
+      '<span style="color:var(--heading);font-weight:500">'+file.name+'</span>';
+
+    var view = document.getElementById('notebook-view');
+    view.style.display = 'block';
+    document.getElementById('welcome').style.display = 'none';
+    view.innerHTML = '';
+
+    file.cells.forEach(function(cell, idx) {
+      var div = document.createElement('div');
+      div.className = 'nb-cell';
+      if (cell.t === 'm') {
+        div.className += ' nb-md';
+        div.innerHTML = renderMd(cell.s);
+      } else {
+        div.className += ' nb-code';
+        var codeId = 'code-'+idx;
+        div.innerHTML = '<div class="nb-code-header"><span>Python</span><button class="copy-btn" onclick="window._copyCode(\''+codeId+'\')">\u590d\u5236</button></div><pre><code id="'+codeId+'" class="language-python"></code></pre>';
+        div.querySelector('code').textContent = cell.s;
+      }
+      view.appendChild(div);
+    });
+
+    view.querySelectorAll('pre code').forEach(function(block){ hljs.highlightElement(block); });
+
+    var flatIdx = -1;
+    for (var i=0; i<flatFiles.length; i++) { if(flatFiles[i].bi===bi&&flatFiles[i].ci===ci&&flatFiles[i].fi===fi){flatIdx=i;break;} }
+
+    var nav = document.createElement('div');
+    nav.className = 'page-nav';
+    if (flatIdx > 0) {
+      var prev = flatFiles[flatIdx-1];
+      var a1 = document.createElement('a');
+      a1.innerHTML = '<div><div class="dir">\u2190 \u4e0a\u4e00\u9875</div><div class="title">'+prev.fileName+'</div></div>';
+      a1.onclick = (function(p){return function(){showFile(p.bi,p.ci,p.fi);};})(prev);
+      nav.appendChild(a1);
+    } else { nav.appendChild(document.createElement('div')); }
+    if (flatIdx < flatFiles.length-1) {
+      var next = flatFiles[flatIdx+1];
+      var a2 = document.createElement('a');
+      a2.style.textAlign='right'; a2.style.marginLeft='auto';
+      a2.innerHTML = '<div><div class="dir">\u4e0b\u4e00\u9875 \u2192</div><div class="title">'+next.fileName+'</div></div>';
+      a2.onclick = (function(n){return function(){showFile(n.bi,n.ci,n.fi);};})(next);
+      nav.appendChild(a2);
+    }
+    view.appendChild(nav);
+
+    document.getElementById('btn-prev').disabled = flatIdx <= 0;
+    document.getElementById('btn-next').disabled = flatIdx >= flatFiles.length-1;
+    document.getElementById('progress-fill').style.width = ((flatIdx+1)/flatFiles.length*100)+'%';
+
+    document.querySelectorAll('.tree-file').forEach(function(el){el.classList.remove('active');});
+    var target = document.querySelector('.tree-file[data-path="'+bi+'-'+ci+'-'+fi+'"]');
+    if (target) {
+      target.classList.add('active');
+      var node = target.parentElement;
+      while (node && node.id !== 'sidebar-tree') {
+        if (node.classList.contains('tree-children')) node.classList.add('open');
+        if (node.previousElementSibling) { var ar = node.previousElementSibling.querySelector('.arrow'); if(ar) ar.classList.add('open'); }
+        node = node.parentElement;
+      }
+      target.scrollIntoView({block:'nearest'});
+    }
+    document.getElementById('content').scrollTop = 0;
+  }
+
+  function expandBook(bi) {
+    var el = document.querySelector('.tree-book[data-bi="'+bi+'"]');
+    if (el) { var ch=el.querySelector(':scope > .tree-children'), ar=el.querySelector('.tree-book-header .arrow');
+      if(ch&&!ch.classList.contains('open')){ch.classList.add('open'); if(ar)ar.classList.add('open');} }
+  }
+
+  function navPrev() {
+    if(!currentPath) return;
+    var idx=-1; for(var i=0;i<flatFiles.length;i++){if(flatFiles[i].bi===currentPath.bi&&flatFiles[i].ci===currentPath.ci&&flatFiles[i].fi===currentPath.fi){idx=i;break;}}
+    if(idx>0){var p=flatFiles[idx-1];showFile(p.bi,p.ci,p.fi);}
+  }
+  function navNext() {
+    if(!currentPath) return;
+    var idx=-1; for(var i=0;i<flatFiles.length;i++){if(flatFiles[i].bi===currentPath.bi&&flatFiles[i].ci===currentPath.ci&&flatFiles[i].fi===currentPath.fi){idx=i;break;}}
+    if(idx<flatFiles.length-1){var n=flatFiles[idx+1];showFile(n.bi,n.ci,n.fi);}
+  }
+
+  function copyCode(id) {
+    var code = document.getElementById(id);
+    navigator.clipboard.writeText(code.textContent).then(function(){
+      var btn = code.closest('.nb-code').querySelector('.copy-btn');
+      btn.textContent='\u5df2\u590d\u5236 \u2713'; setTimeout(function(){btn.textContent='\u590d\u5236';},1500);
+    });
+  }
+
+  function showWelcome() {
+    currentPath = null;
+    document.getElementById('notebook-view').style.display = 'none';
+    var w = document.getElementById('welcome'); w.style.display = '';
+    document.getElementById('btn-prev').disabled = true;
+    document.getElementById('btn-next').disabled = true;
+    document.getElementById('progress-fill').style.width = '0%';
+    document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--heading);font-weight:500">\u9996\u9875</span>';
+
+    var totalBooks=D.books.filter(function(b){return b.has_code;}).length;
+    var totalChapters=D.books.reduce(function(s,b){return s+b.chapters.length;},0);
+    var totalFileCount=flatFiles.length;
+    var grid='';
+    D.books.forEach(function(b,bi){
+      if(b.has_code){ grid+='<div class="book-card" onclick="window._expandBook('+bi+');window._showFile('+bi+',0,0)"><div class="bc-num">'+b.num+'</div><div class="bc-name">'+b.name_cn+'</div></div>'; }
+      else { grid+='<div class="book-card no-code"><div class="bc-num" style="color:var(--text-light)">'+b.num+'</div><div class="bc-name" style="color:var(--text-light)">'+b.name_cn+'<br><small>\uff08\u65e0\u4ee3\u7801\u6587\u4ef6\uff09</small></div></div>'; }
+    });
+    w.innerHTML='<h2>\u6b22\u8fce\u6765\u5230\u4f60\u7684 ML \u5b66\u4e60\u4e66\u5e93</h2><div class="sub">32 \u672c\u673a\u5668\u5b66\u4e60\u7ecf\u5178\u4e66\u7c4d \u00b7 \u53cc\u8bed\u6ce8\u91ca \u00b7 \u9010\u6b65\u8bb2\u89e3</div><div class="stats-row"><div class="stat-item"><div class="num">'+totalBooks+'</div><div class="label">\u672c\u4e66</div></div><div class="stat-item"><div class="num">'+totalChapters+'</div><div class="label">\u7ae0\u8282</div></div><div class="stat-item"><div class="num">'+totalFileCount+'</div><div class="label">\u4ee3\u7801\u6587\u4ef6</div></div></div><div class="quick-start"><h3>\u9009\u62e9\u4e00\u672c\u4e66\u5f00\u59cb\u5b66\u4e60 \u2192</h3><div class="book-grid">'+grid+'</div></div>';
+    document.getElementById('content').scrollTop = 0;
+  }
+
+  document.getElementById('content').addEventListener('scroll', function(){ document.getElementById('scroll-top').style.display=this.scrollTop>300?'flex':'none'; });
+  document.addEventListener('keydown', function(e){ if(e.target.tagName==='INPUT')return; if(e.key==='ArrowLeft')navPrev(); if(e.key==='ArrowRight')navNext(); });
+  document.getElementById('btn-prev').onclick = navPrev;
+  document.getElementById('btn-next').onclick = navNext;
+
+  window._showFile = showFile;
+  window._showWelcome = showWelcome;
+  window._expandBook = expandBook;
+  window._copyCode = copyCode;
+
+  buildTree();
+  showWelcome();
+});
+</script>
+</body>
+</html>
