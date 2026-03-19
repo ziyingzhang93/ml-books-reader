@@ -116,6 +116,13 @@ body {
 }
 #nav-buttons button:hover:not(:disabled) { background: var(--accent); color: white; border-color: var(--accent); }
 #nav-buttons button:disabled { opacity: 0.3; cursor: not-allowed; }
+#colab-btn {
+  display: none; padding: 6px 14px; border: 1px solid #F9AB00; background: #FFF8E1;
+  border-radius: 16px; font-size: 12px; cursor: pointer; color: #E37400;
+  font-weight: 600; transition: all 0.2s; text-decoration: none; white-space: nowrap;
+}
+#colab-btn:hover { background: #F9AB00; color: white; }
+#colab-btn svg { vertical-align: middle; margin-right: 4px; }
 #content { flex: 1; overflow-y: auto; padding: 32px; }
 #content::-webkit-scrollbar { width: 6px; }
 #content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -220,6 +227,7 @@ body {
 <div id="main">
   <div id="topbar">
     <div id="breadcrumb"><span>首页</span></div>
+    <a id="colab-btn" href="#" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#F9AB00"/></svg>Open in Colab</a>
     <div id="nav-buttons">
       <button id="btn-prev" disabled>← 上一页</button>
       <button id="btn-next" disabled>下一页 →</button>
@@ -338,6 +346,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var book = D.books[bi], ch = book.chapters[ci], file = ch.files[fi];
     currentPath = {bi:bi, ci:ci, fi:fi};
 
+    var colabBtn = document.getElementById('colab-btn');
+    var nbPath = book.id+'/annotated_code/'+ch.id+'/'+file.id;
+    colabBtn.href = 'https://colab.research.google.com/github/ziyingzhang93/ml-books-reader/blob/main/'+nbPath;
+    colabBtn.style.display = 'inline-flex';
+
     document.getElementById('breadcrumb').innerHTML =
       '<span onclick="window._showWelcome()">\u9996\u9875</span><span class="sep">/</span>'+
       '<span onclick="window._expandBook('+bi+')">'+book.name_cn+'</span><span class="sep">/</span>'+
@@ -439,6 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('btn-prev').disabled = true;
     document.getElementById('btn-next').disabled = true;
     document.getElementById('progress-fill').style.width = '0%';
+    document.getElementById('colab-btn').style.display = 'none';
     document.getElementById('breadcrumb').innerHTML = '<span style="color:var(--heading);font-weight:500">\u9996\u9875</span>';
 
     var totalBooks=D.books.filter(function(b){return b.has_code;}).length;
