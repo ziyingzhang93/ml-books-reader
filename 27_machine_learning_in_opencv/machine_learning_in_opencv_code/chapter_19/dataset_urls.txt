@@ -1,0 +1,2 @@
+https://thor.robots.ox.ac.uk/~vgg/data/pets/images.tar.gz
+https://thor.robots.ox.ac.uk/~vgg/data/pets/annotations.tar.gz

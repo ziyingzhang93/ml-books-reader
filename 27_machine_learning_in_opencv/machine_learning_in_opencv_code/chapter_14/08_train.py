@@ -1,0 +1,27 @@
+import cv2
+import numpy as np
+from sklearn.datasets import make_blobs
+from sklearn import model_selection as ms
+
+# Generate a dataset of 2D data points and their groundtruth labels
+x, y_true = make_blobs(n_samples=100, centers=2, cluster_std=5, random_state=15)
+
+# Split the data into training and test sets
+x_train, x_test, y_train, y_test = \
+    ms.train_test_split(x, y_true, test_size=0.2, random_state=10)
+
+# Create an empty logistic regression model
+lr = cv2.ml.LogisticRegression_create()
+
+# Set the training method to mini-batch gradient descent and the size of the mini-batch
+lr.setTrainMethod(cv2.ml.LogisticRegression_MINI_BATCH)
+lr.setMiniBatchSize(5)
+
+# Set the number of iterations
+lr.setIterations(10)
+
+# Train the logistic regressor on the set of training data
+lr.train(x_train.astype(np.float32), cv2.ml.ROW_SAMPLE, y_train.astype(np.float32))
+
+# Print the learned coefficients
+print(lr.get_learnt_thetas())

@@ -1,0 +1,18 @@
+# reconstruct square matrix from svd
+from numpy import array
+from numpy import diag
+from scipy.linalg import svd
+# define matrix
+A = array([
+	[1, 2, 3],
+	[4, 5, 6],
+	[7, 8, 9]])
+print(A)
+# factorize
+U, s, VT = svd(A)
+# create n x n Sigma matrix
+Sigma = diag(s)
+# reconstruct matrix
+# alternative syntax in Python 3.5: B = U @ Sigma @ VT
+B = U.dot(Sigma.dot(VT))
+print(B)

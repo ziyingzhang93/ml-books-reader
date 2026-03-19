@@ -1,0 +1,26 @@
+Python for Machine Learning
+===========================
+
+README
+------
+
+Welcome to Python for Machine Learning!
+
+Your package contains:
+
+1. README (this file)
+	README.txt
+2. The Ebook:
+	python_for_machine_learning.pdf
+3. Code Recipes:
+	python_for_machine_learning_code/
+4. NumPy Cheatsheet
+	numpy-cheatsheet.pdf
+
+The code directory provides access to all of the data and code examples used in the book.
+
+Any questions at all, contact me directly via email: jason@MachineLearningMastery.com
+
+Kind Regards,
+
+Jason.
