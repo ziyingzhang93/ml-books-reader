@@ -1,0 +1,395 @@
+# 数据科学入门
+## Chapter 10
+
+---
+
+### Histogram
+
+# 01 — Histogram / 01 Histogram
+
+**Chapter 10 — File 1 of 3 / 第10章 — 第1个文件（共3个）**
+
+---
+
+## Summary / 总结
+
+This script demonstrates **Data separation**.
+
+本脚本演示 **Data separation**。
+
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 加载和准备数据 / Load and prepare data
+- 可视化结果 / Visualize results
+
+## Code Flow / 代码流程
+
+```
+   
+┌────────────────────┐
+│  加载数据 Load Data  │
+└────────────────────┘
+  │
+  ▼
+┌───────────────────┐
+│  可视化 Visualize  │
+└───────────────────┘
+```
+
+---
+## Step 1 — Step 1
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+Ames = pd.read_csv('Ames.csv')
+```
+
+---
+## Step 2 — Data separation
+
+```python
+ac_prices = Ames[Ames['CentralAir'] == 'Y']['SalePrice']
+no_ac_prices = Ames[Ames['CentralAir'] == 'N']['SalePrice']
+```
+
+---
+## Step 3 — Setting up the visualization
+
+```python
+plt.figure(figsize=(10, 6))
+```
+
+---
+## Step 4 — Histograms for sale prices based on air conditioning
+Plotting 'With AC' first for the desired order in the legend
+
+```python
+plt.hist(ac_prices, bins=30, alpha=0.7, color='blue', edgecolor='blue', lw=0.5,
+         label='Sales Prices With AC')
+mean_ac = np.mean(ac_prices)
+plt.axvline(mean_ac, color='blue', linestyle='dashed', linewidth=1.5,
+            label=f'Mean (With AC): ${mean_ac:.2f}')
+
+plt.hist(no_ac_prices, bins=30, alpha=0.7, color='red', edgecolor='red', lw=0.5,
+         label='Sales Prices Without AC')
+mean_no_ac = np.mean(no_ac_prices)
+plt.axvline(mean_no_ac, color='red', linestyle='dashed', linewidth=1.5,
+            label=f'Mean (Without AC): ${mean_no_ac:.2f}')
+
+plt.title('Distribution of Sales Prices based on Presence of Air Conditioning',
+          fontsize=18)
+plt.xlabel('Sales Price', fontsize=15)
+plt.ylabel('Number of Houses', fontsize=15)
+plt.legend(loc='upper right')
+plt.tight_layout()
+plt.show()
+```
+
+---
+## Learning Notes / 学习笔记
+
+- **概念**: Data separation 是机器学习中的常用技术。  
+  *Data separation is a common technique in machine learning.*
+
+- **ML 应用**: 本示例展示了如何在实践中应用该技术。  
+  *This example shows how to apply the technique in practice.*
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `matplotlib` | 绑图库 | Plotting library |
+| `np.mean` | 计算均值 | Calculate mean |
+| `numpy` | 数值计算库 | Numerical computing library |
+| `pandas` | 数据分析库 | Data analysis library |
+| `plt.figure` | 创建画布 | Create figure |
+| `plt.hist` | 绘制直方图 | Draw histogram |
+| `plt.show` | 显示图表 | Display plot |
+| `read_csv` | 读取CSV文件 | Read CSV file |
+
+---
+## Complete Code / 完整代码一览
+
+Below is the full code for quick reference. / 以下是完整代码，供快速参考。
+
+```python
+# ===============================
+# Histogram / 01 Histogram
+# Complete Code / 完整代码
+# ===============================
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+Ames = pd.read_csv('Ames.csv')
+
+# Data separation
+ac_prices = Ames[Ames['CentralAir'] == 'Y']['SalePrice']
+no_ac_prices = Ames[Ames['CentralAir'] == 'N']['SalePrice']
+
+# Setting up the visualization
+plt.figure(figsize=(10, 6))
+
+# Histograms for sale prices based on air conditioning
+# Plotting 'With AC' first for the desired order in the legend
+plt.hist(ac_prices, bins=30, alpha=0.7, color='blue', edgecolor='blue', lw=0.5,
+         label='Sales Prices With AC')
+mean_ac = np.mean(ac_prices)
+plt.axvline(mean_ac, color='blue', linestyle='dashed', linewidth=1.5,
+            label=f'Mean (With AC): ${mean_ac:.2f}')
+
+plt.hist(no_ac_prices, bins=30, alpha=0.7, color='red', edgecolor='red', lw=0.5,
+         label='Sales Prices Without AC')
+mean_no_ac = np.mean(no_ac_prices)
+plt.axvline(mean_no_ac, color='red', linestyle='dashed', linewidth=1.5,
+            label=f'Mean (Without AC): ${mean_no_ac:.2f}')
+
+plt.title('Distribution of Sales Prices based on Presence of Air Conditioning',
+          fontsize=18)
+plt.xlabel('Sales Price', fontsize=15)
+plt.ylabel('Number of Houses', fontsize=15)
+plt.legend(loc='upper right')
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+➡️ **Next / 下一步**: File 2 of 3
+
+---
+
+### Hypothesis
+
+# 02 — Hypothesis / 02 Hypothesis
+
+**Chapter 10 — File 2 of 3 / 第10章 — 第2个文件（共3个）**
+
+---
+
+## Summary / 总结
+
+This script demonstrates **Performing a two-sample t-test**.
+
+本脚本演示 **Performing a two-sample t-test**。
+
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 加载和准备数据 / Load and prepare data
+
+
+---
+## Step 1 — Step 1
+
+```python
+import pandas as pd
+import scipy.stats as stats
+
+Ames = pd.read_csv('Ames.csv')
+ac_prices = Ames[Ames['CentralAir'] == 'Y']['SalePrice']
+no_ac_prices = Ames[Ames['CentralAir'] == 'N']['SalePrice']
+```
+
+---
+## Step 2 — Performing a two-sample t-test
+
+```python
+t_stat, p_value = stats.ttest_ind(ac_prices, no_ac_prices, equal_var=False)
+```
+
+---
+## Step 3 — Printing the results
+
+```python
+if p_value < 0.05:
+    result = "reject the null hypothesis"
+else:
+    result = "fail to reject the null hypothesis"
+print(f"With a p-value of {p_value:.5f}, we {result}.")
+```
+
+---
+## Learning Notes / 学习笔记
+
+- **概念**: Performing a two-sample t-test 是机器学习中的常用技术。  
+  *Performing a two-sample t-test is a common technique in machine learning.*
+
+- **ML 应用**: 本示例展示了如何在实践中应用该技术。  
+  *This example shows how to apply the technique in practice.*
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `pandas` | 数据分析库 | Data analysis library |
+| `read_csv` | 读取CSV文件 | Read CSV file |
+
+---
+## Complete Code / 完整代码一览
+
+Below is the full code for quick reference. / 以下是完整代码，供快速参考。
+
+```python
+# ===============================
+# Hypothesis / 02 Hypothesis
+# Complete Code / 完整代码
+# ===============================
+
+import pandas as pd
+import scipy.stats as stats
+
+Ames = pd.read_csv('Ames.csv')
+ac_prices = Ames[Ames['CentralAir'] == 'Y']['SalePrice']
+no_ac_prices = Ames[Ames['CentralAir'] == 'N']['SalePrice']
+
+# Performing a two-sample t-test
+t_stat, p_value = stats.ttest_ind(ac_prices, no_ac_prices, equal_var=False)
+
+# Printing the results
+if p_value < 0.05:
+    result = "reject the null hypothesis"
+else:
+    result = "fail to reject the null hypothesis"
+print(f"With a p-value of {p_value:.5f}, we {result}.")
+```
+
+---
+
+➡️ **Next / 下一步**: File 3 of 3
+
+---
+
+### Onesided
+
+# 03 — Onesided / 03 Onesided
+
+**Chapter 10 — File 3 of 3 / 第10章 — 第3个文件（共3个）**
+
+---
+
+## Summary / 总结
+
+This script demonstrates **Performing a two-sample t-test**.
+
+本脚本演示 **Performing a two-sample t-test**。
+
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 加载和准备数据 / Load and prepare data
+
+
+---
+## Step 1 — Step 1
+
+```python
+import pandas as pd
+import scipy.stats as stats
+
+Ames = pd.read_csv('Ames.csv')
+ac_prices = Ames[Ames['CentralAir'] == 'Y']['SalePrice']
+no_ac_prices = Ames[Ames['CentralAir'] == 'N']['SalePrice']
+```
+
+---
+## Step 2 — Performing a two-sample t-test
+
+```python
+t_stat, p_value = stats.ttest_ind(ac_prices, no_ac_prices, equal_var=False,
+                                  alternative="greater")
+```
+
+---
+## Step 3 — Printing the results
+
+```python
+if p_value < 0.05:
+    result = "reject the null hypothesis"
+else:
+    result = "fail to reject the null hypothesis"
+print(f"With a p-value of {p_value:.5f}, we {result}.")
+```
+
+---
+## Learning Notes / 学习笔记
+
+- **概念**: Performing a two-sample t-test 是机器学习中的常用技术。  
+  *Performing a two-sample t-test is a common technique in machine learning.*
+
+- **ML 应用**: 本示例展示了如何在实践中应用该技术。  
+  *This example shows how to apply the technique in practice.*
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `pandas` | 数据分析库 | Data analysis library |
+| `read_csv` | 读取CSV文件 | Read CSV file |
+
+---
+## Complete Code / 完整代码一览
+
+Below is the full code for quick reference. / 以下是完整代码，供快速参考。
+
+```python
+# ===============================
+# Onesided / 03 Onesided
+# Complete Code / 完整代码
+# ===============================
+
+import pandas as pd
+import scipy.stats as stats
+
+Ames = pd.read_csv('Ames.csv')
+ac_prices = Ames[Ames['CentralAir'] == 'Y']['SalePrice']
+no_ac_prices = Ames[Ames['CentralAir'] == 'N']['SalePrice']
+
+# Performing a two-sample t-test
+t_stat, p_value = stats.ttest_ind(ac_prices, no_ac_prices, equal_var=False,
+                                  alternative="greater")
+
+# Printing the results
+if p_value < 0.05:
+    result = "reject the null hypothesis"
+else:
+    result = "fail to reject the null hypothesis"
+print(f"With a p-value of {p_value:.5f}, we {result}.")
+```
+
+---
+
+### Chapter Summary
+
+# Chapter 10 Summary / 第10章总结
+
+## Theme / 主题: Chapter 10 / Chapter 10
+
+This chapter contains **3 code files** demonstrating chapter 10.
+
+本章包含 **3 个代码文件**，演示Chapter 10。
+
+---
+## Evolution / 演化路线
+
+  1. `01_histogram.ipynb` — Histogram
+  2. `02_hypothesis.ipynb` — Hypothesis
+  3. `03_onesided.ipynb` — Onesided
+
+---
+## ML Relevance / ML 关联
+
+The techniques in this chapter (Chapter 10) are fundamental building blocks in machine learning pipelines.
+
+本章技术（Chapter 10）是机器学习流水线中的基础构建块。
+
+---
