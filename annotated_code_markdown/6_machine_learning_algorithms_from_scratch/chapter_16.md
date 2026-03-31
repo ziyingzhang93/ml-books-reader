@@ -1,9 +1,9 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 16
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 16 Summary / 第16章总结
 
@@ -52,6 +52,25 @@ This script demonstrates **Bagging Algorithm on the Sonar dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Bagging Algorithm on the Sonar dataset
 
 ```python
@@ -66,11 +85,13 @@ from csv import reader
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -92,6 +113,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -106,12 +128,18 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 ```
@@ -122,9 +150,11 @@ def cross_validation_split(dataset, n_folds):
 ```python
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 ```
 
@@ -142,11 +172,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 ```
@@ -159,8 +191,10 @@ def test_split(index, value, dataset):
 	left, right = list(), list()
 	for row in dataset:
 		if row[index] < value:
+   # 添加元素到列表末尾 / Append element to list end
 			left.append(row)
 		else:
+   # 添加元素到列表末尾 / Append element to list end
 			right.append(row)
 	return left, right
 ```
@@ -176,6 +210,7 @@ def gini_index(groups, classes):
 ## Step 10 — count all samples at split point
 
 ```python
+# 获取长度 / Get length
 n_instances = float(sum([len(group) for group in groups]))
 ```
 
@@ -185,6 +220,7 @@ n_instances = float(sum([len(group) for group in groups]))
 ```python
 gini = 0.0
 	for group in groups:
+  # 获取长度 / Get length
 		size = float(len(group))
 ```
 
@@ -221,6 +257,7 @@ gini += (1.0 - score) * (size / n_instances)
 def get_split(dataset):
 	class_values = list(set(row[-1] for row in dataset))
 	b_index, b_value, b_score, b_groups = 999, 999, 999, None
+ # 获取长度 / Get length
 	for index in range(len(dataset[0])-1):
 		for row in dataset:
 ```
@@ -277,6 +314,7 @@ if depth >= max_depth:
 ## Step 21 — process left child
 
 ```python
+# 获取长度 / Get length
 if len(left) <= min_size:
 		node['left'] = to_terminal(left)
 	else:
@@ -288,6 +326,7 @@ if len(left) <= min_size:
 ## Step 22 — process right child
 
 ```python
+# 获取长度 / Get length
 if len(right) <= min_size:
 		node['right'] = to_terminal(right)
 	else:
@@ -328,9 +367,13 @@ def predict(node, row):
 ```python
 def subsample(dataset, ratio):
 	sample = list()
+ # 获取长度 / Get length
 	n_sample = round(len(dataset) * ratio)
+ # 获取长度 / Get length
 	while len(sample) < n_sample:
+  # 获取长度 / Get length
 		index = randrange(len(dataset))
+  # 添加元素到列表末尾 / Append element to list end
 		sample.append(dataset[index])
 	return sample
 ```
@@ -350,9 +393,11 @@ def bagging_predict(trees, row):
 ```python
 def bagging(train, test, max_depth, min_size, sample_size, n_trees):
 	trees = list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_trees):
 		sample = subsample(train, sample_size)
 		tree = build_tree(sample, max_depth, min_size)
+  # 添加元素到列表末尾 / Append element to list end
 		trees.append(tree)
 	predictions = [bagging_predict(trees, row) for row in test]
 	return(predictions)
@@ -362,6 +407,7 @@ def bagging(train, test, max_depth, min_size, sample_size, n_trees):
 ## Step 28 — Test bagging on the sonar dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -377,6 +423,7 @@ dataset = load_csv(filename)
 ## Step 30 — convert string attributes to integers
 
 ```python
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 ```
@@ -385,6 +432,7 @@ for i in range(len(dataset[0])-1):
 ## Step 31 — convert class column to integers
 
 ```python
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 ```
 
@@ -398,8 +446,11 @@ min_size = 2
 sample_size = 0.50
 for n_trees in [1, 5, 10, 50]:
 	scores = evaluate_algorithm(dataset, bagging, n_folds, max_depth, min_size, sample_size, n_trees)
+ # 打印输出 / Print output
 	print('Trees: %d' % n_trees)
+ # 打印输出 / Print output
 	print('Scores: %s' % scores)
+ # 打印输出 / Print output
 	print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -438,11 +489,13 @@ from csv import reader
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -456,6 +509,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -466,21 +520,29 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 
 # Evaluate an algorithm using a cross validation split
@@ -494,11 +556,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 
@@ -507,18 +571,22 @@ def test_split(index, value, dataset):
 	left, right = list(), list()
 	for row in dataset:
 		if row[index] < value:
+   # 添加元素到列表末尾 / Append element to list end
 			left.append(row)
 		else:
+   # 添加元素到列表末尾 / Append element to list end
 			right.append(row)
 	return left, right
 
 # Calculate the Gini index for a split dataset
 def gini_index(groups, classes):
 	# count all samples at split point
+ # 获取长度 / Get length
 	n_instances = float(sum([len(group) for group in groups]))
 	# sum weighted Gini index for each group
 	gini = 0.0
 	for group in groups:
+  # 获取长度 / Get length
 		size = float(len(group))
 		# avoid divide by zero
 		if size == 0:
@@ -536,6 +604,7 @@ def gini_index(groups, classes):
 def get_split(dataset):
 	class_values = list(set(row[-1] for row in dataset))
 	b_index, b_value, b_score, b_groups = 999, 999, 999, None
+ # 获取长度 / Get length
 	for index in range(len(dataset[0])-1):
 		for row in dataset:
 		# for i in range(len(dataset)):
@@ -564,12 +633,14 @@ def split(node, max_depth, min_size, depth):
 		node['left'], node['right'] = to_terminal(left), to_terminal(right)
 		return
 	# process left child
+ # 获取长度 / Get length
 	if len(left) <= min_size:
 		node['left'] = to_terminal(left)
 	else:
 		node['left'] = get_split(left)
 		split(node['left'], max_depth, min_size, depth+1)
 	# process right child
+ # 获取长度 / Get length
 	if len(right) <= min_size:
 		node['right'] = to_terminal(right)
 	else:
@@ -598,9 +669,13 @@ def predict(node, row):
 # Create a random subsample from the dataset with replacement
 def subsample(dataset, ratio):
 	sample = list()
+ # 获取长度 / Get length
 	n_sample = round(len(dataset) * ratio)
+ # 获取长度 / Get length
 	while len(sample) < n_sample:
+  # 获取长度 / Get length
 		index = randrange(len(dataset))
+  # 添加元素到列表末尾 / Append element to list end
 		sample.append(dataset[index])
 	return sample
 
@@ -612,22 +687,27 @@ def bagging_predict(trees, row):
 # Bootstrap Aggregation Algorithm
 def bagging(train, test, max_depth, min_size, sample_size, n_trees):
 	trees = list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_trees):
 		sample = subsample(train, sample_size)
 		tree = build_tree(sample, max_depth, min_size)
+  # 添加元素到列表末尾 / Append element to list end
 		trees.append(tree)
 	predictions = [bagging_predict(trees, row) for row in test]
 	return(predictions)
 
 # Test bagging on the sonar dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 # load and prepare data
 filename = 'sonar.all-data.csv'
 dataset = load_csv(filename)
 # convert string attributes to integers
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 # convert class column to integers
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 # evaluate algorithm
 n_folds = 5
@@ -636,8 +716,11 @@ min_size = 2
 sample_size = 0.50
 for n_trees in [1, 5, 10, 50]:
 	scores = evaluate_algorithm(dataset, bagging, n_folds, max_depth, min_size, sample_size, n_trees)
+ # 打印输出 / Print output
 	print('Trees: %d' % n_trees)
+ # 打印输出 / Print output
 	print('Scores: %s' % scores)
+ # 打印输出 / Print output
 	print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -683,9 +766,13 @@ from random import randrange
 ```python
 def subsample(dataset, ratio=1.0):
 	sample = list()
+ # 获取长度 / Get length
 	n_sample = round(len(dataset) * ratio)
+ # 获取长度 / Get length
 	while len(sample) < n_sample:
+  # 获取长度 / Get length
 		index = randrange(len(dataset))
+  # 添加元素到列表末尾 / Append element to list end
 		sample.append(dataset[index])
 	return sample
 ```
@@ -695,6 +782,7 @@ def subsample(dataset, ratio=1.0):
 
 ```python
 def mean(numbers):
+ # 获取长度 / Get length
 	return sum(numbers) / float(len(numbers))
 ```
 
@@ -702,6 +790,7 @@ def mean(numbers):
 ## Step 4 — Test subsampling a dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -709,7 +798,9 @@ seed(1)
 ## Step 5 — True mean
 
 ```python
+# 生成整数序列 / Generate integer sequence
 dataset = [[randrange(10)] for i in range(20)]
+# 打印输出 / Print output
 print('True Mean: %.3f' % mean([row[0] for row in dataset]))
 ```
 
@@ -720,10 +811,13 @@ print('True Mean: %.3f' % mean([row[0] for row in dataset]))
 ratio = 0.10
 for size in [1, 10, 100]:
 	sample_means = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(size):
 		sample = subsample(dataset, ratio)
 		sample_mean = mean([row[0] for row in sample])
+  # 添加元素到列表末尾 / Append element to list end
 		sample_means.append(sample_mean)
+ # 打印输出 / Print output
 	print('Samples=%d, Estimated Mean: %.3f' % (size, mean(sample_means)))
 ```
 
@@ -760,29 +854,40 @@ from random import randrange
 # Create a random subsample from the dataset with replacement
 def subsample(dataset, ratio=1.0):
 	sample = list()
+ # 获取长度 / Get length
 	n_sample = round(len(dataset) * ratio)
+ # 获取长度 / Get length
 	while len(sample) < n_sample:
+  # 获取长度 / Get length
 		index = randrange(len(dataset))
+  # 添加元素到列表末尾 / Append element to list end
 		sample.append(dataset[index])
 	return sample
 
 # Calculate the mean of a list of numbers
 def mean(numbers):
+ # 获取长度 / Get length
 	return sum(numbers) / float(len(numbers))
 
 # Test subsampling a dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 # True mean
+# 生成整数序列 / Generate integer sequence
 dataset = [[randrange(10)] for i in range(20)]
+# 打印输出 / Print output
 print('True Mean: %.3f' % mean([row[0] for row in dataset]))
 # Estimated means
 ratio = 0.10
 for size in [1, 10, 100]:
 	sample_means = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(size):
 		sample = subsample(dataset, ratio)
 		sample_mean = mean([row[0] for row in sample])
+  # 添加元素到列表末尾 / Append element to list end
 		sample_means.append(sample_mean)
+ # 打印输出 / Print output
 	print('Samples=%d, Estimated Mean: %.3f' % (size, mean(sample_means)))
 ```
 

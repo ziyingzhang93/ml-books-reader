@@ -21,6 +21,14 @@ $$P(\text{no collision}) = \prod_{i=1}^{n-1} \frac{365-i}{365}$$
 
 $$P(\text{collision}) = 1 - P(\text{no collision})$$
 
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 演示核心概念和API用法 / Demonstrate core concepts and API usage
+
+
 ## Step 1 — Initialize Parameters / 初始化参数
 
 We set up the calculation for groups of people from 1 to 30, assuming 365 days in a year.
@@ -39,6 +47,7 @@ For each person added to the group, we multiply the probability that they have a
 ```python
 # Calculate P(no collision) for increasing group sizes
 # 计算递增的群体大小的无碰撞概率
+# 生成整数序列 / Generate integer sequence
 for i in range(1, n):
     # Available days for person i (excluding days taken by previous i-1 people)
     # 人i可用的天数（排除前i-1人占用的天数）
@@ -52,6 +61,7 @@ for i in range(1, n):
     # 碰撞概率 = 1 - 无碰撞的概率
     collision_prob = (1 - p) * 100
     
+    # 打印输出 / Print output
     print('n=%d, %d/%d, P(no collision)=%.3f%%, P(collision)=%.3f%%' 
           % (i+1, av, days, p*100, collision_prob))
 ```
@@ -64,13 +74,16 @@ We determine when the probability of collision crosses 50%.
 # Find the first group size where collision probability > 50%
 # 找到碰撞概率首次超过50%的最小人数
 p = 1.0
+# 生成整数序列 / Generate integer sequence
 for i in range(1, n):
     av = days - i
     p *= av / days
     collision_prob = 1 - p
     
     if collision_prob >= 0.5:
+        # 打印输出 / Print output
         print(f'\nCritical point: With {i+1} people, P(collision) = {collision_prob*100:.1f}%')
+        # 打印输出 / Print output
         print(f'临界点：{i+1}人时，碰撞概率 = {collision_prob*100:.1f}%')
         break
 ```
@@ -97,9 +110,12 @@ p = 1.0                   # Probability of no collision / 无碰撞的概率
 
 # Calculate P(no collision) for increasing group sizes
 # 计算递增的群体大小的无碰撞概率
+# 打印输出 / Print output
 print('Birthday Problem Analysis / 生日问题分析')
+# 打印输出 / Print output
 print('=' * 70)
 
+# 生成整数序列 / Generate integer sequence
 for i in range(1, n):
     # Available days for person i (excluding days taken by previous i-1 people)
     # 人i可用的天数（排除前i-1人占用的天数）
@@ -113,19 +129,23 @@ for i in range(1, n):
     # 碰撞概率 = 1 - 无碰撞的概率
     collision_prob = (1 - p) * 100
     
+    # 打印输出 / Print output
     print('n=%d, %d/%d, P(no collision)=%.3f%%, P(collision)=%.3f%%' 
           % (i+1, av, days, p*100, collision_prob))
 
 # Find the critical point where P(collision) >= 50%
 # 找到碰撞概率首次超过50%的临界点
+# 打印输出 / Print output
 print('\n' + '=' * 70)
 p = 1.0
+# 生成整数序列 / Generate integer sequence
 for i in range(1, n):
     av = days - i
     p *= av / days
     collision_prob = 1 - p
     
     if collision_prob >= 0.5:
+        # 打印输出 / Print output
         print(f'Critical Point / 临界点: {i+1} people, P(collision) = {collision_prob*100:.1f}%')
         break
 ```

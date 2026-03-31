@@ -5,25 +5,7 @@
 
 ### Chapter Summary / 章节总结
 
-# Chapter 17 Summary / 第17章总结
 
-## Theme / 主题: Chapter 17 / Chapter 17
-
-This chapter contains **1 code files** demonstrating chapter 17.
-
-本章包含 **1 个代码文件**，演示Chapter 17。
-
----
-## Evolution / 演化路线
-
-  1. `random_forest_sonar.ipynb` — Random Forest Sonar
-
----
-## ML Relevance / ML 关联
-
-The techniques in this chapter (Chapter 17) are fundamental building blocks in machine learning pipelines.
-
-本章技术（Chapter 17）是机器学习流水线中的基础构建块。
 
 ---
 
@@ -42,6 +24,34 @@ This script demonstrates **Random Forest Algorithm on Sonar Dataset**.
 本脚本演示 **Random Forest Algorithm on Sonar Dataset**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 定义模型结构 / Define model architecture
+- 评估模型效果 / Evaluate model performance
+
+
+---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Random Forest Algorithm on Sonar Dataset
 
 ```python
@@ -57,11 +67,13 @@ from math import sqrt
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -83,6 +95,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -97,12 +110,18 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 ```
@@ -113,9 +132,11 @@ def cross_validation_split(dataset, n_folds):
 ```python
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 ```
 
@@ -133,11 +154,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 ```
@@ -150,8 +173,10 @@ def test_split(index, value, dataset):
 	left, right = list(), list()
 	for row in dataset:
 		if row[index] < value:
+   # 添加元素到列表末尾 / Append element to list end
 			left.append(row)
 		else:
+   # 添加元素到列表末尾 / Append element to list end
 			right.append(row)
 	return left, right
 ```
@@ -167,6 +192,7 @@ def gini_index(groups, classes):
 ## Step 10 — count all samples at split point
 
 ```python
+# 获取长度 / Get length
 n_instances = float(sum([len(group) for group in groups]))
 ```
 
@@ -176,6 +202,7 @@ n_instances = float(sum([len(group) for group in groups]))
 ```python
 gini = 0.0
 	for group in groups:
+  # 获取长度 / Get length
 		size = float(len(group))
 ```
 
@@ -213,9 +240,12 @@ def get_split(dataset, n_features):
 	class_values = list(set(row[-1] for row in dataset))
 	b_index, b_value, b_score, b_groups = 999, 999, 999, None
 	features = list()
+ # 获取长度 / Get length
 	while len(features) < n_features:
+  # 获取长度 / Get length
 		index = randrange(len(dataset[0])-1)
 		if index not in features:
+   # 添加元素到列表末尾 / Append element to list end
 			features.append(index)
 	for index in features:
 		for row in dataset:
@@ -266,6 +296,7 @@ if depth >= max_depth:
 ## Step 20 — process left child
 
 ```python
+# 获取长度 / Get length
 if len(left) <= min_size:
 		node['left'] = to_terminal(left)
 	else:
@@ -277,6 +308,7 @@ if len(left) <= min_size:
 ## Step 21 — process right child
 
 ```python
+# 获取长度 / Get length
 if len(right) <= min_size:
 		node['right'] = to_terminal(right)
 	else:
@@ -317,9 +349,13 @@ def predict(node, row):
 ```python
 def subsample(dataset, ratio):
 	sample = list()
+ # 获取长度 / Get length
 	n_sample = round(len(dataset) * ratio)
+ # 获取长度 / Get length
 	while len(sample) < n_sample:
+  # 获取长度 / Get length
 		index = randrange(len(dataset))
+  # 添加元素到列表末尾 / Append element to list end
 		sample.append(dataset[index])
 	return sample
 ```
@@ -339,9 +375,11 @@ def bagging_predict(trees, row):
 ```python
 def random_forest(train, test, max_depth, min_size, sample_size, n_trees, n_features):
 	trees = list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_trees):
 		sample = subsample(train, sample_size)
 		tree = build_tree(sample, max_depth, min_size, n_features)
+  # 添加元素到列表末尾 / Append element to list end
 		trees.append(tree)
 	predictions = [bagging_predict(trees, row) for row in test]
 	return(predictions)
@@ -351,6 +389,7 @@ def random_forest(train, test, max_depth, min_size, sample_size, n_trees, n_feat
 ## Step 27 — Test the random forest algorithm on sonar dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(2)
 ```
 
@@ -366,6 +405,7 @@ dataset = load_csv(filename)
 ## Step 29 — convert string attributes to integers
 
 ```python
+# 获取长度 / Get length
 for i in range(0, len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 ```
@@ -374,6 +414,7 @@ for i in range(0, len(dataset[0])-1):
 ## Step 30 — convert class column to integers
 
 ```python
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 ```
 
@@ -385,11 +426,15 @@ n_folds = 5
 max_depth = 10
 min_size = 1
 sample_size = 1.0
+# 获取长度 / Get length
 n_features = int(sqrt(len(dataset[0])-1))
 for n_trees in [1, 5, 10]:
 	scores = evaluate_algorithm(dataset, random_forest, n_folds, max_depth, min_size, sample_size, n_trees, n_features)
+ # 打印输出 / Print output
 	print('Trees: %d' % n_trees)
+ # 打印输出 / Print output
 	print('Scores: %s' % scores)
+ # 打印输出 / Print output
 	print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -401,6 +446,13 @@ for n_trees in [1, 5, 10]:
 
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dataset` | 数据集基类，定义数据读取方式 | Base class defining how to read data |
+| `predict` | 用训练好的模型做预测 | Make predictions with trained model |
 
 ---
 ## Complete Code / 完整代码一览
@@ -422,11 +474,13 @@ from math import sqrt
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -440,6 +494,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -450,21 +505,29 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 
 # Evaluate an algorithm using a cross validation split
@@ -478,11 +541,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 
@@ -491,18 +556,22 @@ def test_split(index, value, dataset):
 	left, right = list(), list()
 	for row in dataset:
 		if row[index] < value:
+   # 添加元素到列表末尾 / Append element to list end
 			left.append(row)
 		else:
+   # 添加元素到列表末尾 / Append element to list end
 			right.append(row)
 	return left, right
 
 # Calculate the Gini index for a split dataset
 def gini_index(groups, classes):
 	# count all samples at split point
+ # 获取长度 / Get length
 	n_instances = float(sum([len(group) for group in groups]))
 	# sum weighted Gini index for each group
 	gini = 0.0
 	for group in groups:
+  # 获取长度 / Get length
 		size = float(len(group))
 		# avoid divide by zero
 		if size == 0:
@@ -521,9 +590,12 @@ def get_split(dataset, n_features):
 	class_values = list(set(row[-1] for row in dataset))
 	b_index, b_value, b_score, b_groups = 999, 999, 999, None
 	features = list()
+ # 获取长度 / Get length
 	while len(features) < n_features:
+  # 获取长度 / Get length
 		index = randrange(len(dataset[0])-1)
 		if index not in features:
+   # 添加元素到列表末尾 / Append element to list end
 			features.append(index)
 	for index in features:
 		for row in dataset:
@@ -551,12 +623,14 @@ def split(node, max_depth, min_size, n_features, depth):
 		node['left'], node['right'] = to_terminal(left), to_terminal(right)
 		return
 	# process left child
+ # 获取长度 / Get length
 	if len(left) <= min_size:
 		node['left'] = to_terminal(left)
 	else:
 		node['left'] = get_split(left, n_features)
 		split(node['left'], max_depth, min_size, n_features, depth+1)
 	# process right child
+ # 获取长度 / Get length
 	if len(right) <= min_size:
 		node['right'] = to_terminal(right)
 	else:
@@ -585,9 +659,13 @@ def predict(node, row):
 # Create a random subsample from the dataset with replacement
 def subsample(dataset, ratio):
 	sample = list()
+ # 获取长度 / Get length
 	n_sample = round(len(dataset) * ratio)
+ # 获取长度 / Get length
 	while len(sample) < n_sample:
+  # 获取长度 / Get length
 		index = randrange(len(dataset))
+  # 添加元素到列表末尾 / Append element to list end
 		sample.append(dataset[index])
 	return sample
 
@@ -599,33 +677,42 @@ def bagging_predict(trees, row):
 # Random Forest Algorithm
 def random_forest(train, test, max_depth, min_size, sample_size, n_trees, n_features):
 	trees = list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_trees):
 		sample = subsample(train, sample_size)
 		tree = build_tree(sample, max_depth, min_size, n_features)
+  # 添加元素到列表末尾 / Append element to list end
 		trees.append(tree)
 	predictions = [bagging_predict(trees, row) for row in test]
 	return(predictions)
 
 # Test the random forest algorithm on sonar dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(2)
 # load and prepare data
 filename = 'sonar.all-data.csv'
 dataset = load_csv(filename)
 # convert string attributes to integers
+# 获取长度 / Get length
 for i in range(0, len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 # convert class column to integers
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 # evaluate algorithm
 n_folds = 5
 max_depth = 10
 min_size = 1
 sample_size = 1.0
+# 获取长度 / Get length
 n_features = int(sqrt(len(dataset[0])-1))
 for n_trees in [1, 5, 10]:
 	scores = evaluate_algorithm(dataset, random_forest, n_folds, max_depth, min_size, sample_size, n_trees, n_features)
+ # 打印输出 / Print output
 	print('Trees: %d' % n_trees)
+ # 打印输出 / Print output
 	print('Scores: %s' % scores)
+ # 打印输出 / Print output
 	print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 

@@ -1,5 +1,17 @@
-# XGBoost
+# Python XGBoost 实战 / XGBoost with Python
 ## Chapter 15
+
+---
+
+### Chapter Summary / 章节总结
+
+
+
+---
+
+### Plot Performance
+
+
 
 ---
 
@@ -52,13 +64,20 @@ This script demonstrates **XGBoost on Otto dataset, Tune learning_rate**.
 ## Step 1 — XGBoost on Otto dataset, Tune learning_rate
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入XGBoost梯度提升库 / Import XGBoost gradient boosting library
 from xgboost import XGBClassifier
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import GridSearchCV
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import StratifiedKFold
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import LabelEncoder
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
 matplotlib.use('Agg')
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -66,7 +85,9 @@ from matplotlib import pyplot
 ## Step 2 — load data
 
 ```python
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 data = read_csv('train.csv')
+# 转换为NumPy数组 / Convert to NumPy array
 dataset = data.values
 ```
 
@@ -82,6 +103,7 @@ y = dataset[:,94]
 ## Step 4 — encode string class values as integers
 
 ```python
+# 将类别标签编码为数字 / Encode categorical labels to numbers
 label_encoded_y = LabelEncoder().fit_transform(y)
 ```
 
@@ -93,6 +115,7 @@ model = XGBClassifier()
 learning_rate = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3]
 param_grid = dict(learning_rate=learning_rate)
 kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+# 网格搜索：自动尝试所有参数组合找最优 / GridSearch: try all parameter combos to find best
 grid_search = GridSearchCV(model, param_grid, scoring="neg_log_loss", n_jobs=-1, cv=kfold)
 grid_result = grid_search.fit(X, label_encoded_y)
 ```
@@ -101,11 +124,14 @@ grid_result = grid_search.fit(X, label_encoded_y)
 ## Step 6 — summarize results
 
 ```python
+# 打印输出 / Print output
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 means = grid_result.cv_results_['mean_test_score']
 stds = grid_result.cv_results_['std_test_score']
 params = grid_result.cv_results_['params']
+# 将多个序列配对 / Pair multiple sequences
 for mean, stdev, param in zip(means, stds, params):
+ # 打印输出 / Print output
 	print("%f (%f) with: %r" % (mean, stdev, param))
 ```
 
@@ -156,35 +182,49 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # XGBoost on Otto dataset, Tune learning_rate
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入XGBoost梯度提升库 / Import XGBoost gradient boosting library
 from xgboost import XGBClassifier
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import GridSearchCV
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import StratifiedKFold
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import LabelEncoder
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
 matplotlib.use('Agg')
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # load data
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 data = read_csv('train.csv')
+# 转换为NumPy数组 / Convert to NumPy array
 dataset = data.values
 # split data into X and y
 X = dataset[:,0:94]
 y = dataset[:,94]
 # encode string class values as integers
+# 将类别标签编码为数字 / Encode categorical labels to numbers
 label_encoded_y = LabelEncoder().fit_transform(y)
 # grid search
 model = XGBClassifier()
 learning_rate = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.3]
 param_grid = dict(learning_rate=learning_rate)
 kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+# 网格搜索：自动尝试所有参数组合找最优 / GridSearch: try all parameter combos to find best
 grid_search = GridSearchCV(model, param_grid, scoring="neg_log_loss", n_jobs=-1, cv=kfold)
 grid_result = grid_search.fit(X, label_encoded_y)
 # summarize results
+# 打印输出 / Print output
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 means = grid_result.cv_results_['mean_test_score']
 stds = grid_result.cv_results_['std_test_score']
 params = grid_result.cv_results_['params']
+# 将多个序列配对 / Pair multiple sequences
 for mean, stdev, param in zip(means, stds, params):
+ # 打印输出 / Print output
 	print("%f (%f) with: %r" % (mean, stdev, param))
 # plot
 pyplot.errorbar(learning_rate, means, yerr=stds)
@@ -249,14 +289,22 @@ This script demonstrates **XGBoost on Otto dataset, Tune learning_rate and n_est
 ## Step 1 — XGBoost on Otto dataset, Tune learning_rate and n_estimators
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入XGBoost梯度提升库 / Import XGBoost gradient boosting library
 from xgboost import XGBClassifier
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import GridSearchCV
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import StratifiedKFold
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import LabelEncoder
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
 matplotlib.use('Agg')
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
 ```
 
@@ -264,7 +312,9 @@ import numpy
 ## Step 2 — load data
 
 ```python
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 data = read_csv('train.csv')
+# 转换为NumPy数组 / Convert to NumPy array
 dataset = data.values
 ```
 
@@ -280,6 +330,7 @@ y = dataset[:,94]
 ## Step 4 — encode string class values as integers
 
 ```python
+# 将类别标签编码为数字 / Encode categorical labels to numbers
 label_encoded_y = LabelEncoder().fit_transform(y)
 ```
 
@@ -292,6 +343,7 @@ n_estimators = [100, 200, 300, 400, 500]
 learning_rate = [0.0001, 0.001, 0.01, 0.1]
 param_grid = dict(learning_rate=learning_rate, n_estimators=n_estimators)
 kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+# 网格搜索：自动尝试所有参数组合找最优 / GridSearch: try all parameter combos to find best
 grid_search = GridSearchCV(model, param_grid, scoring="neg_log_loss", n_jobs=-1, cv=kfold)
 grid_result = grid_search.fit(X, label_encoded_y)
 ```
@@ -300,11 +352,14 @@ grid_result = grid_search.fit(X, label_encoded_y)
 ## Step 6 — summarize results
 
 ```python
+# 打印输出 / Print output
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 means = grid_result.cv_results_['mean_test_score']
 stds = grid_result.cv_results_['std_test_score']
 params = grid_result.cv_results_['params']
+# 将多个序列配对 / Pair multiple sequences
 for mean, stdev, param in zip(means, stds, params):
+ # 打印输出 / Print output
 	print("%f (%f) with: %r" % (mean, stdev, param))
 ```
 
@@ -312,7 +367,9 @@ for mean, stdev, param in zip(means, stds, params):
 ## Step 7 — plot results
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 scores = numpy.array(means).reshape(len(learning_rate), len(n_estimators))
+# 同时获取索引和值 / Get both index and value
 for i, value in enumerate(learning_rate):
     pyplot.plot(n_estimators, scores[i], label='learning_rate: ' + str(value))
 pyplot.legend()
@@ -358,22 +415,33 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # XGBoost on Otto dataset, Tune learning_rate and n_estimators
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入XGBoost梯度提升库 / Import XGBoost gradient boosting library
 from xgboost import XGBClassifier
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import GridSearchCV
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import StratifiedKFold
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import LabelEncoder
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
 matplotlib.use('Agg')
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
 # load data
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 data = read_csv('train.csv')
+# 转换为NumPy数组 / Convert to NumPy array
 dataset = data.values
 # split data into X and y
 X = dataset[:,0:94]
 y = dataset[:,94]
 # encode string class values as integers
+# 将类别标签编码为数字 / Encode categorical labels to numbers
 label_encoded_y = LabelEncoder().fit_transform(y)
 # grid search
 model = XGBClassifier()
@@ -381,17 +449,23 @@ n_estimators = [100, 200, 300, 400, 500]
 learning_rate = [0.0001, 0.001, 0.01, 0.1]
 param_grid = dict(learning_rate=learning_rate, n_estimators=n_estimators)
 kfold = StratifiedKFold(n_splits=10, shuffle=True, random_state=7)
+# 网格搜索：自动尝试所有参数组合找最优 / GridSearch: try all parameter combos to find best
 grid_search = GridSearchCV(model, param_grid, scoring="neg_log_loss", n_jobs=-1, cv=kfold)
 grid_result = grid_search.fit(X, label_encoded_y)
 # summarize results
+# 打印输出 / Print output
 print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
 means = grid_result.cv_results_['mean_test_score']
 stds = grid_result.cv_results_['std_test_score']
 params = grid_result.cv_results_['params']
+# 将多个序列配对 / Pair multiple sequences
 for mean, stdev, param in zip(means, stds, params):
+ # 打印输出 / Print output
 	print("%f (%f) with: %r" % (mean, stdev, param))
 # plot results
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 scores = numpy.array(means).reshape(len(learning_rate), len(n_estimators))
+# 同时获取索引和值 / Get both index and value
 for i, value in enumerate(learning_rate):
     pyplot.plot(n_estimators, scores[i], label='learning_rate: ' + str(value))
 pyplot.legend()

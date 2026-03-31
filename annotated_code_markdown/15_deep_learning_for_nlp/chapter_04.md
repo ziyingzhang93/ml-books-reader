@@ -1,4 +1,4 @@
-# NLP深度学习
+# NLP 深度学习 / Deep Learning for NLP
 ## Chapter 04
 
 ---
@@ -29,14 +29,22 @@ This script demonstrates **Multilayer Perceptron**.
 ## Step 1 — Multilayer Perceptron
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 visible = Input(shape=(10,))
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden1 = Dense(10, activation='relu')(visible)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden2 = Dense(20, activation='relu')(hidden1)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden3 = Dense(10, activation='relu')(hidden2)
+# 全连接层（Keras） / Fully connected layer (Keras)
 output = Dense(1, activation='sigmoid')(hidden3)
 model = Model(inputs=visible, outputs=output)
 ```
@@ -82,14 +90,22 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # Multilayer Perceptron
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 visible = Input(shape=(10,))
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden1 = Dense(10, activation='relu')(visible)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden2 = Dense(20, activation='relu')(hidden1)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden3 = Dense(10, activation='relu')(hidden2)
+# 全连接层（Keras） / Fully connected layer (Keras)
 output = Dense(1, activation='sigmoid')(hidden3)
 model = Model(inputs=visible, outputs=output)
 # summarize layers
@@ -130,18 +146,30 @@ This script demonstrates **Convolutional Neural Network**.
 ## Step 1 — Convolutional Neural Network
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.convolutional import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.pooling import MaxPooling2D
 visible = Input(shape=(64,64,1))
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv1 = Conv2D(32, (4,4), activation='relu')(visible)
+# 最大池化层（Keras） / Max pooling layer (Keras)
 pool1 = MaxPooling2D()(conv1)
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv2 = Conv2D(16, (4,4), activation='relu')(pool1)
+# 最大池化层（Keras） / Max pooling layer (Keras)
 pool2 = MaxPooling2D()(conv2)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden1 = Dense(10, activation='relu')(pool2)
+# 全连接层（Keras） / Fully connected layer (Keras)
 output = Dense(1, activation='sigmoid')(hidden1)
 model = Model(inputs=visible, outputs=output)
 ```
@@ -189,18 +217,30 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # Convolutional Neural Network
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.convolutional import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.pooling import MaxPooling2D
 visible = Input(shape=(64,64,1))
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv1 = Conv2D(32, (4,4), activation='relu')(visible)
+# 最大池化层（Keras） / Max pooling layer (Keras)
 pool1 = MaxPooling2D()(conv1)
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv2 = Conv2D(16, (4,4), activation='relu')(pool1)
+# 最大池化层（Keras） / Max pooling layer (Keras)
 pool2 = MaxPooling2D()(conv2)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden1 = Dense(10, activation='relu')(pool2)
+# 全连接层（Keras） / Fully connected layer (Keras)
 output = Dense(1, activation='sigmoid')(hidden1)
 model = Model(inputs=visible, outputs=output)
 # summarize layers
@@ -241,14 +281,21 @@ This script demonstrates **Recurrent Neural Network**.
 ## Step 1 — Recurrent Neural Network
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.recurrent import LSTM
 visible = Input(shape=(100,1))
 hidden1 = LSTM(10)(visible)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden2 = Dense(10, activation='relu')(hidden1)
+# 全连接层（Keras） / Fully connected layer (Keras)
 output = Dense(1, activation='sigmoid')(hidden2)
 model = Model(inputs=visible, outputs=output)
 ```
@@ -294,14 +341,21 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # Recurrent Neural Network
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.recurrent import LSTM
 visible = Input(shape=(100,1))
 hidden1 = LSTM(10)(visible)
+# 全连接层（Keras） / Fully connected layer (Keras)
 hidden2 = Dense(10, activation='relu')(hidden1)
+# 全连接层（Keras） / Fully connected layer (Keras)
 output = Dense(1, activation='sigmoid')(hidden2)
 model = Model(inputs=visible, outputs=output)
 # summarize layers
@@ -312,7 +366,7 @@ plot_model(model, to_file='recurrent_neural_network.png')
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 04 Summary / 第04章总结
 

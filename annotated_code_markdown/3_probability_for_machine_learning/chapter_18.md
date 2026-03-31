@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 18
 
 ---
@@ -27,6 +27,7 @@ This notebook demonstrates generating a 2D classification dataset using make_blo
 
 ```python
 # example of generating a small classification dataset
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
 
 # generate 2d classification dataset
@@ -34,10 +35,15 @@ from sklearn.datasets import make_blobs
 X, y = make_blobs(n_samples=100, centers=2, n_features=2, random_state=1)
 
 # summarize the dataset shape and sample data
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(X.shape, y.shape)
+# 打印输出 / Print output
 print('First 5 feature samples:')
+# 打印输出 / Print output
 print(X[:5])
+# 打印输出 / Print output
 print('First 5 class labels:')
+# 打印输出 / Print output
 print(y[:5])
 ```
 
@@ -63,14 +69,18 @@ print(y[:5])
 
 ```python
 # example of generating a small classification dataset
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
 
 # generate 2d classification dataset
 X, y = make_blobs(n_samples=100, centers=2, n_features=2, random_state=1)
 
 # summarize
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(X.shape, y.shape)
+# 打印输出 / Print output
 print(X[:5])
+# 打印输出 / Print output
 print(y[:5])
 ```
 
@@ -99,8 +109,10 @@ This notebook demonstrates fitting Normal distributions to features for each cla
 ## Step 1 — Define fit_distribution Helper Function / 定义幐合分布辅助函数
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
 from scipy.stats import norm
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean, std
 
 # fit a probability distribution to a univariate data sample
@@ -108,6 +120,7 @@ def fit_distribution(data):
     # estimate parameters: calculate mean and standard deviation
     mu = mean(data)          # 求平均值 (mean)
     sigma = std(data)        # 求标准差 (std)
+    # 打印输出 / Print output
     print(mu, sigma)
     # fit distribution: create a Normal distribution with these parameters
     dist = norm(mu, sigma)   # 使用scipy.stats创建正态分布对象
@@ -123,6 +136,7 @@ X, y = make_blobs(n_samples=100, centers=2, n_features=2, random_state=1)
 # sort data into classes: separate features by class label
 Xy0 = X[y == 0]          # 模类0的特征
 Xy1 = X[y == 1]          # 模类1的特征
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(Xy0.shape, Xy1.shape)
 ```
 
@@ -132,6 +146,7 @@ print(Xy0.shape, Xy1.shape)
 # calculate priors: P(y=0) and P(y=1)
 priory0 = len(Xy0) / len(X)   # class 0 模类0的先验
 priory1 = len(Xy1) / len(X)   # class 1 模类1的先验
+# 打印输出 / Print output
 print('P(y=0):', priory0, 'P(y=1):', priory1)
 ```
 
@@ -170,9 +185,12 @@ X2y1 = fit_distribution(Xy1[:, 1])  # Feature 2 for class 1 特征2的模类1分
 
 ```python
 # summarize probability distributions of the dataset
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
 from scipy.stats import norm
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import std
 
 # fit a probability distribution to a univariate data sample
@@ -180,6 +198,7 @@ def fit_distribution(data):
     # estimate parameters
     mu = mean(data)
     sigma = std(data)
+    # 打印输出 / Print output
     print(mu, sigma)
     # fit distribution
     dist = norm(mu, sigma)
@@ -190,10 +209,14 @@ X, y = make_blobs(n_samples=100, centers=2, n_features=2, random_state=1)
 # sort data into classes
 Xy0 = X[y == 0]
 Xy1 = X[y == 1]
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(Xy0.shape, Xy1.shape)
 # calculate priors
+# 获取长度 / Get length
 priory0 = len(Xy0) / len(X)
+# 获取长度 / Get length
 priory1 = len(Xy1) / len(X)
+# 打印输出 / Print output
 print(priory0, priory1)
 # create PDFs for y==0
 X1y0 = fit_distribution(Xy0[:, 0])
@@ -228,6 +251,7 @@ This notebook implements Naive Bayes classifier from scratch. We calculate P(y|X
 ## Step 1 — Define probability Calculation Helper / 定义概率计算辅助函数
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobsfrom scipy.stats import normfrom numpy import mean, std# fit a probability distribution to a univariate data sampledef fit_distribution(data):    # estimate parameters    mu = mean(data)    sigma = std(data)    # fit distribution    dist = norm(mu, sigma)    return dist# calculate the independent conditional probabilitydef probability(X, prior, dist1, dist2):    # P(y|X) = prior * PDF(X1|y) * PDF(X2|y)    # Calculate probability using prior and conditional feature PDFs    return prior * dist1.pdf(X[0]) * dist2.pdf(X[1])
 ```
 
@@ -264,5 +288,17 @@ from sklearn.datasets import make_blobsfrom scipy.stats import normfrom numpy im
 ```python
 # example of preparing and making a prediction with a naive bayes modelfrom sklearn.datasets import make_blobsfrom scipy.stats import normfrom numpy import meanfrom numpy import std# fit a probability distribution to a univariate data sampledef fit_distribution(data):    # estimate parameters    mu = mean(data)    sigma = std(data)    # fit distribution    dist = norm(mu, sigma)    return dist# calculate the independent conditional probabilitydef probability(X, prior, dist1, dist2):    return prior * dist1.pdf(X[0]) * dist2.pdf(X[1])# generate 2d classification datasetX, y = make_blobs(n_samples=100, centers=2, n_features=2, random_state=1)# sort data into classesXy0 = X[y == 0]Xy1 = X[y == 1]# calculate priorspriory0 = len(Xy0) / len(X)priory1 = len(Xy1) / len(X)# create PDFs for y==0distX1y0 = fit_distribution(Xy0[:, 0])distX2y0 = fit_distribution(Xy0[:, 1])# create PDFs for y==1distX1y1 = fit_distribution(Xy1[:, 0])distX2y1 = fit_distribution(Xy1[:, 1])# classify one exampleXsample, ysample = X[0], y[0]py0 = probability(Xsample, priory0, distX1y0, distX2y0)py1 = probability(Xsample, priory1, distX1y1, distX2y1)print('P(y=0 | %s) = %.3f' % (Xsample, py0*100))print('P(y=1 | %s) = %.3f' % (Xsample, py1*100))print('Truth: y=%d' % ysample)
 ```
+
+---
+
+### Naive Bayes Sklearn
+
+
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

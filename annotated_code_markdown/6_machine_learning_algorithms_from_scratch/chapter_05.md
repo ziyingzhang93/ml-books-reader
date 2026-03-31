@@ -1,9 +1,9 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 05
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 05 Summary / 第05章总结
 
@@ -26,5 +26,23 @@ This chapter contains **3 code files** demonstrating chapter 05.
 The techniques in this chapter (Chapter 05) are fundamental building blocks in machine learning pipelines.
 
 本章技术（Chapter 05）是机器学习流水线中的基础构建块。
+
+---
+
+### Random Predictions
+
+
+
+---
+
+### Zero Rule Classification
+
+
+
+---
+
+### Zero Rule Regression
+
+
 
 ---

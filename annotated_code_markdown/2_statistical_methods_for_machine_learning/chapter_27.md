@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 27
 
 ---
@@ -30,10 +30,13 @@ Nonparametric correlations rank the data rather than using raw values, making th
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand, seed
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # Visualization library for plotting scatter plots / 用于绘制散点图的可视化库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 ```
 
@@ -41,6 +44,7 @@ import numpy as np
 
 ```python
 # Set random seed for reproducibility / 设置随机种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate first variable: uniform random [0, 20) / 生成第一个变量: 均匀分布随机数[0, 20)
@@ -87,9 +91,12 @@ pyplot.show()
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand, seed
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 data1 = rand(1000) * 20
 data2 = data1 + (rand(1000) * 10)
@@ -132,9 +139,11 @@ where $d_i$ is the difference between ranks and $n$ is the number of observation
 ## Step 1 — Generate Data / 生成数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand, seed
 
 # Set random seed for reproducibility / 设置随机种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate two variables with monotonic relationship / 生成具有单调关系的两个变量
@@ -153,6 +162,7 @@ from scipy.stats import spearmanr
 # spearmanr返回: (相关系数, p值)
 coef, p = spearmanr(data1, data2)
 
+# 打印输出 / Print output
 print('Spearmans correlation coefficient: %.3f' % coef)
 ```
 
@@ -168,8 +178,10 @@ print('Spearmans correlation coefficient: %.3f' % coef)
 alpha = 0.05
 
 if p > alpha:
+    # 打印输出 / Print output
     print('Samples are uncorrelated (fail to reject H0) p=%.3f' % p)
 else:
+    # 打印输出 / Print output
     print('Samples are correlated (reject H0) p=%.3f' % p)
 ```
 
@@ -194,21 +206,38 @@ else:
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand, seed
 from scipy.stats import spearmanr
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 data1 = rand(1000) * 20
 data2 = data1 + (rand(1000) * 10)
 
 coef, p = spearmanr(data1, data2)
+# 打印输出 / Print output
 print('Spearmans correlation coefficient: %.3f' % coef)
 
 alpha = 0.05
 if p > alpha:
+    # 打印输出 / Print output
     print('Samples are uncorrelated (fail to reject H0) p=%.3f' % p)
 else:
+    # 打印输出 / Print output
     print('Samples are correlated (reject H0) p=%.3f' % p)
 ```
+
+---
+
+### Kendalls
+
+
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

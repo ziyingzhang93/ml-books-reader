@@ -1,9 +1,21 @@
-# OpenCV ML
+# OpenCV 机器学习 / Machine Learning in OpenCV
 ## Chapter 07
 
 ---
 
-### Chapter Summary
+### Edges
+
+
+
+---
+
+### Corners
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 07 Summary / 第07章总结
 

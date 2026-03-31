@@ -1,4 +1,4 @@
-# CV深度学习
+# 计算机视觉深度学习 / Deep Learning for Computer Vision
 ## Chapter 28
 
 ---
@@ -29,6 +29,7 @@ This script demonstrates **check opencv version**.
 ## Step 1 — check opencv version
 
 ```python
+# 导入OpenCV计算机视觉库 / Import OpenCV computer vision library
 import cv2
 ```
 
@@ -36,6 +37,7 @@ import cv2
 ## Step 2 — print version number
 
 ```python
+# 打印输出 / Print output
 print(cv2.__version__)
 ```
 
@@ -60,8 +62,10 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # check opencv version
+# 导入OpenCV计算机视觉库 / Import OpenCV computer vision library
 import cv2
 # print version number
+# 打印输出 / Print output
 print(cv2.__version__)
 ```
 
@@ -127,6 +131,7 @@ bboxes = classifier.detectMultiScale(pixels)
 
 ```python
 for box in bboxes:
+ # 打印输出 / Print output
 	print(box)
 ```
 
@@ -161,6 +166,7 @@ classifier = CascadeClassifier('haarcascade_frontalface_default.xml')
 bboxes = classifier.detectMultiScale(pixels)
 # print bounding box for each detected face
 for box in bboxes:
+ # 打印输出 / Print output
 	print(box)
 ```
 
@@ -507,6 +513,7 @@ import mtcnn
 ## Step 2 — print version
 
 ```python
+# 打印输出 / Print output
 print(mtcnn.__version__)
 ```
 
@@ -533,6 +540,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # confirm mtcnn was installed correctly
 import mtcnn
 # print version
+# 打印输出 / Print output
 print(mtcnn.__version__)
 ```
 
@@ -565,9 +573,20 @@ This script demonstrates **face detection with mtcnn on a photograph**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
+---
 ## Step 1 — face detection with mtcnn on a photograph
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from mtcnn.mtcnn import MTCNN
 ```
@@ -593,6 +612,7 @@ detector = MTCNN()
 ```python
 faces = detector.detect_faces(pixels)
 for face in faces:
+ # 打印输出 / Print output
 	print(face)
 ```
 
@@ -623,6 +643,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # face detection with mtcnn on a photograph
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from mtcnn.mtcnn import MTCNN
 # load image from file
@@ -633,6 +654,7 @@ detector = MTCNN()
 # detect faces in the image
 faces = detector.detect_faces(pixels)
 for face in faces:
+ # 打印输出 / Print output
 	print(face)
 ```
 
@@ -665,10 +687,22 @@ This script demonstrates **face detection with mtcnn on a photograph**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
+---
 ## Step 1 — face detection with mtcnn on a photograph
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib.patches import Rectangle
 from mtcnn.mtcnn import MTCNN
 ```
@@ -793,7 +827,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # face detection with mtcnn on a photograph
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib.patches import Rectangle
 from mtcnn.mtcnn import MTCNN
 
@@ -833,6 +869,18 @@ draw_image_with_boxes(filename, faces)
 
 ---
 
+### Mtcnn Face Detection Plot Landmarks1
+
+
+
+---
+
+### Mtcnn Face Detection Plot Landmarks2
+
+
+
+---
+
 ### Mtcnn Extract Faces
 
 # 10 — Mtcnn Extract Faces / 卷积神经网络
@@ -856,9 +904,20 @@ This script demonstrates **extract and plot each detected face in a photograph**
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
+---
 ## Step 1 — extract and plot each detected face in a photograph
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from mtcnn.mtcnn import MTCNN
 ```
@@ -881,6 +940,7 @@ data = pyplot.imread(filename)
 ## Step 4 — plot each face as a subplot
 
 ```python
+# 获取长度 / Get length
 for i in range(len(result_list)):
 ```
 
@@ -896,6 +956,7 @@ x1, y1, width, height = result_list[i]['box']
 ## Step 6 — define subplot
 
 ```python
+# 获取长度 / Get length
 pyplot.subplot(1, len(result_list), i+1)
 		pyplot.axis('off')
 ```
@@ -971,6 +1032,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # extract and plot each detected face in a photograph
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from mtcnn.mtcnn import MTCNN
 
@@ -979,11 +1041,13 @@ def draw_faces(filename, result_list):
 	# load the image
 	data = pyplot.imread(filename)
 	# plot each face as a subplot
+ # 获取长度 / Get length
 	for i in range(len(result_list)):
 		# get coordinates
 		x1, y1, width, height = result_list[i]['box']
 		x2, y2 = x1 + width, y1 + height
 		# define subplot
+  # 获取长度 / Get length
 		pyplot.subplot(1, len(result_list), i+1)
 		pyplot.axis('off')
 		# plot face
@@ -1004,7 +1068,7 @@ draw_faces(filename, faces)
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 28 Summary / 第28章总结
 

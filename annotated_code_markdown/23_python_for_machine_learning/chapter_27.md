@@ -1,4 +1,4 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 27
 
 ---
@@ -29,10 +29,14 @@ This script demonstrates **convert vector into 2D arrays**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(-1, 1, 100)
+# 生成等间距数组 / Generate evenly spaced array
 y = np.linspace(-2, 2, 100)
 ```
 
@@ -49,6 +53,7 @@ xx, yy = np.meshgrid(x,y)
 ```python
 z = np.sqrt(1 - xx**2 - (yy/2)**2)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(8,8))
 ax = plt.axes(projection='3d')
 ax.set_xlim([-2,2])
@@ -56,6 +61,7 @@ ax.set_ylim([-2,2])
 ax.set_zlim([0,2])
 ax.plot_surface(xx, yy, z, cmap="cividis")
 ax.view_init(45, 35)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -88,10 +94,14 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(-1, 1, 100)
+# 生成等间距数组 / Generate evenly spaced array
 y = np.linspace(-2, 2, 100)
 
 # convert vector into 2D arrays
@@ -99,6 +109,7 @@ xx, yy = np.meshgrid(x,y)
 # computation on matching
 z = np.sqrt(1 - xx**2 - (yy/2)**2)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(8,8))
 ax = plt.axes(projection='3d')
 ax.set_xlim([-2,2])
@@ -106,6 +117,7 @@ ax.set_ylim([-2,2])
 ax.set_zlim([0,2])
 ax.plot_surface(xx, yy, z, cmap="cividis")
 ax.view_init(45, 35)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -141,8 +153,10 @@ This script demonstrates **image has axes 0, 1, and 2, adding axis 3**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_digits
 images = load_digits()["images"]
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(images.shape)
 ```
 
@@ -150,7 +164,9 @@ print(images.shape)
 ## Step 2 — image has axes 0, 1, and 2, adding axis 3
 
 ```python
+# 增加一个维度 / Add a dimension
 images = np.expand_dims(images, 3)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(images.shape)
 ```
 
@@ -180,12 +196,16 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_digits
 images = load_digits()["images"]
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(images.shape)
 
 # image has axes 0, 1, and 2, adding axis 3
+# 增加一个维度 / Add a dimension
 images = np.expand_dims(images, 3)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(images.shape)
 ```
 
@@ -221,8 +241,10 @@ This script demonstrates **Positive**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 创建NumPy数组 / Create NumPy array
 X = np.array([
     [ 1.299,  0.332,  0.594, -0.047,  0.834],
     [ 0.842,  0.441, -0.705, -1.086, -0.252],
@@ -231,6 +253,7 @@ X = np.array([
 ])
 
 y = (X > 0).all(axis=0)
+# 打印输出 / Print output
 print(y)
 ```
 
@@ -261,8 +284,10 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 创建NumPy数组 / Create NumPy array
 X = np.array([
     [ 1.299,  0.332,  0.594, -0.047,  0.834],
     [ 0.842,  0.441, -0.705, -1.086, -0.252],
@@ -271,6 +296,7 @@ X = np.array([
 ])
 
 y = (X > 0).all(axis=0)
+# 打印输出 / Print output
 print(y)
 ```
 
@@ -306,8 +332,10 @@ This script demonstrates **Subarray**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 创建NumPy数组 / Create NumPy array
 X = np.array([
     [ 1.299,  0.332,  0.594, -0.047,  0.834],
     [ 0.842,  0.441, -0.705, -1.086, -0.252],
@@ -316,6 +344,7 @@ X = np.array([
 ])
 
 y = X[:, (X > 0).all(axis=0)]
+# 打印输出 / Print output
 print(y)
 ```
 
@@ -346,8 +375,10 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 创建NumPy数组 / Create NumPy array
 X = np.array([
     [ 1.299,  0.332,  0.594, -0.047,  0.834],
     [ 0.842,  0.441, -0.705, -1.086, -0.252],
@@ -356,6 +387,7 @@ X = np.array([
 ])
 
 y = X[:, (X > 0).all(axis=0)]
+# 打印输出 / Print output
 print(y)
 ```
 
@@ -391,8 +423,10 @@ This script demonstrates **Fancy**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 创建NumPy数组 / Create NumPy array
 X = np.array([
     [ 1.299,  0.332,  0.594, -0.047,  0.834],
     [ 0.842,  0.441, -0.705, -1.086, -0.252],
@@ -401,6 +435,7 @@ X = np.array([
 ])
 
 y = X[:, [0,1,1,0]]
+# 打印输出 / Print output
 print(y)
 ```
 
@@ -431,8 +466,10 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 创建NumPy数组 / Create NumPy array
 X = np.array([
     [ 1.299,  0.332,  0.594, -0.047,  0.834],
     [ 0.842,  0.441, -0.705, -1.086, -0.252],
@@ -441,6 +478,7 @@ X = np.array([
 ])
 
 y = X[:, [0,1,1,0]]
+# 打印输出 / Print output
 print(y)
 ```
 
@@ -476,28 +514,35 @@ This script demonstrates **Gaussian**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy.stats import multivariate_normal
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 mean = [0, 0]             # zero mean
 cov = [[1, 0.8],[0.8, 1]] # covariance matrix
+# 生成随机数 / Generate random numbers
 X1 = np.random.default_rng().multivariate_normal(mean, cov, 5000)
 X2 = multivariate_normal.rvs(mean, cov, 5000)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(12,6))
+# 创建子图 / Create subplot
 ax = plt.subplot(121)
 ax.scatter(X1[:,0], X1[:,1], s=1)
 ax.set_xlim([-4,4])
 ax.set_ylim([-4,4])
 ax.set_title("NumPy")
 
+# 创建子图 / Create subplot
 ax = plt.subplot(122)
 ax.scatter(X2[:,0], X2[:,1], s=1)
 ax.set_xlim([-4,4])
 ax.set_ylim([-4,4])
 ax.set_title("SciPy")
 
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -532,28 +577,35 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy.stats import multivariate_normal
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 mean = [0, 0]             # zero mean
 cov = [[1, 0.8],[0.8, 1]] # covariance matrix
+# 生成随机数 / Generate random numbers
 X1 = np.random.default_rng().multivariate_normal(mean, cov, 5000)
 X2 = multivariate_normal.rvs(mean, cov, 5000)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(12,6))
+# 创建子图 / Create subplot
 ax = plt.subplot(121)
 ax.scatter(X1[:,0], X1[:,1], s=1)
 ax.set_xlim([-4,4])
 ax.set_ylim([-4,4])
 ax.set_title("NumPy")
 
+# 创建子图 / Create subplot
 ax = plt.subplot(122)
 ax.scatter(X2[:,0], X2[:,1], s=1)
 ax.set_xlim([-4,4])
 ax.set_ylim([-4,4])
 ax.set_title("SciPy")
 
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -591,7 +643,9 @@ This script demonstrates **Cdf**.
 ```python
 from scipy.stats import norm
 n = norm.cdf([1,2,3,-1,-2,-3])
+# 打印输出 / Print output
 print(n)
+# 打印输出 / Print output
 print(n[:3] - n[-3:])
 ```
 
@@ -617,7 +671,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 from scipy.stats import norm
 n = norm.cdf([1,2,3,-1,-2,-3])
+# 打印输出 / Print output
 print(n)
+# 打印输出 / Print output
 print(n[:3] - n[-3:])
 ```
 
@@ -654,6 +710,7 @@ This script demonstrates **Ppf**.
 
 ```python
 from scipy.stats import norm
+# 打印输出 / Print output
 print(norm.ppf(0.99))
 ```
 
@@ -678,6 +735,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from scipy.stats import norm
+# 打印输出 / Print output
 print(norm.ppf(0.99))
 ```
 
@@ -730,8 +788,11 @@ This script demonstrates **normalize input**.
 ```python
 import datetime
 
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow as tf
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 import numba
 
@@ -748,7 +809,9 @@ def tSNE(X, ndims=2, perplexity=30, seed=0, max_iter=500,
     momentum = 0.5
     final_momentum = 0.8
     eta = 200.0
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     N, _D = X.shape
+    # 生成随机数 / Generate random numbers
     np.random.seed(seed)
 ```
 
@@ -786,6 +849,7 @@ P *= 12.0
 ## Step 6 — initialize solution
 
 ```python
+# 生成随机数 / Generate random numbers
 Y = np.random.randn(N, ndims) * 0.0001
 ```
 
@@ -795,6 +859,7 @@ Y = np.random.randn(N, ndims) * 0.0001
 ```python
 gains = np.ones_like(Y)
     uY = np.zeros_like(Y)
+    # 生成整数序列 / Generate integer sequence
     for i in range(max_iter):
 ```
 
@@ -838,6 +903,7 @@ if i == stop_lying_iter:
 if (i % 50) == 0:
             C = evaluateError(P, Y)
             now = datetime.datetime.now()
+            # 打印输出 / Print output
             print(f"{now} - Iteration {i}: Error = {C}")
     return Y
 
@@ -851,6 +917,7 @@ def computeExactGradient(P, Y):
     Returns:
         dY, a numpy array of shape (N,D)
 	"""
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     N, _D = Y.shape
 ```
 
@@ -870,7 +937,9 @@ DD = computeSquaredEuclideanDistance(Y)
 ```python
 mult = (P - (Q/sum_Q)) * Q
     dY = np.zeros_like(Y)
+    # 生成整数序列 / Generate integer sequence
     for n in range(N):
+        # 生成整数序列 / Generate integer sequence
         for m in range(N):
             if n==m: continue
             dY[n] += (Y[n] - Y[m]) * mult[n,m]
@@ -922,6 +991,7 @@ def computeGaussianPerplexity(X, perplexity):
 ## Step 17 — Compute the squared Euclidean distance matrix
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 N, _D = X.shape
     DD = computeSquaredEuclideanDistance(X)
 ```
@@ -931,6 +1001,7 @@ N, _D = X.shape
 
 ```python
 P = np.zeros_like(DD)
+    # 生成整数序列 / Generate integer sequence
     for n in range(N):
         found = False
         beta = 1.0
@@ -1006,14 +1077,19 @@ def computeSquaredEuclideanDistance(X):
     Returns:
         numpy array of shape (N,N) of squared distances
     """
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     N, _D = X.shape
+    # 创建全零数组 / Create array of zeros
     DD = np.zeros((N,N))
+    # 生成整数序列 / Generate integer sequence
     for i in range(N-1):
+        # 生成整数序列 / Generate integer sequence
         for j in range(i+1, N):
             diff = X[i] - X[j]
             DD[j][i] = DD[i][j] = diff @ diff
     return DD
 
+# 加载数据集 / Load dataset
 (X_train, y_train), (X_test, y_test) = tf.keras.datasets.mnist.load_data()
 ```
 
@@ -1021,7 +1097,9 @@ def computeSquaredEuclideanDistance(X):
 ## Step 24 — pick 1000 samples from the dataset
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 rows = np.random.choice(X_test.shape[0], 1000, replace=False)
+# 转换数据类型 / Convert data type
 X_data = X_train[rows].reshape(1000, -1).astype("float")
 X_label = y_train[rows]
 ```
@@ -1031,8 +1109,11 @@ X_label = y_train[rows]
 
 ```python
 Y = tSNE(X_data, 2, 30, 0, 500, 100, 400)
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8,8))
+# 绘制散点图 / Draw scatter plot
 plt.scatter(Y[:,0], Y[:,1], c=X_label)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -1073,8 +1154,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 import datetime
 
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow as tf
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 import numba
 
@@ -1091,7 +1175,9 @@ def tSNE(X, ndims=2, perplexity=30, seed=0, max_iter=500,
     momentum = 0.5
     final_momentum = 0.8
     eta = 200.0
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     N, _D = X.shape
+    # 生成随机数 / Generate random numbers
     np.random.seed(seed)
 
     # normalize input
@@ -1106,10 +1192,12 @@ def tSNE(X, ndims=2, perplexity=30, seed=0, max_iter=500,
     # lie about the P-values
     P *= 12.0
     # initialize solution
+    # 生成随机数 / Generate random numbers
     Y = np.random.randn(N, ndims) * 0.0001
     # perform main training loop
     gains = np.ones_like(Y)
     uY = np.zeros_like(Y)
+    # 生成整数序列 / Generate integer sequence
     for i in range(max_iter):
         # compute gradient, update gains
         dY = computeExactGradient(P, Y)
@@ -1128,6 +1216,7 @@ def tSNE(X, ndims=2, perplexity=30, seed=0, max_iter=500,
         if (i % 50) == 0:
             C = evaluateError(P, Y)
             now = datetime.datetime.now()
+            # 打印输出 / Print output
             print(f"{now} - Iteration {i}: Error = {C}")
     return Y
 
@@ -1141,6 +1230,7 @@ def computeExactGradient(P, Y):
     Returns:
         dY, a numpy array of shape (N,D)
 	"""
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     N, _D = Y.shape
     # compute squared Euclidean distance matrix of Y, the Q matrix, and the
     # normalization sum
@@ -1150,7 +1240,9 @@ def computeExactGradient(P, Y):
     # compute gradient
     mult = (P - (Q/sum_Q)) * Q
     dY = np.zeros_like(Y)
+    # 生成整数序列 / Generate integer sequence
     for n in range(N):
+        # 生成整数序列 / Generate integer sequence
         for m in range(N):
             if n==m: continue
             dY[n] += (Y[n] - Y[m]) * mult[n,m]
@@ -1187,10 +1279,12 @@ def computeGaussianPerplexity(X, perplexity):
         Similarity matrix P
     """
     # Compute the squared Euclidean distance matrix
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     N, _D = X.shape
     DD = computeSquaredEuclideanDistance(X)
     # Compute the Gaussian kernel row by row
     P = np.zeros_like(DD)
+    # 生成整数序列 / Generate integer sequence
     for n in range(N):
         found = False
         beta = 1.0
@@ -1242,29 +1336,39 @@ def computeSquaredEuclideanDistance(X):
     Returns:
         numpy array of shape (N,N) of squared distances
     """
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     N, _D = X.shape
+    # 创建全零数组 / Create array of zeros
     DD = np.zeros((N,N))
+    # 生成整数序列 / Generate integer sequence
     for i in range(N-1):
+        # 生成整数序列 / Generate integer sequence
         for j in range(i+1, N):
             diff = X[i] - X[j]
             DD[j][i] = DD[i][j] = diff @ diff
     return DD
 
+# 加载数据集 / Load dataset
 (X_train, y_train), (X_test, y_test) = tf.keras.datasets.mnist.load_data()
 # pick 1000 samples from the dataset
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 rows = np.random.choice(X_test.shape[0], 1000, replace=False)
+# 转换数据类型 / Convert data type
 X_data = X_train[rows].reshape(1000, -1).astype("float")
 X_label = y_train[rows]
 # run t-SNE to transform into 2D and visualize in scatter plot
 Y = tSNE(X_data, 2, 30, 0, 500, 100, 400)
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8,8))
+# 绘制散点图 / Draw scatter plot
 plt.scatter(Y[:,0], Y[:,1], c=X_label)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 27 Summary / 第27章总结
 

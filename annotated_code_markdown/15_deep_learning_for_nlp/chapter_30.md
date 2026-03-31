@@ -1,4 +1,4 @@
-# NLP深度学习
+# NLP 深度学习 / Deep Learning for NLP
 ## Chapter 30
 
 ---
@@ -26,13 +26,31 @@ This script demonstrates **load doc into memory**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  💾 保存结果 / Save Results
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 import string
+# 导入正则表达式模块 / Import regex module
 import re
 from pickle import dump
 from unicodedata import normalize
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -141,7 +159,9 @@ line = [word for word in line if word.isalpha()]
 ## Step 15 — store as string
 
 ```python
+# 添加元素到列表末尾 / Append element to list end
 clean_pair.append(' '.join(line))
+  # 添加元素到列表末尾 / Append element to list end
 		cleaned.append(clean_pair)
 	return array(cleaned)
 ```
@@ -152,6 +172,7 @@ clean_pair.append(' '.join(line))
 ```python
 def save_clean_data(sentences, filename):
 	dump(sentences, open(filename, 'wb'))
+ # 打印输出 / Print output
 	print('Saved: %s' % filename)
 ```
 
@@ -188,7 +209,9 @@ save_clean_data(clean_pairs, 'english-german.pkl')
 ## Step 21 — spot check
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(100):
+ # 打印输出 / Print output
 	print('[%s] => [%s]' % (clean_pairs[i,0], clean_pairs[i,1]))
 ```
 
@@ -220,9 +243,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import string
+# 导入正则表达式模块 / Import regex module
 import re
 from pickle import dump
 from unicodedata import normalize
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # load doc into memory
@@ -264,13 +289,16 @@ def clean_pairs(lines):
 			# remove tokens with numbers in them
 			line = [word for word in line if word.isalpha()]
 			# store as string
+   # 添加元素到列表末尾 / Append element to list end
 			clean_pair.append(' '.join(line))
+  # 添加元素到列表末尾 / Append element to list end
 		cleaned.append(clean_pair)
 	return array(cleaned)
 
 # save a list of clean sentences to file
 def save_clean_data(sentences, filename):
 	dump(sentences, open(filename, 'wb'))
+ # 打印输出 / Print output
 	print('Saved: %s' % filename)
 
 # load dataset
@@ -283,7 +311,9 @@ clean_pairs = clean_pairs(pairs)
 # save clean pairs to file
 save_clean_data(clean_pairs, 'english-german.pkl')
 # spot check
+# 生成整数序列 / Generate integer sequence
 for i in range(100):
+ # 打印输出 / Print output
 	print('[%s] => [%s]' % (clean_pairs[i,0], clean_pairs[i,1]))
 ```
 
@@ -316,11 +346,25 @@ This script demonstrates **load a clean dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  💾 保存结果 / Save Results
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 from pickle import load
 from pickle import dump
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import shuffle
 ```
 
@@ -338,6 +382,7 @@ def load_clean_sentences(filename):
 ```python
 def save_clean_data(sentences, filename):
 	dump(sentences, open(filename, 'wb'))
+ # 打印输出 / Print output
 	print('Saved: %s' % filename)
 ```
 
@@ -408,6 +453,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 from pickle import load
 from pickle import dump
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import shuffle
 
 # load a clean dataset
@@ -417,6 +463,7 @@ def load_clean_sentences(filename):
 # save a list of clean sentences to file
 def save_clean_data(sentences, filename):
 	dump(sentences, open(filename, 'wb'))
+ # 打印输出 / Print output
 	print('Saved: %s' % filename)
 
 # load dataset
@@ -465,21 +512,55 @@ This script demonstrates **load a clean dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+       │
+       ▼
+  💾 保存结果 / Save Results
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Embedding
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import RepeatVector
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import TimeDistributed
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.callbacks import ModelCheckpoint
 ```
 
@@ -506,6 +587,7 @@ def create_tokenizer(lines):
 
 ```python
 def max_length(lines):
+ # 获取长度 / Get length
 	return max(len(line.split()) for line in lines)
 ```
 
@@ -539,8 +621,10 @@ def encode_output(sequences, vocab_size):
 	ylist = list()
 	for sequence in sequences:
 		encoded = to_categorical(sequence, num_classes=vocab_size)
+  # 添加元素到列表末尾 / Append element to list end
 		ylist.append(encoded)
 	y = array(ylist)
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	y = y.reshape(sequences.shape[0], sequences.shape[1], vocab_size)
 	return y
 ```
@@ -550,11 +634,17 @@ def encode_output(sequences, vocab_size):
 
 ```python
 def define_model(src_vocab, tar_vocab, src_timesteps, tar_timesteps, n_units):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Embedding(src_vocab, n_units, input_length=src_timesteps, mask_zero=True))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(LSTM(n_units))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(RepeatVector(tar_timesteps))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(LSTM(n_units, return_sequences=True))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(TimeDistributed(Dense(tar_vocab, activation='softmax')))
 ```
 
@@ -562,6 +652,7 @@ def define_model(src_vocab, tar_vocab, src_timesteps, tar_timesteps, n_units):
 ## Step 10 — compile model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(optimizer='adam', loss='categorical_crossentropy')
 ```
 
@@ -588,9 +679,12 @@ test = load_clean_sentences('english-german-test.pkl')
 
 ```python
 eng_tokenizer = create_tokenizer(dataset[:, 0])
+# 获取长度 / Get length
 eng_vocab_size = len(eng_tokenizer.word_index) + 1
 eng_length = max_length(dataset[:, 0])
+# 打印输出 / Print output
 print('English Vocabulary Size: %d' % eng_vocab_size)
+# 打印输出 / Print output
 print('English Max Length: %d' % (eng_length))
 ```
 
@@ -599,9 +693,12 @@ print('English Max Length: %d' % (eng_length))
 
 ```python
 ger_tokenizer = create_tokenizer(dataset[:, 1])
+# 获取长度 / Get length
 ger_vocab_size = len(ger_tokenizer.word_index) + 1
 ger_length = max_length(dataset[:, 1])
+# 打印输出 / Print output
 print('German Vocabulary Size: %d' % ger_vocab_size)
+# 打印输出 / Print output
 print('German Max Length: %d' % (ger_length))
 ```
 
@@ -634,7 +731,9 @@ model = define_model(ger_vocab_size, eng_vocab_size, ger_length, eng_length, 256
 ## Step 18 — fit model
 
 ```python
+# 模型检查点：训练中保存最佳模型 / ModelCheckpoint: save best model during training
 checkpoint = ModelCheckpoint('model.h5', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+# 训练模型 / Train the model
 model.fit(trainX, trainY, epochs=30, batch_size=64, validation_data=(testX, testY), callbacks=[checkpoint], verbose=2)
 ```
 
@@ -678,17 +777,29 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Embedding
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import RepeatVector
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import TimeDistributed
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.callbacks import ModelCheckpoint
 
 # load a clean dataset
@@ -703,6 +814,7 @@ def create_tokenizer(lines):
 
 # max sentence length
 def max_length(lines):
+ # 获取长度 / Get length
 	return max(len(line.split()) for line in lines)
 
 # encode and pad sequences
@@ -718,20 +830,29 @@ def encode_output(sequences, vocab_size):
 	ylist = list()
 	for sequence in sequences:
 		encoded = to_categorical(sequence, num_classes=vocab_size)
+  # 添加元素到列表末尾 / Append element to list end
 		ylist.append(encoded)
 	y = array(ylist)
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	y = y.reshape(sequences.shape[0], sequences.shape[1], vocab_size)
 	return y
 
 # define NMT model
 def define_model(src_vocab, tar_vocab, src_timesteps, tar_timesteps, n_units):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Embedding(src_vocab, n_units, input_length=src_timesteps, mask_zero=True))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(LSTM(n_units))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(RepeatVector(tar_timesteps))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(LSTM(n_units, return_sequences=True))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(TimeDistributed(Dense(tar_vocab, activation='softmax')))
 	# compile model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(optimizer='adam', loss='categorical_crossentropy')
 	# summarize defined model
 	model.summary()
@@ -744,15 +865,21 @@ train = load_clean_sentences('english-german-train.pkl')
 test = load_clean_sentences('english-german-test.pkl')
 # prepare english tokenizer
 eng_tokenizer = create_tokenizer(dataset[:, 0])
+# 获取长度 / Get length
 eng_vocab_size = len(eng_tokenizer.word_index) + 1
 eng_length = max_length(dataset[:, 0])
+# 打印输出 / Print output
 print('English Vocabulary Size: %d' % eng_vocab_size)
+# 打印输出 / Print output
 print('English Max Length: %d' % (eng_length))
 # prepare german tokenizer
 ger_tokenizer = create_tokenizer(dataset[:, 1])
+# 获取长度 / Get length
 ger_vocab_size = len(ger_tokenizer.word_index) + 1
 ger_length = max_length(dataset[:, 1])
+# 打印输出 / Print output
 print('German Vocabulary Size: %d' % ger_vocab_size)
+# 打印输出 / Print output
 print('German Max Length: %d' % (ger_length))
 # prepare training data
 trainX = encode_sequences(ger_tokenizer, ger_length, train[:, 1])
@@ -765,7 +892,9 @@ testY = encode_output(testY, eng_vocab_size)
 # define model
 model = define_model(ger_vocab_size, eng_vocab_size, ger_length, eng_length, 256)
 # fit model
+# 模型检查点：训练中保存最佳模型 / ModelCheckpoint: save best model during training
 checkpoint = ModelCheckpoint('model.h5', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+# 训练模型 / Train the model
 model.fit(trainX, trainY, epochs=30, batch_size=64, validation_data=(testX, testY), callbacks=[checkpoint], verbose=2)
 ```
 
@@ -798,13 +927,33 @@ This script demonstrates **load a clean dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+       │
+       ▼
+  💾 保存结果 / Save Results
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
 from nltk.translate.bleu_score import corpus_bleu
 ```
@@ -832,6 +981,7 @@ def create_tokenizer(lines):
 
 ```python
 def max_length(lines):
+ # 获取长度 / Get length
 	return max(len(line.split()) for line in lines)
 ```
 
@@ -862,6 +1012,7 @@ X = pad_sequences(X, maxlen=length, padding='post')
 
 ```python
 def word_for_id(integer, tokenizer):
+ # 获取字典的键值对 / Get dict key-value pairs
 	for word, index in tokenizer.word_index.items():
 		if index == integer:
 			return word
@@ -873,6 +1024,7 @@ def word_for_id(integer, tokenizer):
 
 ```python
 def predict_sequence(model, tokenizer, source):
+ # 用模型做预测 / Make predictions with model
 	prediction = model.predict(source, verbose=0)[0]
 	integers = [argmax(vector) for vector in prediction]
 	target = list()
@@ -880,6 +1032,7 @@ def predict_sequence(model, tokenizer, source):
 		word = word_for_id(i, tokenizer)
 		if word is None:
 			break
+  # 添加元素到列表末尾 / Append element to list end
 		target.append(word)
 	return ' '.join(target)
 ```
@@ -890,6 +1043,7 @@ def predict_sequence(model, tokenizer, source):
 ```python
 def evaluate_model(model, sources, raw_dataset):
 	actual, predicted = list(), list()
+ # 同时获取索引和值 / Get both index and value
 	for i, source in enumerate(sources):
 ```
 
@@ -897,12 +1051,16 @@ def evaluate_model(model, sources, raw_dataset):
 ## Step 11 — translate encoded source text
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 source = source.reshape((1, source.shape[0]))
 		translation = predict_sequence(model, eng_tokenizer, source)
 		raw_target, raw_src = raw_dataset[i]
 		if i < 10:
+   # 打印输出 / Print output
 			print('src=[%s], target=[%s], predicted=[%s]' % (raw_src, raw_target, translation))
+  # 添加元素到列表末尾 / Append element to list end
 		actual.append([raw_target.split()])
+  # 添加元素到列表末尾 / Append element to list end
 		predicted.append(translation.split())
 ```
 
@@ -910,9 +1068,13 @@ source = source.reshape((1, source.shape[0]))
 ## Step 12 — calculate BLEU score
 
 ```python
+# 打印输出 / Print output
 print('BLEU-1: %f' % corpus_bleu(actual, predicted, weights=(1.0, 0, 0, 0)))
+ # 打印输出 / Print output
 	print('BLEU-2: %f' % corpus_bleu(actual, predicted, weights=(0.5, 0.5, 0, 0)))
+ # 打印输出 / Print output
 	print('BLEU-3: %f' % corpus_bleu(actual, predicted, weights=(0.3, 0.3, 0.3, 0)))
+ # 打印输出 / Print output
 	print('BLEU-4: %f' % corpus_bleu(actual, predicted, weights=(0.25, 0.25, 0.25, 0.25)))
 ```
 
@@ -930,6 +1092,7 @@ test = load_clean_sentences('english-german-test.pkl')
 
 ```python
 eng_tokenizer = create_tokenizer(dataset[:, 0])
+# 获取长度 / Get length
 eng_vocab_size = len(eng_tokenizer.word_index) + 1
 eng_length = max_length(dataset[:, 0])
 ```
@@ -939,6 +1102,7 @@ eng_length = max_length(dataset[:, 0])
 
 ```python
 ger_tokenizer = create_tokenizer(dataset[:, 1])
+# 获取长度 / Get length
 ger_vocab_size = len(ger_tokenizer.word_index) + 1
 ger_length = max_length(dataset[:, 1])
 ```
@@ -955,6 +1119,7 @@ testX = encode_sequences(ger_tokenizer, ger_length, test[:, 1])
 ## Step 17 — load model
 
 ```python
+# 从文件加载模型 / Load model from file
 model = load_model('model.h5')
 ```
 
@@ -962,6 +1127,7 @@ model = load_model('model.h5')
 ## Step 18 — test on some training sequences
 
 ```python
+# 打印输出 / Print output
 print('train')
 evaluate_model(model, trainX, train)
 ```
@@ -970,6 +1136,7 @@ evaluate_model(model, trainX, train)
 ## Step 19 — test on some test sequences
 
 ```python
+# 打印输出 / Print output
 print('test')
 evaluate_model(model, testX, test)
 ```
@@ -1005,9 +1172,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
 from nltk.translate.bleu_score import corpus_bleu
 
@@ -1023,6 +1194,7 @@ def create_tokenizer(lines):
 
 # max sentence length
 def max_length(lines):
+ # 获取长度 / Get length
 	return max(len(line.split()) for line in lines)
 
 # encode and pad sequences
@@ -1035,6 +1207,7 @@ def encode_sequences(tokenizer, length, lines):
 
 # map an integer to a word
 def word_for_id(integer, tokenizer):
+ # 获取字典的键值对 / Get dict key-value pairs
 	for word, index in tokenizer.word_index.items():
 		if index == integer:
 			return word
@@ -1042,6 +1215,7 @@ def word_for_id(integer, tokenizer):
 
 # generate target given source sequence
 def predict_sequence(model, tokenizer, source):
+ # 用模型做预测 / Make predictions with model
 	prediction = model.predict(source, verbose=0)[0]
 	integers = [argmax(vector) for vector in prediction]
 	target = list()
@@ -1049,25 +1223,35 @@ def predict_sequence(model, tokenizer, source):
 		word = word_for_id(i, tokenizer)
 		if word is None:
 			break
+  # 添加元素到列表末尾 / Append element to list end
 		target.append(word)
 	return ' '.join(target)
 
 # evaluate the skill of the model
 def evaluate_model(model, sources, raw_dataset):
 	actual, predicted = list(), list()
+ # 同时获取索引和值 / Get both index and value
 	for i, source in enumerate(sources):
 		# translate encoded source text
+  # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 		source = source.reshape((1, source.shape[0]))
 		translation = predict_sequence(model, eng_tokenizer, source)
 		raw_target, raw_src = raw_dataset[i]
 		if i < 10:
+   # 打印输出 / Print output
 			print('src=[%s], target=[%s], predicted=[%s]' % (raw_src, raw_target, translation))
+  # 添加元素到列表末尾 / Append element to list end
 		actual.append([raw_target.split()])
+  # 添加元素到列表末尾 / Append element to list end
 		predicted.append(translation.split())
 	# calculate BLEU score
+ # 打印输出 / Print output
 	print('BLEU-1: %f' % corpus_bleu(actual, predicted, weights=(1.0, 0, 0, 0)))
+ # 打印输出 / Print output
 	print('BLEU-2: %f' % corpus_bleu(actual, predicted, weights=(0.5, 0.5, 0, 0)))
+ # 打印输出 / Print output
 	print('BLEU-3: %f' % corpus_bleu(actual, predicted, weights=(0.3, 0.3, 0.3, 0)))
+ # 打印输出 / Print output
 	print('BLEU-4: %f' % corpus_bleu(actual, predicted, weights=(0.25, 0.25, 0.25, 0.25)))
 
 # load datasets
@@ -1076,28 +1260,33 @@ train = load_clean_sentences('english-german-train.pkl')
 test = load_clean_sentences('english-german-test.pkl')
 # prepare english tokenizer
 eng_tokenizer = create_tokenizer(dataset[:, 0])
+# 获取长度 / Get length
 eng_vocab_size = len(eng_tokenizer.word_index) + 1
 eng_length = max_length(dataset[:, 0])
 # prepare german tokenizer
 ger_tokenizer = create_tokenizer(dataset[:, 1])
+# 获取长度 / Get length
 ger_vocab_size = len(ger_tokenizer.word_index) + 1
 ger_length = max_length(dataset[:, 1])
 # prepare data
 trainX = encode_sequences(ger_tokenizer, ger_length, train[:, 1])
 testX = encode_sequences(ger_tokenizer, ger_length, test[:, 1])
 # load model
+# 从文件加载模型 / Load model from file
 model = load_model('model.h5')
 # test on some training sequences
+# 打印输出 / Print output
 print('train')
 evaluate_model(model, trainX, train)
 # test on some test sequences
+# 打印输出 / Print output
 print('test')
 evaluate_model(model, testX, test)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 30 Summary / 第30章总结
 

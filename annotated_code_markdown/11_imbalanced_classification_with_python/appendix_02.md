@@ -1,4 +1,4 @@
-# 不平衡分类
+# 不平衡分类问题 / Imbalanced Classification with Python
 ## Appendix 02
 
 ---
@@ -31,6 +31,7 @@ scipy
 
 ```python
 import scipy
+# 打印输出 / Print output
 print('scipy: %s' % scipy.__version__)
 ```
 
@@ -38,7 +39,9 @@ print('scipy: %s' % scipy.__version__)
 ## Step 2 — numpy
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
+# 打印输出 / Print output
 print('numpy: %s' % numpy.__version__)
 ```
 
@@ -46,7 +49,9 @@ print('numpy: %s' % numpy.__version__)
 ## Step 3 — matplotlib
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 打印输出 / Print output
 print('matplotlib: %s' % matplotlib.__version__)
 ```
 
@@ -54,7 +59,9 @@ print('matplotlib: %s' % matplotlib.__version__)
 ## Step 4 — pandas
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas
+# 打印输出 / Print output
 print('pandas: %s' % pandas.__version__)
 ```
 
@@ -63,6 +70,7 @@ print('pandas: %s' % pandas.__version__)
 
 ```python
 import statsmodels
+# 打印输出 / Print output
 print('statsmodels: %s' % statsmodels.__version__)
 ```
 
@@ -70,7 +78,9 @@ print('statsmodels: %s' % statsmodels.__version__)
 ## Step 6 — scikit-learn
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
+# 打印输出 / Print output
 print('sklearn: %s' % sklearn.__version__)
 ```
 
@@ -105,21 +115,31 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # check library version numbers
 # scipy
 import scipy
+# 打印输出 / Print output
 print('scipy: %s' % scipy.__version__)
 # numpy
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
+# 打印输出 / Print output
 print('numpy: %s' % numpy.__version__)
 # matplotlib
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 打印输出 / Print output
 print('matplotlib: %s' % matplotlib.__version__)
 # pandas
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas
+# 打印输出 / Print output
 print('pandas: %s' % pandas.__version__)
 # statsmodels
 import statsmodels
+# 打印输出 / Print output
 print('statsmodels: %s' % statsmodels.__version__)
 # scikit-learn
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
+# 打印输出 / Print output
 print('sklearn: %s' % sklearn.__version__)
 ```
 
@@ -156,6 +176,7 @@ This script demonstrates **check version number**.
 
 ```python
 import imblearn
+# 打印输出 / Print output
 print(imblearn.__version__)
 ```
 
@@ -181,6 +202,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # check version number
 import imblearn
+# 打印输出 / Print output
 print(imblearn.__version__)
 ```
 
@@ -217,7 +239,9 @@ This script demonstrates **check deep learning version numbers**.
 tensorflow
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow
+# 打印输出 / Print output
 print('tensorflow: %s' % tensorflow.__version__)
 ```
 
@@ -225,7 +249,9 @@ print('tensorflow: %s' % tensorflow.__version__)
 ## Step 2 — keras
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 import keras
+# 打印输出 / Print output
 print('keras: %s' % keras.__version__)
 ```
 
@@ -251,10 +277,14 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # check deep learning version numbers
 # tensorflow
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow
+# 打印输出 / Print output
 print('tensorflow: %s' % tensorflow.__version__)
 # keras
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 import keras
+# 打印输出 / Print output
 print('keras: %s' % keras.__version__)
 ```
 
@@ -290,7 +320,9 @@ This script demonstrates **check version number**.
 ## Step 1 — check version number
 
 ```python
+# 导入XGBoost梯度提升库 / Import XGBoost gradient boosting library
 import xgboost
+# 打印输出 / Print output
 print(xgboost.__version__)
 ```
 
@@ -321,13 +353,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # check version number
+# 导入XGBoost梯度提升库 / Import XGBoost gradient boosting library
 import xgboost
+# 打印输出 / Print output
 print(xgboost.__version__)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 02 Summary / 第02章总结
 

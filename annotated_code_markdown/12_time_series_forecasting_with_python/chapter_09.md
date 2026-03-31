@@ -1,9 +1,9 @@
-# 时间序列预测
+# 时间序列预测 / Time Series Forecasting with Python
 ## Chapter 09
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 09 Summary / 第09章总结
 
@@ -70,8 +70,11 @@ This script demonstrates **moving average smoothing as data preparation**.
 ## Step 1 — moving average smoothing as data preparation
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 ```
 
@@ -81,6 +84,7 @@ series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_
 ```python
 rolling = series.rolling(window=3)
 rolling_mean = rolling.mean()
+# 查看前几行数据（快速预览） / View first rows (quick preview)
 print(rolling_mean.head(10))
 ```
 
@@ -132,12 +136,16 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # moving average smoothing as data preparation
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 # tail-rolling average transform
 rolling = series.rolling(window=3)
 rolling_mean = rolling.mean()
+# 查看前几行数据（快速预览） / View first rows (quick preview)
 print(rolling_mean.head(10))
 # plot original and transformed dataset
 series.plot()
@@ -152,6 +160,12 @@ pyplot.show()
 ---
 
 ➡️ **Next / 下一步**: File 2 of 3
+
+---
+
+### Ma Feature Eng
+
+
 
 ---
 
@@ -196,10 +210,15 @@ This script demonstrates **moving average smoothing as a forecast model**.
 
 ```python
 from math import sqrt
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 ```
 
@@ -207,9 +226,12 @@ series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_
 ## Step 2 — prepare situation
 
 ```python
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 window = 3
+# 生成整数序列 / Generate integer sequence
 history = [X[i] for i in range(window)]
+# 获取长度 / Get length
 test = [X[i] for i in range(window, len(X))]
 predictions = list()
 ```
@@ -218,14 +240,22 @@ predictions = list()
 ## Step 3 — walk forward over time steps in test
 
 ```python
+# 获取长度 / Get length
 for t in range(len(test)):
+ # 获取长度 / Get length
 	length = len(history)
+ # 生成整数序列 / Generate integer sequence
 	yhat = mean([history[i] for i in range(length-window,length)])
 	obs = test[t]
+ # 添加元素到列表末尾 / Append element to list end
 	predictions.append(yhat)
+ # 添加元素到列表末尾 / Append element to list end
 	history.append(obs)
+ # 打印输出 / Print output
 	print('predicted=%f, expected=%f' % (yhat, obs))
+# 计算均方误差 / Calculate Mean Squared Error
 rmse = sqrt(mean_squared_error(test, predictions))
+# 打印输出 / Print output
 print('Test RMSE: %.3f' % rmse)
 ```
 
@@ -279,26 +309,42 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # moving average smoothing as a forecast model
 from math import sqrt
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 # prepare situation
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 window = 3
+# 生成整数序列 / Generate integer sequence
 history = [X[i] for i in range(window)]
+# 获取长度 / Get length
 test = [X[i] for i in range(window, len(X))]
 predictions = list()
 # walk forward over time steps in test
+# 获取长度 / Get length
 for t in range(len(test)):
+ # 获取长度 / Get length
 	length = len(history)
+ # 生成整数序列 / Generate integer sequence
 	yhat = mean([history[i] for i in range(length-window,length)])
 	obs = test[t]
+ # 添加元素到列表末尾 / Append element to list end
 	predictions.append(yhat)
+ # 添加元素到列表末尾 / Append element to list end
 	history.append(obs)
+ # 打印输出 / Print output
 	print('predicted=%f, expected=%f' % (yhat, obs))
+# 计算均方误差 / Calculate Mean Squared Error
 rmse = sqrt(mean_squared_error(test, predictions))
+# 打印输出 / Print output
 print('Test RMSE: %.3f' % rmse)
 # plot
 pyplot.plot(test)

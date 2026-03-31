@@ -1,4 +1,4 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 01
 
 ---
@@ -31,6 +31,7 @@ This script demonstrates **Secant**.
 ```python
 def secant_method(f, x0, x1, iterations):
     """Return the root calculated using the secant method."""
+    # 生成整数序列 / Generate integer sequence
     for i in range(iterations):
         x2 = x1 - f(x1) * (x1 - x0) / float(f(x1) - f(x0))
         x0, x1 = x1, x2
@@ -41,6 +42,7 @@ def f_example(x):
 
 root = secant_method(f_example, 10, 30, 5)
 
+# 打印输出 / Print output
 print("Root: {}".format(root))  # Root: 24.738633748750722
 ```
 
@@ -66,6 +68,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 def secant_method(f, x0, x1, iterations):
     """Return the root calculated using the secant method."""
+    # 生成整数序列 / Generate integer sequence
     for i in range(iterations):
         x2 = x1 - f(x1) * (x1 - x0) / float(f(x1) - f(x0))
         x0, x1 = x1, x2
@@ -76,12 +79,13 @@ def f_example(x):
 
 root = secant_method(f_example, 10, 30, 5)
 
+# 打印输出 / Print output
 print("Root: {}".format(root))  # Root: 24.738633748750722
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 01 Summary / 第01章总结
 

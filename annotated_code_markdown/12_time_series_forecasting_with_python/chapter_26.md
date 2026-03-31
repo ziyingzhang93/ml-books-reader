@@ -1,9 +1,9 @@
-# 时间序列预测
+# 时间序列预测 / Time Series Forecasting with Python
 ## Chapter 26
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 26 Summary / 第26章总结
 
@@ -69,10 +69,13 @@ This script demonstrates **grid search ARIMA parameters for time series**.
 ## Step 1 — grid search ARIMA parameters for time series
 
 ```python
+# 导入警告控制模块 / Import warnings control module
 import warnings
 from math import sqrt
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 ```
 
@@ -87,6 +90,7 @@ def evaluate_arima_model(X, arima_order):
 ## Step 3 — prepare training dataset
 
 ```python
+# 获取长度 / Get length
 train_size = int(len(X) * 0.66)
 	train, test = X[0:train_size], X[train_size:]
 	history = [x for x in train]
@@ -97,11 +101,15 @@ train_size = int(len(X) * 0.66)
 
 ```python
 predictions = list()
+ # 获取长度 / Get length
 	for t in range(len(test)):
 		model = ARIMA(history, order=arima_order)
+  # 训练模型 / Train the model
 		model_fit = model.fit()
 		yhat = model_fit.forecast()[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
+  # 添加元素到列表末尾 / Append element to list end
 		history.append(test[t])
 ```
 
@@ -109,6 +117,7 @@ predictions = list()
 ## Step 5 — calculate out of sample error
 
 ```python
+# 计算均方误差 / Calculate Mean Squared Error
 rmse = sqrt(mean_squared_error(test, predictions))
 	return rmse
 ```
@@ -118,6 +127,7 @@ rmse = sqrt(mean_squared_error(test, predictions))
 
 ```python
 def evaluate_models(dataset, p_values, d_values, q_values):
+ # 转换数据类型 / Convert data type
 	dataset = dataset.astype('float32')
 	best_score, best_cfg = float("inf"), None
 	for p in p_values:
@@ -128,9 +138,11 @@ def evaluate_models(dataset, p_values, d_values, q_values):
 					rmse = evaluate_arima_model(dataset, order)
 					if rmse < best_score:
 						best_score, best_cfg = rmse, order
+     # 打印输出 / Print output
 					print('ARIMA%s RMSE=%.3f' % (order,rmse))
 				except:
 					continue
+ # 打印输出 / Print output
 	print('Best ARIMA%s RMSE=%.3f' % (best_cfg, best_score))
 ```
 
@@ -138,6 +150,7 @@ def evaluate_models(dataset, p_values, d_values, q_values):
 ## Step 7 — load dataset
 
 ```python
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 ```
 
@@ -146,9 +159,13 @@ series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_
 
 ```python
 p_values = [0, 1, 2, 4, 6, 8, 10]
+# 生成整数序列 / Generate integer sequence
 d_values = range(0, 3)
+# 生成整数序列 / Generate integer sequence
 q_values = range(0, 3)
+# 过滤警告信息 / Filter warning messages
 warnings.filterwarnings("ignore")
+# 转换为NumPy数组 / Convert to NumPy array
 evaluate_models(series.values, p_values, d_values, q_values)
 ```
 
@@ -183,32 +200,42 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # grid search ARIMA parameters for time series
+# 导入警告控制模块 / Import warnings control module
 import warnings
 from math import sqrt
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 
 # evaluate an ARIMA model for a given order (p,d,q)
 def evaluate_arima_model(X, arima_order):
 	# prepare training dataset
+ # 获取长度 / Get length
 	train_size = int(len(X) * 0.66)
 	train, test = X[0:train_size], X[train_size:]
 	history = [x for x in train]
 	# make predictions
 	predictions = list()
+ # 获取长度 / Get length
 	for t in range(len(test)):
 		model = ARIMA(history, order=arima_order)
+  # 训练模型 / Train the model
 		model_fit = model.fit()
 		yhat = model_fit.forecast()[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
+  # 添加元素到列表末尾 / Append element to list end
 		history.append(test[t])
 	# calculate out of sample error
+ # 计算均方误差 / Calculate Mean Squared Error
 	rmse = sqrt(mean_squared_error(test, predictions))
 	return rmse
 
 # evaluate combinations of p, d and q values for an ARIMA model
 def evaluate_models(dataset, p_values, d_values, q_values):
+ # 转换数据类型 / Convert data type
 	dataset = dataset.astype('float32')
 	best_score, best_cfg = float("inf"), None
 	for p in p_values:
@@ -219,18 +246,25 @@ def evaluate_models(dataset, p_values, d_values, q_values):
 					rmse = evaluate_arima_model(dataset, order)
 					if rmse < best_score:
 						best_score, best_cfg = rmse, order
+     # 打印输出 / Print output
 					print('ARIMA%s RMSE=%.3f' % (order,rmse))
 				except:
 					continue
+ # 打印输出 / Print output
 	print('Best ARIMA%s RMSE=%.3f' % (best_cfg, best_score))
 
 # load dataset
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-total-female-births.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 # evaluate parameters
 p_values = [0, 1, 2, 4, 6, 8, 10]
+# 生成整数序列 / Generate integer sequence
 d_values = range(0, 3)
+# 生成整数序列 / Generate integer sequence
 q_values = range(0, 3)
+# 过滤警告信息 / Filter warning messages
 warnings.filterwarnings("ignore")
+# 转换为NumPy数组 / Convert to NumPy array
 evaluate_models(series.values, p_values, d_values, q_values)
 ```
 
@@ -281,11 +315,15 @@ This script demonstrates **grid search ARIMA parameters for time series**.
 ## Step 1 — grid search ARIMA parameters for time series
 
 ```python
+# 导入警告控制模块 / Import warnings control module
 import warnings
 from math import sqrt
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 ```
 
@@ -300,6 +338,7 @@ def evaluate_arima_model(X, arima_order):
 ## Step 3 — prepare training dataset
 
 ```python
+# 获取长度 / Get length
 train_size = int(len(X) * 0.66)
 	train, test = X[0:train_size], X[train_size:]
 	history = [x for x in train]
@@ -310,11 +349,15 @@ train_size = int(len(X) * 0.66)
 
 ```python
 predictions = list()
+ # 获取长度 / Get length
 	for t in range(len(test)):
 		model = ARIMA(history, order=arima_order)
+  # 训练模型 / Train the model
 		model_fit = model.fit()
 		yhat = model_fit.forecast()[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
+  # 添加元素到列表末尾 / Append element to list end
 		history.append(test[t])
 ```
 
@@ -322,6 +365,7 @@ predictions = list()
 ## Step 5 — calculate out of sample error
 
 ```python
+# 计算均方误差 / Calculate Mean Squared Error
 rmse = sqrt(mean_squared_error(test, predictions))
 	return rmse
 ```
@@ -331,6 +375,7 @@ rmse = sqrt(mean_squared_error(test, predictions))
 
 ```python
 def evaluate_models(dataset, p_values, d_values, q_values):
+ # 转换数据类型 / Convert data type
 	dataset = dataset.astype('float32')
 	best_score, best_cfg = float("inf"), None
 	for p in p_values:
@@ -341,9 +386,11 @@ def evaluate_models(dataset, p_values, d_values, q_values):
 					rmse = evaluate_arima_model(dataset, order)
 					if rmse < best_score:
 						best_score, best_cfg = rmse, order
+     # 打印输出 / Print output
 					print('ARIMA%s RMSE=%.3f' % (order,rmse))
 				except:
 					continue
+ # 打印输出 / Print output
 	print('Best ARIMA%s RMSE=%.3f' % (best_cfg, best_score))
 ```
 
@@ -353,6 +400,7 @@ def evaluate_models(dataset, p_values, d_values, q_values):
 ```python
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 ```
 
@@ -361,9 +409,13 @@ series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, 
 
 ```python
 p_values = [0, 1, 2, 4, 6, 8, 10]
+# 生成整数序列 / Generate integer sequence
 d_values = range(0, 3)
+# 生成整数序列 / Generate integer sequence
 q_values = range(0, 3)
+# 过滤警告信息 / Filter warning messages
 warnings.filterwarnings("ignore")
+# 转换为NumPy数组 / Convert to NumPy array
 evaluate_models(series.values, p_values, d_values, q_values)
 ```
 
@@ -398,33 +450,44 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # grid search ARIMA parameters for time series
+# 导入警告控制模块 / Import warnings control module
 import warnings
 from math import sqrt
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 
 # evaluate an ARIMA model for a given order (p,d,q)
 def evaluate_arima_model(X, arima_order):
 	# prepare training dataset
+ # 获取长度 / Get length
 	train_size = int(len(X) * 0.66)
 	train, test = X[0:train_size], X[train_size:]
 	history = [x for x in train]
 	# make predictions
 	predictions = list()
+ # 获取长度 / Get length
 	for t in range(len(test)):
 		model = ARIMA(history, order=arima_order)
+  # 训练模型 / Train the model
 		model_fit = model.fit()
 		yhat = model_fit.forecast()[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
+  # 添加元素到列表末尾 / Append element to list end
 		history.append(test[t])
 	# calculate out of sample error
+ # 计算均方误差 / Calculate Mean Squared Error
 	rmse = sqrt(mean_squared_error(test, predictions))
 	return rmse
 
 # evaluate combinations of p, d and q values for an ARIMA model
 def evaluate_models(dataset, p_values, d_values, q_values):
+ # 转换数据类型 / Convert data type
 	dataset = dataset.astype('float32')
 	best_score, best_cfg = float("inf"), None
 	for p in p_values:
@@ -435,20 +498,27 @@ def evaluate_models(dataset, p_values, d_values, q_values):
 					rmse = evaluate_arima_model(dataset, order)
 					if rmse < best_score:
 						best_score, best_cfg = rmse, order
+     # 打印输出 / Print output
 					print('ARIMA%s RMSE=%.3f' % (order,rmse))
 				except:
 					continue
+ # 打印输出 / Print output
 	print('Best ARIMA%s RMSE=%.3f' % (best_cfg, best_score))
 
 # load dataset
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 # evaluate parameters
 p_values = [0, 1, 2, 4, 6, 8, 10]
+# 生成整数序列 / Generate integer sequence
 d_values = range(0, 3)
+# 生成整数序列 / Generate integer sequence
 q_values = range(0, 3)
+# 过滤警告信息 / Filter warning messages
 warnings.filterwarnings("ignore")
+# 转换为NumPy数组 / Convert to NumPy array
 evaluate_models(series.values, p_values, d_values, q_values)
 ```
 

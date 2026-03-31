@@ -1,5 +1,11 @@
-# LSTM网络
+# LSTM 网络实战 / LSTM Networks with Python
 ## Lesson 06
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -30,7 +36,9 @@ This script demonstrates **generate a sequence of random numbers in [0, n_featur
 
 ```python
 from random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
 ```
 
@@ -39,6 +47,7 @@ from numpy import argmax
 
 ```python
 def generate_sequence(length, n_features):
+ # 生成整数序列 / Generate integer sequence
 	return [randint(0, n_features-1) for _ in range(length)]
 ```
 
@@ -49,8 +58,10 @@ def generate_sequence(length, n_features):
 def one_hot_encode(sequence, n_features):
 	encoding = list()
 	for value in sequence:
+  # 生成整数序列 / Generate integer sequence
 		vector = [0 for _ in range(n_features)]
 		vector[value] = 1
+  # 添加元素到列表末尾 / Append element to list end
 		encoding.append(vector)
 	return array(encoding)
 ```
@@ -68,6 +79,7 @@ def one_hot_decode(encoded_seq):
 
 ```python
 sequence = generate_sequence(25, 100)
+# 打印输出 / Print output
 print(sequence)
 ```
 
@@ -76,6 +88,7 @@ print(sequence)
 
 ```python
 encoded = one_hot_encode(sequence, 100)
+# 打印输出 / Print output
 print(encoded)
 ```
 
@@ -84,6 +97,7 @@ print(encoded)
 
 ```python
 decoded = one_hot_decode(encoded)
+# 打印输出 / Print output
 print(decoded)
 ```
 
@@ -114,19 +128,24 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
 
 # generate a sequence of random numbers in [0, n_features)
 def generate_sequence(length, n_features):
+ # 生成整数序列 / Generate integer sequence
 	return [randint(0, n_features-1) for _ in range(length)]
 
 # one hot encode sequence
 def one_hot_encode(sequence, n_features):
 	encoding = list()
 	for value in sequence:
+  # 生成整数序列 / Generate integer sequence
 		vector = [0 for _ in range(n_features)]
 		vector[value] = 1
+  # 添加元素到列表末尾 / Append element to list end
 		encoding.append(vector)
 	return array(encoding)
 
@@ -136,12 +155,15 @@ def one_hot_decode(encoded_seq):
 
 # generate random sequence
 sequence = generate_sequence(25, 100)
+# 打印输出 / Print output
 print(sequence)
 # one hot encode
 encoded = one_hot_encode(sequence, 100)
+# 打印输出 / Print output
 print(encoded)
 # one hot decode
 decoded = one_hot_decode(encoded)
+# 打印输出 / Print output
 print(decoded)
 ```
 
@@ -178,7 +200,9 @@ This script demonstrates **generate a sequence of random numbers in [0, n_featur
 
 ```python
 from random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
 ```
 
@@ -187,6 +211,7 @@ from numpy import argmax
 
 ```python
 def generate_sequence(length, n_features):
+ # 生成整数序列 / Generate integer sequence
 	return [randint(0, n_features-1) for _ in range(length)]
 ```
 
@@ -197,8 +222,10 @@ def generate_sequence(length, n_features):
 def one_hot_encode(sequence, n_features):
 	encoding = list()
 	for value in sequence:
+  # 生成整数序列 / Generate integer sequence
 		vector = [0 for _ in range(n_features)]
 		vector[value] = 1
+  # 添加元素到列表末尾 / Append element to list end
 		encoding.append(vector)
 	return array(encoding)
 ```
@@ -236,6 +263,7 @@ encoded = one_hot_encode(sequence, n_features)
 ## Step 8 — reshape sequence to be 3D
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = encoded.reshape((1, length, n_features))
 ```
 
@@ -243,11 +271,14 @@ X = encoded.reshape((1, length, n_features))
 ## Step 9 — select output
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 y = encoded[out_index].reshape(1, n_features)
 	return X, y
 
 X, y = generate_example(25, 100, 2)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(X.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(y.shape)
 ```
 
@@ -278,19 +309,24 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
 
 # generate a sequence of random numbers in [0, n_features)
 def generate_sequence(length, n_features):
+ # 生成整数序列 / Generate integer sequence
 	return [randint(0, n_features-1) for _ in range(length)]
 
 # one hot encode sequence
 def one_hot_encode(sequence, n_features):
 	encoding = list()
 	for value in sequence:
+  # 生成整数序列 / Generate integer sequence
 		vector = [0 for _ in range(n_features)]
 		vector[value] = 1
+  # 添加元素到列表末尾 / Append element to list end
 		encoding.append(vector)
 	return array(encoding)
 
@@ -305,13 +341,17 @@ def generate_example(length, n_features, out_index):
 	# one hot encode
 	encoded = one_hot_encode(sequence, n_features)
 	# reshape sequence to be 3D
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X = encoded.reshape((1, length, n_features))
 	# select output
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	y = encoded[out_index].reshape(1, n_features)
 	return X, y
 
 X, y = generate_example(25, 100, 2)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(X.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(y.shape)
 ```
 
@@ -363,10 +403,15 @@ This script demonstrates **generate a sequence of random numbers in [0, n_featur
 
 ```python
 from random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 ```
 
@@ -375,6 +420,7 @@ from keras.layers import Dense
 
 ```python
 def generate_sequence(length, n_features):
+ # 生成整数序列 / Generate integer sequence
 	return [randint(0, n_features-1) for _ in range(length)]
 ```
 
@@ -385,8 +431,10 @@ def generate_sequence(length, n_features):
 def one_hot_encode(sequence, n_features):
 	encoding = list()
 	for value in sequence:
+  # 生成整数序列 / Generate integer sequence
 		vector = [0 for _ in range(n_features)]
 		vector[value] = 1
+  # 添加元素到列表末尾 / Append element to list end
 		encoding.append(vector)
 	return array(encoding)
 ```
@@ -424,6 +472,7 @@ encoded = one_hot_encode(sequence, n_features)
 ## Step 8 — reshape sequence to be 3D
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = encoded.reshape((1, length, n_features))
 ```
 
@@ -431,6 +480,7 @@ X = encoded.reshape((1, length, n_features))
 ## Step 9 — select output
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 y = encoded[out_index].reshape(1, n_features)
 	return X, y
 ```
@@ -442,9 +492,13 @@ y = encoded[out_index].reshape(1, n_features)
 length = 5
 n_features = 10
 out_index = 2
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(25, input_shape=(length, n_features)))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(n_features, activation='softmax'))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.summary()
 ```
@@ -453,8 +507,10 @@ model.summary()
 ## Step 11 — fit model
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(10000):
 	X, y = generate_example(length, n_features, out_index)
+ # 训练模型 / Train the model
 	model.fit(X, y, epochs=1, verbose=2)
 ```
 
@@ -463,11 +519,14 @@ for i in range(10000):
 
 ```python
 correct = 0
+# 生成整数序列 / Generate integer sequence
 for i in range(100):
 	X, y = generate_example(length, n_features, out_index)
+ # 用模型做预测 / Make predictions with model
 	yhat = model.predict(X)
 	if one_hot_decode(yhat) == one_hot_decode(y):
 		correct += 1
+# 打印输出 / Print output
 print('Accuracy: %f' % ((correct/100.0)*100.0))
 ```
 
@@ -476,9 +535,13 @@ print('Accuracy: %f' % ((correct/100.0)*100.0))
 
 ```python
 X, y = generate_example(length, n_features, out_index)
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(X)
+# 打印输出 / Print output
 print('Sequence:  %s' % [one_hot_decode(x) for x in X])
+# 打印输出 / Print output
 print('Expected:  %s' % one_hot_decode(y))
+# 打印输出 / Print output
 print('Predicted: %s' % one_hot_decode(yhat))
 ```
 
@@ -519,22 +582,30 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmax
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 
 # generate a sequence of random numbers in [0, n_features)
 def generate_sequence(length, n_features):
+ # 生成整数序列 / Generate integer sequence
 	return [randint(0, n_features-1) for _ in range(length)]
 
 # one hot encode sequence
 def one_hot_encode(sequence, n_features):
 	encoding = list()
 	for value in sequence:
+  # 生成整数序列 / Generate integer sequence
 		vector = [0 for _ in range(n_features)]
 		vector[value] = 1
+  # 添加元素到列表末尾 / Append element to list end
 		encoding.append(vector)
 	return array(encoding)
 
@@ -549,8 +620,10 @@ def generate_example(length, n_features, out_index):
 	# one hot encode
 	encoded = one_hot_encode(sequence, n_features)
 	# reshape sequence to be 3D
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X = encoded.reshape((1, length, n_features))
 	# select output
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	y = encoded[out_index].reshape(1, n_features)
 	return X, y
 
@@ -558,31 +631,44 @@ def generate_example(length, n_features, out_index):
 length = 5
 n_features = 10
 out_index = 2
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(25, input_shape=(length, n_features)))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(n_features, activation='softmax'))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.summary()
 
 # fit model
+# 生成整数序列 / Generate integer sequence
 for i in range(10000):
 	X, y = generate_example(length, n_features, out_index)
+ # 训练模型 / Train the model
 	model.fit(X, y, epochs=1, verbose=2)
 
 # evaluate model
 correct = 0
+# 生成整数序列 / Generate integer sequence
 for i in range(100):
 	X, y = generate_example(length, n_features, out_index)
+ # 用模型做预测 / Make predictions with model
 	yhat = model.predict(X)
 	if one_hot_decode(yhat) == one_hot_decode(y):
 		correct += 1
+# 打印输出 / Print output
 print('Accuracy: %f' % ((correct/100.0)*100.0))
 
 # prediction on new data
 X, y = generate_example(length, n_features, out_index)
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(X)
+# 打印输出 / Print output
 print('Sequence:  %s' % [one_hot_decode(x) for x in X])
+# 打印输出 / Print output
 print('Expected:  %s' % one_hot_decode(y))
+# 打印输出 / Print output
 print('Predicted: %s' % one_hot_decode(yhat))
 ```
 

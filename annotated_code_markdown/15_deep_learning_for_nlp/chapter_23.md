@@ -1,4 +1,4 @@
-# NLP深度学习
+# NLP 深度学习 / Deep Learning for NLP
 ## Chapter 23
 
 ---
@@ -27,13 +27,31 @@ This script demonstrates **load the model**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.image import load_img
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.image import img_to_array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.applications.vgg16 import preprocess_input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.applications.vgg16 import decode_predictions
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.applications.vgg16 import VGG16
 ```
 
@@ -62,6 +80,7 @@ image = img_to_array(image)
 ## Step 5 — reshape data for the model
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 ```
 
@@ -76,6 +95,7 @@ image = preprocess_input(image)
 ## Step 7 — predict the probability across all output classes
 
 ```python
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(image)
 ```
 
@@ -97,6 +117,7 @@ label = label[0][0]
 ## Step 10 — print the classification
 
 ```python
+# 打印输出 / Print output
 print('%s (%.2f%%)' % (label[1], label[2]*100))
 ```
 
@@ -128,10 +149,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.image import load_img
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.image import img_to_array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.applications.vgg16 import preprocess_input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.applications.vgg16 import decode_predictions
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.applications.vgg16 import VGG16
 # load the model
 model = VGG16()
@@ -140,22 +166,25 @@ image = load_img('mug.jpg', target_size=(224, 224))
 # convert the image pixels to a numpy array
 image = img_to_array(image)
 # reshape data for the model
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 # prepare the image for the VGG model
 image = preprocess_input(image)
 # predict the probability across all output classes
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(image)
 # convert the probabilities to class labels
 label = decode_predictions(yhat)
 # retrieve the most likely result, e.g. highest probability
 label = label[0][0]
 # print the classification
+# 打印输出 / Print output
 print('%s (%.2f%%)' % (label[1], label[2]*100))
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 23 Summary / 第23章总结
 

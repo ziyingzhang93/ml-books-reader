@@ -1,5 +1,11 @@
-# Transformer
+# 注意力与Transformer / Transformer Models with Attention
 ## Appendix 02
+
+---
+
+### Python Versions
+
+
 
 ---
 
@@ -30,7 +36,9 @@ This script demonstrates **check deep learning version numbers**.
 tensorflow
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow
+# 打印输出 / Print output
 print('tensorflow: %s' % tensorflow.__version__)
 ```
 
@@ -38,7 +46,9 @@ print('tensorflow: %s' % tensorflow.__version__)
 ## Step 2 — keras
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 import keras
+# 打印输出 / Print output
 print('keras: %s' % keras.__version__)
 ```
 
@@ -64,16 +74,20 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # check deep learning version numbers
 # tensorflow
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow
+# 打印输出 / Print output
 print('tensorflow: %s' % tensorflow.__version__)
 # keras
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 import keras
+# 打印输出 / Print output
 print('keras: %s' % keras.__version__)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 02 Summary / 第02章总结
 

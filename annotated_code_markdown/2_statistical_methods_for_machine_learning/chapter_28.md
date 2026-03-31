@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 28
 
 ---
@@ -33,7 +33,9 @@ This chapter covers nonparametric hypothesis tests that do not assume normal dis
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Libraries for nonparametric tests / 非参数检验库
@@ -44,6 +46,7 @@ from scipy.stats import mannwhitneyu, wilcoxon, kruskal, friedmanchisquare
 
 ```python
 # Set random seed for reproducibility / 设置随机种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate two independent uniform samples with base 50 and 51
@@ -59,9 +62,13 @@ data2 = 51 + (rand(100) * 10)
 ```python
 # Display summary statistics of the generated samples
 # 显示生成样本的摘要统计
+# 打印输出 / Print output
 print('data1: min=%.3f max=%.3f' % (min(data1), max(data1)))
+# 打印输出 / Print output
 print('data2: min=%.3f max=%.3f' % (min(data2), max(data2)))
+# 计算均值 / Calculate mean
 print('data1 mean: %.3f' % np.mean(data1))
+# 计算均值 / Calculate mean
 print('data2 mean: %.3f' % np.mean(data2))
 ```
 
@@ -87,16 +94,23 @@ print('data2 mean: %.3f' % np.mean(data2))
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 data1 = 50 + (rand(100) * 10)
 data2 = 51 + (rand(100) * 10)
 
+# 打印输出 / Print output
 print('data1: min=%.3f max=%.3f' % (min(data1), max(data1)))
+# 打印输出 / Print output
 print('data2: min=%.3f max=%.3f' % (min(data2), max(data2)))
+# 计算均值 / Calculate mean
 print('data1 mean: %.3f' % np.mean(data1))
+# 计算均值 / Calculate mean
 print('data2 mean: %.3f' % np.mean(data2))
 ```
 
@@ -131,9 +145,11 @@ where $n_1, n_2$ are sample sizes and $R_1$ is the sum of ranks in the first sam
 ## Step 1 — Generate Data / 生成数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 
 # Set random seed for reproducibility / 设置随机种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate two independent samples for comparison
@@ -153,6 +169,7 @@ from scipy.stats import mannwhitneyu
 # 返回: (检验统计量U, p值)
 stat, p = mannwhitneyu(data1, data2)
 
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 ```
 
@@ -168,8 +185,10 @@ print('Statistics=%.3f, p=%.3f' % (stat, p))
 alpha = 0.05
 
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distribution (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distribution (reject H0)')
 ```
 
@@ -194,20 +213,25 @@ else:
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 from scipy.stats import mannwhitneyu
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 data1 = 50 + (rand(100) * 10)
 data2 = 51 + (rand(100) * 10)
 
 stat, p = mannwhitneyu(data1, data2)
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 
 alpha = 0.05
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distribution (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distribution (reject H0)')
 ```
 
@@ -240,9 +264,11 @@ Tests whether paired differences are symmetric around zero, without assuming nor
 ## Step 1 — Generate Paired Data / 生成配对数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 
 # Set random seed for reproducibility / 设置随机种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate two paired samples (same subjects measured twice or matched pairs)
@@ -264,6 +290,7 @@ from scipy.stats import wilcoxon
 # W = 正排序的和(或根据约定可以是较小排序的和)
 stat, p = wilcoxon(data1, data2)
 
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 ```
 
@@ -279,8 +306,10 @@ print('Statistics=%.3f, p=%.3f' % (stat, p))
 alpha = 0.05
 
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distribution (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distribution (reject H0)')
 ```
 
@@ -305,20 +334,25 @@ else:
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 from scipy.stats import wilcoxon
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 data1 = 50 + (rand(100) * 10)
 data2 = 51 + (rand(100) * 10)
 
 stat, p = wilcoxon(data1, data2)
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 
 alpha = 0.05
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distribution (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distribution (reject H0)')
 ```
 
@@ -353,9 +387,11 @@ where $R_i$ is the sum of ranks in group $i$, $n_i$ is the group size, and $n$ i
 ## Step 1 — Generate Data from Multiple Groups / 生成多组数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 
 # Set random seed for reproducibility / 设置随机种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate three independent samples with slightly different bases
@@ -378,6 +414,7 @@ from scipy.stats import kruskal
 # 返回: (H统计量, p值)
 stat, p = kruskal(data1, data2, data3)
 
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 ```
 
@@ -393,8 +430,10 @@ print('Statistics=%.3f, p=%.3f' % (stat, p))
 alpha = 0.05
 
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distributions (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distributions (reject H0)')
 ```
 
@@ -419,21 +458,26 @@ else:
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 from scipy.stats import kruskal
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 data1 = 50 + (rand(100) * 10)
 data2 = 51 + (rand(100) * 10)
 data3 = 52 + (rand(100) * 10)
 
 stat, p = kruskal(data1, data2, data3)
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 
 alpha = 0.05
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distributions (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distributions (reject H0)')
 ```
 
@@ -468,9 +512,11 @@ where $R_j$ is the sum of ranks for condition $j$, $n$ is number of subjects, an
 ## Step 1 — Generate Repeated Measures Data / 生成重复测量数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 
 # Set random seed for reproducibility / 设置随机种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate three repeated measures (conditions) for the same 100 subjects
@@ -495,6 +541,7 @@ from scipy.stats import friedmanchisquare
 # 返回: (检验统计量, p值)
 stat, p = friedmanchisquare(data1, data2, data3)
 
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 ```
 
@@ -510,8 +557,10 @@ print('Statistics=%.3f, p=%.3f' % (stat, p))
 alpha = 0.05
 
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distributions (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distributions (reject H0)')
 ```
 
@@ -536,27 +585,32 @@ else:
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, rand
 from scipy.stats import friedmanchisquare
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 data1 = 50 + (rand(100) * 10)
 data2 = 51 + (rand(100) * 10)
 data3 = 52 + (rand(100) * 10)
 
 stat, p = friedmanchisquare(data1, data2, data3)
+# 打印输出 / Print output
 print('Statistics=%.3f, p=%.3f' % (stat, p))
 
 alpha = 0.05
 if p > alpha:
+    # 打印输出 / Print output
     print('Same distributions (fail to reject H0)')
 else:
+    # 打印输出 / Print output
     print('Different distributions (reject H0)')
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 28: Nonparametric Hypothesis Tests
 # 第28章：非参数假设检验

@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 12
 
 ---
@@ -34,6 +34,7 @@ If $A = \begin{bmatrix} a & b \\ c & d \\ e & f \end{bmatrix}$, then $A^T = \beg
 We create a 3×2 matrix (3 rows, 2 columns). This demonstrates how transpose will convert it to a 2×3 matrix.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create a 3x2 matrix: 3 rows, 2 columns
@@ -42,7 +43,9 @@ A = array([[1, 2],
            [3, 4],
            [5, 6]])
 
+# 打印输出 / Print output
 print("Original matrix A (shape: 3x2) / 原始矩阵 A（形状：3x2）:")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -55,9 +58,13 @@ Use the `.T` attribute to transpose the matrix. Rows become columns and columns 
 # 使用 .T 属性对矩阵进行转置
 C = A.T
 
+# 打印输出 / Print output
 print("Transposed matrix C = A^T (shape: 2x3) / 转置矩阵 C = A^T（形状：2x3）:")
+# 打印输出 / Print output
 print(C)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nOriginal shape: {A.shape}, Transposed shape: {C.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"原始形状：{A.shape}，转置后形状：{C.shape}")
 ```
 
@@ -79,6 +86,7 @@ print(f"原始形状：{A.shape}，转置后形状：{C.shape}")
 
 ```python
 # --- Matrix Transpose / 矩阵转置 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Step 1: Create a 3x2 matrix
@@ -87,16 +95,22 @@ A = array([[1, 2],
            [3, 4],
            [5, 6]])
 
+# 打印输出 / Print output
 print("Original matrix A (shape: 3x2) / 原始矩阵 A（形状：3x2）:")
+# 打印输出 / Print output
 print(A)
 
 # Step 2: Transpose using .T attribute
 # 步骤 2：使用 .T 属性进行转置
 C = A.T
 
+# 打印输出 / Print output
 print("\nTransposed matrix C = A^T (shape: 2x3) / 转置矩阵 C = A^T（形状：2x3）:")
+# 打印输出 / Print output
 print(C)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nOriginal shape: {A.shape}, Transposed shape: {C.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"原始形状：{A.shape}，转置后形状：{C.shape}")
 ```
 
@@ -133,6 +147,7 @@ For a 2×2 matrix: $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, $A^{-1} =
 We create a 2×2 matrix with non-zero determinant, which ensures it has an inverse.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create a 2x2 matrix with floating point values
@@ -140,7 +155,9 @@ from numpy import array
 A = array([[1.0, 2.0],
            [3.0, 4.0]])
 
+# 打印输出 / Print output
 print("Original matrix A / 原始矩阵 A:")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -149,13 +166,16 @@ print(A)
 Use `numpy.linalg.inv()` to compute the matrix inverse.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import inv
 
 # Compute the inverse using numpy.linalg.inv()
 # 使用 numpy.linalg.inv() 计算逆矩阵
 B = inv(A)
 
+# 打印输出 / Print output
 print("Inverse matrix B = A^(-1) / 逆矩阵 B = A^(-1):")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -168,9 +188,13 @@ Multiply $A \cdot A^{-1}$ to verify we get the identity matrix (approximately, d
 # 验证：A * A^(-1) 应该等于单位矩阵 I
 I = A.dot(B)
 
+# 打印输出 / Print output
 print("Product A * B = A * A^(-1) / 乘积 A * B = A * A^(-1):")
+# 打印输出 / Print output
 print(I)
+# 打印输出 / Print output
 print("\nThis should be approximately the identity matrix [1 0; 0 1]")
+# 打印输出 / Print output
 print("这应该近似为单位矩阵 [1 0; 0 1]")
 ```
 
@@ -192,7 +216,9 @@ print("这应该近似为单位矩阵 [1 0; 0 1]")
 
 ```python
 # --- Matrix Inverse / 矩阵求逆 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import inv
 
 # Step 1: Create a 2x2 matrix
@@ -200,25 +226,45 @@ from numpy.linalg import inv
 A = array([[1.0, 2.0],
            [3.0, 4.0]])
 
+# 打印输出 / Print output
 print("Original matrix A / 原始矩阵 A:")
+# 打印输出 / Print output
 print(A)
 
 # Step 2: Compute the inverse
 # 步骤 2：计算逆矩阵
 B = inv(A)
 
+# 打印输出 / Print output
 print("\nInverse matrix B = A^(-1) / 逆矩阵 B = A^(-1):")
+# 打印输出 / Print output
 print(B)
 
 # Step 3: Verify with identity matrix
 # 步骤 3：用单位矩阵验证
 I = A.dot(B)
 
+# 打印输出 / Print output
 print("\nProduct A * B = A * A^(-1) / 乘积 A * B = A * A^(-1):")
+# 打印输出 / Print output
 print(I)
+# 打印输出 / Print output
 print("\nThis should be approximately the identity matrix [1 0; 0 1]")
+# 打印输出 / Print output
 print("这应该近似为单位矩阵 [1 0; 0 1]")
 ```
+
+---
+
+### Trace
+
+
+
+---
+
+### Determinant
+
+
 
 ---
 
@@ -253,23 +299,31 @@ For $\mathbf{v} = [1, 2, 3]$, rank = 1. For $\mathbf{v} = [0, 0, 0]$, rank = 0.
 Create a non-zero vector and compute its rank.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import matrix_rank
 
 # Create a non-zero vector
 # 创建一个非零向量
 v1 = array([1, 2, 3])
 
+# 打印输出 / Print output
 print("Non-zero vector v1 / 非零向量 v1:")
+# 打印输出 / Print output
 print(v1)
 
 # Compute rank of the vector
 # 计算向量的秩
 vr1 = matrix_rank(v1)
 
+# 打印输出 / Print output
 print(f"\nRank of v1: rank(v1) = {vr1}")
+# 打印输出 / Print output
 print(f"v1 的秩：rank(v1) = {vr1}")
+# 打印输出 / Print output
 print(f"\nExplanation: Any non-zero vector has rank 1 (spans a 1D space)")
+# 打印输出 / Print output
 print(f"解释：任何非零向量的秩为 1（张成一个 1D 空间）")
 ```
 
@@ -282,16 +336,22 @@ Create a zero vector and compute its rank.
 # 创建一个零向量
 v2 = array([0, 0, 0, 0, 0])
 
+# 打印输出 / Print output
 print("Zero vector v2 / 零向量 v2:")
+# 打印输出 / Print output
 print(v2)
 
 # Compute rank of the zero vector
 # 计算零向量的秩
 vr2 = matrix_rank(v2)
 
+# 打印输出 / Print output
 print(f"\nRank of v2: rank(v2) = {vr2}")
+# 打印输出 / Print output
 print(f"v2 的秩：rank(v2) = {vr2}")
+# 打印输出 / Print output
 print(f"\nExplanation: The zero vector has rank 0 (spans only the zero element)")
+# 打印输出 / Print output
 print(f"解释：零向量的秩为 0（仅张成零元素）")
 ```
 
@@ -313,29 +373,39 @@ print(f"解释：零向量的秩为 0（仅张成零元素）")
 
 ```python
 # --- Vector Rank / 向量的秩 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import matrix_rank
 
 # Step 1: Rank of non-zero vector
 # 步骤 1：非零向量的秩
 v1 = array([1, 2, 3])
 
+# 打印输出 / Print output
 print("Non-zero vector v1 / 非零向量 v1:")
+# 打印输出 / Print output
 print(v1)
 
 vr1 = matrix_rank(v1)
+# 打印输出 / Print output
 print(f"\nRank of v1: rank(v1) = {vr1}")
+# 打印输出 / Print output
 print(f"v1 的秩：rank(v1) = {vr1}")
 
 # Step 2: Rank of zero vector
 # 步骤 2：零向量的秩
 v2 = array([0, 0, 0, 0, 0])
 
+# 打印输出 / Print output
 print("\nZero vector v2 / 零向量 v2:")
+# 打印输出 / Print output
 print(v2)
 
 vr2 = matrix_rank(v2)
+# 打印输出 / Print output
 print(f"\nRank of v2: rank(v2) = {vr2}")
+# 打印输出 / Print output
 print(f"v2 的秩：rank(v2) = {vr2}")
 ```
 
@@ -374,7 +444,9 @@ For rank-deficient: $\text{rank}(A) < \min(m, n)$
 Compute the rank of a zero matrix (all elements are zero).
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import matrix_rank
 
 # Create a zero matrix
@@ -382,16 +454,22 @@ from numpy.linalg import matrix_rank
 M0 = array([[0, 0],
             [0, 0]])
 
+# 打印输出 / Print output
 print("Zero matrix M0 / 零矩阵 M0:")
+# 打印输出 / Print output
 print(M0)
 
 # Compute rank
 # 计算秩
 mr0 = matrix_rank(M0)
 
+# 打印输出 / Print output
 print(f"\nRank of M0: rank(M0) = {mr0}")
+# 打印输出 / Print output
 print(f"M0 的秩：rank(M0) = {mr0}")
+# 打印输出 / Print output
 print(f"\nExplanation: Zero matrix has rank 0 (no linearly independent rows/columns)")
+# 打印输出 / Print output
 print(f"解释：零矩阵的秩为 0（没有线性独立的行/列）")
 ```
 
@@ -405,18 +483,26 @@ Compute the rank of a rank-deficient matrix (linearly dependent rows).
 M1 = array([[1, 2],
             [1, 2]])
 
+# 打印输出 / Print output
 print("Rank-deficient matrix M1 / 秩亏矩阵 M1:")
+# 打印输出 / Print output
 print(M1)
 
 # Compute rank
 # 计算秩
 mr1 = matrix_rank(M1)
 
+# 打印输出 / Print output
 print(f"\nRank of M1: rank(M1) = {mr1}")
+# 打印输出 / Print output
 print(f"M1 的秩：rank(M1) = {mr1}")
+# 打印输出 / Print output
 print(f"\nExplanation: Row 2 equals Row 1, so only 1 linearly independent row")
+# 打印输出 / Print output
 print(f"解释：第2行等于第1行，所以只有 1 个线性独立的行")
+# 打印输出 / Print output
 print(f"Maximum possible rank: min(2, 2) = 2, but actual rank = 1 (rank-deficient)")
+# 打印输出 / Print output
 print(f"最大可能的秩：min(2, 2) = 2，但实际秩 = 1（秩亏）")
 ```
 
@@ -430,20 +516,30 @@ Compute the rank of a full-rank matrix (linearly independent rows and columns).
 M2 = array([[1, 2],
             [3, 4]])
 
+# 打印输出 / Print output
 print("Full-rank matrix M2 / 满秩矩阵 M2:")
+# 打印输出 / Print output
 print(M2)
 
 # Compute rank
 # 计算秩
 mr2 = matrix_rank(M2)
 
+# 打印输出 / Print output
 print(f"\nRank of M2: rank(M2) = {mr2}")
+# 打印输出 / Print output
 print(f"M2 的秩：rank(M2) = {mr2}")
+# 打印输出 / Print output
 print(f"\nExplanation: All rows are linearly independent")
+# 打印输出 / Print output
 print(f"解释：所有行都线性独立")
+# 打印输出 / Print output
 print(f"Maximum possible rank: min(2, 2) = 2, actual rank = 2 (full-rank matrix)")
+# 打印输出 / Print output
 print(f"最大可能的秩：min(2, 2) = 2，实际秩 = 2（满秩矩阵）")
+# 打印输出 / Print output
 print(f"\nFull-rank matrices are invertible and have non-zero determinant")
+# 打印输出 / Print output
 print(f"满秩矩阵是可逆的，且有非零行列式")
 ```
 
@@ -465,7 +561,9 @@ print(f"满秩矩阵是可逆的，且有非零行列式")
 
 ```python
 # --- Matrix Rank / 矩阵的秩 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import matrix_rank
 
 # Step 1: Zero matrix
@@ -473,10 +571,13 @@ from numpy.linalg import matrix_rank
 M0 = array([[0, 0],
             [0, 0]])
 
+# 打印输出 / Print output
 print("Zero matrix M0 / 零矩阵 M0:")
+# 打印输出 / Print output
 print(M0)
 
 mr0 = matrix_rank(M0)
+# 打印输出 / Print output
 print(f"Rank of M0: rank(M0) = {mr0}\n")
 
 # Step 2: Rank-deficient matrix
@@ -484,10 +585,13 @@ print(f"Rank of M0: rank(M0) = {mr0}\n")
 M1 = array([[1, 2],
             [1, 2]])
 
+# 打印输出 / Print output
 print("Rank-deficient matrix M1 / 秩亏矩阵 M1:")
+# 打印输出 / Print output
 print(M1)
 
 mr1 = matrix_rank(M1)
+# 打印输出 / Print output
 print(f"Rank of M1: rank(M1) = {mr1}\n")
 
 # Step 3: Full-rank matrix
@@ -495,18 +599,23 @@ print(f"Rank of M1: rank(M1) = {mr1}\n")
 M2 = array([[1, 2],
             [3, 4]])
 
+# 打印输出 / Print output
 print("Full-rank matrix M2 / 满秩矩阵 M2:")
+# 打印输出 / Print output
 print(M2)
 
 mr2 = matrix_rank(M2)
+# 打印输出 / Print output
 print(f"Rank of M2: rank(M2) = {mr2}")
+# 打印输出 / Print output
 print(f"M2 is invertible and has non-zero determinant")
+# 打印输出 / Print output
 print(f"M2 可逆且行列式非零")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 12 Summary / 第12章总结：Matrix Properties
 

@@ -15,6 +15,14 @@ This notebook prints the versions of key libraries used in the course. Version t
 
 本笔记本打印课程中使用的关键库的版本。版本跟踪对于可重复性很重要。
 
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 可视化结果 / Visualize results
+
+
 ## Step 1 — Print Library Versions / 打印库版本
 
 ```python
@@ -29,9 +37,18 @@ This notebook prints the versions of key libraries used in the course. Version t
 
 ➡️ **Next**: `../README.md`
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `matplotlib` | 绑图库 | Plotting library |
+| `numpy` | 数值计算库 | Numerical computing library |
+| `pandas` | 数据分析库 | Data analysis library |
+
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 import scipyprint('scipy: %s' % scipy.__version__)import numpyprint('numpy: %s' % numpy.__version__)import matplotlibprint('matplotlib: %s' % matplotlib.__version__)import pandasprint('pandas: %s' % pandas.__version__)import statsmodelsprint('statsmodels: %s' % statsmodels.__version__)import sklearnprint('sklearn: %s' % sklearn.__version__)
 ```
 

@@ -1,5 +1,11 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 12
+
+---
+
+### Test Dataset
+
+
 
 ---
 
@@ -45,8 +51,10 @@ Note: Cov(X,X) = Var(X)
 ## Step 1 — Import and Load Data / 导入并加载数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import random, cov, mean, std
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 
@@ -55,6 +63,7 @@ from matplotlib import pyplot
 
 # Use the previously generated correlated dataset
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 random.seed(1)
 
 data1 = 20 * random.randn(1000) + 100
@@ -63,6 +72,7 @@ data2 = data1 + (10 * random.randn(1000) + 50)
 
 
 
+# 打印输出 / Print output
 print(f"Loaded {len(data1)} observations")
 ```
 
@@ -77,17 +87,22 @@ covariance_matrix = cov(data1, data2)
 
 
 
+# 打印输出 / Print output
 print("Covariance Matrix / 协方差矩阵:")
+# 打印输出 / Print output
 print(covariance_matrix)
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nShape: {covariance_matrix.shape}")
 ```
 
 ## Step 3 — Interpret Covariance Matrix Elements / 解释协方差矩阵元素
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
@@ -112,13 +127,20 @@ cov_21 = covariance_matrix[1, 0]
 
 
 
+# 打印输出 / Print output
 print("Covariance Matrix Elements / 协方差矩阵元素:")
+# 打印输出 / Print output
 print("="*50)
 
+# 打印输出 / Print output
 print(f"Var(X) = Cov(X,X) = {var1:.4f}")
+# 打印输出 / Print output
 print(f"Var(Y) = Cov(Y,Y) = {var2:.4f}")
+# 打印输出 / Print output
 print(f"Cov(X,Y) = {cov_12:.4f}")
+# 打印输出 / Print output
 print(f"Cov(Y,X) = {cov_21:.4f}")
+# 打印输出 / Print output
 print(f"\nNote: Cov(X,Y) = Cov(Y,X) (symmetric matrix)")
 
 
@@ -128,10 +150,15 @@ std1 = std(data1)
 
 std2 = std(data2)
 
+# 打印输出 / Print output
 print(f"\nStandard Deviations:")
+# 打印输出 / Print output
 print(f"Std(X) = {std1:.4f}")
+# 打印输出 / Print output
 print(f"Std(Y) = {std2:.4f}")
+# 打印输出 / Print output
 print(f"\nNote: sqrt(Var) = Std")
+# 打印输出 / Print output
 print(f"sqrt({var1:.4f}) = {np.sqrt(var1):.4f}")
 ```
 
@@ -139,24 +166,35 @@ print(f"sqrt({var1:.4f}) = {np.sqrt(var1):.4f}")
 # 协方差的解释
         "# Interpretation of covariance
 
+# 打印输出 / Print output
 print("Covariance Interpretation / 协方差解释:")
+# 打印输出 / Print output
 print("="*50)
 
+# 打印输出 / Print output
 print(f"\nCovariance value: {cov_12:.4f}")
 
 
 if cov_12 > 0:
+    # 打印输出 / Print output
     print("Result: POSITIVE covariance")
+    # 打印输出 / Print output
     print("Meaning: Variables move in the same direction")
+    # 打印输出 / Print output
     print("When X increases, Y tends to increase")
 
 elif cov_12 < 0:
+    # 打印输出 / Print output
     print("Result: NEGATIVE covariance")
+    # 打印输出 / Print output
     print("Meaning: Variables move in opposite directions")
+    # 打印输出 / Print output
     print("When X increases, Y tends to decrease")
 
 else:
+    # 打印输出 / Print output
     print("Result: ZERO covariance")
+    # 打印输出 / Print output
     print("Meaning: Variables are uncorrelated")
 
 
@@ -164,15 +202,21 @@ else:
 
 # Limitation of covariance
 
+# 打印输出 / Print output
 print("\n" + "="*50)
 
+# 打印输出 / Print output
 print("Limitation / 局限性:")
+# 打印输出 / Print output
 print("Covariance depends on the scale of variables")
 
+# 打印输出 / Print output
 print("Therefore, covariance values are hard to interpret")
 
+# 打印输出 / Print output
 print("in absolute terms. We use correlation for")
 
+# 打印输出 / Print output
 print("standardized comparison.")
 ```
 
@@ -193,7 +237,9 @@ cov_df = pd.DataFrame(
 
 
 
+# 打印输出 / Print output
 print("\nCovariance Matrix as DataFrame:")
+# 打印输出 / Print output
 print(cov_df)
 
 
@@ -202,6 +248,7 @@ print(cov_df)
 
 # Heatmap visualization
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.patches as mpatches
 
 
@@ -222,7 +269,9 @@ pyplot.title('Covariance Matrix Heatmap / 协方差矩阵热力图')
 
 # 添加数值标签
 
+# 生成整数序列 / Generate integer sequence
 for i in range(2):
+    # 生成整数序列 / Generate integer sequence
     for j in range(2):
         pyplot.text(j, i, f'{covariance_matrix[i, j]:.2f}',
                    ha='center', va='center', color='black', fontsize=12)
@@ -254,18 +303,23 @@ pyplot.show()
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import random, cov, mean, std
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
 
 # Generate correlated data
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 random.seed(1)
 
 data1 = 20 * random.randn(1000) + 100
@@ -278,7 +332,9 @@ data2 = data1 + (10 * random.randn(1000) + 50)
 
 covariance_matrix = cov(data1, data2)
 
+# 打印输出 / Print output
 print("Covariance Matrix:")
+# 打印输出 / Print output
 print(covariance_matrix)
 
 
@@ -293,8 +349,11 @@ cov_12 = covariance_matrix[0, 1]
 
 
 
+# 打印输出 / Print output
 print(f"\nVar(X) = {var1:.4f}")
+# 打印输出 / Print output
 print(f"Var(Y) = {var2:.4f}")
+# 打印输出 / Print output
 print(f"Cov(X,Y) = {cov_12:.4f}")
 
 
@@ -306,7 +365,9 @@ cov_df = pd.DataFrame(covariance_matrix,
 
                       columns=['Data1', 'Data2'])
 
+# 打印输出 / Print output
 print("\nCovariance Matrix DataFrame:")
+# 打印输出 / Print output
 print(cov_df)
 
 
@@ -325,7 +386,9 @@ pyplot.yticks([0, 1], ['Data1', 'Data2'])
 
 pyplot.title('Covariance Matrix Heatmap')
 
+# 生成整数序列 / Generate integer sequence
 for i in range(2):
+    # 生成整数序列 / Generate integer sequence
     for j in range(2):
         pyplot.text(j, i, f'{covariance_matrix[i, j]:.0f}',
                    ha='center', va='center')
@@ -348,9 +411,20 @@ pyplot.show()
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import and Load Data / 导入并加载数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import random, corrcoef\\nfrom scipy.stats import pearsonr\\nfrom matplotlib import pyplot\\n\\n# 使用之前生成的相关数据集\\n# Use the previously generated correlated dataset\\nrandom.seed(1)\\ndata1 = 20 * random.randn(1000) + 100\\ndata2 = data1 + (10 * random.randn(1000) + 50)\\n\\nprint(f\\\"Loaded {len(data1)} observations\\\")
 ```
 
@@ -404,7 +478,7 @@ from numpy import random, corrcoef, cov, std\\nfrom scipy.stats import pearsonr\
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 12: Correlation
 # 第12章：相关性

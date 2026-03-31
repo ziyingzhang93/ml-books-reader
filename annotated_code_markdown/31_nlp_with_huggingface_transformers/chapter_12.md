@@ -1,4 +1,4 @@
-# HF Transformers
+# HuggingFace Transformers NLP / NLP with HF Transformers
 ## Chapter 12
 
 ---
@@ -29,7 +29,9 @@ This script demonstrates **Load pre-trained model and tokenizer**.
 ## Step 1 — Step 1
 
 ```python
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import DistilBertTokenizer, DistilBertForQuestionAnswering
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
 ```
 
@@ -62,6 +64,7 @@ develop conventional algorithms to perform the needed tasks."""
 
 ```python
 inputs = tokenizer(question, context, return_tensors="pt")
+# 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
 with torch.no_grad():
     outputs = model(**inputs)
 ```
@@ -75,7 +78,9 @@ answer_end = torch.argmax(outputs.end_logits)
 answer_tokens = inputs.input_ids[0, answer_start: answer_end + 1]
 answer = tokenizer.decode(answer_tokens)
 
+# 打印输出 / Print output
 print(f"Question: {question}")
+# 打印输出 / Print output
 print(f"Answer: {answer}")
 ```
 
@@ -107,7 +112,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import DistilBertTokenizer, DistilBertForQuestionAnswering
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
 
 # Load pre-trained model and tokenizer
@@ -128,6 +135,7 @@ develop conventional algorithms to perform the needed tasks."""
 
 # Tokenize the input and run the model
 inputs = tokenizer(question, context, return_tensors="pt")
+# 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
 with torch.no_grad():
     outputs = model(**inputs)
 
@@ -137,7 +145,9 @@ answer_end = torch.argmax(outputs.end_logits)
 answer_tokens = inputs.input_ids[0, answer_start: answer_end + 1]
 answer = tokenizer.decode(answer_tokens)
 
+# 打印输出 / Print output
 print(f"Question: {question}")
+# 打印输出 / Print output
 print(f"Answer: {answer}")
 ```
 
@@ -147,7 +157,25 @@ print(f"Answer: {answer}")
 
 ---
 
-### Chapter Summary
+### Logit
+
+
+
+---
+
+### Sliding
+
+
+
+---
+
+### Ensemble
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 12 Summary / 第12章总结
 

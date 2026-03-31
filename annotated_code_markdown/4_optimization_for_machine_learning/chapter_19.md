@@ -1,4 +1,4 @@
-# 机器学习优化方法
+# 机器学习优化方法 / Optimization for Machine Learning
 ## Chapter 19
 
 ---
@@ -29,12 +29,19 @@ This script demonstrates **differential evolution search of the two-dimensional 
 ## Step 1 — differential evolution search of the two-dimensional sphere objective function
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import choice
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import clip
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmin
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import min
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import around
 ```
 
@@ -59,6 +66,7 @@ def mutation(x, F):
 
 ```python
 def check_bounds(mutated, bounds):
+    # 获取长度 / Get length
     mutated_bound = [clip(mutated[i], bounds[i, 0], bounds[i, 1]) for i in range(len(bounds))]
     return mutated_bound
 ```
@@ -81,6 +89,7 @@ p = rand(dims)
 ## Step 7 — generate trial vector by binomial crossover
 
 ```python
+# 生成整数序列 / Generate integer sequence
 trial = [mutated[i] if p[i] < cr else target[i] for i in range(dims)]
     return trial
 
@@ -91,6 +100,7 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
 ## Step 8 — initialise population of candidate solutions randomly within the specified bounds
 
 ```python
+# 获取长度 / Get length
 pop = bounds[:, 0] + (rand(pop_size, len(bounds)) * (bounds[:, 1] - bounds[:, 0]))
 ```
 
@@ -114,6 +124,7 @@ best_vector = pop[argmin(obj_all)]
 ## Step 11 — run iterations of the algorithm
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(iter):
 ```
 
@@ -121,6 +132,7 @@ for i in range(iter):
 ## Step 12 — iterate over all candidate solutions
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for j in range(pop_size):
 ```
 
@@ -128,6 +140,7 @@ for j in range(pop_size):
 ## Step 13 — choose three candidates, a, b and c, that are not the current one
 
 ```python
+# 生成整数序列 / Generate integer sequence
 candidates = [candidate for candidate in range(pop_size) if candidate != j]
             a, b, c = pop[choice(candidates, 3, replace=False)]
 ```
@@ -150,6 +163,7 @@ mutated = check_bounds(mutated, bounds)
 ## Step 16 — perform crossover
 
 ```python
+# 获取长度 / Get length
 trial = crossover(mutated, pop[j], len(bounds), cr)
 ```
 
@@ -208,6 +222,7 @@ if best_obj < prev_obj:
 ## Step 24 — report progress at each iteration
 
 ```python
+# 打印输出 / Print output
 print('Iteration: %d f([%s]) = %.5f' % (i, around(best_vector, decimals=5), best_obj))
     return [best_vector, best_obj]
 ```
@@ -252,6 +267,7 @@ cr = 0.7
 
 ```python
 solution = differential_evolution(pop_size, bounds, iter, F, cr)
+# 打印输出 / Print output
 print('\nSolution: f([%s]) = %.5f' % (around(solution[0], decimals=5), solution[1]))
 ```
 
@@ -282,12 +298,19 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # differential evolution search of the two-dimensional sphere objective function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import choice
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import clip
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmin
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import min
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import around
 
 # define objective function
@@ -300,6 +323,7 @@ def mutation(x, F):
 
 # define boundary check operation
 def check_bounds(mutated, bounds):
+    # 获取长度 / Get length
     mutated_bound = [clip(mutated[i], bounds[i, 0], bounds[i, 1]) for i in range(len(bounds))]
     return mutated_bound
 
@@ -308,11 +332,13 @@ def crossover(mutated, target, dims, cr):
     # generate a uniform random value for every dimension
     p = rand(dims)
     # generate trial vector by binomial crossover
+    # 生成整数序列 / Generate integer sequence
     trial = [mutated[i] if p[i] < cr else target[i] for i in range(dims)]
     return trial
 
 def differential_evolution(pop_size, bounds, iter, F, cr):
     # initialise population of candidate solutions randomly within the specified bounds
+    # 获取长度 / Get length
     pop = bounds[:, 0] + (rand(pop_size, len(bounds)) * (bounds[:, 1] - bounds[:, 0]))
     # evaluate initial population of candidate solutions
     obj_all = [obj(ind) for ind in pop]
@@ -321,10 +347,13 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
     best_obj = min(obj_all)
     prev_obj = best_obj
     # run iterations of the algorithm
+    # 生成整数序列 / Generate integer sequence
     for i in range(iter):
         # iterate over all candidate solutions
+        # 生成整数序列 / Generate integer sequence
         for j in range(pop_size):
             # choose three candidates, a, b and c, that are not the current one
+            # 生成整数序列 / Generate integer sequence
             candidates = [candidate for candidate in range(pop_size) if candidate != j]
             a, b, c = pop[choice(candidates, 3, replace=False)]
             # perform mutation
@@ -332,6 +361,7 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
             # check that lower and upper bounds are retained after mutation
             mutated = check_bounds(mutated, bounds)
             # perform crossover
+            # 获取长度 / Get length
             trial = crossover(mutated, pop[j], len(bounds), cr)
             # compute objective function value for target vector
             obj_target = obj(pop[j])
@@ -350,6 +380,7 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
             best_vector = pop[argmin(obj_all)]
             prev_obj = best_obj
             # report progress at each iteration
+            # 打印输出 / Print output
             print('Iteration: %d f([%s]) = %.5f' % (i, around(best_vector, decimals=5), best_obj))
     return [best_vector, best_obj]
 
@@ -366,6 +397,7 @@ cr = 0.7
 
 # perform differential evolution
 solution = differential_evolution(pop_size, bounds, iter, F, cr)
+# 打印输出 / Print output
 print('\nSolution: f([%s]) = %.5f' % (around(solution[0], decimals=5), solution[1]))
 ```
 
@@ -401,13 +433,21 @@ This script demonstrates **differential evolution search of the two-dimensional 
 ## Step 1 — differential evolution search of the two-dimensional sphere objective function
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import choice
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import clip
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmin
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import min
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import around
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -432,6 +472,7 @@ def mutation(x, F):
 
 ```python
 def check_bounds(mutated, bounds):
+    # 获取长度 / Get length
     mutated_bound = [clip(mutated[i], bounds[i, 0], bounds[i, 1]) for i in range(len(bounds))]
     return mutated_bound
 ```
@@ -454,6 +495,7 @@ p = rand(dims)
 ## Step 7 — generate trial vector by binomial crossover
 
 ```python
+# 生成整数序列 / Generate integer sequence
 trial = [mutated[i] if p[i] < cr else target[i] for i in range(dims)]
     return trial
 
@@ -464,6 +506,7 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
 ## Step 8 — initialise population of candidate solutions randomly within the specified bounds
 
 ```python
+# 获取长度 / Get length
 pop = bounds[:, 0] + (rand(pop_size, len(bounds)) * (bounds[:, 1] - bounds[:, 0]))
 ```
 
@@ -494,6 +537,7 @@ obj_iter = list()
 ## Step 12 — run iterations of the algorithm
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(iter):
 ```
 
@@ -501,6 +545,7 @@ for i in range(iter):
 ## Step 13 — iterate over all candidate solutions
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for j in range(pop_size):
 ```
 
@@ -508,6 +553,7 @@ for j in range(pop_size):
 ## Step 14 — choose three candidates, a, b and c, that are not the current one
 
 ```python
+# 生成整数序列 / Generate integer sequence
 candidates = [candidate for candidate in range(pop_size) if candidate != j]
             a, b, c = pop[choice(candidates, 3, replace=False)]
 ```
@@ -530,6 +576,7 @@ mutated = check_bounds(mutated, bounds)
 ## Step 17 — perform crossover
 
 ```python
+# 获取长度 / Get length
 trial = crossover(mutated, pop[j], len(bounds), cr)
 ```
 
@@ -582,6 +629,7 @@ best_obj = min(obj_all)
 if best_obj < prev_obj:
             best_vector = pop[argmin(obj_all)]
             prev_obj = best_obj
+            # 添加元素到列表末尾 / Append element to list end
             obj_iter.append(best_obj)
 ```
 
@@ -589,6 +637,7 @@ if best_obj < prev_obj:
 ## Step 25 — report progress at each iteration
 
 ```python
+# 打印输出 / Print output
 print('Iteration: %d f([%s]) = %.5f' % (i, around(best_vector, decimals=5), best_obj))
     return [best_vector, best_obj, obj_iter]
 ```
@@ -633,6 +682,7 @@ cr = 0.7
 
 ```python
 solution = differential_evolution(pop_size, bounds, iter, F, cr)
+# 打印输出 / Print output
 print('\nSolution: f([%s]) = %.5f' % (around(solution[0], decimals=5), solution[1]))
 ```
 
@@ -674,13 +724,21 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # differential evolution search of the two-dimensional sphere objective function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import choice
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import clip
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import argmin
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import min
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import around
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # define objective function
@@ -693,6 +751,7 @@ def mutation(x, F):
 
 # define boundary check operation
 def check_bounds(mutated, bounds):
+    # 获取长度 / Get length
     mutated_bound = [clip(mutated[i], bounds[i, 0], bounds[i, 1]) for i in range(len(bounds))]
     return mutated_bound
 
@@ -701,11 +760,13 @@ def crossover(mutated, target, dims, cr):
     # generate a uniform random value for every dimension
     p = rand(dims)
     # generate trial vector by binomial crossover
+    # 生成整数序列 / Generate integer sequence
     trial = [mutated[i] if p[i] < cr else target[i] for i in range(dims)]
     return trial
 
 def differential_evolution(pop_size, bounds, iter, F, cr):
     # initialise population of candidate solutions randomly within the specified bounds
+    # 获取长度 / Get length
     pop = bounds[:, 0] + (rand(pop_size, len(bounds)) * (bounds[:, 1] - bounds[:, 0]))
     # evaluate initial population of candidate solutions
     obj_all = [obj(ind) for ind in pop]
@@ -716,10 +777,13 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
     # initialise list to store the objective function value at each iteration
     obj_iter = list()
     # run iterations of the algorithm
+    # 生成整数序列 / Generate integer sequence
     for i in range(iter):
         # iterate over all candidate solutions
+        # 生成整数序列 / Generate integer sequence
         for j in range(pop_size):
             # choose three candidates, a, b and c, that are not the current one
+            # 生成整数序列 / Generate integer sequence
             candidates = [candidate for candidate in range(pop_size) if candidate != j]
             a, b, c = pop[choice(candidates, 3, replace=False)]
             # perform mutation
@@ -727,6 +791,7 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
             # check that lower and upper bounds are retained after mutation
             mutated = check_bounds(mutated, bounds)
             # perform crossover
+            # 获取长度 / Get length
             trial = crossover(mutated, pop[j], len(bounds), cr)
             # compute objective function value for target vector
             obj_target = obj(pop[j])
@@ -744,8 +809,10 @@ def differential_evolution(pop_size, bounds, iter, F, cr):
         if best_obj < prev_obj:
             best_vector = pop[argmin(obj_all)]
             prev_obj = best_obj
+            # 添加元素到列表末尾 / Append element to list end
             obj_iter.append(best_obj)
             # report progress at each iteration
+            # 打印输出 / Print output
             print('Iteration: %d f([%s]) = %.5f' % (i, around(best_vector, decimals=5), best_obj))
     return [best_vector, best_obj, obj_iter]
 
@@ -762,6 +829,7 @@ cr = 0.7
 
 # perform differential evolution
 solution = differential_evolution(pop_size, bounds, iter, F, cr)
+# 打印输出 / Print output
 print('\nSolution: f([%s]) = %.5f' % (around(solution[0], decimals=5), solution[1]))
 
 # line plot of best objective function values
@@ -773,7 +841,7 @@ pyplot.show()
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 19 Summary / 第19章总结
 

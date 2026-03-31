@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 22
 
 ---
@@ -39,7 +39,9 @@ World Bank indicators for 2010:
 # pandas_datareader requires internet connection
 # 导入数据下载库和pandas
 # pandas_datareader需要互联网连接
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas_datareader import wb
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 ```
 
@@ -56,7 +58,9 @@ indicator_names = [
     "NE.RSB.GNFS.CD",  # External balance on goods and services (current US$)
 ]
 
+# 打印输出 / Print output
 print(f"Downloading {len(indicator_names)} economic indicators from World Bank...")
+# 打印输出 / Print output
 print(f"Note: This requires internet connection")
 ```
 
@@ -72,11 +76,16 @@ try:
         start=2010,                # Year 2010
         end=2010                   # Single year
     ).reset_index()
+    # 打印输出 / Print output
     print(f"\nData downloaded successfully!")
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     print(f"Dataset shape: {df.shape}")
+    # 获取列名 / Get column names
     print(f"Columns: {df.columns.tolist()}")
 except Exception as e:
+    # 打印输出 / Print output
     print(f"\nError downloading data: {e}")
+    # 打印输出 / Print output
     print(f"Note: This requires internet connection to World Bank API")
 ```
 
@@ -88,15 +97,20 @@ except Exception as e:
 # 过滤汇总地区（世界、收入组等）
 # 仅保留单个国家
 countries = wb.get_countries()
+# 打印输出 / Print output
 print(f"\nTotal countries/regions in WB: {len(countries)}")
 
 # Get only non-aggregate entries
 non_aggregates = countries[countries['region'] != 'Aggregates'].name
+# 打印输出 / Print output
 print(f"Individual countries: {len(non_aggregates)}")
 
 # Filter dataframe to include only individual countries
+# 删除含缺失值的行 / Drop rows with missing values
 df_nonagg = df[df['country'].isin(non_aggregates)].dropna()
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nFiltered dataset shape: {df_nonagg.shape}")
+# 打印输出 / Print output
 print(f"Countries with complete data: {df_nonagg['country'].nunique()}")
 ```
 
@@ -105,13 +119,19 @@ print(f"Countries with complete data: {df_nonagg['country'].nunique()}")
 ```python
 # Show first few rows of data
 # 显示数据的前几行
+# 打印输出 / Print output
 print(f"\nFirst 5 rows:")
+# 查看前几行数据（快速预览） / View first rows (quick preview)
 print(df_nonagg.head())
 
+# 打印输出 / Print output
 print(f"\nData types:")
+# 打印输出 / Print output
 print(df_nonagg.dtypes)
 
+# 打印输出 / Print output
 print(f"\nData statistics:")
+# 生成统计摘要（均值、标准差等） / Generate statistical summary (mean, std, etc.)
 print(df_nonagg.describe())
 ```
 
@@ -122,12 +142,18 @@ print(df_nonagg.describe())
 ```python
 # Check missing values
 # 检查缺失值
+# 打印输出 / Print output
 print(f"\nMissing values per column:")
+# 打印输出 / Print output
 print(df_nonagg.isnull().sum())
 
+# 打印输出 / Print output
 print(f"\nMissing percentage:")
+# 获取长度 / Get length
 missing_pct = (df_nonagg.isnull().sum() / len(df_nonagg) * 100)
+# 获取字典的键值对 / Get dict key-value pairs
 for col, pct in missing_pct.items():
+    # 打印输出 / Print output
     print(f"  {col}: {pct:.1f}%")
 ```
 
@@ -158,7 +184,9 @@ for col, pct in missing_pct.items():
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas_datareader import wb
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 # --- Define Indicators / 定义指标 ---
@@ -181,9 +209,11 @@ df = wb.download(
 # --- Filter Countries / 过滤国家 ---
 countries = wb.get_countries()
 non_aggregates = countries[countries['region'] != 'Aggregates'].name
+# 删除含缺失值的行 / Drop rows with missing values
 df_nonagg = df[df['country'].isin(non_aggregates)].dropna()
 
 # --- Display Results / 显示结果 ---
+# 打印输出 / Print output
 print(df_nonagg)
 ```
 
@@ -219,10 +249,15 @@ Compute Euclidean and cosine distances between countries based on economic indic
 ```python
 # Import necessary libraries
 # 导入必要的库
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas_datareader import wb
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import StandardScaler
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics.pairwise import euclidean_distances, cosine_distances
 ```
 
@@ -250,11 +285,15 @@ try:
     # Filter non-aggregate countries
     countries = wb.get_countries()
     non_aggregates = countries[countries['region'] != 'Aggregates'].name
+    # 删除含缺失值的行 / Drop rows with missing values
     df = df[df['country'].isin(non_aggregates)].dropna()
     
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     print(f"Data loaded: {df.shape}")
 except Exception as e:
+    # 打印输出 / Print output
     print(f"Note: Could not download data: {e}")
+    # 打印输出 / Print output
     print(f"This notebook requires internet connection to World Bank API")
 ```
 
@@ -263,14 +302,20 @@ except Exception as e:
 ```python
 # Extract feature matrix and country names
 # 提取特征矩阵和国家名称
+# 转换为NumPy数组 / Convert to NumPy array
 X = df.iloc[:, 2:].values  # Exclude year and country columns
+# 转换为NumPy数组 / Convert to NumPy array
 country_names = df['country'].values
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Feature matrix shape: {X.shape}")
+# 打印输出 / Print output
 print(f"Number of countries: {len(country_names)}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Number of features: {X.shape[1]}")
 
 # Show first few countries
+# 打印输出 / Print output
 print(f"\nFirst 5 countries: {country_names[:5]}")
 ```
 
@@ -279,11 +324,16 @@ print(f"\nFirst 5 countries: {country_names[:5]}")
 ```python
 # Standardize features (important for distance metrics)
 # 标准化特征（对距离度量很重要）
+# 标准化：均值=0，标准差=1 / Standardize: mean=0, std=1
 scaler = StandardScaler()
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 X_scaled = scaler.fit_transform(X)
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Scaled feature matrix shape: {X_scaled.shape}")
+# 打印输出 / Print output
 print(f"Mean of scaled features: {X_scaled.mean(axis=0)}")
+# 打印输出 / Print output
 print(f"Std of scaled features: {X_scaled.std(axis=0)}")
 ```
 
@@ -294,10 +344,15 @@ print(f"Std of scaled features: {X_scaled.std(axis=0)}")
 # 计算两两欧几里得距离
 euclidean_dist = euclidean_distances(X_scaled)
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Euclidean distance matrix shape: {euclidean_dist.shape}")
+# 打印输出 / Print output
 print(f"\nDistance statistics:")
+# 打印输出 / Print output
 print(f"  Min distance: {euclidean_dist[euclidean_dist > 0].min():.4f}")
+# 打印输出 / Print output
 print(f"  Max distance: {euclidean_dist.max():.4f}")
+# 打印输出 / Print output
 print(f"  Mean distance: {euclidean_dist[euclidean_dist > 0].mean():.4f}")
 ```
 
@@ -308,10 +363,15 @@ print(f"  Mean distance: {euclidean_dist[euclidean_dist > 0].mean():.4f}")
 # 计算余弦距离
 cosine_dist = cosine_distances(X_scaled)
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Cosine distance matrix shape: {cosine_dist.shape}")
+# 打印输出 / Print output
 print(f"\nDistance statistics:")
+# 打印输出 / Print output
 print(f"  Min distance: {cosine_dist[cosine_dist > 0].min():.4f}")
+# 打印输出 / Print output
 print(f"  Max distance: {cosine_dist.max():.4f}")
+# 打印输出 / Print output
 print(f"  Mean distance: {cosine_dist[cosine_dist > 0].mean():.4f}")
 ```
 
@@ -334,17 +394,24 @@ try:
     
     # Euclidean distances
     euclidean_closest = np.argsort(distances_to_australia_euclidean)[1:n_closest+1]
+    # 打印输出 / Print output
     print("Countries most similar to Australia (by Euclidean distance):")
+    # 同时获取索引和值 / Get both index and value
     for i, idx in enumerate(euclidean_closest, 1):
+        # 打印输出 / Print output
         print(f"  {i}. {country_names[idx]}: {distances_to_australia_euclidean[idx]:.4f}")
     
     # Cosine distances
     cosine_closest = np.argsort(distances_to_australia_cosine)[1:n_closest+1]
+    # 打印输出 / Print output
     print(f"\nCountries most similar to Australia (by Cosine distance):")
+    # 同时获取索引和值 / Get both index and value
     for i, idx in enumerate(cosine_closest, 1):
+        # 打印输出 / Print output
         print(f"  {i}. {country_names[idx]}: {distances_to_australia_cosine[idx]:.4f}")
         
 except Exception as e:
+    # 打印输出 / Print output
     print(f"Could not find Australia: {e}")
 ```
 
@@ -353,17 +420,29 @@ except Exception as e:
 ```python
 # Discuss differences between Euclidean and Cosine distances
 # 讨论欧几里得距离和余弦距离的差异
+# 打印输出 / Print output
 print(f"\nDistance Metric Comparison:")
+# 打印输出 / Print output
 print(f"\nEuclidean Distance:")
+# 打印输出 / Print output
 print(f"  - Measures absolute differences between vectors")
+# 打印输出 / Print output
 print(f"  - Sensitive to scale of features")
+# 打印输出 / Print output
 print(f"  - Geometric distance in feature space")
+# 打印输出 / Print output
 print(f"\nCosine Distance:")
+# 打印输出 / Print output
 print(f"  - Measures angle between vectors")
+# 打印输出 / Print output
 print(f"  - Invariant to scale (measures direction only)")
+# 打印输出 / Print output
 print(f"  - Better for comparing vector direction/pattern")
+# 打印输出 / Print output
 print(f"\nFor economic data:")
+# 打印输出 / Print output
 print(f"  - Euclidean: Countries with similar absolute sizes")
+# 打印输出 / Print output
 print(f"  - Cosine: Countries with similar economic structure/proportions")
 ```
 
@@ -393,10 +472,15 @@ print(f"  - Cosine: Countries with similar economic structure/proportions")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas_datareader import wb
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import StandardScaler
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics.pairwise import euclidean_distances, cosine_distances
 
 # --- Download Data / 下载数据 ---
@@ -410,12 +494,17 @@ names = [
 df = wb.download(country='all', indicator=names, start=2010, end=2010).reset_index()
 countries = wb.get_countries()
 non_aggregates = countries[countries['region'] != 'Aggregates'].name
+# 删除含缺失值的行 / Drop rows with missing values
 df = df[df['country'].isin(non_aggregates)].dropna()
 
 # --- Prepare Features / 准备特征 ---
+# 转换为NumPy数组 / Convert to NumPy array
 X = df.iloc[:, 2:].values
+# 转换为NumPy数组 / Convert to NumPy array
 country_names = df['country'].values
+# 标准化：均值=0，标准差=1 / Standardize: mean=0, std=1
 scaler = StandardScaler()
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 X_scaled = scaler.fit_transform(X)
 
 # --- Compute Distances / 计算距离 ---
@@ -426,12 +515,13 @@ cosine_dist = cosine_distances(X_scaled)
 australia_idx = np.where(country_names == 'Australia')[0][0]
 closest = np.argsort(euclidean_dist[australia_idx])[1:11]
 for idx in closest:
+    # 打印输出 / Print output
     print(f"{country_names[idx]}: {euclidean_dist[australia_idx, idx]:.4f}")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 22 Summary / 第22章总结：Country Comparison via Vector Norms
 

@@ -1,9 +1,15 @@
-# 集成学习
+# 集成学习算法 / Ensemble Learning Algorithms
 ## Appendix 02
 
 ---
 
-### Chapter Summary
+### Python Versions
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 02 Summary / 第02章总结
 

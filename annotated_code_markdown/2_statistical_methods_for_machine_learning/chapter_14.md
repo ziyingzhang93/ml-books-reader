@@ -1,17 +1,21 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 14
 
 ---
 
 ### Association
 
+
+
 ---
 
 ### Difference
 
+
+
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 14: Effect Size
 # 第14章：效应大小

@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 19
 
 ---
@@ -38,17 +38,29 @@ df2 = diff(f, x, x)
 df3 = diff(f, x, x, x)
 df4 = diff(f, x, x, x, x)
 df5 = diff(f, x, x, x, x, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("First derivative")
+# 打印输出 / Print output
 pprint(df1)
+# 打印输出 / Print output
 print("Second derivative")
+# 打印输出 / Print output
 pprint(df2)
+# 打印输出 / Print output
 print("Third derivative")
+# 打印输出 / Print output
 pprint(df3)
+# 打印输出 / Print output
 print("Fourth derivative")
+# 打印输出 / Print output
 pprint(df4)
+# 打印输出 / Print output
 print("Fifth derivative")
+# 打印输出 / Print output
 pprint(df5)
 ```
 
@@ -81,17 +93,29 @@ df2 = diff(f, x, x)
 df3 = diff(f, x, x, x)
 df4 = diff(f, x, x, x, x)
 df5 = diff(f, x, x, x, x, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("First derivative")
+# 打印输出 / Print output
 pprint(df1)
+# 打印输出 / Print output
 print("Second derivative")
+# 打印输出 / Print output
 pprint(df2)
+# 打印输出 / Print output
 print("Third derivative")
+# 打印输出 / Print output
 pprint(df3)
+# 打印输出 / Print output
 print("Fourth derivative")
+# 打印输出 / Print output
 pprint(df4)
+# 打印输出 / Print output
 print("Fifth derivative")
+# 打印输出 / Print output
 pprint(df5)
 ```
 
@@ -137,19 +161,33 @@ fxx = diff(fx, x)
 fyy = diff(fy, y)
 fxy = diff(fx, y)
 fyx = diff(fy, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("f_x =")
+# 打印输出 / Print output
 pprint(fx)
+# 打印输出 / Print output
 print("f_y =")
+# 打印输出 / Print output
 pprint(fy)
+# 打印输出 / Print output
 print("f_xx =")
+# 打印输出 / Print output
 pprint(fxx)
+# 打印输出 / Print output
 print("f_yy =")
+# 打印输出 / Print output
 pprint(fyy)
+# 打印输出 / Print output
 print("f_xy =")
+# 打印输出 / Print output
 pprint(fxy)
+# 打印输出 / Print output
 print("f_yx =")
+# 打印输出 / Print output
 pprint(fyx)
 ```
 
@@ -183,25 +221,39 @@ fxx = diff(fx, x)
 fyy = diff(fy, y)
 fxy = diff(fx, y)
 fyx = diff(fy, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("f_x =")
+# 打印输出 / Print output
 pprint(fx)
+# 打印输出 / Print output
 print("f_y =")
+# 打印输出 / Print output
 pprint(fy)
+# 打印输出 / Print output
 print("f_xx =")
+# 打印输出 / Print output
 pprint(fxx)
+# 打印输出 / Print output
 print("f_yy =")
+# 打印输出 / Print output
 pprint(fyy)
+# 打印输出 / Print output
 print("f_xy =")
+# 打印输出 / Print output
 pprint(fxy)
+# 打印输出 / Print output
 print("f_yx =")
+# 打印输出 / Print output
 pprint(fyx)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 19 Summary / 第19章总结
 

@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 09
 
 ---
@@ -31,7 +31,9 @@ $$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 
 ```python
 # Import necessary libraries / 导入必要的库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 ```
 
@@ -49,15 +51,24 @@ num_samples = 10000  # Number of samples / 样本数
 ```python
 # Sample from normal distribution / 从正态分布中抽样
 # numpy.random.normal(loc=mu, scale=sigma, size=num_samples)
+# 生成随机数 / Generate random numbers
 samples = np.random.normal(loc=mu, scale=sigma, size=num_samples)
 
+# 打印输出 / Print output
 print(f'Normal Distribution Sample / 正态分布样本')
+# 打印输出 / Print output
 print(f'Parameters: μ={mu}, σ={sigma}')
+# 打印输出 / Print output
 print(f'样本数: {num_samples}')
+# 打印输出 / Print output
 print(f'\nSample statistics / 样本统计:')
+# 计算均值 / Calculate mean
 print(f'Mean / 均值: {np.mean(samples):.4f}')
+# 计算标准差 / Calculate standard deviation
 print(f'Std Dev / 标准差: {np.std(samples):.4f}')
+# 求最小值 / Find minimum value
 print(f'Min / 最小值: {np.min(samples):.4f}')
+# 求最大值 / Find maximum value
 print(f'Max / 最大值: {np.max(samples):.4f}')
 ```
 
@@ -69,7 +80,9 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Histogram / 直方图
 axes[0].hist(samples, bins=50, density=True, alpha=0.7, edgecolor='black')
+# 计算均值 / Calculate mean
 axes[0].axvline(np.mean(samples), color='r', linestyle='--', linewidth=2, 
+                 # 计算均值 / Calculate mean
                  label=f'Sample Mean: {np.mean(samples):.2f}')
 axes[0].axvline(mu, color='g', linestyle='--', linewidth=2, 
                  label=f'Theoretical μ: {mu}')
@@ -86,6 +99,7 @@ axes[1].set_title('Q-Q Plot: Normal Distribution')
 axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -93,23 +107,34 @@ plt.show()
 
 ```python
 # Calculate percentiles and confidence intervals / 计算百分位数和置信区间
+# 打印输出 / Print output
 print('\nDistribution Properties / 分布性质:')
+# 打印输出 / Print output
 print('=' * 60)
 
 # Calculate percentiles / 计算百分位数
 percentiles = [2.5, 5, 25, 50, 75, 95, 97.5]
+# 打印输出 / Print output
 print(f'\n{"Percentile":>12s} {"Value":>12s}')
+# 打印输出 / Print output
 print('-' * 26)
 for p in percentiles:
     value = np.percentile(samples, p)
+    # 打印输出 / Print output
     print(f'{p:11.1f}% {value:12.4f}')
 
 # Confidence intervals / 置信区间
+# 计算均值 / Calculate mean
 mean = np.mean(samples)
+# 计算标准差 / Calculate standard deviation
 std = np.std(samples)
+# 打印输出 / Print output
 print(f'\nConfidence Intervals (based on sample): / 置信区间（基于样本）:')
+# 打印输出 / Print output
 print(f'68% (μ ± 1σ):  [{mean - std:.2f}, {mean + std:.2f}]')
+# 打印输出 / Print output
 print(f'95% (μ ± 2σ):  [{mean - 2*std:.2f}, {mean + 2*std:.2f}]')
+# 打印输出 / Print output
 print(f'99% (μ ± 3σ):  [{mean - 3*std:.2f}, {mean + 3*std:.2f}]')
 ```
 
@@ -144,7 +169,9 @@ print(f'99% (μ ± 3σ):  [{mean - 3*std:.2f}, {mean + 3*std:.2f}]')
 ```python
 # Complete Normal Distribution Sampling / 完整正态分布抽样
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
@@ -154,15 +181,24 @@ sigma = 5            # Standard deviation / 标准差
 num_samples = 10000  # Number of samples / 样本数
 
 # Sample from normal distribution / 从正态分布中抽样
+# 生成随机数 / Generate random numbers
 samples = np.random.normal(loc=mu, scale=sigma, size=num_samples)
 
+# 打印输出 / Print output
 print(f'Normal Distribution Sample')
+# 打印输出 / Print output
 print(f'Parameters: μ={mu}, σ={sigma}')
+# 打印输出 / Print output
 print(f'Sample count: {num_samples}')
+# 打印输出 / Print output
 print(f'\nSample statistics:')
+# 计算均值 / Calculate mean
 print(f'Mean: {np.mean(samples):.4f}')
+# 计算标准差 / Calculate standard deviation
 print(f'Std Dev: {np.std(samples):.4f}')
+# 求最小值 / Find minimum value
 print(f'Min: {np.min(samples):.4f}')
+# 求最大值 / Find maximum value
 print(f'Max: {np.max(samples):.4f}')
 
 # Create visualization / 创建可视化
@@ -170,7 +206,9 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Histogram / 直方图
 axes[0].hist(samples, bins=50, density=True, alpha=0.7, edgecolor='black')
+# 计算均值 / Calculate mean
 axes[0].axvline(np.mean(samples), color='r', linestyle='--', linewidth=2, 
+                 # 计算均值 / Calculate mean
                  label=f'Sample Mean: {np.mean(samples):.2f}')
 axes[0].axvline(mu, color='g', linestyle='--', linewidth=2, 
                  label=f'Theoretical μ: {mu}')
@@ -186,27 +224,45 @@ axes[1].set_title('Q-Q Plot: Normal Distribution')
 axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
 # Calculate percentiles and confidence intervals / 计算百分位数和置信区间
+# 打印输出 / Print output
 print('\nDistribution Properties:')
+# 打印输出 / Print output
 print('=' * 60)
 
 percentiles = [2.5, 5, 25, 50, 75, 95, 97.5]
+# 打印输出 / Print output
 print(f'\n{"Percentile":>12s} {"Value":>12s}')
+# 打印输出 / Print output
 print('-' * 26)
 for p in percentiles:
     value = np.percentile(samples, p)
+    # 打印输出 / Print output
     print(f'{p:11.1f}% {value:12.4f}')
 
 # Confidence intervals / 置信区间
+# 计算均值 / Calculate mean
 mean = np.mean(samples)
+# 计算标准差 / Calculate standard deviation
 std = np.std(samples)
+# 打印输出 / Print output
 print(f'\nConfidence Intervals:')
+# 打印输出 / Print output
 print(f'68% (μ ± 1σ):  [{mean - std:.2f}, {mean + std:.2f}]')
+# 打印输出 / Print output
 print(f'95% (μ ± 2σ):  [{mean - 2*std:.2f}, {mean + 2*std:.2f}]')
+# 打印输出 / Print output
 print(f'99% (μ ± 3σ):  [{mean - 3*std:.2f}, {mean + 3*std:.2f}]')
 ```
+
+---
+
+### Normal Plot
+
+
 
 ---
 
@@ -237,12 +293,24 @@ where $z_{0.025} = -1.96$ and $z_{0.975} = 1.96$
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  📊 评估模型 / Evaluate Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import necessary libraries / 导入必要的库
 from scipy.stats import norm
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 ```
 
@@ -271,21 +339,32 @@ upper_percentile = 0.975
 z_lower = norm.ppf(lower_percentile)
 z_upper = norm.ppf(upper_percentile)
 
+# 打印输出 / Print output
 print(f'95% Confidence Interval Calculation / 95%置信区间计算')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Distribution: N(μ={mu}, σ={sigma})')
+# 打印输出 / Print output
 print(f'\nZ-scores (standardized):/')
+# 打印输出 / Print output
 print(f'Z_{lower_percentile} = {z_lower:.4f}')
+# 打印输出 / Print output
 print(f'Z_{upper_percentile} = {z_upper:.4f}')
 
 # Convert to original scale / 转换到原始尺度
 lower_bound = mu + z_lower * sigma
 upper_bound = mu + z_upper * sigma
 
+# 打印输出 / Print output
 print(f'\nOriginal Scale:/')
+# 打印输出 / Print output
 print(f'Lower Bound: μ + z_lower × σ = {mu} + {z_lower:.4f} × {sigma} = {lower_bound:.4f}')
+# 打印输出 / Print output
 print(f'Upper Bound: μ + z_upper × σ = {mu} + {z_upper:.4f} × {sigma} = {upper_bound:.4f}')
+# 打印输出 / Print output
 print(f'\nMiddle 95% Range: [{lower_bound:.4f}, {upper_bound:.4f}]')
+# 打印输出 / Print output
 print(f'中间95%范围: [{lower_bound:.4f}, {upper_bound:.4f}]')
 ```
 
@@ -297,10 +376,15 @@ prob_below_upper = norm.cdf(upper_bound, loc=mu, scale=sigma)
 prob_below_lower = norm.cdf(lower_bound, loc=mu, scale=sigma)
 prob_in_range = prob_below_upper - prob_below_lower
 
+# 打印输出 / Print output
 print(f'\nVerification using CDF / 使用CDF验证:')
+# 打印输出 / Print output
 print(f'P(X <= {lower_bound:.4f}) = {prob_below_lower:.6f}')
+# 打印输出 / Print output
 print(f'P(X <= {upper_bound:.4f}) = {prob_below_upper:.6f}')
+# 打印输出 / Print output
 print(f'P({lower_bound:.4f} <= X <= {upper_bound:.4f}) = {prob_in_range:.6f}')
+# 打印输出 / Print output
 print(f'\nExpected: 0.95, Got: {prob_in_range:.6f}')
 ```
 
@@ -310,9 +394,13 @@ print(f'\nExpected: 0.95, Got: {prob_in_range:.6f}')
 # Calculate confidence intervals for different levels / 计算不同水平的置信区间
 confidence_levels = [0.68, 0.90, 0.95, 0.99]
 
+# 打印输出 / Print output
 print(f'\nConfidence Intervals at Different Levels / 不同水平的置信区间:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'{"Confidence":>12s} {"Lower Bound":>15s} {"Upper Bound":>15s} {"Width":>12s}')
+# 打印输出 / Print output
 print('-' * 70)
 
 for conf in confidence_levels:
@@ -329,6 +417,7 @@ for conf in confidence_levels:
     upper = mu + z_u * sigma
     width = upper - lower
     
+    # 打印输出 / Print output
     print(f'{conf*100:10.0f}% [{lower:13.4f}, {upper:13.4f}] {width:12.4f}')
 ```
 
@@ -339,11 +428,13 @@ for conf in confidence_levels:
 fig, ax = plt.subplots(figsize=(12, 6))
 
 # Plot PDF / 绘制PDF
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
 pdf = norm.pdf(x, loc=mu, scale=sigma)
 ax.plot(x, pdf, 'b-', linewidth=2, label='PDF')
 
 # Highlight 95% interval / 高亮95%区间
+# 生成等间距数组 / Generate evenly spaced array
 x_95 = np.linspace(lower_bound, upper_bound, 100)
 pdf_95 = norm.pdf(x_95, loc=mu, scale=sigma)
 ax.fill_between(x_95, pdf_95, alpha=0.6, color='green', label='95% CI')
@@ -372,6 +463,7 @@ ax.legend(loc='upper right')
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -404,7 +496,9 @@ plt.show()
 # Complete Normal Middle Range Analysis / 完整正态分布中间范围分析
 
 from scipy.stats import norm
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # Define normal distribution parameters / 定义正态分布参数
@@ -419,19 +513,28 @@ upper_percentile = 0.975
 z_lower = norm.ppf(lower_percentile)
 z_upper = norm.ppf(upper_percentile)
 
+# 打印输出 / Print output
 print(f'95% Confidence Interval Calculation')
+# 打印输出 / Print output
 print(f'Distribution: N(μ={mu}, σ={sigma})')
+# 打印输出 / Print output
 print(f'\nZ-scores (standardized):')
+# 打印输出 / Print output
 print(f'Z_{lower_percentile} = {z_lower:.4f}')
+# 打印输出 / Print output
 print(f'Z_{upper_percentile} = {z_upper:.4f}')
 
 # Convert to original scale / 转换到原始尺度
 lower_bound = mu + z_lower * sigma
 upper_bound = mu + z_upper * sigma
 
+# 打印输出 / Print output
 print(f'\nOriginal Scale:')
+# 打印输出 / Print output
 print(f'Lower Bound: μ + z_lower × σ = {mu} + {z_lower:.4f} × {sigma} = {lower_bound:.4f}')
+# 打印输出 / Print output
 print(f'Upper Bound: μ + z_upper × σ = {mu} + {z_upper:.4f} × {sigma} = {upper_bound:.4f}')
+# 打印输出 / Print output
 print(f'\nMiddle 95% Range: [{lower_bound:.4f}, {upper_bound:.4f}]')
 
 # Verify by calculating CDF at these points / 通过在这些点计算CDF来验证
@@ -439,17 +542,25 @@ prob_below_upper = norm.cdf(upper_bound, loc=mu, scale=sigma)
 prob_below_lower = norm.cdf(lower_bound, loc=mu, scale=sigma)
 prob_in_range = prob_below_upper - prob_below_lower
 
+# 打印输出 / Print output
 print(f'\nVerification using CDF:')
+# 打印输出 / Print output
 print(f'P(X <= {lower_bound:.4f}) = {prob_below_lower:.6f}')
+# 打印输出 / Print output
 print(f'P(X <= {upper_bound:.4f}) = {prob_below_upper:.6f}')
+# 打印输出 / Print output
 print(f'P({lower_bound:.4f} <= X <= {upper_bound:.4f}) = {prob_in_range:.6f}')
 
 # Calculate confidence intervals for different levels / 计算不同水平的置信区间
 confidence_levels = [0.68, 0.90, 0.95, 0.99]
 
+# 打印输出 / Print output
 print(f'\nConfidence Intervals at Different Levels:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'{"Confidence":>12s} {"Lower Bound":>15s} {"Upper Bound":>15s} {"Width":>12s}')
+# 打印输出 / Print output
 print('-' * 70)
 
 for conf in confidence_levels:
@@ -464,16 +575,19 @@ for conf in confidence_levels:
     upper = mu + z_u * sigma
     width = upper - lower
     
+    # 打印输出 / Print output
     print(f'{conf*100:10.0f}% [{lower:13.4f}, {upper:13.4f}] {width:12.4f}')
 
 # Create visualization / 创建可视化
 fig, ax = plt.subplots(figsize=(12, 6))
 
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
 pdf = norm.pdf(x, loc=mu, scale=sigma)
 ax.plot(x, pdf, 'b-', linewidth=2, label='PDF')
 
 # Highlight 95% interval / 高亮95%区间
+# 生成等间距数组 / Generate evenly spaced array
 x_95 = np.linspace(lower_bound, upper_bound, 100)
 pdf_95 = norm.pdf(x_95, loc=mu, scale=sigma)
 ax.fill_between(x_95, pdf_95, alpha=0.6, color='green', label='95% CI')
@@ -502,12 +616,37 @@ ax.legend(loc='upper right')
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
 ---
 
-### Chapter Summary
+### Exponential Sample
+
+
+
+---
+
+### Exponential Plot
+
+
+
+---
+
+### Pareto Sample
+
+
+
+---
+
+### Pareto Plot
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 9: Continuous Distributions
 

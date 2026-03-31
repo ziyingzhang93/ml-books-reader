@@ -1,9 +1,9 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 03
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 03 Summary / 第03章总结
 
@@ -51,6 +51,16 @@ This script demonstrates **Example of Creating a Cross Validation Split**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+```
+
+---
 ## Step 1 — Example of Creating a Cross Validation Split
 
 ```python
@@ -65,12 +75,18 @@ from random import randrange
 def cross_validation_split(dataset, folds=3):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 ```
@@ -79,9 +95,11 @@ def cross_validation_split(dataset, folds=3):
 ## Step 3 — test cross validation split
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]]
 folds = cross_validation_split(dataset, 4)
+# 打印输出 / Print output
 print(folds)
 ```
 
@@ -119,19 +137,27 @@ from random import randrange
 def cross_validation_split(dataset, folds=3):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 
 # test cross validation split
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]]
 folds = cross_validation_split(dataset, 4)
+# 打印输出 / Print output
 print(folds)
 ```
 
@@ -164,6 +190,16 @@ This script demonstrates **Example of Splitting a Contrived Dataset into Train a
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+```
+
+---
 ## Step 1 — Example of Splitting a Contrived Dataset into Train and Test
 
 ```python
@@ -175,12 +211,17 @@ from random import randrange
 ## Step 2 — Split a dataset into a train and test set
 
 ```python
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(dataset, split=0.60):
 	train = list()
+ # 获取长度 / Get length
 	train_size = split * len(dataset)
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	while len(train) < train_size:
+  # 获取长度 / Get length
 		index = randrange(len(dataset_copy))
+  # 添加元素到列表末尾 / Append element to list end
 		train.append(dataset_copy.pop(index))
 	return train, dataset_copy
 ```
@@ -189,10 +230,14 @@ def train_test_split(dataset, split=0.60):
 ## Step 3 — test train/test split
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]]
+# 划分训练集和测试集 / Split into train and test sets
 train, test = train_test_split(dataset)
+# 打印输出 / Print output
 print(train)
+# 打印输出 / Print output
 print(test)
 ```
 
@@ -228,20 +273,29 @@ from random import seed
 from random import randrange
 
 # Split a dataset into a train and test set
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(dataset, split=0.60):
 	train = list()
+ # 获取长度 / Get length
 	train_size = split * len(dataset)
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	while len(train) < train_size:
+  # 获取长度 / Get length
 		index = randrange(len(dataset_copy))
+  # 添加元素到列表末尾 / Append element to list end
 		train.append(dataset_copy.pop(index))
 	return train, dataset_copy
 
 # test train/test split
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]]
+# 划分训练集和测试集 / Split into train and test sets
 train, test = train_test_split(dataset)
+# 打印输出 / Print output
 print(train)
+# 打印输出 / Print output
 print(test)
 ```
 

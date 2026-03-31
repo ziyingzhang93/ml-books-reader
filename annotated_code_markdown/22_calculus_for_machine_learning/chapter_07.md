@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 07
 
 ---
@@ -34,9 +34,13 @@ from sympy.abc import x
 
 expression = 2*x + 5
 result = diff(expression, x)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -65,9 +69,13 @@ from sympy.abc import x
 
 expression = 2*x + 5
 result = diff(expression, x)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -108,9 +116,13 @@ from sympy.abc import x
 
 expression = x**2
 result = diff(expression, x)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -139,9 +151,13 @@ from sympy.abc import x
 
 expression = x**2
 result = diff(expression, x)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -182,9 +198,13 @@ from sympy.abc import x
 
 expression = 1/x
 result = diff(expression, x)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -213,15 +233,19 @@ from sympy.abc import x
 
 expression = 1/x
 result = diff(expression, x)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(result)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 07 Summary / 第07章总结
 

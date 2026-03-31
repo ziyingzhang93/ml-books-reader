@@ -1,9 +1,9 @@
-# 时间序列预测
+# 时间序列预测 / Time Series Forecasting with Python
 ## Chapter 12
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 12 Summary / 第12章总结
 
@@ -26,5 +26,23 @@ This chapter contains **3 code files** demonstrating chapter 12.
 The techniques in this chapter (Chapter 12) are fundamental building blocks in machine learning pipelines.
 
 本章技术（Chapter 12）是机器学习流水线中的基础构建块。
+
+---
+
+### Airline Multiplicative
+
+
+
+---
+
+### Contrived Additive
+
+
+
+---
+
+### Contrived Multiplicative
+
+
 
 ---

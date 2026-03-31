@@ -1,9 +1,9 @@
-# LSTM网络
+# LSTM 网络实战 / LSTM Networks with Python
 ## Lesson 03
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 03 Summary / 第03章总结
 
@@ -36,6 +36,18 @@ The techniques in this chapter (Lesson 03) are fundamental building blocks in ma
 
 ---
 
+### Normalize
+
+
+
+---
+
+### One Hot Encode
+
+
+
+---
+
 ### Post Seq Padding
 
 # 01 — Post Seq Padding / Post Seq Padding
@@ -62,6 +74,7 @@ This script demonstrates **define sequences**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
 ```
 
@@ -81,6 +94,7 @@ sequences = [
 
 ```python
 padded = pad_sequences(sequences, padding='post')
+# 打印输出 / Print output
 print(padded)
 ```
 
@@ -104,6 +118,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
 # define sequences
 sequences = [
@@ -113,6 +128,7 @@ sequences = [
 	]
 # pad sequence
 padded = pad_sequences(sequences, padding='post')
+# 打印输出 / Print output
 print(padded)
 ```
 
@@ -148,6 +164,7 @@ This script demonstrates **define sequences**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
 ```
 
@@ -167,6 +184,7 @@ sequences = [
 
 ```python
 truncated= pad_sequences(sequences, maxlen=2, truncating='post')
+# 打印输出 / Print output
 print(truncated)
 ```
 
@@ -190,6 +208,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
 # define sequences
 sequences = [
@@ -199,12 +218,25 @@ sequences = [
 	]
 # truncate sequence
 truncated= pad_sequences(sequences, maxlen=2, truncating='post')
+# 打印输出 / Print output
 print(truncated)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 5 of 10
+
+---
+
+### Pre Seq Padding
+
+
+
+---
+
+### Pre Seq Truncating
+
+
 
 ---
 
@@ -235,6 +267,7 @@ This script demonstrates **define the sequence**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 ```
 
@@ -243,6 +276,7 @@ from pandas import DataFrame
 
 ```python
 df = DataFrame()
+# 生成整数序列 / Generate integer sequence
 df['t'] = [x for x in range(10)]
 ```
 
@@ -251,6 +285,7 @@ df['t'] = [x for x in range(10)]
 
 ```python
 df['t+1'] = df['t'].shift(-1)
+# 打印输出 / Print output
 print(df)
 ```
 
@@ -282,12 +317,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 # define the sequence
 df = DataFrame()
+# 生成整数序列 / Generate integer sequence
 df['t'] = [x for x in range(10)]
 # shift backward
 df['t+1'] = df['t'].shift(-1)
+# 打印输出 / Print output
 print(df)
 ```
 
@@ -323,6 +361,7 @@ This script demonstrates **define the sequence**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 ```
 
@@ -331,6 +370,7 @@ from pandas import DataFrame
 
 ```python
 df = DataFrame()
+# 生成整数序列 / Generate integer sequence
 df['t'] = [x for x in range(10)]
 ```
 
@@ -339,6 +379,7 @@ df['t'] = [x for x in range(10)]
 
 ```python
 df['t-1'] = df['t'].shift(1)
+# 打印输出 / Print output
 print(df)
 ```
 
@@ -369,12 +410,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 # define the sequence
 df = DataFrame()
+# 生成整数序列 / Generate integer sequence
 df['t'] = [x for x in range(10)]
 # shift forward
 df['t-1'] = df['t'].shift(1)
+# 打印输出 / Print output
 print(df)
 ```
 
@@ -410,6 +454,7 @@ This script demonstrates **define the sequence**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 ```
 
@@ -418,7 +463,9 @@ from pandas import DataFrame
 
 ```python
 df = DataFrame()
+# 生成整数序列 / Generate integer sequence
 df['t'] = [x for x in range(10)]
+# 打印输出 / Print output
 print(df)
 ```
 
@@ -449,15 +496,24 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 # define the sequence
 df = DataFrame()
+# 生成整数序列 / Generate integer sequence
 df['t'] = [x for x in range(10)]
+# 打印输出 / Print output
 print(df)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 10 of 10
+
+---
+
+### Standardize
+
+
 
 ---

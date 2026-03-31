@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 18
 
 ---
@@ -34,7 +34,9 @@ where $n$ is the number of elements and $x_i$ are the vector elements.
 ```python
 # Import array creation and mean calculation functions
 # 导入数组创建和均值计算函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
 ```
 
@@ -44,6 +46,7 @@ from numpy import mean
 # Define a simple vector with 6 elements
 # 定义一个包含6个元素的简单向量
 v = array([1, 2, 3, 4, 5, 6])
+# 打印输出 / Print output
 print(f"Vector: {v}")
 ```
 
@@ -55,6 +58,7 @@ print(f"Vector: {v}")
 # 计算向量的均值
 # 均值 = (1+2+3+4+5+6)/6 = 21/6 = 3.5
 result = mean(v)
+# 打印输出 / Print output
 print(f"Mean of vector: {result}")
 ```
 
@@ -80,12 +84,15 @@ print(f"Mean of vector: {result}")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
 
 # --- Vector Mean Computation / 向量均值计算 ---
 v = array([1, 2, 3, 4, 5, 6])
 result = mean(v)
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -122,7 +129,9 @@ Compute column-wise and row-wise means of matrices using the `axis` parameter. T
 ```python
 # Import array and mean function
 # 导入数组和均值函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
 ```
 
@@ -133,7 +142,9 @@ from numpy import mean
 # 定义一个2x6的矩阵
 M = array([[1, 2, 3, 4, 5, 6],
            [1, 2, 3, 4, 5, 6]])
+# 打印输出 / Print output
 print("Matrix M:")
+# 打印输出 / Print output
 print(M)
 ```
 
@@ -145,6 +156,7 @@ print(M)
 # 沿axis=0计算均值（沿列方向）
 # axis=0 表示沿着每一列计算均值
 col_mean = mean(M, axis=0)
+# 打印输出 / Print output
 print(f"Column means: {col_mean}")
 ```
 
@@ -156,6 +168,7 @@ print(f"Column means: {col_mean}")
 # 沿axis=1计算均值（沿行方向）
 # axis=1 表示沿着每一行计算均值
 row_mean = mean(M, axis=1)
+# 打印输出 / Print output
 print(f"Row means: {row_mean}")
 ```
 
@@ -181,17 +194,21 @@ print(f"Row means: {row_mean}")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
 
 # --- Matrix Mean Computation / 矩阵均值计算 ---
 M = array([[1, 2, 3, 4, 5, 6],
            [1, 2, 3, 4, 5, 6]])
 col_mean = mean(M, axis=0)
+# 打印输出 / Print output
 print(col_mean)
 
 # --- Row Mean Computation / 行均值计算 ---
 row_mean = mean(M, axis=1)
+# 打印输出 / Print output
 print(row_mean)
 ```
 
@@ -228,7 +245,9 @@ Calculate the variance of a vector, which measures how spread out the values are
 ```python
 # Import array and variance function
 # 导入数组和方差函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import var
 ```
 
@@ -238,6 +257,7 @@ from numpy import var
 # Define a vector
 # 定义一个向量
 v = array([1, 2, 3, 4, 5, 6])
+# 打印输出 / Print output
 print(f"Vector: {v}")
 ```
 
@@ -249,11 +269,13 @@ print(f"Vector: {v}")
 # 计算样本方差，ddof=1（自由度修正）
 # ddof=1 除以(n-1)而不是n，提供无偏估计
 result = var(v, ddof=1)
+# 打印输出 / Print output
 print(f"Sample Variance (ddof=1): {result}")
 
 # For comparison: population variance (ddof=0, default)
 # 对比：总体方差（ddof=0，默认值）
 pop_var = var(v, ddof=0)
+# 打印输出 / Print output
 print(f"Population Variance (ddof=0): {pop_var}")
 ```
 
@@ -279,14 +301,23 @@ print(f"Population Variance (ddof=0): {pop_var}")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import var
 
 # --- Vector Variance Computation / 向量方差计算 ---
 v = array([1, 2, 3, 4, 5, 6])
 result = var(v, ddof=1)
+# 打印输出 / Print output
 print(result)
 ```
+
+---
+
+### Matrix Variance
+
+
 
 ---
 
@@ -319,7 +350,9 @@ Calculate the standard deviation of a matrix. Standard deviation is the square r
 ```python
 # Import array and standard deviation function
 # 导入数组和标准差函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import std
 ```
 
@@ -330,7 +363,9 @@ from numpy import std
 # 定义一个2x6的矩阵
 M = array([[1, 2, 3, 4, 5, 6],
            [1, 2, 3, 4, 5, 6]])
+# 打印输出 / Print output
 print("Matrix M:")
+# 打印输出 / Print output
 print(M)
 ```
 
@@ -340,6 +375,7 @@ print(M)
 # Compute standard deviation along axis=0 (columns) with ddof=1
 # 沿axis=0计算标准差（列），ddof=1用于样本标准差
 col_std = std(M, ddof=1, axis=0)
+# 打印输出 / Print output
 print(f"Column standard deviations: {col_std}")
 ```
 
@@ -349,6 +385,7 @@ print(f"Column standard deviations: {col_std}")
 # Compute standard deviation along axis=1 (rows) with ddof=1
 # 沿axis=1计算标准差（行），ddof=1用于样本标准差
 row_std = std(M, ddof=1, axis=1)
+# 打印输出 / Print output
 print(f"Row standard deviations: {row_std}")
 ```
 
@@ -357,11 +394,15 @@ print(f"Row standard deviations: {row_std}")
 ```python
 # Standard deviation is the square root of variance
 # 标准差是方差的平方根
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import var, sqrt
 col_var = var(M, ddof=1, axis=0)
 col_std_from_var = sqrt(col_var)
+# 打印输出 / Print output
 print(f"Std from variance: {col_std_from_var}")
+# 打印输出 / Print output
 print(f"Std directly: {col_std}")
+# 打印输出 / Print output
 print(f"They are equal: {all(col_std == col_std_from_var)}")
 ```
 
@@ -387,17 +428,21 @@ print(f"They are equal: {all(col_std == col_std_from_var)}")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import std
 
 # --- Matrix Standard Deviation Computation / 矩阵标准差计算 ---
 M = array([[1, 2, 3, 4, 5, 6],
            [1, 2, 3, 4, 5, 6]])
 col_std = std(M, ddof=1, axis=0)
+# 打印输出 / Print output
 print(col_std)
 
 # --- Row Standard Deviation Computation / 行标准差计算 ---
 row_std = std(M, ddof=1, axis=1)
+# 打印输出 / Print output
 print(row_std)
 ```
 
@@ -434,7 +479,9 @@ Positive covariance: variables increase together. Negative covariance: one incre
 ```python
 # Import array and covariance function
 # 导入数组和协方差函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import cov
 ```
 
@@ -449,7 +496,9 @@ from numpy import cov
 # y从9减少到1
 x = array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 y = array([9, 8, 7, 6, 5, 4, 3, 2, 1])
+# 打印输出 / Print output
 print(f"x: {x}")
+# 打印输出 / Print output
 print(f"y: {y}")
 ```
 
@@ -465,12 +514,15 @@ print(f"y: {y}")
 # cov(x, y)返回2x2矩阵
 # 非对角元素[0,1]是协方差
 cov_matrix = cov(x, y)
+# 打印输出 / Print output
 print("Covariance matrix:")
+# 打印输出 / Print output
 print(cov_matrix)
 
 # Extract the covariance between x and y
 # 提取x和y之间的协方差
 Sigma = cov_matrix[0, 1]
+# 打印输出 / Print output
 print(f"\nCovariance between x and y: {Sigma}")
 ```
 
@@ -482,10 +534,13 @@ print(f"\nCovariance between x and y: {Sigma}")
 # 负协方差表示反向关系
 # 当x增加时，y减少
 if Sigma < 0:
+    # 打印输出 / Print output
     print("Negative covariance: variables have inverse relationship")
 elif Sigma > 0:
+    # 打印输出 / Print output
     print("Positive covariance: variables move together")
 else:
+    # 打印输出 / Print output
     print("Zero covariance: no linear relationship")
 ```
 
@@ -511,13 +566,16 @@ else:
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import cov
 
 # --- Vector Covariance Computation / 向量协方差计算 ---
 x = array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 y = array([9, 8, 7, 6, 5, 4, 3, 2, 1])
 Sigma = cov(x, y)[0, 1]
+# 打印输出 / Print output
 print(Sigma)
 ```
 
@@ -554,7 +612,9 @@ where $\sigma_X$ and $\sigma_Y$ are the standard deviations of X and Y.
 ```python
 # Import array and correlation function
 # 导入数组和相关性函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import corrcoef
 ```
 
@@ -565,7 +625,9 @@ from numpy import corrcoef
 # 定义两个向量
 x = array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 y = array([9, 8, 7, 6, 5, 4, 3, 2, 1])
+# 打印输出 / Print output
 print(f"x: {x}")
+# 打印输出 / Print output
 print(f"y: {y}")
 ```
 
@@ -580,12 +642,15 @@ print(f"y: {y}")
 # 使用corrcoef()计算相关矩阵
 # 对角线总是1（变量与自身完全相关）
 corr_matrix = corrcoef(x, y)
+# 打印输出 / Print output
 print("Correlation matrix:")
+# 打印输出 / Print output
 print(corr_matrix)
 
 # Extract the correlation between x and y
 # 提取x和y之间的相关性
 corr = corr_matrix[0, 1]
+# 打印输出 / Print output
 print(f"\nCorrelation coefficient: {corr}")
 ```
 
@@ -601,16 +666,22 @@ print(f"\nCorrelation coefficient: {corr}")
 # 0：没有线性相关
 # 1：完全正相关
 if corr < -0.7:
+    # 打印输出 / Print output
     print("Strong negative correlation: variables move in opposite directions")
 elif corr < -0.3:
+    # 打印输出 / Print output
     print("Moderate negative correlation")
 elif corr < 0.3:
+    # 打印输出 / Print output
     print("Weak or no correlation")
 elif corr < 0.7:
+    # 打印输出 / Print output
     print("Moderate positive correlation")
 else:
+    # 打印输出 / Print output
     print("Strong positive correlation: variables move together")
 
+# 打印输出 / Print output
 print(f"\nInterpretation: r = {corr:.4f}")
 ```
 
@@ -636,13 +707,16 @@ print(f"\nInterpretation: r = {corr:.4f}")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import corrcoef
 
 # --- Vector Correlation Computation / 向量相关性计算 ---
 x = array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 y = array([9, 8, 7, 6, 5, 4, 3, 2, 1])
 corr = corrcoef(x, y)[0, 1]
+# 打印输出 / Print output
 print(corr)
 ```
 
@@ -677,7 +751,9 @@ Compute the covariance matrix for multiple variables. The covariance matrix is a
 ```python
 # Import array and covariance function
 # 导入数组和协方差函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import cov
 ```
 
@@ -691,8 +767,11 @@ X = array([[1, 5, 8],
            [2, 4, 9],
            [3, 6, 10],
            [1, 5, 10]])
+# 打印输出 / Print output
 print("Dataset X (5 observations, 3 features):")
+# 打印输出 / Print output
 print(X)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {X.shape}")
 ```
 
@@ -706,8 +785,11 @@ print(f"Shape: {X.shape}")
 # X.T转置矩阵，使每行成为一个变量
 # cov()期望每行是一个变量
 Sigma = cov(X.T)
+# 打印输出 / Print output
 print("Covariance Matrix:")
+# 打印输出 / Print output
 print(Sigma)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {Sigma.shape}")
 ```
 
@@ -716,15 +798,22 @@ print(f"Shape: {Sigma.shape}")
 ```python
 # The diagonal contains variances of each feature
 # 对角线包含每个特征的方差
+# 打印输出 / Print output
 print("Diagonal (variances of each feature):")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for i in range(Sigma.shape[0]):
+    # 打印输出 / Print output
     print(f"  Var(X_{i+1}) = {Sigma[i, i]:.4f}")
 
 # Off-diagonal elements contain covariances between features
 # 非对角线元素包含特征间的协方差
+# 打印输出 / Print output
 print("\nOff-diagonal (covariances between features):")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for i in range(Sigma.shape[0]):
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     for j in range(i+1, Sigma.shape[1]):
+        # 打印输出 / Print output
         print(f"  Cov(X_{i+1}, X_{j+1}) = {Sigma[i, j]:.4f}")
 ```
 
@@ -733,15 +822,19 @@ for i in range(Sigma.shape[0]):
 ```python
 # The covariance matrix is symmetric: Cov(X_i, X_j) = Cov(X_j, X_i)
 # 协方差矩阵是对称的
+# 打印输出 / Print output
 print("Is the matrix symmetric?")
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 is_symmetric = np.allclose(Sigma, Sigma.T)
+# 打印输出 / Print output
 print(f"  {is_symmetric}")
 
 # The matrix is positive semi-definite (all eigenvalues >= 0)
 # Used in PCA and other algorithms
 # 矩阵是半正定的（所有特征值≥0）
 eigenvalues = np.linalg.eigvalsh(Sigma)
+# 打印输出 / Print output
 print(f"\nEigenvalues (all should be >= 0): {eigenvalues}")
 ```
 
@@ -770,7 +863,9 @@ print(f"\nEigenvalues (all should be >= 0): {eigenvalues}")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import cov
 
 # --- Covariance Matrix Computation / 协方差矩阵计算 ---
@@ -780,12 +875,13 @@ X = array([[1, 5, 8],
            [3, 6, 10],
            [1, 5, 10]])
 Sigma = cov(X.T)
+# 打印输出 / Print output
 print(Sigma)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 18 Summary / 第18章总结：Statistics
 

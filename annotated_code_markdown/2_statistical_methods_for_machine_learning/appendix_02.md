@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Appendix 02
 
 ---
@@ -38,6 +38,7 @@ This notebook displays the version numbers of key scientific computing and machi
 # SciPy: Statistical computing and special functions
 # 用于统计计算和特殊函数
 import scipy
+# 打印输出 / Print output
 print('scipy: %s' % scipy.__version__)
 ```
 
@@ -46,7 +47,9 @@ print('scipy: %s' % scipy.__version__)
 ```python
 # NumPy: Fundamental package for numerical computing
 # 用于数值计算的基础包
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
+# 打印输出 / Print output
 print('numpy: %s' % numpy.__version__)
 ```
 
@@ -55,7 +58,9 @@ print('numpy: %s' % numpy.__version__)
 ```python
 # Matplotlib: Visualization library for creating plots
 # 用于创建图的可视化库
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 打印输出 / Print output
 print('matplotlib: %s' % matplotlib.__version__)
 ```
 
@@ -64,7 +69,9 @@ print('matplotlib: %s' % matplotlib.__version__)
 ```python
 # Pandas: Data manipulation and analysis library
 # 用于数据操作和分析的库
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas
+# 打印输出 / Print output
 print('pandas: %s' % pandas.__version__)
 ```
 
@@ -74,6 +81,7 @@ print('pandas: %s' % pandas.__version__)
 # Statsmodels: Statistical models and hypothesis testing
 # 用于统计模型和假设检验
 import statsmodels
+# 打印输出 / Print output
 print('statsmodels: %s' % statsmodels.__version__)
 ```
 
@@ -82,7 +90,9 @@ print('statsmodels: %s' % statsmodels.__version__)
 ```python
 # Scikit-learn: Machine learning library
 # 用于机器学习的库
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
+# 打印输出 / Print output
 print('sklearn: %s' % sklearn.__version__)
 ```
 
@@ -110,27 +120,37 @@ print('sklearn: %s' % sklearn.__version__)
 
 ```python
 import scipy
+# 打印输出 / Print output
 print('scipy: %s' % scipy.__version__)
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
+# 打印输出 / Print output
 print('numpy: %s' % numpy.__version__)
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 打印输出 / Print output
 print('matplotlib: %s' % matplotlib.__version__)
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas
+# 打印输出 / Print output
 print('pandas: %s' % pandas.__version__)
 
 import statsmodels
+# 打印输出 / Print output
 print('statsmodels: %s' % statsmodels.__version__)
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
+# 打印输出 / Print output
 print('sklearn: %s' % sklearn.__version__)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Appendix 2: Library Versions
 # 附录2：库版本

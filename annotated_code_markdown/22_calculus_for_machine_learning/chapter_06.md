@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 06
 
 ---
@@ -34,8 +34,11 @@ from sympy.abc import x
 
 expression = sqrt(x+1)
 result = limit(expression, x, -1)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x=-1 is", result)
 ```
 
@@ -64,8 +67,11 @@ from sympy.abc import x
 
 expression = sqrt(x+1)
 result = limit(expression, x, -1)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x=-1 is", result)
 ```
 
@@ -106,8 +112,11 @@ from sympy.abc import x
 
 expression = x**2 * sin(1/x)
 result = limit(expression, x, 0)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x=0 is", result)
 ```
 
@@ -136,14 +145,17 @@ from sympy.abc import x
 
 expression = x**2 * sin(1/x)
 result = limit(expression, x, 0)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x=0 is", result)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 06 Summary / 第06章总结
 

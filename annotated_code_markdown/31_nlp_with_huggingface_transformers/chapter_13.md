@@ -1,4 +1,4 @@
-# HF Transformers
+# HuggingFace Transformers NLP / NLP with HF Transformers
 ## Chapter 13
 
 ---
@@ -44,6 +44,7 @@ This script demonstrates **Load the SQuAD dataset**.
 ## Step 1 — Step 1
 
 ```python
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import DistilBertTokenizerFast, DistilBertForQuestionAnswering, \
     Trainer, TrainingArguments
 from datasets import load_dataset
@@ -85,9 +86,11 @@ def preprocess_function(examples):
     start_positions = []
     end_positions = []
 
+    # 同时获取索引和值 / Get both index and value
     for i, offsets in enumerate(offset_mapping):
         answer = answers[i]
         start_char = answer["answer_start"][0]
+        # 获取长度 / Get length
         end_char = start_char + len(answer["text"][0])
         sequence_ids = inputs.sequence_ids(i)
 ```
@@ -97,6 +100,7 @@ def preprocess_function(examples):
 
 ```python
 context_start = sequence_ids.index(1)
+        # 获取长度 / Get length
         context_end = len(sequence_ids) - 1 - sequence_ids[::-1].index(1)
 ```
 
@@ -105,7 +109,9 @@ context_start = sequence_ids.index(1)
 
 ```python
 if offsets[context_start][0] > end_char or offsets[context_end][1] < start_char:
+            # 添加元素到列表末尾 / Append element to list end
             start_positions.append(0)
+            # 添加元素到列表末尾 / Append element to list end
             end_positions.append(0)
         else:
 ```
@@ -117,11 +123,13 @@ if offsets[context_start][0] > end_char or offsets[context_end][1] < start_char:
 idx = context_start
             while idx <= context_end and offsets[idx][0] <= start_char:
                 idx += 1
+            # 添加元素到列表末尾 / Append element to list end
             start_positions.append(idx - 1)
 
             idx = context_end
             while idx >= context_start and offsets[idx][1] >= end_char:
                 idx -= 1
+            # 添加元素到列表末尾 / Append element to list end
             end_positions.append(idx + 1)
 
     inputs["start_positions"] = start_positions
@@ -206,6 +214,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import DistilBertTokenizerFast, DistilBertForQuestionAnswering, \
     Trainer, TrainingArguments
 from datasets import load_dataset
@@ -235,30 +244,37 @@ def preprocess_function(examples):
     start_positions = []
     end_positions = []
 
+    # 同时获取索引和值 / Get both index and value
     for i, offsets in enumerate(offset_mapping):
         answer = answers[i]
         start_char = answer["answer_start"][0]
+        # 获取长度 / Get length
         end_char = start_char + len(answer["text"][0])
         sequence_ids = inputs.sequence_ids(i)
 
         # Find the start and end of the context
         context_start = sequence_ids.index(1)
+        # 获取长度 / Get length
         context_end = len(sequence_ids) - 1 - sequence_ids[::-1].index(1)
 
         # If the answer is not fully inside the context, label it (0, 0)
         if offsets[context_start][0] > end_char or offsets[context_end][1] < start_char:
+            # 添加元素到列表末尾 / Append element to list end
             start_positions.append(0)
+            # 添加元素到列表末尾 / Append element to list end
             end_positions.append(0)
         else:
             # Otherwise find the start and end token positions
             idx = context_start
             while idx <= context_end and offsets[idx][0] <= start_char:
                 idx += 1
+            # 添加元素到列表末尾 / Append element to list end
             start_positions.append(idx - 1)
 
             idx = context_end
             while idx >= context_start and offsets[idx][1] >= end_char:
                 idx -= 1
+            # 添加元素到列表末尾 / Append element to list end
             end_positions.append(idx + 1)
 
     inputs["start_positions"] = start_positions
@@ -295,7 +311,7 @@ tokenizer.save_pretrained("./fine-tuned-distilbert-squad")
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 13 Summary / 第13章总结
 

@@ -1,9 +1,9 @@
-# 时间序列预测
+# 时间序列预测 / Time Series Forecasting with Python
 ## Chapter 14
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 14 Summary / 第14章总结
 
@@ -72,14 +72,20 @@ This script demonstrates **deseasonalize a time series using differencing**.
 ## Step 1 — deseasonalize a time series using differencing
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 diff = list()
 days_in_year = 365
+# 获取长度 / Get length
 for i in range(days_in_year, len(X)):
 	value = X[i] - X[i - days_in_year]
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()
@@ -114,14 +120,20 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # deseasonalize a time series using differencing
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 diff = list()
 days_in_year = 365
+# 获取长度 / Get length
 for i in range(days_in_year, len(X)):
 	value = X[i] - X[i - days_in_year]
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()
@@ -173,16 +185,22 @@ This script demonstrates **deseasonalize a time series using month-based differe
 ## Step 1 — deseasonalize a time series using month-based differencing
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 diff = list()
 days_in_year = 365
+# 获取长度 / Get length
 for i in range(days_in_year, len(X)):
 	month_str = str(series.index[i].year-1)+'-'+str(series.index[i].month)
 	month_mean_last_year = series[month_str].mean()
 	value = X[i] - month_mean_last_year
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()
@@ -217,16 +235,22 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # deseasonalize a time series using month-based differencing
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 diff = list()
 days_in_year = 365
+# 获取长度 / Get length
 for i in range(days_in_year, len(X)):
 	month_str = str(series.index[i].year-1)+'-'+str(series.index[i].month)
 	month_mean_last_year = series[month_str].mean()
 	value = X[i] - month_mean_last_year
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()
@@ -279,9 +303,13 @@ This script demonstrates **deseasonalize by differencing with a polynomial model
 ## Step 1 — deseasonalize by differencing with a polynomial model
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import polyfit
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 ```
 
@@ -289,7 +317,9 @@ series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse
 ## Step 2 — fit polynomial: x^2*b1 + x*b2 + ... + bn
 
 ```python
+# 获取长度 / Get length
 X = [i%365 for i in range(0, len(series))]
+# 转换为NumPy数组 / Convert to NumPy array
 y = series.values
 degree = 4
 coef = polyfit(X, y, degree)
@@ -300,10 +330,13 @@ coef = polyfit(X, y, degree)
 
 ```python
 curve = list()
+# 获取长度 / Get length
 for i in range(len(X)):
 	value = coef[-1]
+ # 生成整数序列 / Generate integer sequence
 	for d in range(degree):
 		value += X[i]**(degree-d) * coef[d]
+ # 添加元素到列表末尾 / Append element to list end
 	curve.append(value)
 ```
 
@@ -311,10 +344,13 @@ for i in range(len(X)):
 ## Step 4 — create seasonally adjusted
 
 ```python
+# 转换为NumPy数组 / Convert to NumPy array
 values = series.values
 diff = list()
+# 获取长度 / Get length
 for i in range(len(values)):
 	value = values[i] - curve[i]
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()
@@ -350,27 +386,39 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # deseasonalize by differencing with a polynomial model
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import polyfit
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 # fit polynomial: x^2*b1 + x*b2 + ... + bn
+# 获取长度 / Get length
 X = [i%365 for i in range(0, len(series))]
+# 转换为NumPy数组 / Convert to NumPy array
 y = series.values
 degree = 4
 coef = polyfit(X, y, degree)
 # create curve
 curve = list()
+# 获取长度 / Get length
 for i in range(len(X)):
 	value = coef[-1]
+ # 生成整数序列 / Generate integer sequence
 	for d in range(degree):
 		value += X[i]**(degree-d) * coef[d]
+ # 添加元素到列表末尾 / Append element to list end
 	curve.append(value)
 # create seasonally adjusted
+# 转换为NumPy数组 / Convert to NumPy array
 values = series.values
 diff = list()
+# 获取长度 / Get length
 for i in range(len(values)):
 	value = values[i] - curve[i]
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()
@@ -423,9 +471,13 @@ This script demonstrates **model seasonality with a polynomial model**.
 ## Step 1 — model seasonality with a polynomial model
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import polyfit
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 ```
 
@@ -433,10 +485,13 @@ series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse
 ## Step 2 — fit polynomial: x^2*b1 + x*b2 + ... + bn
 
 ```python
+# 获取长度 / Get length
 X = [i%365 for i in range(0, len(series))]
+# 转换为NumPy数组 / Convert to NumPy array
 y = series.values
 degree = 4
 coef = polyfit(X, y, degree)
+# 打印输出 / Print output
 print('Coefficients: %s' % coef)
 ```
 
@@ -445,10 +500,13 @@ print('Coefficients: %s' % coef)
 
 ```python
 curve = list()
+# 获取长度 / Get length
 for i in range(len(X)):
 	value = coef[-1]
+ # 生成整数序列 / Generate integer sequence
 	for d in range(degree):
 		value += X[i]**(degree-d) * coef[d]
+ # 添加元素到列表末尾 / Append element to list end
 	curve.append(value)
 ```
 
@@ -456,6 +514,7 @@ for i in range(len(X)):
 ## Step 4 — plot curve over original data
 
 ```python
+# 转换为NumPy数组 / Convert to NumPy array
 pyplot.plot(series.values)
 pyplot.plot(curve, color='red', linewidth=3)
 pyplot.show()
@@ -491,24 +550,35 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # model seasonality with a polynomial model
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import polyfit
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 # fit polynomial: x^2*b1 + x*b2 + ... + bn
+# 获取长度 / Get length
 X = [i%365 for i in range(0, len(series))]
+# 转换为NumPy数组 / Convert to NumPy array
 y = series.values
 degree = 4
 coef = polyfit(X, y, degree)
+# 打印输出 / Print output
 print('Coefficients: %s' % coef)
 # create curve
 curve = list()
+# 获取长度 / Get length
 for i in range(len(X)):
 	value = coef[-1]
+ # 生成整数序列 / Generate integer sequence
 	for d in range(degree):
 		value += X[i]**(degree-d) * coef[d]
+ # 添加元素到列表末尾 / Append element to list end
 	curve.append(value)
 # plot curve over original data
+# 转换为NumPy数组 / Convert to NumPy array
 pyplot.plot(series.values)
 pyplot.plot(curve, color='red', linewidth=3)
 pyplot.show()
@@ -560,11 +630,15 @@ This script demonstrates **calculate and plot monthly average**.
 ## Step 1 — calculate and plot monthly average
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 resample = series.resample('M')
 monthly_mean = resample.mean()
+# 查看前几行数据（快速预览） / View first rows (quick preview)
 print(monthly_mean.head(13))
 monthly_mean.plot()
 pyplot.show()
@@ -599,11 +673,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # calculate and plot monthly average
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 resample = series.resample('M')
 monthly_mean = resample.mean()
+# 查看前几行数据（快速预览） / View first rows (quick preview)
 print(monthly_mean.head(13))
 monthly_mean.plot()
 pyplot.show()
@@ -655,16 +733,22 @@ This script demonstrates **deseasonalize monthly data by differencing**.
 ## Step 1 — deseasonalize monthly data by differencing
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 resample = series.resample('M')
 monthly_mean = resample.mean()
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 diff = list()
 months_in_year = 12
+# 获取长度 / Get length
 for i in range(months_in_year, len(monthly_mean)):
 	value = monthly_mean[i] - monthly_mean[i - months_in_year]
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()
@@ -699,16 +783,22 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # deseasonalize monthly data by differencing
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('daily-minimum-temperatures.csv', header=0, index_col=0, parse_dates=True, squeeze=True)
 resample = series.resample('M')
 monthly_mean = resample.mean()
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
 diff = list()
 months_in_year = 12
+# 获取长度 / Get length
 for i in range(months_in_year, len(monthly_mean)):
 	value = monthly_mean[i] - monthly_mean[i - months_in_year]
+ # 添加元素到列表末尾 / Append element to list end
 	diff.append(value)
 pyplot.plot(diff)
 pyplot.show()

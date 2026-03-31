@@ -18,9 +18,18 @@ This script demonstrates **Implementing the Add & Norm Layer**.
 本脚本演示 **Implementing the Add & Norm Layer**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 定义模型结构 / Define model architecture
+
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import LayerNormalization, Layer, Dense, ReLU, Dropout
 from multihead_attention import MultiHeadAttention
 from positional_encoding import PositionEmbeddingFixedWeights
@@ -31,6 +40,7 @@ from positional_encoding import PositionEmbeddingFixedWeights
 
 ```python
 class AddNormalization(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.layer_norm = LayerNormalization()  # Layer normalization layer
@@ -57,9 +67,12 @@ return self.layer_norm(add)
 
 ```python
 class FeedForward(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, d_ff, d_model, **kwargs):
         super().__init__(**kwargs)
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected1 = Dense(d_ff)  # First fully connected layer
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected2 = Dense(d_model)  # Second fully connected layer
         self.activation = ReLU()  # ReLU activation layer
 
@@ -80,6 +93,7 @@ x_fc1 = self.fully_connected1(x)
 
 ```python
 class EncoderLayer(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, h, d_k, d_v, d_model, d_ff, rate, **kwargs):
         super().__init__(**kwargs)
         self.multihead_attention = MultiHeadAttention(h, d_k, d_v, d_model)
@@ -142,6 +156,7 @@ return self.add_norm2(addnorm_output, feedforward_output)
 
 ```python
 class Encoder(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, vocab_size, sequence_length, h, d_k, d_v, d_model, d_ff, n, rate,
                        **kwargs):
         super().__init__(**kwargs)
@@ -149,6 +164,7 @@ class Encoder(Layer):
                                                           d_model)
         self.dropout = Dropout(rate)
         self.encoder_layer = [EncoderLayer(h, d_k, d_v, d_model, d_ff, rate)
+                              # 生成整数序列 / Generate integer sequence
                               for _ in range(n)]
 
     def call(self, input_sentence, padding_mask, training):
@@ -173,6 +189,7 @@ x = self.dropout(pos_encoding_output, training=training)
 ## Step 17 — Pass on the positional encoded values to each encoder layer
 
 ```python
+# 同时获取索引和值 / Get both index and value
 for i, layer in enumerate(self.encoder_layer):
             x = layer(x, padding_mask, training)
 
@@ -188,6 +205,16 @@ for i, layer in enumerate(self.encoder_layer):
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dense` | 全连接层（Keras） | Fully connected layer (Keras) |
+| `attention` | 注意力机制：让模型关注重要部分 | Attention: focus on important parts |
+| `batch_size` | 每次送入模型的样本数 | Number of samples per training step |
+| `dropout` | 随机丢弃：训练时随机关闭部分神经元 | Randomly disable neurons during training |
+| `embedding` | 嵌入：将离散数据映射为连续向量 | Embedding: map discrete data to continuous vectors |
+
 ---
 ## Complete Code / 完整代码一览
 
@@ -199,12 +226,14 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import LayerNormalization, Layer, Dense, ReLU, Dropout
 from multihead_attention import MultiHeadAttention
 from positional_encoding import PositionEmbeddingFixedWeights
 
 # Implementing the Add & Norm Layer
 class AddNormalization(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.layer_norm = LayerNormalization()  # Layer normalization layer
@@ -218,9 +247,12 @@ class AddNormalization(Layer):
 
 # Implementing the Feed-Forward Layer
 class FeedForward(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, d_ff, d_model, **kwargs):
         super().__init__(**kwargs)
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected1 = Dense(d_ff)  # First fully connected layer
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected2 = Dense(d_model)  # Second fully connected layer
         self.activation = ReLU()  # ReLU activation layer
 
@@ -232,6 +264,7 @@ class FeedForward(Layer):
 
 # Implementing the Encoder Layer
 class EncoderLayer(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, h, d_k, d_v, d_model, d_ff, rate, **kwargs):
         super().__init__(**kwargs)
         self.multihead_attention = MultiHeadAttention(h, d_k, d_v, d_model)
@@ -265,6 +298,7 @@ class EncoderLayer(Layer):
 
 # Implementing the Encoder
 class Encoder(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, vocab_size, sequence_length, h, d_k, d_v, d_model, d_ff, n, rate,
                        **kwargs):
         super().__init__(**kwargs)
@@ -272,6 +306,7 @@ class Encoder(Layer):
                                                           d_model)
         self.dropout = Dropout(rate)
         self.encoder_layer = [EncoderLayer(h, d_k, d_v, d_model, d_ff, rate)
+                              # 生成整数序列 / Generate integer sequence
                               for _ in range(n)]
 
     def call(self, input_sentence, padding_mask, training):
@@ -283,6 +318,7 @@ class Encoder(Layer):
         x = self.dropout(pos_encoding_output, training=training)
 
         # Pass on the positional encoded values to each encoder layer
+        # 同时获取索引和值 / Get both index and value
         for i, layer in enumerate(self.encoder_layer):
             x = layer(x, padding_mask, training)
 
@@ -310,11 +346,22 @@ This script demonstrates **Implementing the Add & Norm Layer**.
 本脚本演示 **Implementing the Add & Norm Layer**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 定义模型结构 / Define model architecture
+
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import random
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import LayerNormalization, Layer, Dense, ReLU, Dropout
 from multihead_attention import MultiHeadAttention
 from positional_encoding import PositionEmbeddingFixedWeights
@@ -325,6 +372,7 @@ from positional_encoding import PositionEmbeddingFixedWeights
 
 ```python
 class AddNormalization(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.layer_norm = LayerNormalization()  # Layer normalization layer
@@ -351,9 +399,12 @@ return self.layer_norm(add)
 
 ```python
 class FeedForward(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, d_ff, d_model, **kwargs):
         super().__init__(**kwargs)
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected1 = Dense(d_ff)  # First fully connected layer
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected2 = Dense(d_model)  # Second fully connected layer
         self.activation = ReLU()  # ReLU activation layer
 
@@ -374,6 +425,7 @@ x_fc1 = self.fully_connected1(x)
 
 ```python
 class EncoderLayer(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, h, d_k, d_v, d_model, d_ff, rate, **kwargs):
         super().__init__(**kwargs)
         self.multihead_attention = MultiHeadAttention(h, d_k, d_v, d_model)
@@ -436,6 +488,7 @@ return self.add_norm2(addnorm_output, feedforward_output)
 
 ```python
 class Encoder(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, vocab_size, sequence_length, h, d_k, d_v, d_model, d_ff, n, rate,
                        **kwargs):
         super().__init__(**kwargs)
@@ -443,6 +496,7 @@ class Encoder(Layer):
                                                           d_model)
         self.dropout = Dropout(rate)
         self.encoder_layer = [EncoderLayer(h, d_k, d_v, d_model, d_ff, rate)
+                              # 生成整数序列 / Generate integer sequence
                               for _ in range(n)]
 
     def call(self, input_sentence, padding_mask, training):
@@ -467,6 +521,7 @@ x = self.dropout(pos_encoding_output, training=training)
 ## Step 17 — Pass on the positional encoded values to each encoder layer
 
 ```python
+# 同时获取索引和值 / Get both index and value
 for i, layer in enumerate(self.encoder_layer):
             x = layer(x, padding_mask, training)
 
@@ -488,6 +543,7 @@ input_seq = random.random((batch_size, input_seq_length))
 
 encoder = Encoder(enc_vocab_size, input_seq_length, h, d_k, d_v, d_model, d_ff, n,
                   dropout_rate)
+# 打印输出 / Print output
 print(encoder(input_seq, None, True))
 ```
 
@@ -500,6 +556,17 @@ print(encoder(input_seq, None, True))
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dense` | 全连接层（Keras） | Fully connected layer (Keras) |
+| `attention` | 注意力机制：让模型关注重要部分 | Attention: focus on important parts |
+| `batch_size` | 每次送入模型的样本数 | Number of samples per training step |
+| `dropout` | 随机丢弃：训练时随机关闭部分神经元 | Randomly disable neurons during training |
+| `embedding` | 嵌入：将离散数据映射为连续向量 | Embedding: map discrete data to continuous vectors |
+| `numpy` | 数值计算库 | Numerical computing library |
+
 ---
 ## Complete Code / 完整代码一览
 
@@ -511,14 +578,18 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import random
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import LayerNormalization, Layer, Dense, ReLU, Dropout
 from multihead_attention import MultiHeadAttention
 from positional_encoding import PositionEmbeddingFixedWeights
 
 # Implementing the Add & Norm Layer
 class AddNormalization(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.layer_norm = LayerNormalization()  # Layer normalization layer
@@ -532,9 +603,12 @@ class AddNormalization(Layer):
 
 # Implementing the Feed-Forward Layer
 class FeedForward(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, d_ff, d_model, **kwargs):
         super().__init__(**kwargs)
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected1 = Dense(d_ff)  # First fully connected layer
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.fully_connected2 = Dense(d_model)  # Second fully connected layer
         self.activation = ReLU()  # ReLU activation layer
 
@@ -546,6 +620,7 @@ class FeedForward(Layer):
 
 # Implementing the Encoder Layer
 class EncoderLayer(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, h, d_k, d_v, d_model, d_ff, rate, **kwargs):
         super().__init__(**kwargs)
         self.multihead_attention = MultiHeadAttention(h, d_k, d_v, d_model)
@@ -579,6 +654,7 @@ class EncoderLayer(Layer):
 
 # Implementing the Encoder
 class Encoder(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, vocab_size, sequence_length, h, d_k, d_v, d_model, d_ff, n, rate,
                        **kwargs):
         super().__init__(**kwargs)
@@ -586,6 +662,7 @@ class Encoder(Layer):
                                                           d_model)
         self.dropout = Dropout(rate)
         self.encoder_layer = [EncoderLayer(h, d_k, d_v, d_model, d_ff, rate)
+                              # 生成整数序列 / Generate integer sequence
                               for _ in range(n)]
 
     def call(self, input_sentence, padding_mask, training):
@@ -597,6 +674,7 @@ class Encoder(Layer):
         x = self.dropout(pos_encoding_output, training=training)
 
         # Pass on the positional encoded values to each encoder layer
+        # 同时获取索引和值 / Get both index and value
         for i, layer in enumerate(self.encoder_layer):
             x = layer(x, padding_mask, training)
 
@@ -618,6 +696,7 @@ input_seq = random.random((batch_size, input_seq_length))
 
 encoder = Encoder(enc_vocab_size, input_seq_length, h, d_k, d_v, d_model, d_ff, n,
                   dropout_rate)
+# 打印输出 / Print output
 print(encoder(input_seq, None, True))
 ```
 
@@ -669,11 +748,36 @@ This script demonstrates **Implementing the Scaled-Dot Product Attention**.
 本脚本演示 **Implementing the Scaled-Dot Product Attention**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 定义模型结构 / Define model architecture
+- 评估模型效果 / Evaluate model performance
+
+
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow import math, matmul, reshape, shape, transpose, cast, float32
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Dense, Layer
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.backend import softmax
 ```
 
@@ -682,6 +786,7 @@ from tensorflow.keras.backend import softmax
 
 ```python
 class DotProductAttention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -722,6 +827,7 @@ return matmul(weights, values)
 
 ```python
 class MultiHeadAttention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, h, d_k, d_v, d_model, **kwargs):
         super().__init__(**kwargs)
         self.attention = DotProductAttention()  # Scaled dot product attention
@@ -729,9 +835,13 @@ class MultiHeadAttention(Layer):
         self.d_k = d_k  # Dimensionality of the linearly projected queries and keys
         self.d_v = d_v  # Dimensionality of the linearly projected values
         self.d_model = d_model  # Dimensionality of the model
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_q = Dense(d_k)   # Learned projection matrix for the queries
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_k = Dense(d_k)   # Learned projection matrix for the keys
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_v = Dense(d_v)   # Learned projection matrix for the values
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_o = Dense(d_model) # Learned projection matrix for the multi-head output
 
     def reshape_tensor(self, x, heads, flag):
@@ -818,6 +928,14 @@ return self.W_o(output)
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dense` | 全连接层（Keras） | Fully connected layer (Keras) |
+| `attention` | 注意力机制：让模型关注重要部分 | Attention: focus on important parts |
+| `batch_size` | 每次送入模型的样本数 | Number of samples per training step |
+
 ---
 ## Complete Code / 完整代码一览
 
@@ -829,12 +947,16 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow import math, matmul, reshape, shape, transpose, cast, float32
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Dense, Layer
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.backend import softmax
 
 # Implementing the Scaled-Dot Product Attention
 class DotProductAttention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -854,6 +976,7 @@ class DotProductAttention(Layer):
 
 # Implementing the Multi-Head Attention
 class MultiHeadAttention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, h, d_k, d_v, d_model, **kwargs):
         super().__init__(**kwargs)
         self.attention = DotProductAttention()  # Scaled dot product attention
@@ -861,9 +984,13 @@ class MultiHeadAttention(Layer):
         self.d_k = d_k  # Dimensionality of the linearly projected queries and keys
         self.d_v = d_v  # Dimensionality of the linearly projected values
         self.d_model = d_model  # Dimensionality of the model
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_q = Dense(d_k)   # Learned projection matrix for the queries
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_k = Dense(d_k)   # Learned projection matrix for the keys
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_v = Dense(d_v)   # Learned projection matrix for the values
+        # 全连接层（Keras） / Fully connected layer (Keras)
         self.W_o = Dense(d_model) # Learned projection matrix for the multi-head output
 
     def reshape_tensor(self, x, heads, flag):
@@ -927,14 +1054,26 @@ This script demonstrates **Positional Encoding**.
 本脚本演示 **Positional Encoding**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 定义模型结构 / Define model architecture
+
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow as tf
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Embedding, Layer
 
 class PositionEmbeddingFixedWeights(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, seq_length, vocab_size, output_dim, **kwargs):
         super().__init__(**kwargs)
         word_embedding_matrix = self.get_position_encoding(vocab_size, output_dim)
@@ -951,8 +1090,11 @@ class PositionEmbeddingFixedWeights(Layer):
         )
 
     def get_position_encoding(self, seq_len, d, n=10000):
+        # 创建全零数组 / Create array of zeros
         P = np.zeros((seq_len, d))
+        # 生成整数序列 / Generate integer sequence
         for k in range(seq_len):
+            # 生成等差数组 / Generate array with step
             for i in np.arange(int(d/2)):
                 denominator = np.power(n, 2*i/d)
                 P[k, 2*i] = np.sin(k/denominator)
@@ -961,6 +1103,7 @@ class PositionEmbeddingFixedWeights(Layer):
 
 
     def call(self, inputs):
+        # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
         position_indices = tf.range(tf.shape(inputs)[-1])
         embedded_words = self.word_embedding_layer(inputs)
         embedded_indices = self.position_embedding_layer(position_indices)
@@ -976,6 +1119,14 @@ class PositionEmbeddingFixedWeights(Layer):
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `embedding` | 嵌入：将离散数据映射为连续向量 | Embedding: map discrete data to continuous vectors |
+| `np.zeros` | 全零数组 | Array filled with zeros |
+| `numpy` | 数值计算库 | Numerical computing library |
+
 ---
 ## Complete Code / 完整代码一览
 
@@ -987,11 +1138,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow as tf
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Embedding, Layer
 
 class PositionEmbeddingFixedWeights(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self, seq_length, vocab_size, output_dim, **kwargs):
         super().__init__(**kwargs)
         word_embedding_matrix = self.get_position_encoding(vocab_size, output_dim)
@@ -1008,8 +1163,11 @@ class PositionEmbeddingFixedWeights(Layer):
         )
 
     def get_position_encoding(self, seq_len, d, n=10000):
+        # 创建全零数组 / Create array of zeros
         P = np.zeros((seq_len, d))
+        # 生成整数序列 / Generate integer sequence
         for k in range(seq_len):
+            # 生成等差数组 / Generate array with step
             for i in np.arange(int(d/2)):
                 denominator = np.power(n, 2*i/d)
                 P[k, 2*i] = np.sin(k/denominator)
@@ -1018,6 +1176,7 @@ class PositionEmbeddingFixedWeights(Layer):
 
 
     def call(self, inputs):
+        # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
         position_indices = tf.range(tf.shape(inputs)[-1])
         embedded_words = self.word_embedding_layer(inputs)
         embedded_indices = self.position_embedding_layer(position_indices)

@@ -1,4 +1,4 @@
-# OpenCV ML
+# OpenCV 机器学习 / Machine Learning in OpenCV
 ## Chapter 21
 
 ---
@@ -50,6 +50,7 @@ def read_voc_xml(xmlfile: str) -> dict:
             "xmax": int(bb.find("xmax").text),
             "ymax": int(bb.find("ymax").text),
         }
+        # 添加元素到列表末尾 / Append element to list end
         boxes["objects"].append(obj)
 
     return boxes
@@ -80,6 +81,7 @@ ann = read_voc_xml(str(xmlfile))
 ## Step 4 — negative sample (dog)
 
 ```python
+# 添加元素到列表末尾 / Append element to list end
 negative.append(str(img_src / ann['filename']))
     else:
 ```
@@ -94,8 +96,11 @@ bbox = []
             y = obj['ymin']
             w = obj['xmax'] - obj['xmin']
             h = obj['ymax'] - obj['ymin']
+            # 添加元素到列表末尾 / Append element to list end
             bbox.append(f"{x} {y} {w} {h}")
+        # 获取长度 / Get length
         line = f"{str(img_src/ann['filename'])} {len(bbox)} {' '.join(bbox)}"
+        # 添加元素到列表末尾 / Append element to list end
         positive.append(line)
 ```
 
@@ -103,9 +108,11 @@ bbox = []
 ## Step 6 — write the output to `negative.dat` and `postiive.dat`
 
 ```python
+# 打开文件（自动关闭） / Open file (auto-close)
 with open("negative.dat", "w") as fp:
     fp.write("\n".join(negative))
 
+# 打开文件（自动关闭） / Open file (auto-close)
 with open("positive.dat", "w") as fp:
     fp.write("\n".join(positive))
 ```
@@ -151,6 +158,7 @@ def read_voc_xml(xmlfile: str) -> dict:
             "xmax": int(bb.find("xmax").text),
             "ymax": int(bb.find("ymax").text),
         }
+        # 添加元素到列表末尾 / Append element to list end
         boxes["objects"].append(obj)
 
     return boxes
@@ -167,6 +175,7 @@ for xmlfile in ann_src.glob("*.xml"):
     ann = read_voc_xml(str(xmlfile))
     if ann['objects'][0]['name'] == 'dog':
         # negative sample (dog)
+        # 添加元素到列表末尾 / Append element to list end
         negative.append(str(img_src / ann['filename']))
     else:
         # positive sample (cats)
@@ -176,14 +185,19 @@ for xmlfile in ann_src.glob("*.xml"):
             y = obj['ymin']
             w = obj['xmax'] - obj['xmin']
             h = obj['ymax'] - obj['ymin']
+            # 添加元素到列表末尾 / Append element to list end
             bbox.append(f"{x} {y} {w} {h}")
+        # 获取长度 / Get length
         line = f"{str(img_src/ann['filename'])} {len(bbox)} {' '.join(bbox)}"
+        # 添加元素到列表末尾 / Append element to list end
         positive.append(line)
 
 # write the output to `negative.dat` and `postiive.dat`
+# 打开文件（自动关闭） / Open file (auto-close)
 with open("negative.dat", "w") as fp:
     fp.write("\n".join(negative))
 
+# 打开文件（自动关闭） / Open file (auto-close)
 with open("positive.dat", "w") as fp:
     fp.write("\n".join(positive))
 ```
@@ -220,6 +234,7 @@ This script demonstrates **Convert the image to grayscale**.
 ## Step 1 — Step 1
 
 ```python
+# 导入OpenCV计算机视觉库 / Import OpenCV computer vision library
 import cv2
 
 image = 'oxford-iiit-pet/images/Abyssinian_88.jpg'
@@ -281,6 +296,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入OpenCV计算机视觉库 / Import OpenCV computer vision library
 import cv2
 
 image = 'oxford-iiit-pet/images/Abyssinian_88.jpg'
@@ -305,5 +321,11 @@ cv2.imshow('Object Detection', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

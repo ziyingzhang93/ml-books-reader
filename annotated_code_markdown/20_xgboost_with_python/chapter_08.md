@@ -1,9 +1,9 @@
-# XGBoost
+# Python XGBoost 实战 / XGBoost with Python
 ## Chapter 08
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 08 Summary / 第08章总结
 
@@ -25,5 +25,17 @@ This chapter contains **2 code files** demonstrating chapter 08.
 The techniques in this chapter (Chapter 08) are fundamental building blocks in machine learning pipelines.
 
 本章技术（Chapter 08）是机器学习流水线中的基础构建块。
+
+---
+
+### Serialize With Joblib
+
+
+
+---
+
+### Serialize With Pickle
+
+
 
 ---

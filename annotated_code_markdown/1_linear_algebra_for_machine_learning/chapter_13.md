@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 13
 
 ---
@@ -36,6 +36,7 @@ Memory savings: For a matrix with 99% zeros, sparse format uses ~1% of dense sto
 Start with a dense matrix that is mostly zeros, then convert to CSR (Compressed Sparse Row) format.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 from scipy.sparse import csr_matrix
 
@@ -45,11 +46,17 @@ A = array([[1, 0, 0, 1, 0, 0],
            [0, 0, 2, 0, 0, 1],
            [0, 0, 0, 2, 0, 0]])
 
+# 打印输出 / Print output
 print("Dense matrix A / 密集矩阵 A:")
+# 打印输出 / Print output
 print(A)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nDense matrix shape: {A.shape}")
+# 打印输出 / Print output
 print(f"Total elements: {A.size}")
+# 打印输出 / Print output
 print(f"Non-zero elements: {(A != 0).sum()}")
+# 打印输出 / Print output
 print(f"Sparsity: {(A == 0).sum() / A.size * 100:.1f}%")
 ```
 
@@ -62,15 +69,25 @@ Convert the dense matrix to CSR (Compressed Sparse Row) format for efficient sto
 # 将密集数组转换为 CSR（压缩稀疏行）格式
 S = csr_matrix(A)
 
+# 打印输出 / Print output
 print("Sparse matrix S (CSR format) / 稀疏矩阵 S（CSR 格式）:")
+# 打印输出 / Print output
 print(S)
+# 打印输出 / Print output
 print(f"\nSparse format stores:")
+# 打印输出 / Print output
 print(f"  - data: {S.data}")
+# 打印输出 / Print output
 print(f"  - indices: {S.indices}")
+# 打印输出 / Print output
 print(f"  - indptr: {S.indptr}")
+# 打印输出 / Print output
 print(f"\n稀疏格式存储：")
+# 打印输出 / Print output
 print(f"  - 非零值（data）：{S.data}")
+# 打印输出 / Print output
 print(f"  - 列索引（indices）：{S.indices}")
+# 打印输出 / Print output
 print(f"  - 行指针（indptr）：{S.indptr}")
 ```
 
@@ -83,9 +100,13 @@ Verify that we can convert the sparse matrix back to dense format without loss o
 # 将稀疏矩阵转回密集格式
 B = S.todense()
 
+# 打印输出 / Print output
 print("Converted back to dense format / 转回密集格式:")
+# 打印输出 / Print output
 print(B)
+# 打印输出 / Print output
 print(f"\nOriginal matrix A == Reconstructed matrix B: {(A == B).all()}")
+# 打印输出 / Print output
 print(f"原始矩阵 A == 重构矩阵 B：{(A == B).all()}")
 ```
 
@@ -108,6 +129,7 @@ print(f"原始矩阵 A == 重构矩阵 B：{(A == B).all()}")
 
 ```python
 # --- Sparse Matrices / 稀疏矩阵 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 from scipy.sparse import csr_matrix
 
@@ -117,25 +139,35 @@ A = array([[1, 0, 0, 1, 0, 0],
            [0, 0, 2, 0, 0, 1],
            [0, 0, 0, 2, 0, 0]])
 
+# 打印输出 / Print output
 print("Dense matrix A / 密集矩阵 A:")
+# 打印输出 / Print output
 print(A)
+# 打印输出 / Print output
 print(f"\nNon-zero elements: {(A != 0).sum()}/{A.size}")
+# 打印输出 / Print output
 print(f"Sparsity: {(A == 0).sum() / A.size * 100:.1f}%")
 
 # Step 2: Convert to CSR (Compressed Sparse Row) format
 # 步骤 2：转换为 CSR（压缩稀疏行）格式
 S = csr_matrix(A)
 
+# 打印输出 / Print output
 print("\nSparse matrix S (CSR format) / 稀疏矩阵 S（CSR 格式）:")
+# 打印输出 / Print output
 print(S)
 
 # Step 3: Convert back to dense
 # 步骤 3：转回密集格式
 B = S.todense()
 
+# 打印输出 / Print output
 print("\nConverted back to dense / 转回密集格式:")
+# 打印输出 / Print output
 print(B)
+# 打印输出 / Print output
 print(f"\nReconstruction successful: {(A == B).all()}")
+# 打印输出 / Print output
 print(f"重构成功：{(A == B).all()}")
 ```
 
@@ -172,6 +204,7 @@ $$\text{Sparsity} = 1 - \frac{\text{non-zero elements}}{\text{total elements}}$$
 Create the same matrix from the previous notebook.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create a sparse matrix (3x6) with mostly zeros
@@ -180,7 +213,9 @@ A = array([[1, 0, 0, 1, 0, 0],
            [0, 0, 2, 0, 0, 1],
            [0, 0, 0, 2, 0, 0]])
 
+# 打印输出 / Print output
 print("Matrix A / 矩阵 A:")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -189,28 +224,41 @@ print(A)
 Use `count_nonzero()` to count non-zero elements, then calculate sparsity.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import count_nonzero
 
 # Calculate sparsity
 # 计算稀疏度
 sparsity = 1.0 - count_nonzero(A) / A.size
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Matrix dimensions: {A.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"矩阵维度：{A.shape}")
 
+# 打印输出 / Print output
 print(f"\nTotal elements: {A.size}")
+# 打印输出 / Print output
 print(f"总元素数：{A.size}")
 
+# 打印输出 / Print output
 print(f"\nNon-zero elements: {count_nonzero(A)}")
+# 打印输出 / Print output
 print(f"非零元素数：{count_nonzero(A)}")
 
+# 打印输出 / Print output
 print(f"\nZero elements: {A.size - count_nonzero(A)}")
+# 打印输出 / Print output
 print(f"零元素数：{A.size - count_nonzero(A)}")
 
+# 打印输出 / Print output
 print(f"\nSparsity: {sparsity:.4f} ({sparsity*100:.2f}%)")
+# 打印输出 / Print output
 print(f"稀疏度：{sparsity:.4f} ({sparsity*100:.2f}%)")
 
+# 打印输出 / Print output
 print(f"\nMemory savings with sparse format: ~{sparsity*100:.1f}% reduction")
+# 打印输出 / Print output
 print(f"使用稀疏格式的内存节省：~{sparsity*100:.1f}% 的减少")
 ```
 
@@ -234,19 +282,28 @@ else:
     interpretation = "Low sparsity - Dense format may be acceptable"
     interpretation_zh = "低稀疏度 - 密集格式可能是可接受的"
 
+# 打印输出 / Print output
 print(f"Sparsity interpretation / 稀疏度解释:")
+# 打印输出 / Print output
 print(f"{interpretation}")
+# 打印输出 / Print output
 print(f"{interpretation_zh}")
 
 # Calculate theoretical memory savings
 # 计算理论内存节省
+# 打印输出 / Print output
 print(f"\nTheoretical memory usage comparison (assuming 8 bytes per float64):")
+# 打印输出 / Print output
 print(f"理论内存使用情况比较（假设每个 float64 8 字节）：")
 dense_memory = A.size * 8
 sparse_nnz = count_nonzero(A)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 sparse_memory = (sparse_nnz * 2 + A.shape[0] + 1) * 8  # Simplified estimate
+# 打印输出 / Print output
 print(f"  Dense format: {dense_memory} bytes")
+# 打印输出 / Print output
 print(f"  Sparse format: ~{sparse_memory} bytes")
+# 打印输出 / Print output
 print(f"  Savings: {(1 - sparse_memory/dense_memory)*100:.1f}%")
 ```
 
@@ -269,7 +326,9 @@ print(f"  Savings: {(1 - sparse_memory/dense_memory)*100:.1f}%")
 
 ```python
 # --- Calculate Sparsity / 计算稀疏度 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import count_nonzero
 
 # Step 1: Create a sparse matrix
@@ -278,24 +337,32 @@ A = array([[1, 0, 0, 1, 0, 0],
            [0, 0, 2, 0, 0, 1],
            [0, 0, 0, 2, 0, 0]])
 
+# 打印输出 / Print output
 print("Matrix A / 矩阵 A:")
+# 打印输出 / Print output
 print(A)
 
 # Step 2: Calculate sparsity
 # 步骤 2：计算稀疏度
 sparsity = 1.0 - count_nonzero(A) / A.size
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nMatrix shape: {A.shape}")
+# 打印输出 / Print output
 print(f"Total elements: {A.size}")
+# 打印输出 / Print output
 print(f"Non-zero elements: {count_nonzero(A)}")
+# 打印输出 / Print output
 print(f"Zero elements: {A.size - count_nonzero(A)}")
+# 打印输出 / Print output
 print(f"\nSparsity: {sparsity:.4f} ({sparsity*100:.2f}%)")
+# 打印输出 / Print output
 print(f"Sparsity: {sparsity:.4f} ({sparsity*100:.2f}%)")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 13 Summary / 第13章总结：Sparse Matrices
 

@@ -1,5 +1,11 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 18
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -28,6 +34,28 @@ This script demonstrates **Stacking on the sonar dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Stacking on the sonar dataset
 
 ```python
@@ -44,11 +72,13 @@ from math import exp
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -70,6 +100,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -84,12 +115,18 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 ```
@@ -100,9 +137,11 @@ def cross_validation_split(dataset, n_folds):
 ```python
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 ```
 
@@ -120,11 +159,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 ```
@@ -135,6 +176,7 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 ```python
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -148,10 +190,13 @@ def get_neighbors(train, test_row, num_neighbors):
 	distances = list()
 	for train_row in train:
 		dist = euclidean_distance(test_row, train_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((train_row, dist))
 	distances.sort(key=lambda tup: tup[1])
 	neighbors = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(num_neighbors):
+  # 添加元素到列表末尾 / Append element to list end
 		neighbors.append(distances[i][0])
 	return neighbors
 ```
@@ -181,6 +226,7 @@ def knn_model(train):
 ```python
 def perceptron_predict(model, row):
 	activation = model[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		activation += model[i + 1] * row[i]
 	return 1.0 if activation >= 0.0 else 0.0
@@ -191,12 +237,15 @@ def perceptron_predict(model, row):
 
 ```python
 def perceptron_model(train, l_rate=0.01, n_epoch=5000):
+ # 获取长度 / Get length
 	weights = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			prediction = perceptron_predict(weights, row)
 			error = row[-1] - prediction
 			weights[0] = weights[0] + l_rate * error
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				weights[i + 1] = weights[i + 1] + l_rate * error * row[i]
 	return weights
@@ -208,6 +257,7 @@ def perceptron_model(train, l_rate=0.01, n_epoch=5000):
 ```python
 def logistic_regression_predict(model, row):
 	yhat = model[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += model[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
@@ -218,12 +268,15 @@ def logistic_regression_predict(model, row):
 
 ```python
 def logistic_regression_model(train, l_rate=0.01, n_epoch=5000):
+ # 获取长度 / Get length
 	coef = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			yhat = logistic_regression_predict(coef, row)
 			error = row[-1] - yhat
 			coef[0] = coef[0] + l_rate * error * yhat * (1.0 - yhat)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				coef[i + 1] = coef[i + 1] + l_rate * error * yhat * (1.0 - yhat) * row[i]
 	return coef
@@ -235,10 +288,14 @@ def logistic_regression_model(train, l_rate=0.01, n_epoch=5000):
 ```python
 def to_stacked_row(models, predict_list, row):
 	stacked_row = list()
+ # 获取长度 / Get length
 	for i in range(len(models)):
 		prediction = predict_list[i](models[i], row)
+  # 添加元素到列表末尾 / Append element to list end
 		stacked_row.append(prediction)
+ # 添加元素到列表末尾 / Append element to list end
 	stacked_row.append(row[-1])
+ # 获取长度 / Get length
 	return row[0:len(row)-1] + stacked_row
 ```
 
@@ -250,20 +307,25 @@ def stacking(train, test):
 	model_list = [knn_model, perceptron_model]
 	predict_list = [knn_predict, perceptron_predict]
 	models = list()
+ # 获取长度 / Get length
 	for i in range(len(model_list)):
 		model = model_list[i](train)
+  # 添加元素到列表末尾 / Append element to list end
 		models.append(model)
 	stacked_dataset = list()
 	for row in train:
 		stacked_row = to_stacked_row(models, predict_list, row)
+  # 添加元素到列表末尾 / Append element to list end
 		stacked_dataset.append(stacked_row)
 	stacked_model = logistic_regression_model(stacked_dataset)
 	predictions = list()
 	for row in test:
 		stacked_row = to_stacked_row(models, predict_list, row)
+  # 添加元素到列表末尾 / Append element to list end
 		stacked_dataset.append(stacked_row)
 		prediction = logistic_regression_predict(stacked_model, stacked_row)
 		prediction = round(prediction)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(prediction)
 	return predictions
 ```
@@ -272,6 +334,7 @@ def stacking(train, test):
 ## Step 18 — Test stacking on the sonar dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -287,6 +350,7 @@ dataset = load_csv(filename)
 ## Step 20 — convert string attributes to integers
 
 ```python
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 ```
@@ -295,10 +359,13 @@ for i in range(len(dataset[0])-1):
 ## Step 21 — convert class column to integers
 
 ```python
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 n_folds = 3
 scores = evaluate_algorithm(dataset, stacking, n_folds)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -341,11 +408,13 @@ from math import exp
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -359,6 +428,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -369,21 +439,29 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 
 # Evaluate an algorithm using a cross validation split
@@ -397,17 +475,20 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 
 # Calculate the Euclidean distance between two vectors
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -417,10 +498,13 @@ def get_neighbors(train, test_row, num_neighbors):
 	distances = list()
 	for train_row in train:
 		dist = euclidean_distance(test_row, train_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((train_row, dist))
 	distances.sort(key=lambda tup: tup[1])
 	neighbors = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(num_neighbors):
+  # 添加元素到列表末尾 / Append element to list end
 		neighbors.append(distances[i][0])
 	return neighbors
 
@@ -438,18 +522,22 @@ def knn_model(train):
 # Make a prediction with weights
 def perceptron_predict(model, row):
 	activation = model[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		activation += model[i + 1] * row[i]
 	return 1.0 if activation >= 0.0 else 0.0
 
 # Estimate Perceptron weights using stochastic gradient descent
 def perceptron_model(train, l_rate=0.01, n_epoch=5000):
+ # 获取长度 / Get length
 	weights = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			prediction = perceptron_predict(weights, row)
 			error = row[-1] - prediction
 			weights[0] = weights[0] + l_rate * error
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				weights[i + 1] = weights[i + 1] + l_rate * error * row[i]
 	return weights
@@ -457,18 +545,22 @@ def perceptron_model(train, l_rate=0.01, n_epoch=5000):
 # Make a prediction with coefficients
 def logistic_regression_predict(model, row):
 	yhat = model[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += model[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
 
 # Estimate logistic regression coefficients using stochastic gradient descent
 def logistic_regression_model(train, l_rate=0.01, n_epoch=5000):
+ # 获取长度 / Get length
 	coef = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			yhat = logistic_regression_predict(coef, row)
 			error = row[-1] - yhat
 			coef[0] = coef[0] + l_rate * error * yhat * (1.0 - yhat)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				coef[i + 1] = coef[i + 1] + l_rate * error * yhat * (1.0 - yhat) * row[i]
 	return coef
@@ -476,10 +568,14 @@ def logistic_regression_model(train, l_rate=0.01, n_epoch=5000):
 # Make predictions with sub-models and construct a new stacked row
 def to_stacked_row(models, predict_list, row):
 	stacked_row = list()
+ # 获取长度 / Get length
 	for i in range(len(models)):
 		prediction = predict_list[i](models[i], row)
+  # 添加元素到列表末尾 / Append element to list end
 		stacked_row.append(prediction)
+ # 添加元素到列表末尾 / Append element to list end
 	stacked_row.append(row[-1])
+ # 获取长度 / Get length
 	return row[0:len(row)-1] + stacked_row
 
 # Stacked Generalization Algorithm
@@ -487,36 +583,46 @@ def stacking(train, test):
 	model_list = [knn_model, perceptron_model]
 	predict_list = [knn_predict, perceptron_predict]
 	models = list()
+ # 获取长度 / Get length
 	for i in range(len(model_list)):
 		model = model_list[i](train)
+  # 添加元素到列表末尾 / Append element to list end
 		models.append(model)
 	stacked_dataset = list()
 	for row in train:
 		stacked_row = to_stacked_row(models, predict_list, row)
+  # 添加元素到列表末尾 / Append element to list end
 		stacked_dataset.append(stacked_row)
 	stacked_model = logistic_regression_model(stacked_dataset)
 	predictions = list()
 	for row in test:
 		stacked_row = to_stacked_row(models, predict_list, row)
+  # 添加元素到列表末尾 / Append element to list end
 		stacked_dataset.append(stacked_row)
 		prediction = logistic_regression_predict(stacked_model, stacked_row)
 		prediction = round(prediction)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(prediction)
 	return predictions
 
 # Test stacking on the sonar dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 # load and prepare data
 filename = 'sonar.all-data.csv'
 dataset = load_csv(filename)
 # convert string attributes to integers
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 # convert class column to integers
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 n_folds = 3
 scores = evaluate_algorithm(dataset, stacking, n_folds)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 

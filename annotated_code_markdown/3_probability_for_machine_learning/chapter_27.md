@@ -1,9 +1,21 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 27
 
 ---
 
-### Chapter Summary
+### Roc Curve
+
+
+
+---
+
+### Precision Recall
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 27: ROC and Precision-Recall Curves
 

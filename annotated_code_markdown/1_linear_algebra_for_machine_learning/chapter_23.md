@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 23
 
 ---
@@ -35,6 +35,7 @@ Demonstrates how to read and extract files from compressed tar.gz archives. This
 # Import tarfile module for reading archives
 # 导入tarfile模块用于读取档案
 import tarfile
+# 导入操作系统接口 / Import OS interface
 import os
 ```
 
@@ -43,20 +44,35 @@ import os
 ```python
 # TAR file information
 # TAR文件信息
+# 打印输出 / Print output
 print("TAR Archive Information:")
+# 打印输出 / Print output
 print("="*50)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("TAR is a standard archive format in Unix/Linux systems.")
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Common extensions:")
+# 打印输出 / Print output
 print("  .tar       - Uncompressed TAR archive")
+# 打印输出 / Print output
 print("  .tar.gz    - TAR archive compressed with gzip")
+# 打印输出 / Print output
 print("  .tar.bz2   - TAR archive compressed with bzip2")
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Benefits:")
+# 打印输出 / Print output
 print("  - Preserves file structure and permissions")
+# 打印输出 / Print output
 print("  - Smaller file size with compression")
+# 打印输出 / Print output
 print("  - Universal support on Unix/Linux/Mac")
+# 打印输出 / Print output
 print("  - Partial extraction without full decompression")
 ```
 
@@ -71,13 +87,18 @@ example_code = '''
 # Open a TAR archive
 with tarfile.open('archive.tar.gz', 'r:gz') as tar:
     # List all files in the archive
+    # 打印输出 / Print output
     print("Files in archive:")
     for member in tar.getmembers():
+        # 打印输出 / Print output
         print(f"  {member.name} ({member.size} bytes)")
 '''
 
+# 打印输出 / Print output
 print("Example: Opening TAR archive and listing contents")
+# 打印输出 / Print output
 print("="*50)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -98,8 +119,11 @@ with tarfile.open('archive.tar.gz', 'r:gz') as tar:
     tar.extractall(path='/extract/path')
 '''
 
+# 打印输出 / Print output
 print("Example: Extracting files from archive")
+# 打印输出 / Print output
 print("="*50)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -110,6 +134,7 @@ print(example_code)
 # 不提取就读取文件内容的示例代码
 
 example_code = '''
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 # Read CSV file directly from TAR archive
@@ -119,12 +144,17 @@ with tarfile.open('archive.tar.gz', 'r:gz') as tar:
     # Read the file object
     file_obj = tar.extractfile(member)
     # Load with pandas
+    # 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
     df = pd.read_csv(file_obj)
+    # 查看前几行数据（快速预览） / View first rows (quick preview)
     print(df.head())
 '''
 
+# 打印输出 / Print output
 print("Example: Reading file content directly from archive")
+# 打印输出 / Print output
 print("="*50)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -157,6 +187,7 @@ print(example_code)
 ```python
 # --- Import Section / 导入部分 ---
 import tarfile
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 # --- Open TAR Archive / 打开TAR档案 ---
@@ -205,15 +236,32 @@ Build a book recommender system using SVD-based collaborative filtering. Demonst
 - 评估模型效果 / Evaluate model performance
 
 
+---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import libraries for recommendation system
 # 导入推荐系统库
 import tarfile
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import TruncatedSVD
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics.pairwise import cosine_similarity
 ```
 
@@ -228,20 +276,29 @@ example_code = '''
 with tarfile.open('ratings.tar.gz', 'r:gz') as tar:
     # List contents
     for member in tar.getmembers():
+        # 打印输出 / Print output
         print(f"{member.name}")
     
     # Load ratings
     member = tar.getmember('ratings.csv')
     file_obj = tar.extractfile(member)
+    # 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
     ratings = pd.read_csv(file_obj)
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     print(f"Ratings shape: {ratings.shape}")
+    # 查看前几行数据（快速预览） / View first rows (quick preview)
     print(ratings.head())
 '''
 
+# 打印输出 / Print output
 print("Data Loading Pattern (Book Recommender Dataset):")
+# 打印输出 / Print output
 print("="*60)
+# 打印输出 / Print output
 print(example_code)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Expected columns: user_id, book_id, rating")
 ```
 
@@ -261,14 +318,21 @@ rating_matrix = ratings.pivot_table(
     fill_value=0  # Fill missing ratings with 0
 )
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Rating matrix shape: {rating_matrix.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"  Users: {rating_matrix.shape[0]}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"  Books: {rating_matrix.shape[1]}")
+# 打印输出 / Print output
 print(f"  Sparsity: {(rating_matrix == 0).sum().sum() / rating_matrix.size * 100:.1f}%")
 '''
 
+# 打印输出 / Print output
 print("Rating Matrix Creation:")
+# 打印输出 / Print output
 print("="*60)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -287,17 +351,25 @@ example_code = '''
 
 n_factors = 50  # Number of latent factors
 svd = TruncatedSVD(n_components=n_factors)
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 user_factors = svd.fit_transform(rating_matrix)
 book_factors = svd.components_.T
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"User factors shape: {user_factors.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Book factors shape: {book_factors.shape}")
+# 打印输出 / Print output
 print(f"\nExplained variance ratio: {svd.explained_variance_ratio_.sum():.3f}")
+# 打印输出 / Print output
 print(f"This means {svd.explained_variance_ratio_.sum()*100:.1f}% of rating variation is captured")
 '''
 
+# 打印输出 / Print output
 print("SVD Factorization for Latent Factors:")
+# 打印输出 / Print output
 print("="*60)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -312,22 +384,31 @@ example_code = '''
 # Users with similar latent factors have similar tastes
 user_similarity = cosine_similarity(user_factors)
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"User similarity matrix shape: {user_similarity.shape}")
+# 打印输出 / Print output
 print(f"\nSimilarity statistics:")
+# 打印输出 / Print output
 print(f"  Min similarity: {user_similarity[user_similarity < 1].min():.4f}")
+# 打印输出 / Print output
 print(f"  Max similarity: {user_similarity[user_similarity < 1].max():.4f}")
 
 # Find most similar users
 user_id = 0
 similar_users = np.argsort(user_similarity[user_id])[-6:-1]  # Top 5 similar users
+# 打印输出 / Print output
 print(f"\nUsers most similar to user {user_id}:")
 for similar_user in similar_users:
     sim_score = user_similarity[user_id, similar_user]
+    # 打印输出 / Print output
     print(f"  User {similar_user}: similarity = {sim_score:.4f}")
 '''
 
+# 打印输出 / Print output
 print("Computing User Similarity:")
+# 打印输出 / Print output
 print("="*60)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -361,10 +442,13 @@ def recommend_books(user_id, n_recommendations=5):
                 sim_score = user_similarity[user_id, sim_user]
                 book_rating = rating_matrix.iloc[sim_user, book_id]
                 # Weight rating by similarity score
+                # 添加元素到列表末尾 / Append element to list end
                 recommendations[book_id].append(sim_score * book_rating)
     
     # Average scores and rank
+    # 计算均值 / Calculate mean
     rec_scores = {book: np.mean(scores) for book, scores in recommendations.items()}
+    # 获取字典的键值对 / Get dict key-value pairs
     top_books = sorted(rec_scores.items(), key=lambda x: x[1], reverse=True)[:n_recommendations]
     
     return top_books
@@ -372,13 +456,19 @@ def recommend_books(user_id, n_recommendations=5):
 # Get recommendations
 user_id = 0
 recommendations = recommend_books(user_id, n_recommendations=5)
+# 打印输出 / Print output
 print(f"Top 5 book recommendations for user {user_id}:")
+# 同时获取索引和值 / Get both index and value
 for rank, (book_id, score) in enumerate(recommendations, 1):
+    # 打印输出 / Print output
     print(f"  {rank}. Book {book_id}: score = {score:.4f}")
 '''
 
+# 打印输出 / Print output
 print("Recommendation Generation:")
+# 打印输出 / Print output
 print("="*60)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -411,9 +501,13 @@ print(example_code)
 ```python
 # --- Import Section / 导入部分 ---
 import tarfile
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import TruncatedSVD
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics.pairwise import cosine_similarity
 
 # --- Load Data from Archive / 从档案加载数据 ---
@@ -443,7 +537,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 23 Summary / 第23章总结：Recommender System via SVD
 

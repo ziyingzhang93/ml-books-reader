@@ -1,9 +1,9 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 02
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 02 Summary / 第02章总结
 
@@ -60,10 +60,12 @@ This script demonstrates **Find the min and max values for each column**.
 ```python
 def dataset_minmax(dataset):
 	minmax = list()
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
 		value_min = min(col_values)
 		value_max = max(col_values)
+  # 添加元素到列表末尾 / Append element to list end
 		minmax.append([value_min, value_max])
 	return minmax
 ```
@@ -73,6 +75,7 @@ def dataset_minmax(dataset):
 
 ```python
 dataset = [[50, 30], [20, 90]]
+# 打印输出 / Print output
 print(dataset)
 ```
 
@@ -81,6 +84,7 @@ print(dataset)
 
 ```python
 minmax = dataset_minmax(dataset)
+# 打印输出 / Print output
 print(minmax)
 ```
 
@@ -113,24 +117,40 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Find the min and max values for each column
 def dataset_minmax(dataset):
 	minmax = list()
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
 		value_min = min(col_values)
 		value_max = max(col_values)
+  # 添加元素到列表末尾 / Append element to list end
 		minmax.append([value_min, value_max])
 	return minmax
 
 # Contrive small dataset
 dataset = [[50, 30], [20, 90]]
+# 打印输出 / Print output
 print(dataset)
 # Calculate min and max for each column
 minmax = dataset_minmax(dataset)
+# 打印输出 / Print output
 print(minmax)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 2 of 6
+
+---
+
+### Normalize Contrived Dataset
+
+
+
+---
+
+### Normalize Diabetes
+
+
 
 ---
 
@@ -168,9 +188,12 @@ from math import sqrt
 
 ```python
 def column_means(dataset):
+ # 获取长度 / Get length
 	means = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
+  # 获取长度 / Get length
 		means[i] = sum(col_values) / float(len(dataset))
 	return means
 ```
@@ -180,10 +203,13 @@ def column_means(dataset):
 
 ```python
 def column_stdevs(dataset, means):
+ # 获取长度 / Get length
 	stdevs = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		variance = [pow(row[i]-means[i], 2) for row in dataset]
 		stdevs[i] = sum(variance)
+ # 获取长度 / Get length
 	stdevs = [sqrt(x/(float(len(dataset)-1))) for x in stdevs]
 	return stdevs
 ```
@@ -194,6 +220,7 @@ def column_stdevs(dataset, means):
 ```python
 def standardize_dataset(dataset, means, stdevs):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)):
 			row[i] = (row[i] - means[i]) / stdevs[i]
 ```
@@ -203,6 +230,7 @@ def standardize_dataset(dataset, means, stdevs):
 
 ```python
 dataset = [[50, 30], [20, 90], [30, 50]]
+# 打印输出 / Print output
 print(dataset)
 ```
 
@@ -212,7 +240,9 @@ print(dataset)
 ```python
 means = column_means(dataset)
 stdevs = column_stdevs(dataset, means)
+# 打印输出 / Print output
 print(means)
+# 打印输出 / Print output
 print(stdevs)
 ```
 
@@ -221,6 +251,7 @@ print(stdevs)
 
 ```python
 standardize_dataset(dataset, means, stdevs)
+# 打印输出 / Print output
 print(dataset)
 ```
 
@@ -255,37 +286,48 @@ from math import sqrt
 
 # calculate column means
 def column_means(dataset):
+ # 获取长度 / Get length
 	means = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
+  # 获取长度 / Get length
 		means[i] = sum(col_values) / float(len(dataset))
 	return means
 
 # calculate column standard deviations
 def column_stdevs(dataset, means):
+ # 获取长度 / Get length
 	stdevs = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		variance = [pow(row[i]-means[i], 2) for row in dataset]
 		stdevs[i] = sum(variance)
+ # 获取长度 / Get length
 	stdevs = [sqrt(x/(float(len(dataset)-1))) for x in stdevs]
 	return stdevs
 
 # standardize dataset
 def standardize_dataset(dataset, means, stdevs):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)):
 			row[i] = (row[i] - means[i]) / stdevs[i]
 
 # Standardize dataset
 dataset = [[50, 30], [20, 90], [30, 50]]
+# 打印输出 / Print output
 print(dataset)
 # Estimate mean and standard deviation
 means = column_means(dataset)
 stdevs = column_stdevs(dataset, means)
+# 打印输出 / Print output
 print(means)
+# 打印输出 / Print output
 print(stdevs)
 # standardize dataset
 standardize_dataset(dataset, means, stdevs)
+# 打印输出 / Print output
 print(dataset)
 ```
 
@@ -331,11 +373,13 @@ from math import sqrt
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -354,9 +398,12 @@ def str_column_to_float(dataset, column):
 
 ```python
 def column_means(dataset):
+ # 获取长度 / Get length
 	means = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
+  # 获取长度 / Get length
 		means[i] = sum(col_values) / float(len(dataset))
 	return means
 ```
@@ -366,10 +413,13 @@ def column_means(dataset):
 
 ```python
 def column_stdevs(dataset, means):
+ # 获取长度 / Get length
 	stdevs = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		variance = [pow(row[i]-means[i], 2) for row in dataset]
 		stdevs[i] = sum(variance)
+ # 获取长度 / Get length
 	stdevs = [sqrt(x/(float(len(dataset)-1))) for x in stdevs]
 	return stdevs
 ```
@@ -380,6 +430,7 @@ def column_stdevs(dataset, means):
 ```python
 def standardize_dataset(dataset, means, stdevs):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)):
 			row[i] = (row[i] - means[i]) / stdevs[i]
 ```
@@ -390,6 +441,7 @@ def standardize_dataset(dataset, means, stdevs):
 ```python
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
 ```
 
@@ -397,8 +449,10 @@ print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(
 ## Step 8 — convert string columns to float
 
 ```python
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
+# 打印输出 / Print output
 print(dataset[0])
 ```
 
@@ -415,6 +469,7 @@ stdevs = column_stdevs(dataset, means)
 
 ```python
 standardize_dataset(dataset, means, stdevs)
+# 打印输出 / Print output
 print(dataset[0])
 ```
 
@@ -451,11 +506,13 @@ from math import sqrt
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -466,45 +523,62 @@ def str_column_to_float(dataset, column):
 
 # calculate column means
 def column_means(dataset):
+ # 获取长度 / Get length
 	means = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
+  # 获取长度 / Get length
 		means[i] = sum(col_values) / float(len(dataset))
 	return means
 
 # calculate column standard deviations
 def column_stdevs(dataset, means):
+ # 获取长度 / Get length
 	stdevs = [0 for i in range(len(dataset[0]))]
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		variance = [pow(row[i]-means[i], 2) for row in dataset]
 		stdevs[i] = sum(variance)
+ # 获取长度 / Get length
 	stdevs = [sqrt(x/(float(len(dataset)-1))) for x in stdevs]
 	return stdevs
 
 # standardize dataset
 def standardize_dataset(dataset, means, stdevs):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)):
 			row[i] = (row[i] - means[i]) / stdevs[i]
 
 # Load pima-indians-diabetes dataset
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
 # convert string columns to float
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
+# 打印输出 / Print output
 print(dataset[0])
 # Estimate mean and standard deviation
 means = column_means(dataset)
 stdevs = column_stdevs(dataset, means)
 # standardize dataset
 standardize_dataset(dataset, means, stdevs)
+# 打印输出 / Print output
 print(dataset[0])
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 6 of 6
+
+---
+
+### Statistics Contrived Dataset
+
+
 
 ---

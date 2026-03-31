@@ -1,4 +1,4 @@
-# CV深度学习
+# 计算机视觉深度学习 / Deep Learning for Computer Vision
 ## Chapter 13
 
 ---
@@ -27,11 +27,27 @@ This script demonstrates **example of vertical line detection with a convolution
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — example of vertical line detection with a convolutional layer
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
 ```
 
@@ -48,6 +64,7 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 ```
 
@@ -55,7 +72,9 @@ data = data.reshape(1, 8, 8, 1)
 ## Step 3 — create model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
 ```
 
@@ -87,6 +106,7 @@ model.set_weights(weights)
 ## Step 7 — apply filter to input data
 
 ```python
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 ```
 
@@ -94,6 +114,7 @@ yhat = model.predict(data)
 ## Step 8 — enumerate rows
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for r in range(yhat.shape[1]):
 ```
 
@@ -101,6 +122,7 @@ for r in range(yhat.shape[1]):
 ## Step 9 — print each column in the row
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print([yhat[0,r,c,0] for c in range(yhat.shape[2])])
 ```
 
@@ -135,8 +157,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of vertical line detection with a convolutional layer
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
 # define input data
 data = [[0, 0, 0, 1, 1, 0, 0, 0],
@@ -148,9 +173,12 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 # create model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
 # summarize model
 model.summary()
@@ -162,10 +190,13 @@ weights = [asarray(detector), asarray([0.0])]
 # store the weights in the model
 model.set_weights(weights)
 # apply filter to input data
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 # enumerate rows
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for r in range(yhat.shape[1]):
 	# print each column in the row
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	print([yhat[0,r,c,0] for c in range(yhat.shape[2])])
 ```
 
@@ -199,12 +230,29 @@ This script demonstrates **example of average pooling**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — example of average pooling
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import AveragePooling2D
 ```
 
@@ -221,6 +269,7 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 ```
 
@@ -228,8 +277,11 @@ data = data.reshape(1, 8, 8, 1)
 ## Step 3 — create model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(AveragePooling2D())
 ```
 
@@ -261,6 +313,7 @@ model.set_weights(weights)
 ## Step 7 — apply filter to input data
 
 ```python
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 ```
 
@@ -268,6 +321,7 @@ yhat = model.predict(data)
 ## Step 8 — enumerate rows
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for r in range(yhat.shape[1]):
 ```
 
@@ -275,6 +329,7 @@ for r in range(yhat.shape[1]):
 ## Step 9 — print each column in the row
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print([yhat[0,r,c,0] for c in range(yhat.shape[2])])
 ```
 
@@ -309,9 +364,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of average pooling
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import AveragePooling2D
 # define input data
 data = [[0, 0, 0, 1, 1, 0, 0, 0],
@@ -323,10 +382,14 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 # create model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(AveragePooling2D())
 # summarize model
 model.summary()
@@ -338,10 +401,13 @@ weights = [asarray(detector), asarray([0.0])]
 # store the weights in the model
 model.set_weights(weights)
 # apply filter to input data
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 # enumerate rows
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for r in range(yhat.shape[1]):
 	# print each column in the row
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	print([yhat[0,r,c,0] for c in range(yhat.shape[2])])
 ```
 
@@ -375,12 +441,29 @@ This script demonstrates **example of max pooling**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — example of max pooling
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
 ```
 
@@ -397,6 +480,7 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 ```
 
@@ -404,8 +488,11 @@ data = data.reshape(1, 8, 8, 1)
 ## Step 3 — create model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(MaxPooling2D())
 ```
 
@@ -437,6 +524,7 @@ model.set_weights(weights)
 ## Step 7 — apply filter to input data
 
 ```python
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 ```
 
@@ -444,6 +532,7 @@ yhat = model.predict(data)
 ## Step 8 — enumerate rows
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for r in range(yhat.shape[1]):
 ```
 
@@ -451,6 +540,7 @@ for r in range(yhat.shape[1]):
 ## Step 9 — print each column in the row
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print([yhat[0,r,c,0] for c in range(yhat.shape[2])])
 ```
 
@@ -486,9 +576,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of max pooling
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
 # define input data
 data = [[0, 0, 0, 1, 1, 0, 0, 0],
@@ -500,10 +594,14 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 # create model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(MaxPooling2D())
 # summarize model
 model.summary()
@@ -515,10 +613,13 @@ weights = [asarray(detector), asarray([0.0])]
 # store the weights in the model
 model.set_weights(weights)
 # apply filter to input data
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 # enumerate rows
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for r in range(yhat.shape[1]):
 	# print each column in the row
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	print([yhat[0,r,c,0] for c in range(yhat.shape[2])])
 ```
 
@@ -552,12 +653,29 @@ This script demonstrates **example of using global max pooling**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — example of using global max pooling
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import GlobalMaxPooling2D
 ```
 
@@ -574,6 +692,7 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 ```
 
@@ -581,8 +700,11 @@ data = data.reshape(1, 8, 8, 1)
 ## Step 3 — create model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(GlobalMaxPooling2D())
 ```
 
@@ -614,6 +736,7 @@ model.set_weights(weights)
 ## Step 7 — apply filter to input data
 
 ```python
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 ```
 
@@ -621,6 +744,7 @@ yhat = model.predict(data)
 ## Step 8 — show result
 
 ```python
+# 打印输出 / Print output
 print(yhat)
 ```
 
@@ -656,9 +780,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of using global max pooling
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import GlobalMaxPooling2D
 # define input data
 data = [[0, 0, 0, 1, 1, 0, 0, 0],
@@ -670,10 +798,14 @@ data = [[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0],
 		[0, 0, 0, 1, 1, 0, 0, 0]]
 data = asarray(data)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = data.reshape(1, 8, 8, 1)
 # create model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Conv2D(1, (3,3), activation='relu', input_shape=(8, 8, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(GlobalMaxPooling2D())
 # summarize model
 model.summary()
@@ -685,14 +817,16 @@ weights = [asarray(detector), asarray([0.0])]
 # store the weights in the model
 model.set_weights(weights)
 # apply filter to input data
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(data)
 # show result
+# 打印输出 / Print output
 print(yhat)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 13 Summary / 第13章总结
 

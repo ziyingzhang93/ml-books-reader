@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 21
+
+---
+
+### Load Data
+
+
 
 ---
 
@@ -32,15 +38,33 @@ Visualize the 13-dimensional wine dataset by projecting it onto 2D/3D using PCA.
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import dataset, PCA, scaler, and visualization
 # 导入数据集、PCA、缩放器和可视化
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_wine
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import PCA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import StandardScaler
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.pipeline import Pipeline
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 ```
@@ -52,7 +76,9 @@ from mpl_toolkits.mplot3d import Axes3D
 # 加载葡萄酒数据集
 winedata = load_wine()
 X, y = winedata['data'], winedata['target']
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Dataset shape: {X.shape}")
+# 打印输出 / Print output
 print(f"Classes: {winedata['target_names']}")
 ```
 
@@ -61,16 +87,25 @@ print(f"Classes: {winedata['target_names']}")
 ```python
 # Plot two features directly to show raw data structure
 # 绘制两个特征直接显示原始数据结构
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
+# 同时获取索引和值 / Get both index and value
 for i, target in enumerate(set(y)):
     indices = y == target
+    # 绘制散点图 / Draw scatter plot
     plt.scatter(X[indices, 1], X[indices, 2], 
                label=winedata['target_names'][target], alpha=0.7)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(winedata['feature_names'][1])
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(winedata['feature_names'][2])
+# 设置图表标题 / Set chart title
 plt.title('Two Particular Features of Wine Dataset')
+# 显示图例 / Show legend
 plt.legend()
+# 显示图表 / Display the plot
 plt.show()
+# 打印输出 / Print output
 print("Note: Only two features show limited class separation")
 ```
 
@@ -79,9 +114,11 @@ print("Note: Only two features show limited class separation")
 ```python
 # Plot three features in 3D space
 # 在3D空间中绘制三个特征
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111, projection='3d')
 
+# 同时获取索引和值 / Get both index and value
 for i, target in enumerate(set(y)):
     indices = y == target
     ax.scatter(X[indices, 1], X[indices, 2], X[indices, 3],
@@ -92,7 +129,9 @@ ax.set_ylabel(winedata['feature_names'][2])
 ax.set_zlabel(winedata['feature_names'][3])
 ax.set_title('Three Features in 3D Space')
 ax.legend()
+# 显示图表 / Display the plot
 plt.show()
+# 打印输出 / Print output
 print("Note: Better separation but still not optimal")
 ```
 
@@ -102,20 +141,31 @@ print("Note: Better separation but still not optimal")
 # Apply PCA directly without scaling
 # This can be problematic if features have different scales
 # 直接应用PCA而不缩放
+# 主成分分析：降维，保留最重要的特征 / PCA: reduce dimensions, keep key features
 pca = PCA(n_components=2)
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 Xt_unscaled = pca.fit_transform(X)
 
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
+# 同时获取索引和值 / Get both index and value
 for i, target in enumerate(set(y)):
     indices = y == target
+    # 绘制散点图 / Draw scatter plot
     plt.scatter(Xt_unscaled[indices, 0], Xt_unscaled[indices, 1],
                label=winedata['target_names'][target], alpha=0.7)
 
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(f'PC1 (explained var: {pca.explained_variance_ratio_[0]:.3f})')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(f'PC2 (explained var: {pca.explained_variance_ratio_[1]:.3f})')
+# 设置图表标题 / Set chart title
 plt.title('PCA Projection (without scaling)')
+# 显示图例 / Show legend
 plt.legend()
+# 显示图表 / Display the plot
 plt.show()
+# 打印输出 / Print output
 print(f"Variance explained: {sum(pca.explained_variance_ratio_):.3f}")
 ```
 
@@ -126,11 +176,16 @@ print(f"Variance explained: {sum(pca.explained_variance_ratio_):.3f}")
 # This is the recommended approach
 # 使用StandardScaler预处理应用PCA
 # 这是推荐的方法
+# 主成分分析：降维，保留最重要的特征 / PCA: reduce dimensions, keep key features
 pca = PCA(n_components=2)
+# 标准化：均值=0，标准差=1 / Standardize: mean=0, std=1
 pipe = Pipeline([('scaler', StandardScaler()), ('pca', pca)])
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 Xt_scaled = pipe.fit_transform(X)
 
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
+# 绘制散点图 / Draw scatter plot
 scatter = plt.scatter(Xt_scaled[:, 0], Xt_scaled[:, 1], c=y, 
                      cmap='viridis', s=100, alpha=0.7)
 
@@ -138,13 +193,21 @@ scatter = plt.scatter(Xt_scaled[:, 0], Xt_scaled[:, 1], c=y,
 cbar = plt.colorbar(scatter)
 cbar.set_label('Wine Class')
 
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(f'PC1 (explained var: {pca.explained_variance_ratio_[0]:.3f})')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(f'PC2 (explained var: {pca.explained_variance_ratio_[1]:.3f})')
+# 标准化：均值=0，标准差=1 / Standardize: mean=0, std=1
 plt.title('PCA Projection (with StandardScaler - RECOMMENDED)')
+# 显示图例 / Show legend
 plt.legend(labels=winedata['target_names'])
+# 显示图表 / Display the plot
 plt.show()
+# 打印输出 / Print output
 print(f"Variance explained by PC1: {pca.explained_variance_ratio_[0]:.3f}")
+# 打印输出 / Print output
 print(f"Variance explained by PC2: {pca.explained_variance_ratio_[1]:.3f}")
+# 打印输出 / Print output
 print(f"Total variance explained: {sum(pca.explained_variance_ratio_):.3f}")
 ```
 
@@ -177,10 +240,15 @@ print(f"Total variance explained: {sum(pca.explained_variance_ratio_):.3f}")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_wine
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import PCA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import StandardScaler
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.pipeline import Pipeline
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -189,24 +257,45 @@ winedata = load_wine()
 X, y = winedata['data'], winedata['target']
 
 # --- Plot 1: Two Features / 绘图1：两个特征 ---
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
+# 绘制散点图 / Draw scatter plot
 plt.scatter(X[:, 1], X[:, 2], c=y)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(winedata['feature_names'][1])
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(winedata['feature_names'][2])
+# 设置图表标题 / Set chart title
 plt.title('Two Features of Wine Dataset')
+# 显示图表 / Display the plot
 plt.show()
 
 # --- Plot 4: PCA with Scaling / 绘图4：缩放后的PCA ---
+# 主成分分析：降维，保留最重要的特征 / PCA: reduce dimensions, keep key features
 pca = PCA(n_components=2)
+# 标准化：均值=0，标准差=1 / Standardize: mean=0, std=1
 pipe = Pipeline([('scaler', StandardScaler()), ('pca', pca)])
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 Xt = pipe.fit_transform(X)
+# 绘制散点图 / Draw scatter plot
 plot = plt.scatter(Xt[:, 0], Xt[:, 1], c=y)
+# 显示图例 / Show legend
 plt.legend(handles=plot.legend_elements()[0], labels=list(winedata['target_names']))
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('PC1')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('PC2')
+# 设置图表标题 / Set chart title
 plt.title('First Two Principal Components (with Scaling)')
+# 显示图表 / Display the plot
 plt.show()
 ```
+
+---
+
+### Visualize Digits
+
+
 
 ---
 
@@ -237,12 +326,24 @@ Visualize the classic Iris dataset, one of the most famous datasets in machine l
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import dataset loader and visualization
 # 导入数据集加载器和可视化
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_iris
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 ```
 
@@ -253,8 +354,11 @@ import matplotlib.pyplot as plt
 # 加载鸢尾花数据集
 irisdata = load_iris()
 X, y = irisdata['data'], irisdata['target']
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Dataset shape: {X.shape}")
+# 打印输出 / Print output
 print(f"Classes: {irisdata['target_names']}")
+# 打印输出 / Print output
 print(f"Features: {irisdata['feature_names']}")
 ```
 
@@ -263,9 +367,12 @@ print(f"Features: {irisdata['feature_names']}")
 ```python
 # Show class distribution
 # 显示类别分布
+# 打印输出 / Print output
 print(f"\nClass distribution:")
+# 同时获取索引和值 / Get both index and value
 for i, name in enumerate(irisdata['target_names']):
     count = (y == i).sum()
+    # 打印输出 / Print output
     print(f"  {name}: {count} samples")
 ```
 
@@ -274,21 +381,30 @@ for i, name in enumerate(irisdata['target_names']):
 ```python
 # Plot using first two features (sepal length, sepal width)
 # 使用前两个特征绘图（萼片长度、萼片宽度）
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
 
 # Plot each class with a different color
 # 用不同的颜色绘制每个类别
+# 同时获取索引和值 / Get both index and value
 for i, name in enumerate(irisdata['target_names']):
     indices = y == i
+    # 绘制散点图 / Draw scatter plot
     plt.scatter(X[indices, 0], X[indices, 1], 
                label=name, alpha=0.7, s=100)
 
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(irisdata['feature_names'][0])
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(irisdata['feature_names'][1])
+# 设置图表标题 / Set chart title
 plt.title('Two Features from the Iris Dataset')
+# 显示图例 / Show legend
 plt.legend()
 plt.grid(True, alpha=0.3)
+# 显示图表 / Display the plot
 plt.show()
+# 打印输出 / Print output
 print("Note: Iris Setosa is well separated, but other two classes overlap")
 ```
 
@@ -297,12 +413,17 @@ print("Note: Iris Setosa is well separated, but other two classes overlap")
 ```python
 # Show first few samples with feature names
 # 显示带特征名称的前几个样本
+# 打印输出 / Print output
 print(f"First 5 samples with class labels:")
+# 生成整数序列 / Generate integer sequence
 for i in range(5):
     features = X[i]
     label = irisdata['target_names'][y[i]]
+    # 打印输出 / Print output
     print(f"\nSample {i}: {label}")
+    # 同时获取索引和值 / Get both index and value
     for j, fname in enumerate(irisdata['feature_names']):
+        # 打印输出 / Print output
         print(f"  {fname}: {features[j]:.2f}")
 ```
 
@@ -311,13 +432,21 @@ for i in range(5):
 ```python
 # Compute statistics for each feature
 # 计算每个特征的统计
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 打印输出 / Print output
 print(f"Feature statistics:")
+# 同时获取索引和值 / Get both index and value
 for i, fname in enumerate(irisdata['feature_names']):
+    # 打印输出 / Print output
     print(f"\n{fname}:")
+    # 打印输出 / Print output
     print(f"  Mean: {X[:, i].mean():.2f}")
+    # 打印输出 / Print output
     print(f"  Std:  {X[:, i].std():.2f}")
+    # 打印输出 / Print output
     print(f"  Min:  {X[:, i].min():.2f}")
+    # 打印输出 / Print output
     print(f"  Max:  {X[:, i].max():.2f}")
 ```
 
@@ -348,7 +477,9 @@ for i, fname in enumerate(irisdata['feature_names']):
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_iris
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # --- Load Data / 加载数据 ---
@@ -356,11 +487,17 @@ irisdata = load_iris()
 X, y = irisdata['data'], irisdata['target']
 
 # --- Visualize / 可视化 ---
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
+# 绘制散点图 / Draw scatter plot
 plt.scatter(X[:, 0], X[:, 1], c=y)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(irisdata['feature_names'][0])
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(irisdata['feature_names'][1])
+# 设置图表标题 / Set chart title
 plt.title('Two Features from the Iris Dataset')
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -425,12 +562,19 @@ Apply PCA to the Iris dataset and compare classification performance using all f
 ```python
 # Import all required libraries
 # 导入所有必需的库
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_iris
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import train_test_split
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import PCA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import f1_score
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.svm import SVC
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 ```
 
@@ -441,7 +585,9 @@ import numpy as np
 # 加载鸢尾花数据集
 irisdata = load_iris()
 X, y = irisdata['data'], irisdata['target']
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Original data shape: {X.shape}")
+# 打印输出 / Print output
 print(f"Classes: {irisdata['target_names']}")
 ```
 
@@ -450,14 +596,22 @@ print(f"Classes: {irisdata['target_names']}")
 ```python
 # Plot two features to show raw data structure
 # 绘制两个特征以显示原始数据结构
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
+# 同时获取索引和值 / Get both index and value
 for i, name in enumerate(irisdata['target_names']):
     indices = y == i
+    # 绘制散点图 / Draw scatter plot
     plt.scatter(X[indices, 0], X[indices, 1], label=name, alpha=0.7)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(irisdata['feature_names'][0])
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(irisdata['feature_names'][1])
+# 设置图表标题 / Set chart title
 plt.title('Two Features from the Iris Dataset')
+# 显示图例 / Show legend
 plt.legend()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -466,19 +620,28 @@ plt.show()
 ```python
 # Perform PCA on full data (keeping all 4 components)
 # 对全数据执行PCA（保留全部4个成分）
+# 主成分分析：降维，保留最重要的特征 / PCA: reduce dimensions, keep key features
 pca = PCA().fit(X)
 
+# 打印输出 / Print output
 print("Principal Components:")
+# 打印输出 / Print output
 print(pca.components_)
 
+# 打印输出 / Print output
 print(f"\nExplained Variance Ratio:")
+# 同时获取索引和值 / Get both index and value
 for i, ratio in enumerate(pca.explained_variance_ratio_):
+    # 打印输出 / Print output
     print(f"  PC{i+1}: {ratio:.4f}")
 
+# 打印输出 / Print output
 print(f"\nCumulative Explained Variance:")
 cumsum = 0
+# 同时获取索引和值 / Get both index and value
 for i, ratio in enumerate(pca.explained_variance_ratio_):
     cumsum += ratio
+    # 打印输出 / Print output
     print(f"  PC{i+1}: {cumsum:.4f}")
 ```
 
@@ -487,27 +650,42 @@ for i, ratio in enumerate(pca.explained_variance_ratio_):
 ```python
 # Plot explained variance
 # 绘制解释方差
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(10, 5))
 
 # Plot 1: Variance explained by each component
+# 创建子图 / Create subplot
 plt.subplot(1, 2, 1)
+# 绘制柱状图 / Draw bar chart
 plt.bar(range(1, 5), pca.explained_variance_ratio_)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('Principal Component')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('Explained Variance Ratio')
+# 设置图表标题 / Set chart title
 plt.title('Variance Explained by Each Component')
+# 生成整数序列 / Generate integer sequence
 plt.xticks(range(1, 5))
 
 # Plot 2: Cumulative variance
+# 创建子图 / Create subplot
 plt.subplot(1, 2, 2)
 cumsum = np.cumsum(pca.explained_variance_ratio_)
+# 绘制折线图 / Draw line plot
 plt.plot(range(1, 5), cumsum, 'b-o')
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('Number of Components')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('Cumulative Explained Variance')
+# 设置图表标题 / Set chart title
 plt.title('Cumulative Explained Variance')
 plt.axhline(y=0.95, color='r', linestyle='--', label='95% threshold')
+# 生成整数序列 / Generate integer sequence
 plt.xticks(range(1, 5))
+# 显示图例 / Show legend
 plt.legend()
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -516,13 +694,20 @@ plt.show()
 ```python
 # Show how original features contribute to principal components
 # 显示原始特征如何贡献给主成分
+# 打印输出 / Print output
 print("Feature contributions to first 2 principal components:")
+# 打印输出 / Print output
 print(f"\nPC1 loadings (importance of each feature):")
+# 同时获取索引和值 / Get both index and value
 for i, (feature, loading) in enumerate(zip(irisdata['feature_names'], pca.components_[0])):
+    # 打印输出 / Print output
     print(f"  {feature}: {loading:.4f}")
 
+# 打印输出 / Print output
 print(f"\nPC2 loadings:")
+# 同时获取索引和值 / Get both index and value
 for i, (feature, loading) in enumerate(zip(irisdata['feature_names'], pca.components_[1])):
+    # 打印输出 / Print output
     print(f"  {feature}: {loading:.4f}")
 ```
 
@@ -531,17 +716,26 @@ for i, (feature, loading) in enumerate(zip(irisdata['feature_names'], pca.compon
 ```python
 # Transform to PC space and visualize
 # 变换到PC空间并可视化
+# 用已拟合的模型转换数据 / Transform data with fitted model
 X_pca = pca.transform(X)
 
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(8, 6))
+# 同时获取索引和值 / Get both index and value
 for i, name in enumerate(irisdata['target_names']):
     indices = y == i
+    # 绘制散点图 / Draw scatter plot
     plt.scatter(X_pca[indices, 0], X_pca[indices, 1], label=name, alpha=0.7)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%})')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%})')
+# 设置图表标题 / Set chart title
 plt.title('Iris Dataset in Principal Component Space')
+# 显示图例 / Show legend
 plt.legend()
 plt.grid(True, alpha=0.3)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -550,8 +744,11 @@ plt.show()
 ```python
 # Split data for classification
 # 分割数据用于分类
+# 划分训练集和测试集 / Split into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Training set size: {X_train.shape[0]}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Test set size: {X_test.shape[0]}")
 ```
 
@@ -560,29 +757,41 @@ print(f"Test set size: {X_test.shape[0]}")
 ```python
 # Train SVM with all features
 # 用所有特征训练SVM
+# 支持向量机 / Support Vector Machine
 clf_all = SVC(kernel='linear', gamma='auto').fit(X_train, y_train)
 y_pred_all = clf_all.predict(X_test)
 acc_all = clf_all.score(X_test, y_test)
+# 计算F1分数 = 精确率和召回率的调和均值 / F1 = harmonic mean of precision and recall
 f1_all = f1_score(y_test, y_pred_all, average='macro')
 
+# 打印输出 / Print output
 print("Using all 4 features:")
+# 打印输出 / Print output
 print(f"  Accuracy: {acc_all:.4f}")
+# 打印输出 / Print output
 print(f"  F1 Score: {f1_all:.4f}")
 ```
 
 ```python
 # Train SVM with only PC1
 # 仅用PC1训练SVM
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X_train_pc1 = X_train @ pca.components_[0].reshape(-1, 1)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X_test_pc1 = X_test @ pca.components_[0].reshape(-1, 1)
 
+# 支持向量机 / Support Vector Machine
 clf_pc1 = SVC(kernel='linear', gamma='auto').fit(X_train_pc1, y_train)
 y_pred_pc1 = clf_pc1.predict(X_test_pc1)
 acc_pc1 = clf_pc1.score(X_test_pc1, y_test)
+# 计算F1分数 = 精确率和召回率的调和均值 / F1 = harmonic mean of precision and recall
 f1_pc1 = f1_score(y_test, y_pred_pc1, average='macro')
 
+# 打印输出 / Print output
 print(f"\nUsing only PC1 ({pca.explained_variance_ratio_[0]:.1%} variance):")
+# 打印输出 / Print output
 print(f"  Accuracy: {acc_pc1:.4f}")
+# 打印输出 / Print output
 print(f"  F1 Score: {f1_pc1:.4f}")
 ```
 
@@ -591,11 +800,17 @@ print(f"  F1 Score: {f1_pc1:.4f}")
 ```python
 # Print comparison summary
 # 打印比较总结
+# 打印输出 / Print output
 print(f"\nComparison Summary:")
+# 打印输出 / Print output
 print(f"  All features (4D): Accuracy = {acc_all:.4f}")
+# 打印输出 / Print output
 print(f"  PC1 only (1D):    Accuracy = {acc_pc1:.4f}")
+# 打印输出 / Print output
 print(f"  Accuracy loss:     {acc_all - acc_pc1:.4f}")
+# 打印输出 / Print output
 print(f"\nConclusion: PC1 alone captures enough information for reasonable classification")
+# 打印输出 / Print output
 print(f"despite explaining only {pca.explained_variance_ratio_[0]:.1%} of total variance")
 ```
 
@@ -633,11 +848,17 @@ print(f"despite explaining only {pca.explained_variance_ratio_[0]:.1%} of total 
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import load_iris
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import train_test_split
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import PCA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import f1_score
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.svm import SVC
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # --- Load Data / 加载数据 ---
@@ -645,26 +866,37 @@ irisdata = load_iris()
 X, y = irisdata['data'], irisdata['target']
 
 # --- PCA Analysis / PCA分析 ---
+# 主成分分析：降维，保留最重要的特征 / PCA: reduce dimensions, keep key features
 pca = PCA().fit(X)
+# 打印输出 / Print output
 print("Principal components:")
+# 打印输出 / Print output
 print(pca.components_)
+# 打印输出 / Print output
 print("Explained variance:")
+# 打印输出 / Print output
 print(pca.explained_variance_)
 
 # --- Visualization / 可视化 ---
+# 用已拟合的模型转换数据 / Transform data with fitted model
 X_pca = pca.transform(X)
+# 绘制散点图 / Draw scatter plot
 plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y)
+# 显示图表 / Display the plot
 plt.show()
 
 # --- Classification Comparison / 分类比较 ---
+# 划分训练集和测试集 / Split into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33)
+# 支持向量机 / Support Vector Machine
 clf = SVC(kernel='linear', gamma='auto').fit(X_train, y_train)
+# 打印输出 / Print output
 print(f"Accuracy (all features): {clf.score(X_test, y_test)}")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 21 Summary / 第21章总结：Visualization with PCA
 

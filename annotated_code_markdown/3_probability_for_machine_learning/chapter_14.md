@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 14
 
 ---
@@ -32,34 +32,48 @@ $$X \sim p \cdot N(\mu_1, \sigma_1^2) + (1-p) \cdot N(\mu_2, \sigma_2^2)$$
 ## Step 1 — Generate Bimodal Data / 生成双峰数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 # Generate bimodal data / 生成双峰数据
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 
 # Component 1: N(20, 25) / 组件1
 n1 = 500
 mu1, sigma1 = 20, 5
+# 生成随机数 / Generate random numbers
 component1 = np.random.normal(loc=mu1, scale=sigma1, size=n1)
 
 # Component 2: N(40, 25) / 组件2
 n2 = 500
 mu2, sigma2 = 40, 5
+# 生成随机数 / Generate random numbers
 component2 = np.random.normal(loc=mu2, scale=sigma2, size=n2)
 
 # Combine / 组合
+# 拼接数组 / Concatenate arrays
 bimodal_data = np.concatenate([component1, component2])
 labels = np.concatenate([np.zeros(n1), np.ones(n2)])  # True labels / 真实标签
 
+# 打印输出 / Print output
 print(f'Bimodal Data Generation / 双峰数据生成')
+# 打印输出 / Print output
 print(f'Component 1: N({mu1}, {sigma1}²), n={n1}')
+# 打印输出 / Print output
 print(f'Component 2: N({mu2}, {sigma2}²), n={n2}')
+# 打印输出 / Print output
 print(f'\nCombined Data Statistics / 组合数据统计:')
+# 计算均值 / Calculate mean
 print(f'Mean: {np.mean(bimodal_data):.4f}')
+# 计算标准差 / Calculate standard deviation
 print(f'Std: {np.std(bimodal_data):.4f}')
+# 求最小值 / Find minimum value
 print(f'Min: {np.min(bimodal_data):.4f}')
+# 求最大值 / Find maximum value
 print(f'Max: {np.max(bimodal_data):.4f}')
 ```
 
@@ -83,8 +97,10 @@ axes[0].legend()
 axes[0].grid(alpha=0.3)
 
 # Scatter plot / 散点图
+# 生成随机数 / Generate random numbers
 axes[1].scatter(bimodal_data[labels == 0], np.random.normal(0, 0.02, n1), 
                alpha=0.5, s=50, color='red', label='Component 1')
+# 生成随机数 / Generate random numbers
 axes[1].scatter(bimodal_data[labels == 1], np.random.normal(0, 0.02, n2), 
                alpha=0.5, s=50, color='green', label='Component 2')
 axes[1].set_xlabel('Value / 值')
@@ -95,6 +111,7 @@ axes[1].grid(alpha=0.3)
 axes[1].set_ylim([-0.2, 0.2])
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -172,30 +189,47 @@ $$p(x) = \sum_{k=1}^{K} w_k N(x | \mu_k, \Sigma_k)$$
 ## Step 1 — Generate and Fit GMM / 生成和拟合GMM
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.mixture import GaussianMixture
 from scipy.stats import norm
 
 # Generate bimodal data / 生成双峰数据
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 生成随机数 / Generate random numbers
 component1 = np.random.normal(loc=20, scale=5, size=500)
+# 生成随机数 / Generate random numbers
 component2 = np.random.normal(loc=40, scale=5, size=500)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 bimodal_data = np.concatenate([component1, component2]).reshape(-1, 1)
 
 # Fit GMM with 2 components / 用2个组件拟合GMM
 gmm = GaussianMixture(n_components=2, random_state=42)
 gmm.fit(bimodal_data)
 
+# 打印输出 / Print output
 print(f'Gaussian Mixture Model / 高斯混合模型')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Number of components: 2')
+# 打印输出 / Print output
 print(f'\nComponent Parameters / 组件参数:')
+# 生成整数序列 / Generate integer sequence
 for i in range(2):
+    # 打印输出 / Print output
     print(f'\nComponent {i+1}:')
+    # 打印输出 / Print output
     print(f'  Weight (π): {gmm.weights_[i]:.4f}')
+    # 打印输出 / Print output
     print(f'  Mean (μ): {gmm.means_[i][0]:.4f}')
+    # 打印输出 / Print output
     print(f'  Covariance (σ²): {gmm.covariances_[i][0][0]:.4f}')
+    # 打印输出 / Print output
     print(f'  Std Dev (σ): {np.sqrt(gmm.covariances_[i][0][0]):.4f}')
 ```
 
@@ -208,9 +242,13 @@ labels = gmm.predict(bimodal_data)
 # Get probabilities / 获取概率
 probs = gmm.predict_proba(bimodal_data)
 
+# 打印输出 / Print output
 print(f'\nPredicted Labels / 预测标签:')
+# 求和 / Calculate sum
 print(f'Cluster 0: {np.sum(labels == 0)} points')
+# 求和 / Calculate sum
 print(f'Cluster 1: {np.sum(labels == 1)} points')
+# 打印输出 / Print output
 print(f'\nLog-Likelihood / 对数似然: {gmm.score(bimodal_data):.4f}')
 ```
 
@@ -220,8 +258,10 @@ print(f'\nLog-Likelihood / 对数似然: {gmm.score(bimodal_data):.4f}')
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Plot 1: Data with predicted clusters / 绘图1：带预测簇的数据
+# 求和 / Calculate sum
 axes[0].scatter(bimodal_data[labels == 0], [0]*np.sum(labels == 0), 
                alpha=0.5, s=50, color='red', label='Cluster 0')
+# 求和 / Calculate sum
 axes[0].scatter(bimodal_data[labels == 1], [0]*np.sum(labels == 1), 
                alpha=0.5, s=50, color='blue', label='Cluster 1')
 axes[0].set_xlabel('Value / 值')
@@ -231,12 +271,15 @@ axes[0].set_ylim([-0.5, 0.5])
 axes[0].grid(alpha=0.3)
 
 # Plot 2: Fitted GMM PDF / 绘图2：拟合的GMM PDF
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 x = np.linspace(5, 55, 1000).reshape(-1, 1)
 density = np.exp(gmm.score_samples(x))
 component_density = []
+# 生成整数序列 / Generate integer sequence
 for i in range(2):
     comp_dens = gmm.weights_[i] * norm.pdf(x[:, 0], gmm.means_[i][0], 
                                             np.sqrt(gmm.covariances_[i][0][0]))
+    # 添加元素到列表末尾 / Append element to list end
     component_density.append(comp_dens)
 
 axes[1].hist(bimodal_data, bins=30, density=True, alpha=0.5, 
@@ -251,6 +294,7 @@ axes[1].legend()
 axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -275,7 +319,7 @@ plt.show()
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 14: Gaussian Mixture Models
 

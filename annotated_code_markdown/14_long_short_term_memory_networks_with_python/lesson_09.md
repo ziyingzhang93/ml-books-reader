@@ -1,5 +1,17 @@
-# LSTM网络
+# LSTM 网络实战 / LSTM Networks with Python
 ## Lesson 09
+
+---
+
+### Chapter Summary / 章节总结
+
+
+
+---
+
+### Encoder Decoder Lstm
+
+
 
 ---
 
@@ -39,13 +51,18 @@ from random import randint
 ```python
 def random_sum_pairs(n_examples, n_numbers, largest):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_examples):
+  # 生成整数序列 / Generate integer sequence
 		in_pattern = [randint(1,largest) for _ in range(n_numbers)]
 		out_pattern = sum(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(out_pattern)
 	return X, y
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 n_samples = 1
 n_numbers = 2
@@ -57,6 +74,7 @@ largest = 10
 
 ```python
 X, y = random_sum_pairs(n_samples, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -86,19 +104,25 @@ from random import randint
 # generate lists of random integers and their sum
 def random_sum_pairs(n_examples, n_numbers, largest):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_examples):
+  # 生成整数序列 / Generate integer sequence
 		in_pattern = [randint(1,largest) for _ in range(n_numbers)]
 		out_pattern = sum(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(out_pattern)
 	return X, y
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 n_samples = 1
 n_numbers = 2
 largest = 10
 # generate pairs
 X, y = random_sum_pairs(n_samples, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -146,10 +170,14 @@ from math import log10
 ```python
 def random_sum_pairs(n_examples, n_numbers, largest):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_examples):
+  # 生成整数序列 / Generate integer sequence
 		in_pattern = [randint(1,largest) for _ in range(n_numbers)]
 		out_pattern = sum(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(out_pattern)
 	return X, y
 ```
@@ -163,13 +191,17 @@ def to_string(X, y, n_numbers, largest):
 	Xstr = list()
 	for pattern in X:
 		strp = '+'.join([str(n) for n in pattern])
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		Xstr.append(strp)
 	max_length = int(ceil(log10(n_numbers * (largest+1))))
 	ystr = list()
 	for pattern in y:
 		strp = str(pattern)
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		ystr.append(strp)
 	return Xstr, ystr
 ```
@@ -179,17 +211,21 @@ def to_string(X, y, n_numbers, largest):
 
 ```python
 def integer_encode(X, y, alphabet):
+ # 同时获取索引和值 / Get both index and value
 	char_to_int = dict((c, i) for i, c in enumerate(alphabet))
 	Xenc = list()
 	for pattern in X:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		Xenc.append(integer_encoded)
 	yenc = list()
 	for pattern in y:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		yenc.append(integer_encoded)
 	return Xenc, yenc
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 n_samples = 1
 n_numbers = 2
@@ -201,6 +237,7 @@ largest = 10
 
 ```python
 X, y = random_sum_pairs(n_samples, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -209,6 +246,7 @@ print(X, y)
 
 ```python
 X, y = to_string(X, y, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -218,6 +256,7 @@ print(X, y)
 ```python
 alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', ' ']
 X, y = integer_encode(X, y, alphabet)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -249,10 +288,14 @@ from math import log10
 # generate lists of random integers and their sum
 def random_sum_pairs(n_examples, n_numbers, largest):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_examples):
+  # 生成整数序列 / Generate integer sequence
 		in_pattern = [randint(1,largest) for _ in range(n_numbers)]
 		out_pattern = sum(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(out_pattern)
 	return X, y
 
@@ -262,42 +305,53 @@ def to_string(X, y, n_numbers, largest):
 	Xstr = list()
 	for pattern in X:
 		strp = '+'.join([str(n) for n in pattern])
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		Xstr.append(strp)
 	max_length = int(ceil(log10(n_numbers * (largest+1))))
 	ystr = list()
 	for pattern in y:
 		strp = str(pattern)
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		ystr.append(strp)
 	return Xstr, ystr
 
 # integer encode strings
 def integer_encode(X, y, alphabet):
+ # 同时获取索引和值 / Get both index and value
 	char_to_int = dict((c, i) for i, c in enumerate(alphabet))
 	Xenc = list()
 	for pattern in X:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		Xenc.append(integer_encoded)
 	yenc = list()
 	for pattern in y:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		yenc.append(integer_encoded)
 	return Xenc, yenc
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 n_samples = 1
 n_numbers = 2
 largest = 10
 # generate pairs
 X, y = random_sum_pairs(n_samples, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 # convert to strings
 X, y = to_string(X, y, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 # integer encode
 alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', ' ']
 X, y = integer_encode(X, y, alphabet)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -345,10 +399,14 @@ from math import log10
 ```python
 def random_sum_pairs(n_examples, n_numbers, largest):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_examples):
+  # 生成整数序列 / Generate integer sequence
 		in_pattern = [randint(1,largest) for _ in range(n_numbers)]
 		out_pattern = sum(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(out_pattern)
 	return X, y
 ```
@@ -362,13 +420,17 @@ def to_string(X, y, n_numbers, largest):
 	Xstr = list()
 	for pattern in X:
 		strp = '+'.join([str(n) for n in pattern])
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		Xstr.append(strp)
 	max_length = int(ceil(log10(n_numbers * (largest+1))))
 	ystr = list()
 	for pattern in y:
 		strp = str(pattern)
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		ystr.append(strp)
 	return Xstr, ystr
 ```
@@ -378,14 +440,17 @@ def to_string(X, y, n_numbers, largest):
 
 ```python
 def integer_encode(X, y, alphabet):
+ # 同时获取索引和值 / Get both index and value
 	char_to_int = dict((c, i) for i, c in enumerate(alphabet))
 	Xenc = list()
 	for pattern in X:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		Xenc.append(integer_encoded)
 	yenc = list()
 	for pattern in y:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		yenc.append(integer_encoded)
 	return Xenc, yenc
 ```
@@ -399,20 +464,27 @@ def one_hot_encode(X, y, max_int):
 	for seq in X:
 		pattern = list()
 		for index in seq:
+   # 生成整数序列 / Generate integer sequence
 			vector = [0 for _ in range(max_int)]
 			vector[index] = 1
+   # 添加元素到列表末尾 / Append element to list end
 			pattern.append(vector)
+  # 添加元素到列表末尾 / Append element to list end
 		Xenc.append(pattern)
 	yenc = list()
 	for seq in y:
 		pattern = list()
 		for index in seq:
+   # 生成整数序列 / Generate integer sequence
 			vector = [0 for _ in range(max_int)]
 			vector[index] = 1
+   # 添加元素到列表末尾 / Append element to list end
 			pattern.append(vector)
+  # 添加元素到列表末尾 / Append element to list end
 		yenc.append(pattern)
 	return Xenc, yenc
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 n_samples = 1
 n_numbers = 2
@@ -424,6 +496,7 @@ largest = 10
 
 ```python
 X, y = random_sum_pairs(n_samples, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -432,6 +505,7 @@ print(X, y)
 
 ```python
 X, y = to_string(X, y, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -441,6 +515,7 @@ print(X, y)
 ```python
 alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', ' ']
 X, y = integer_encode(X, y, alphabet)
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -448,7 +523,9 @@ print(X, y)
 ## Step 9 — one hot encode
 
 ```python
+# 获取长度 / Get length
 X, y = one_hot_encode(X, y, len(alphabet))
+# 打印输出 / Print output
 print(X, y)
 ```
 
@@ -480,10 +557,14 @@ from math import log10
 # generate lists of random integers and their sum
 def random_sum_pairs(n_examples, n_numbers, largest):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_examples):
+  # 生成整数序列 / Generate integer sequence
 		in_pattern = [randint(1,largest) for _ in range(n_numbers)]
 		out_pattern = sum(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(in_pattern)
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(out_pattern)
 	return X, y
 
@@ -493,26 +574,33 @@ def to_string(X, y, n_numbers, largest):
 	Xstr = list()
 	for pattern in X:
 		strp = '+'.join([str(n) for n in pattern])
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		Xstr.append(strp)
 	max_length = int(ceil(log10(n_numbers * (largest+1))))
 	ystr = list()
 	for pattern in y:
 		strp = str(pattern)
+  # 获取长度 / Get length
 		strp = ''.join([' ' for _ in range(max_length-len(strp))]) + strp
+  # 添加元素到列表末尾 / Append element to list end
 		ystr.append(strp)
 	return Xstr, ystr
 
 # integer encode strings
 def integer_encode(X, y, alphabet):
+ # 同时获取索引和值 / Get both index and value
 	char_to_int = dict((c, i) for i, c in enumerate(alphabet))
 	Xenc = list()
 	for pattern in X:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		Xenc.append(integer_encoded)
 	yenc = list()
 	for pattern in y:
 		integer_encoded = [char_to_int[char] for char in pattern]
+  # 添加元素到列表末尾 / Append element to list end
 		yenc.append(integer_encoded)
 	return Xenc, yenc
 
@@ -522,41 +610,59 @@ def one_hot_encode(X, y, max_int):
 	for seq in X:
 		pattern = list()
 		for index in seq:
+   # 生成整数序列 / Generate integer sequence
 			vector = [0 for _ in range(max_int)]
 			vector[index] = 1
+   # 添加元素到列表末尾 / Append element to list end
 			pattern.append(vector)
+  # 添加元素到列表末尾 / Append element to list end
 		Xenc.append(pattern)
 	yenc = list()
 	for seq in y:
 		pattern = list()
 		for index in seq:
+   # 生成整数序列 / Generate integer sequence
 			vector = [0 for _ in range(max_int)]
 			vector[index] = 1
+   # 添加元素到列表末尾 / Append element to list end
 			pattern.append(vector)
+  # 添加元素到列表末尾 / Append element to list end
 		yenc.append(pattern)
 	return Xenc, yenc
 
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 n_samples = 1
 n_numbers = 2
 largest = 10
 # generate pairs
 X, y = random_sum_pairs(n_samples, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 # convert to strings
 X, y = to_string(X, y, n_numbers, largest)
+# 打印输出 / Print output
 print(X, y)
 # integer encode
 alphabet = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', ' ']
 X, y = integer_encode(X, y, alphabet)
+# 打印输出 / Print output
 print(X, y)
 # one hot encode
+# 获取长度 / Get length
 X, y = one_hot_encode(X, y, len(alphabet))
+# 打印输出 / Print output
 print(X, y)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 5 of 5
+
+---
+
+### Problem Pad
+
+
 
 ---

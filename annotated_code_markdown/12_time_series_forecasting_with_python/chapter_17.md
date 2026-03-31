@@ -1,9 +1,9 @@
-# 时间序列预测
+# 时间序列预测 / Time Series Forecasting with Python
 ## Chapter 17
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 17 Summary / 第17章总结
 
@@ -59,7 +59,9 @@ This script demonstrates **calculate forecast error**.
 ```python
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 获取长度 / Get length
 forecast_errors = [expected[i]-predictions[i] for i in range(len(expected))]
+# 打印输出 / Print output
 print('Forecast Errors: %s' % forecast_errors)
 ```
 
@@ -92,7 +94,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # calculate forecast error
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 获取长度 / Get length
 forecast_errors = [expected[i]-predictions[i] for i in range(len(expected))]
+# 打印输出 / Print output
 print('Forecast Errors: %s' % forecast_errors)
 ```
 
@@ -128,10 +132,12 @@ This script demonstrates **calculate mean absolute error**.
 ## Step 1 — calculate mean absolute error
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_absolute_error
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
 mae = mean_absolute_error(expected, predictions)
+# 打印输出 / Print output
 print('MAE: %f' % mae)
 ```
 
@@ -162,10 +168,12 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # calculate mean absolute error
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_absolute_error
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
 mae = mean_absolute_error(expected, predictions)
+# 打印输出 / Print output
 print('MAE: %f' % mae)
 ```
 
@@ -203,8 +211,11 @@ This script demonstrates **calculate mean forecast error**.
 ```python
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 获取长度 / Get length
 forecast_errors = [expected[i]-predictions[i] for i in range(len(expected))]
+# 获取长度 / Get length
 bias = sum(forecast_errors) * 1.0/len(expected)
+# 打印输出 / Print output
 print('Bias: %f' % bias)
 ```
 
@@ -237,8 +248,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # calculate mean forecast error
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 获取长度 / Get length
 forecast_errors = [expected[i]-predictions[i] for i in range(len(expected))]
+# 获取长度 / Get length
 bias = sum(forecast_errors) * 1.0/len(expected)
+# 打印输出 / Print output
 print('Bias: %f' % bias)
 ```
 
@@ -274,10 +288,13 @@ This script demonstrates **calculate mean squared error**.
 ## Step 1 — calculate mean squared error
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 计算均方误差 / Calculate Mean Squared Error
 mse = mean_squared_error(expected, predictions)
+# 打印输出 / Print output
 print('MSE: %f' % mse)
 ```
 
@@ -308,10 +325,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # calculate mean squared error
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 计算均方误差 / Calculate Mean Squared Error
 mse = mean_squared_error(expected, predictions)
+# 打印输出 / Print output
 print('MSE: %f' % mse)
 ```
 
@@ -347,12 +367,15 @@ This script demonstrates **calculate root mean squared error**.
 ## Step 1 — calculate root mean squared error
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 计算均方误差 / Calculate Mean Squared Error
 mse = mean_squared_error(expected, predictions)
 rmse = sqrt(mse)
+# 打印输出 / Print output
 print('RMSE: %f' % rmse)
 ```
 
@@ -383,12 +406,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # calculate root mean squared error
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 expected = [0.0, 0.5, 0.0, 0.5, 0.0]
 predictions = [0.2, 0.4, 0.1, 0.6, 0.2]
+# 计算均方误差 / Calculate Mean Squared Error
 mse = mean_squared_error(expected, predictions)
 rmse = sqrt(mse)
+# 打印输出 / Print output
 print('RMSE: %f' % rmse)
 ```
 

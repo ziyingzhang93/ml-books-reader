@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 11
 
 ---
@@ -75,10 +75,13 @@ critical_value = norm.ppf(1 - alpha)
 
 
 
+# 打印输出 / Print output
 print(f"Significance level (α): {alpha}")
 
+# 打印输出 / Print output
 print(f"Confidence level: {1 - alpha}")
 
+# 打印输出 / Print output
 print(f"Critical value (one-tailed, Gaussian): {critical_value:.6f}")
 ```
 
@@ -93,14 +96,19 @@ verification_cdf = norm.cdf(critical_value)
 
 
 
+# 打印输出 / Print output
 print(f"\nVerification / 验证:")
 
+# 打印输出 / Print output
 print(f"PPF({1 - alpha}) = {critical_value:.6f}")
 
+# 打印输出 / Print output
 print(f"CDF({critical_value:.6f}) = {verification_cdf:.6f}")
 
+# 打印输出 / Print output
 print(f"Difference: {abs(verification_cdf - (1 - alpha)):.10f}")
 
+# 打印输出 / Print output
 print("\nThe CDF value should equal 1 - α = 0.95")
 
 ```
@@ -114,6 +122,7 @@ print("\nThe CDF value should equal 1 - α = 0.95")
 
 # Common significance levels and confidence levels
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
@@ -146,6 +155,7 @@ for alpha in [0.10, 0.05, 0.01, 0.001]:
 
     
 
+    # 添加元素到列表末尾 / Append element to list end
     data.append({
 
         'α': alpha,
@@ -162,16 +172,20 @@ for alpha in [0.10, 0.05, 0.01, 0.001]:
 
 df = pd.DataFrame(data)
 
+# 打印输出 / Print output
 print("\nGaussian Critical Values / 高斯临界值:")
 
+# 打印输出 / Print output
 print(df.to_string(index=False))
 ```
 
 ## Step 5 — Visualize PPF / 可视化PPF
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange, linspace
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 
@@ -279,10 +293,13 @@ pyplot.show()
 ```python
 from scipy.stats import norm
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import linspace
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
@@ -293,12 +310,14 @@ alpha = 0.05
 
 critical_value = norm.ppf(1 - alpha)
 
+# 打印输出 / Print output
 print(f"Critical value (α={alpha}, one-tailed): {critical_value:.6f}")
 
 
 
 # Verify with CDF
 
+# 打印输出 / Print output
 print(f"Verification: CDF({critical_value:.6f}) = {norm.cdf(critical_value):.6f}")
 
 
@@ -313,10 +332,13 @@ for alpha in [0.10, 0.05, 0.01, 0.001]:
 
     two_tail = norm.ppf(1 - alpha/2)
 
+    # 添加元素到列表末尾 / Append element to list end
     data.append({'α': alpha, 'One-tailed': f"{one_tail:.4f}", 'Two-tailed': f"{two_tail:.4f}"})
 
+# 打印输出 / Print output
 print("\nCritical Values:")
 
+# 打印输出 / Print output
 print(pd.DataFrame(data).to_string(index=False))
 
 
@@ -388,6 +410,7 @@ As $df \to \infty$, $t_{critical} \to z_{critical}$ (Gaussian value)
 ```python
 from scipy.stats import t, norm
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
@@ -428,16 +451,22 @@ z_critical = norm.ppf(1 - alpha_half)
 
 
 
+# 打印输出 / Print output
 print(f"Significance level (α): {alpha}")
 
+# 打印输出 / Print output
 print(f"Degrees of freedom: {df}")
 
+# 打印输出 / Print output
 print(f"\nt-critical value (two-tailed): {t_critical:.6f}")
 
+# 打印输出 / Print output
 print(f"z-critical value (Gaussian): {z_critical:.6f}")
 
+# 打印输出 / Print output
 print(f"Difference: {abs(t_critical - z_critical):.6f}")
 
+# 打印输出 / Print output
 print("\nNote: t is more extreme (further from 0) due to heavier tails")
 ```
 
@@ -452,14 +481,19 @@ verification = t.cdf(t_critical, df)
 
 
 
+# 打印输出 / Print output
 print(f"\nVerification / 验证:")
 
+# 打印输出 / Print output
 print(f"PPF({1 - alpha_half}, df={df}) = {t_critical:.6f}")
 
+# 打印输出 / Print output
 print(f"CDF({t_critical:.6f}, df={df}) = {verification:.6f}")
 
+# 打印输出 / Print output
 print(f"Expected: {1 - alpha_half:.6f}")
 
+# 打印输出 / Print output
 print(f"Difference: {abs(verification - (1 - alpha_half)):.10f}")
 ```
 
@@ -496,6 +530,7 @@ for df_val in dof_values:
 
     
 
+    # 添加元素到列表末尾 / Append element to list end
     data.append({
 
         'Degrees of Freedom': df_display,
@@ -510,16 +545,20 @@ for df_val in dof_values:
 
 df_table = pd.DataFrame(data)
 
+# 打印输出 / Print output
 print(f"\nt-distribution Critical Values (α = {alpha}, two-tailed) / t分布临界值:")
 
+# 打印输出 / Print output
 print(df_table.to_string(index=False))
 ```
 
 ## Step 5 — Visualize Convergence to Gaussian / 可视化收敛到高斯
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import linspace
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 
@@ -556,6 +595,7 @@ pyplot.show()
 
 
 
+# 打印输出 / Print output
 print(f"\nAs df increases, t critical values approach {z_critical_val:.6f}")
 ```
 
@@ -585,10 +625,13 @@ print(f"\nAs df increases, t critical values approach {z_critical_val:.6f}")
 ```python
 from scipy.stats import t, norm
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import linspace
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
@@ -609,10 +652,13 @@ z_critical = norm.ppf(1 - alpha_half)
 
 
 
+# 打印输出 / Print output
 print(f"t-critical (df={df}): {t_critical:.6f}")
 
+# 打印输出 / Print output
 print(f"z-critical: {z_critical:.6f}")
 
+# 打印输出 / Print output
 print(f"Difference: {abs(t_critical - z_critical):.6f}")
 
 
@@ -637,12 +683,15 @@ for df_val in dof_values:
 
         label = str(int(df_val))
 
+    # 添加元素到列表末尾 / Append element to list end
     data.append({'df': label, 'Critical Value': f"{crit:.6f}"})
 
 
 
+# 打印输出 / Print output
 print("\nCritical Values Table:")
 
+# 打印输出 / Print output
 print(pd.DataFrame(data).to_string(index=False))
 
 
@@ -718,6 +767,7 @@ where $k$ is the degrees of freedom.
 ```python
 from scipy.stats import chi2
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
@@ -748,14 +798,19 @@ chi2_critical = chi2.ppf(1 - alpha, df)
 
 
 
+# 打印输出 / Print output
 print(f"Significance level (α): {alpha}")
 
+# 打印输出 / Print output
 print(f"Degrees of freedom: {df}")
 
+# 打印输出 / Print output
 print(f"\nChi-squared critical value: {chi2_critical:.6f}")
 
+# 打印输出 / Print output
 print(f"\nInterpretation / 解释:")
 
+# 打印输出 / Print output
 print(f"Reject H0 if observed χ² > {chi2_critical:.4f}")
 ```
 
@@ -770,14 +825,19 @@ verification = chi2.cdf(chi2_critical, df)
 
 
 
+# 打印输出 / Print output
 print(f"\nVerification / 验证:")
 
+# 打印输出 / Print output
 print(f"PPF({1 - alpha}, df={df}) = {chi2_critical:.6f}")
 
+# 打印输出 / Print output
 print(f"CDF({chi2_critical:.6f}, df={df}) = {verification:.6f}")
 
+# 打印输出 / Print output
 print(f"Expected: {1 - alpha:.6f}")
 
+# 打印输出 / Print output
 print(f"Difference: {abs(verification - (1 - alpha)):.10f}")
 ```
 
@@ -800,8 +860,10 @@ dof_values = [1, 2, 5, 10, 20, 30]
 
 for alpha in alpha_levels:
 
+    # 打印输出 / Print output
     print(f"\nCritical Values for α = {alpha}:")
 
+    # 打印输出 / Print output
     print("-" * 50)
 
     data = []
@@ -810,16 +872,20 @@ for alpha in alpha_levels:
 
         crit = chi2.ppf(1 - alpha, df_val)
 
+        # 添加元素到列表末尾 / Append element to list end
         data.append({'Degrees of Freedom': df_val, 'Critical Value': f"{crit:.4f}"})
 
+    # 打印输出 / Print output
     print(pd.DataFrame(data).to_string(index=False))
 ```
 
 ## Step 5 — Effect of Degrees of Freedom / 自由度的影响
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import linspace
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 
@@ -882,8 +948,10 @@ expected = [10, 10, 10, 10, 10, 10]  # 期望频数（均匀分布）
 
 # Compute chi-squared statistic
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 创建NumPy数组 / Create NumPy array
 chi2_stat = sum((np.array(observed) - np.array(expected))**2 / np.array(expected))
 
 
@@ -892,6 +960,7 @@ chi2_stat = sum((np.array(observed) - np.array(expected))**2 / np.array(expected
 
 # Degrees of freedom = number of categories - 1
 
+# 获取长度 / Get length
 df_test = len(observed) - 1
 
 
@@ -914,36 +983,49 @@ p_value = 1 - chi2.cdf(chi2_stat, df_test)
 
 
 
+# 打印输出 / Print output
 print("Chi-Squared Goodness-of-Fit Test / 卡方拟合优度检验:")
 
+# 打印输出 / Print output
 print("="*50)
 
+# 打印输出 / Print output
 print(f"Observed frequencies: {observed}")
 
+# 打印输出 / Print output
 print(f"Expected frequencies: {expected}")
 
+# 打印输出 / Print output
 print(f"\nχ² statistic: {chi2_stat:.4f}")
 
+# 打印输出 / Print output
 print(f"Degrees of freedom: {df_test}")
 
+# 打印输出 / Print output
 print(f"p-value: {p_value:.6f}")
 
+# 打印输出 / Print output
 print(f"\nCritical value (α = {alpha_05}): {critical_05:.4f}")
 
+# 打印输出 / Print output
 print()
 
 
 
 if chi2_stat > critical_05:
 
+    # 打印输出 / Print output
     print(f"Decision: REJECT H0 (χ² = {chi2_stat:.4f} > {critical_05:.4f})")
 
+    # 打印输出 / Print output
     print("The die does not appear to be fair.")
 
 else:
 
+    # 打印输出 / Print output
     print(f"Decision: FAIL TO REJECT H0 (χ² = {chi2_stat:.4f} ≤ {critical_05:.4f})")
 
+    # 打印输出 / Print output
     print("The die appears to be fair.")
 ```
 
@@ -974,12 +1056,16 @@ else:
 ```python
 from scipy.stats import chi2
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import linspace
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 
 
@@ -992,12 +1078,14 @@ df = 10
 
 chi2_critical = chi2.ppf(1 - alpha, df)
 
+# 打印输出 / Print output
 print(f"Critical value (α={alpha}, df={df}): {chi2_critical:.6f}")
 
 
 
 # Verify with CDF
 
+# 打印输出 / Print output
 print(f"Verification: CDF({chi2_critical:.4f}, df={df}) = {chi2.cdf(chi2_critical, df):.6f}")
 
 
@@ -1032,18 +1120,21 @@ observed = [10, 12, 8, 15, 14, 11]
 
 expected = [10, 10, 10, 10, 10, 10]
 
+# 创建NumPy数组 / Create NumPy array
 chi2_stat = sum((np.array(observed) - np.array(expected))**2 / np.array(expected))
 
+# 获取长度 / Get length
 df_test = len(observed) - 1
 
 p_value = 1 - chi2.cdf(chi2_stat, df_test)
 
+# 打印输出 / Print output
 print(f"\nχ² statistic: {chi2_stat:.4f}, p-value: {p_value:.6f}")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 11: Critical Values
 # 第11章：临界值

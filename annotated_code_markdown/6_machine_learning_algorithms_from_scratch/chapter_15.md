@@ -1,5 +1,11 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 15
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -39,19 +45,26 @@ def transfer_derivative(output):
 
 ```python
 def backward_propagate_error(network, expected):
+ # 获取长度 / Get length
 	for i in reversed(range(len(network))):
 		layer = network[i]
 		errors = list()
+  # 获取长度 / Get length
 		if i != len(network)-1:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				error = 0.0
 				for neuron in network[i + 1]:
 					error += (neuron['weights'][j] * neuron['delta'])
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(error)
 		else:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				neuron = layer[j]
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(expected[j] - neuron['output'])
+  # 获取长度 / Get length
 		for j in range(len(layer)):
 			neuron = layer[j]
 			neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
@@ -66,6 +79,7 @@ network = [[{'output': 0.7105668883115941, 'weights': [0.13436424411240122, 0.84
 expected = [0, 1]
 backward_propagate_error(network, expected)
 for layer in network:
+ # 打印输出 / Print output
 	print(layer)
 ```
 
@@ -103,19 +117,26 @@ def transfer_derivative(output):
 
 # Backpropagate error and store in neurons
 def backward_propagate_error(network, expected):
+ # 获取长度 / Get length
 	for i in reversed(range(len(network))):
 		layer = network[i]
 		errors = list()
+  # 获取长度 / Get length
 		if i != len(network)-1:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				error = 0.0
 				for neuron in network[i + 1]:
 					error += (neuron['weights'][j] * neuron['delta'])
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(error)
 		else:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				neuron = layer[j]
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(expected[j] - neuron['output'])
+  # 获取长度 / Get length
 		for j in range(len(layer)):
 			neuron = layer[j]
 			neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
@@ -126,6 +147,7 @@ network = [[{'output': 0.7105668883115941, 'weights': [0.13436424411240122, 0.84
 expected = [0, 1]
 backward_propagate_error(network, expected)
 for layer in network:
+ # 打印输出 / Print output
 	print(layer)
 ```
 
@@ -161,6 +183,28 @@ This script demonstrates **Backprop on the Seeds Dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Backprop on the Seeds Dataset
 
 ```python
@@ -177,11 +221,13 @@ from math import exp
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -203,6 +249,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -215,6 +262,7 @@ def str_column_to_int(dataset, column):
 
 ```python
 def dataset_minmax(dataset):
+ # 将多个序列配对 / Pair multiple sequences
 	return [[min(column), max(column)] for column in zip(*dataset)]
 ```
 
@@ -224,6 +272,7 @@ def dataset_minmax(dataset):
 ```python
 def normalize_dataset(dataset, minmax):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)-1):
 			row[i] = (row[i] - minmax[i][0]) / (minmax[i][1] - minmax[i][0])
 ```
@@ -235,12 +284,18 @@ def normalize_dataset(dataset, minmax):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 ```
@@ -251,9 +306,11 @@ def cross_validation_split(dataset, n_folds):
 ```python
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 ```
 
@@ -271,11 +328,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 ```
@@ -286,6 +345,7 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 ```python
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -310,6 +370,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -328,19 +389,26 @@ def transfer_derivative(output):
 
 ```python
 def backward_propagate_error(network, expected):
+ # 获取长度 / Get length
 	for i in reversed(range(len(network))):
 		layer = network[i]
 		errors = list()
+  # 获取长度 / Get length
 		if i != len(network)-1:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				error = 0.0
 				for neuron in network[i + 1]:
 					error += (neuron['weights'][j] * neuron['delta'])
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(error)
 		else:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				neuron = layer[j]
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(expected[j] - neuron['output'])
+  # 获取长度 / Get length
 		for j in range(len(layer)):
 			neuron = layer[j]
 			neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
@@ -351,11 +419,13 @@ def backward_propagate_error(network, expected):
 
 ```python
 def update_weights(network, row, l_rate):
+ # 获取长度 / Get length
 	for i in range(len(network)):
 		inputs = row[:-1]
 		if i != 0:
 			inputs = [neuron['output'] for neuron in network[i - 1]]
 		for neuron in network[i]:
+   # 获取长度 / Get length
 			for j in range(len(inputs)):
 				neuron['weights'][j] += l_rate * neuron['delta'] * inputs[j]
 			neuron['weights'][-1] += l_rate * neuron['delta']
@@ -366,9 +436,11 @@ def update_weights(network, row, l_rate):
 
 ```python
 def train_network(network, train, l_rate, n_epoch, n_outputs):
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			forward_propagate(network, row)
+   # 生成整数序列 / Generate integer sequence
 			expected = [0 for i in range(n_outputs)]
 			expected[row[-1]] = 1
 			backward_propagate_error(network, expected)
@@ -381,9 +453,13 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 ```python
 def initialize_network(n_inputs, n_hidden, n_outputs):
 	network = list()
+ # 生成整数序列 / Generate integer sequence
 	hidden_layer = [{'weights':[random() for i in range(n_inputs + 1)]} for i in range(n_hidden)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(hidden_layer)
+ # 生成整数序列 / Generate integer sequence
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(output_layer)
 	return network
 ```
@@ -402,13 +478,16 @@ def predict(network, row):
 
 ```python
 def back_propagation(train, test, l_rate, n_epoch, n_hidden):
+ # 获取长度 / Get length
 	n_inputs = len(train[0]) - 1
+ # 获取长度 / Get length
 	n_outputs = len(set([row[-1] for row in train]))
 	network = initialize_network(n_inputs, n_hidden, n_outputs)
 	train_network(network, train, l_rate, n_epoch, n_outputs)
 	predictions = list()
 	for row in test:
 		prediction = predict(network, row)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(prediction)
 	return(predictions)
 ```
@@ -417,6 +496,7 @@ def back_propagation(train, test, l_rate, n_epoch, n_hidden):
 ## Step 20 — Test Backprop on Seeds dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -426,6 +506,7 @@ seed(1)
 ```python
 filename = 'seeds_dataset.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 ```
@@ -434,6 +515,7 @@ for i in range(len(dataset[0])-1):
 ## Step 22 — convert class column to integers
 
 ```python
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 ```
 
@@ -454,7 +536,9 @@ l_rate = 0.3
 n_epoch = 500
 n_hidden = 5
 scores = evaluate_algorithm(dataset, back_propagation, n_folds, l_rate, n_epoch, n_hidden)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -498,11 +582,13 @@ from math import exp
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -516,6 +602,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -524,11 +611,13 @@ def str_column_to_int(dataset, column):
 
 # Find the min and max values for each column
 def dataset_minmax(dataset):
+ # 将多个序列配对 / Pair multiple sequences
 	return [[min(column), max(column)] for column in zip(*dataset)]
 
 # Rescale dataset columns to the range 0-1
 def normalize_dataset(dataset, minmax):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)-1):
 			row[i] = (row[i] - minmax[i][0]) / (minmax[i][1] - minmax[i][0])
 
@@ -536,21 +625,29 @@ def normalize_dataset(dataset, minmax):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 
 # Evaluate an algorithm using a cross validation split
@@ -564,17 +661,20 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 
 # Calculate neuron activation for an input
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -591,6 +691,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -601,39 +702,50 @@ def transfer_derivative(output):
 
 # Backpropagate error and store in neurons
 def backward_propagate_error(network, expected):
+ # 获取长度 / Get length
 	for i in reversed(range(len(network))):
 		layer = network[i]
 		errors = list()
+  # 获取长度 / Get length
 		if i != len(network)-1:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				error = 0.0
 				for neuron in network[i + 1]:
 					error += (neuron['weights'][j] * neuron['delta'])
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(error)
 		else:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				neuron = layer[j]
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(expected[j] - neuron['output'])
+  # 获取长度 / Get length
 		for j in range(len(layer)):
 			neuron = layer[j]
 			neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
 
 # Update network weights with error
 def update_weights(network, row, l_rate):
+ # 获取长度 / Get length
 	for i in range(len(network)):
 		inputs = row[:-1]
 		if i != 0:
 			inputs = [neuron['output'] for neuron in network[i - 1]]
 		for neuron in network[i]:
+   # 获取长度 / Get length
 			for j in range(len(inputs)):
 				neuron['weights'][j] += l_rate * neuron['delta'] * inputs[j]
 			neuron['weights'][-1] += l_rate * neuron['delta']
 
 # Train a network for a fixed number of epochs
 def train_network(network, train, l_rate, n_epoch, n_outputs):
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			forward_propagate(network, row)
+   # 生成整数序列 / Generate integer sequence
 			expected = [0 for i in range(n_outputs)]
 			expected[row[-1]] = 1
 			backward_propagate_error(network, expected)
@@ -642,9 +754,13 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 # Initialize a network
 def initialize_network(n_inputs, n_hidden, n_outputs):
 	network = list()
+ # 生成整数序列 / Generate integer sequence
 	hidden_layer = [{'weights':[random() for i in range(n_inputs + 1)]} for i in range(n_hidden)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(hidden_layer)
+ # 生成整数序列 / Generate integer sequence
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(output_layer)
 	return network
 
@@ -655,24 +771,30 @@ def predict(network, row):
 
 # Backpropagation Algorithm With Stochastic Gradient Descent
 def back_propagation(train, test, l_rate, n_epoch, n_hidden):
+ # 获取长度 / Get length
 	n_inputs = len(train[0]) - 1
+ # 获取长度 / Get length
 	n_outputs = len(set([row[-1] for row in train]))
 	network = initialize_network(n_inputs, n_hidden, n_outputs)
 	train_network(network, train, l_rate, n_epoch, n_outputs)
 	predictions = list()
 	for row in test:
 		prediction = predict(network, row)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(prediction)
 	return(predictions)
 
 # Test Backprop on Seeds dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 # load and prepare data
 filename = 'seeds_dataset.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 # convert class column to integers
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 # normalize input variables
 minmax = dataset_minmax(dataset)
@@ -683,7 +805,9 @@ l_rate = 0.3
 n_epoch = 500
 n_hidden = 5
 scores = evaluate_algorithm(dataset, back_propagation, n_folds, l_rate, n_epoch, n_hidden)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -728,6 +852,7 @@ from math import exp
 ```python
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -752,6 +877,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -765,6 +891,7 @@ network = [[{'weights': [0.13436424411240122, 0.8474337369372327, 0.763774618976
 		[{'weights': [0.2550690257394217, 0.49543508709194095]}, {'weights': [0.4494910647887381, 0.651592972722763]}]]
 row = [1, 0, None]
 output = forward_propagate(network, row)
+# 打印输出 / Print output
 print(output)
 ```
 
@@ -794,6 +921,7 @@ from math import exp
 # Calculate neuron activation for an input
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -810,6 +938,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -819,6 +948,7 @@ network = [[{'weights': [0.13436424411240122, 0.8474337369372327, 0.763774618976
 		[{'weights': [0.2550690257394217, 0.49543508709194095]}, {'weights': [0.4494910647887381, 0.651592972722763]}]]
 row = [1, 0, None]
 output = forward_propagate(network, row)
+# 打印输出 / Print output
 print(output)
 ```
 
@@ -864,9 +994,13 @@ from random import random
 ```python
 def initialize_network(n_inputs, n_hidden, n_outputs):
 	network = list()
+ # 生成整数序列 / Generate integer sequence
 	hidden_layer = [{'weights':[random() for i in range(n_inputs + 1)]} for i in range(n_hidden)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(hidden_layer)
+ # 生成整数序列 / Generate integer sequence
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(output_layer)
 	return network
 ```
@@ -875,9 +1009,11 @@ def initialize_network(n_inputs, n_hidden, n_outputs):
 ## Step 3 — Test initializing a network
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 network = initialize_network(2, 1, 2)
 for layer in network:
+ # 打印输出 / Print output
 	print(layer)
 ```
 
@@ -908,16 +1044,22 @@ from random import random
 # Initialize a network
 def initialize_network(n_inputs, n_hidden, n_outputs):
 	network = list()
+ # 生成整数序列 / Generate integer sequence
 	hidden_layer = [{'weights':[random() for i in range(n_inputs + 1)]} for i in range(n_hidden)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(hidden_layer)
+ # 生成整数序列 / Generate integer sequence
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(output_layer)
 	return network
 
 # Test initializing a network
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 network = initialize_network(2, 1, 2)
 for layer in network:
+ # 打印输出 / Print output
 	print(layer)
 ```
 
@@ -962,6 +1104,7 @@ from math import exp
 ```python
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -986,6 +1129,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -1018,6 +1162,7 @@ network = [[{'weights': [-1.482313569067226, 1.8308790073202204, 1.0783819220487
 	[{'weights': [2.5001872433501404, 0.7887233511355132, -1.1026649757805829]}, {'weights': [-2.429350576245497, 0.8357651039198697, 1.0699217181280656]}]]
 for row in dataset:
 	prediction = predict(network, row)
+ # 打印输出 / Print output
 	print('Expected=%d, Got=%d' % (row[-1], prediction))
 ```
 
@@ -1054,6 +1199,7 @@ from math import exp
 # Calculate neuron activation for an input
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -1070,6 +1216,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -1094,6 +1241,7 @@ network = [[{'weights': [-1.482313569067226, 1.8308790073202204, 1.0783819220487
 	[{'weights': [2.5001872433501404, 0.7887233511355132, -1.1026649757805829]}, {'weights': [-2.429350576245497, 0.8357651039198697, 1.0699217181280656]}]]
 for row in dataset:
 	prediction = predict(network, row)
+ # 打印输出 / Print output
 	print('Expected=%d, Got=%d' % (row[-1], prediction))
 ```
 
@@ -1140,9 +1288,13 @@ from random import random
 ```python
 def initialize_network(n_inputs, n_hidden, n_outputs):
 	network = list()
+ # 生成整数序列 / Generate integer sequence
 	hidden_layer = [{'weights':[random() for i in range(n_inputs + 1)]} for i in range(n_hidden)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(hidden_layer)
+ # 生成整数序列 / Generate integer sequence
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(output_layer)
 	return network
 ```
@@ -1153,6 +1305,7 @@ def initialize_network(n_inputs, n_hidden, n_outputs):
 ```python
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -1177,6 +1330,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -1195,19 +1349,26 @@ def transfer_derivative(output):
 
 ```python
 def backward_propagate_error(network, expected):
+ # 获取长度 / Get length
 	for i in reversed(range(len(network))):
 		layer = network[i]
 		errors = list()
+  # 获取长度 / Get length
 		if i != len(network)-1:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				error = 0.0
 				for neuron in network[i + 1]:
 					error += (neuron['weights'][j] * neuron['delta'])
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(error)
 		else:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				neuron = layer[j]
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(expected[j] - neuron['output'])
+  # 获取长度 / Get length
 		for j in range(len(layer)):
 			neuron = layer[j]
 			neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
@@ -1218,11 +1379,13 @@ def backward_propagate_error(network, expected):
 
 ```python
 def update_weights(network, row, l_rate):
+ # 获取长度 / Get length
 	for i in range(len(network)):
 		inputs = row[:-1]
 		if i != 0:
 			inputs = [neuron['output'] for neuron in network[i - 1]]
 		for neuron in network[i]:
+   # 获取长度 / Get length
 			for j in range(len(inputs)):
 				neuron['weights'][j] += l_rate * neuron['delta'] * inputs[j]
 			neuron['weights'][-1] += l_rate * neuron['delta']
@@ -1233,15 +1396,19 @@ def update_weights(network, row, l_rate):
 
 ```python
 def train_network(network, train, l_rate, n_epoch, n_outputs):
+ # 生成整数序列 / Generate integer sequence
 	for epoch in range(n_epoch):
 		sum_error = 0
 		for row in train:
 			outputs = forward_propagate(network, row)
+   # 生成整数序列 / Generate integer sequence
 			expected = [0 for i in range(n_outputs)]
 			expected[row[-1]] = 1
+   # 获取长度 / Get length
 			sum_error += sum([(expected[i]-outputs[i])**2 for i in range(len(expected))])
 			backward_propagate_error(network, expected)
 			update_weights(network, row, l_rate)
+  # 打印输出 / Print output
 		print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
 ```
 
@@ -1249,6 +1416,7 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 ## Step 10 — Test training backprop algorithm
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[2.7810836,2.550537003,0],
 	[1.465489372,2.362125076,0],
@@ -1260,11 +1428,14 @@ dataset = [[2.7810836,2.550537003,0],
 	[6.922596716,1.77106367,1],
 	[8.675418651,-0.242068655,1],
 	[7.673756466,3.508563011,1]]
+# 获取长度 / Get length
 n_inputs = len(dataset[0]) - 1
+# 获取长度 / Get length
 n_outputs = len(set([row[-1] for row in dataset]))
 network = initialize_network(n_inputs, 2, n_outputs)
 train_network(network, dataset, 0.5, 20, n_outputs)
 for layer in network:
+ # 打印输出 / Print output
 	print(layer)
 ```
 
@@ -1304,15 +1475,20 @@ from random import random
 # Initialize a network
 def initialize_network(n_inputs, n_hidden, n_outputs):
 	network = list()
+ # 生成整数序列 / Generate integer sequence
 	hidden_layer = [{'weights':[random() for i in range(n_inputs + 1)]} for i in range(n_hidden)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(hidden_layer)
+ # 生成整数序列 / Generate integer sequence
 	output_layer = [{'weights':[random() for i in range(n_hidden + 1)]} for i in range(n_outputs)]
+ # 添加元素到列表末尾 / Append element to list end
 	network.append(output_layer)
 	return network
 
 # Calculate neuron activation for an input
 def activate(weights, inputs):
 	activation = weights[-1]
+ # 获取长度 / Get length
 	for i in range(len(weights)-1):
 		activation += weights[i] * inputs[i]
 	return activation
@@ -1329,6 +1505,7 @@ def forward_propagate(network, row):
 		for neuron in layer:
 			activation = activate(neuron['weights'], inputs)
 			neuron['output'] = transfer(activation)
+   # 添加元素到列表末尾 / Append element to list end
 			new_inputs.append(neuron['output'])
 		inputs = new_inputs
 	return inputs
@@ -1339,48 +1516,62 @@ def transfer_derivative(output):
 
 # Backpropagate error and store in neurons
 def backward_propagate_error(network, expected):
+ # 获取长度 / Get length
 	for i in reversed(range(len(network))):
 		layer = network[i]
 		errors = list()
+  # 获取长度 / Get length
 		if i != len(network)-1:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				error = 0.0
 				for neuron in network[i + 1]:
 					error += (neuron['weights'][j] * neuron['delta'])
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(error)
 		else:
+   # 获取长度 / Get length
 			for j in range(len(layer)):
 				neuron = layer[j]
+    # 添加元素到列表末尾 / Append element to list end
 				errors.append(expected[j] - neuron['output'])
+  # 获取长度 / Get length
 		for j in range(len(layer)):
 			neuron = layer[j]
 			neuron['delta'] = errors[j] * transfer_derivative(neuron['output'])
 
 # Update network weights with error
 def update_weights(network, row, l_rate):
+ # 获取长度 / Get length
 	for i in range(len(network)):
 		inputs = row[:-1]
 		if i != 0:
 			inputs = [neuron['output'] for neuron in network[i - 1]]
 		for neuron in network[i]:
+   # 获取长度 / Get length
 			for j in range(len(inputs)):
 				neuron['weights'][j] += l_rate * neuron['delta'] * inputs[j]
 			neuron['weights'][-1] += l_rate * neuron['delta']
 
 # Train a network for a fixed number of epochs
 def train_network(network, train, l_rate, n_epoch, n_outputs):
+ # 生成整数序列 / Generate integer sequence
 	for epoch in range(n_epoch):
 		sum_error = 0
 		for row in train:
 			outputs = forward_propagate(network, row)
+   # 生成整数序列 / Generate integer sequence
 			expected = [0 for i in range(n_outputs)]
 			expected[row[-1]] = 1
+   # 获取长度 / Get length
 			sum_error += sum([(expected[i]-outputs[i])**2 for i in range(len(expected))])
 			backward_propagate_error(network, expected)
 			update_weights(network, row, l_rate)
+  # 打印输出 / Print output
 		print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
 
 # Test training backprop algorithm
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[2.7810836,2.550537003,0],
 	[1.465489372,2.362125076,0],
@@ -1392,11 +1583,14 @@ dataset = [[2.7810836,2.550537003,0],
 	[6.922596716,1.77106367,1],
 	[8.675418651,-0.242068655,1],
 	[7.673756466,3.508563011,1]]
+# 获取长度 / Get length
 n_inputs = len(dataset[0]) - 1
+# 获取长度 / Get length
 n_outputs = len(set([row[-1] for row in dataset]))
 network = initialize_network(n_inputs, 2, n_outputs)
 train_network(network, dataset, 0.5, 20, n_outputs)
 for layer in network:
+ # 打印输出 / Print output
 	print(layer)
 ```
 

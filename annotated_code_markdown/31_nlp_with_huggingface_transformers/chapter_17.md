@@ -1,5 +1,11 @@
-# HF Transformers
+# HuggingFace Transformers NLP / NLP with HF Transformers
 ## Chapter 17
+
+---
+
+### Keyword
+
+
 
 ---
 
@@ -27,14 +33,28 @@ This script demonstrates **Tokenize the input**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import BertTokenizer, BertModel
 
 def cosine_similarity(vec1, vec2):
+    # 矩阵点积/向量内积 / Matrix dot product / vector inner product
     return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
 
 def get_sentence_embedding(sentence, model, tokenizer):
@@ -53,6 +73,7 @@ inputs = tokenizer(sentence, return_tensors="pt",
 ## Step 3 — Forward pass, get hidden states
 
 ```python
+# 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
 with torch.no_grad():
         outputs = model(**inputs)
 ```
@@ -72,6 +93,7 @@ def extractive_summarize(document, model, tokenizer, num_sentences=3):
 
 ```python
 sentences = [s.strip() for s in document.split(".") if s.strip()]
+    # 获取长度 / Get length
     if len(sentences) <= num_sentences:
         return document
 ```
@@ -83,6 +105,7 @@ sentences = [s.strip() for s in document.split(".") if s.strip()]
 sentence_embeddings = []
     for sentence in sentences:
         embedding = get_sentence_embedding(sentence, model, tokenizer)
+        # 添加元素到列表末尾 / Append element to list end
         sentence_embeddings.append(embedding)
 ```
 
@@ -91,10 +114,13 @@ sentence_embeddings = []
 then find the most similar sentences
 
 ```python
+# 计算均值 / Calculate mean
 document_embedding = np.mean(sentence_embeddings, axis=0)
     similarities = []
+    # 同时获取索引和值 / Get both index and value
     for idx, embedding in enumerate(sentence_embeddings):
         sim = cosine_similarity(embedding, document_embedding)
+        # 添加元素到列表末尾 / Append element to list end
         similarities.append((sim, idx))
     top_sentences = sorted(similarities, reverse=True)[:num_sentences]
 ```
@@ -151,9 +177,13 @@ summary = extractive_summarize(document, model, tokenizer, num_sentences=3)
 ## Step 12 — Print the original document and the summary
 
 ```python
+# 打印输出 / Print output
 print("Original Document:")
+# 打印输出 / Print output
 print(document)
+# 打印输出 / Print output
 print("Summary:")
+# 打印输出 / Print output
 print(summary)
 ```
 
@@ -189,11 +219,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import BertTokenizer, BertModel
 
 def cosine_similarity(vec1, vec2):
+    # 矩阵点积/向量内积 / Matrix dot product / vector inner product
     return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
 
 def get_sentence_embedding(sentence, model, tokenizer):
@@ -203,6 +237,7 @@ def get_sentence_embedding(sentence, model, tokenizer):
                        add_special_tokens=True, truncation=True, max_length=512)
 
     # Forward pass, get hidden states
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = model(**inputs)
 
@@ -213,6 +248,7 @@ def get_sentence_embedding(sentence, model, tokenizer):
 def extractive_summarize(document, model, tokenizer, num_sentences=3):
     # Split the document into sentences
     sentences = [s.strip() for s in document.split(".") if s.strip()]
+    # 获取长度 / Get length
     if len(sentences) <= num_sentences:
         return document
 
@@ -220,14 +256,18 @@ def extractive_summarize(document, model, tokenizer, num_sentences=3):
     sentence_embeddings = []
     for sentence in sentences:
         embedding = get_sentence_embedding(sentence, model, tokenizer)
+        # 添加元素到列表末尾 / Append element to list end
         sentence_embeddings.append(embedding)
 
     # Calculate the document embedding (average of all sentence embeddings)
     # then find the most similar sentences
+    # 计算均值 / Calculate mean
     document_embedding = np.mean(sentence_embeddings, axis=0)
     similarities = []
+    # 同时获取索引和值 / Get both index and value
     for idx, embedding in enumerate(sentence_embeddings):
         sim = cosine_similarity(embedding, document_embedding)
+        # 添加元素到列表末尾 / Append element to list end
         similarities.append((sim, idx))
     top_sentences = sorted(similarities, reverse=True)[:num_sentences]
 
@@ -264,15 +304,19 @@ model = BertModel.from_pretrained("bert-base-uncased")
 summary = extractive_summarize(document, model, tokenizer, num_sentences=3)
 
 # Print the original document and the summary
+# 打印输出 / Print output
 print("Original Document:")
+# 打印输出 / Print output
 print(document)
+# 打印输出 / Print output
 print("Summary:")
+# 打印输出 / Print output
 print(summary)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 17 Summary / 第17章总结
 

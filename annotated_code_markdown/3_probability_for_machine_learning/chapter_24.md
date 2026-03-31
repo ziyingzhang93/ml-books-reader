@@ -1,5 +1,11 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 24
+
+---
+
+### Entropy
+
+
 
 ---
 
@@ -46,12 +52,13 @@ from math import log2# calculate the entropy for the split in the datasetdef ent
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 from math import log2def entropy(class0, class1):    return -(class0 * log2(class0) + class1 * log2(class1))class0 = 13 / 20class1 = 7 / 20s_entropy = entropy(class0, class1)print('Dataset Entropy: %.3f bits' % s_entropy)s1_class0 = 7 / 8s1_class1 = 1 / 8s1_entropy = entropy(s1_class0, s1_class1)print('Group1 Entropy: %.3f bits' % s1_entropy)s2_class0 = 6 / 12s2_class1 = 6 / 12s2_entropy = entropy(s2_class0, s2_class1)print('Group2 Entropy: %.3f bits' % s2_entropy)gain = s_entropy - (8/20 * s1_entropy + 12/20 * s2_entropy)print('Information Gain: %.3f bits' % gain)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 24: Information Gain
 

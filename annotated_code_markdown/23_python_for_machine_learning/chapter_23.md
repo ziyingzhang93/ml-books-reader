@@ -1,4 +1,4 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 23
 
 ---
@@ -29,10 +29,12 @@ This script demonstrates **Iris**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn.datasets
 
 data, target = sklearn.datasets.load_iris(return_X_y=True, as_frame=True)
 data["target"] = target
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -62,10 +64,12 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn.datasets
 
 data, target = sklearn.datasets.load_iris(return_X_y=True, as_frame=True)
 data["target"] = target
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -101,7 +105,9 @@ This script demonstrates **Seaborn**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn.datasets
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -110,6 +116,7 @@ data["target"] = target
 
 sns.pairplot(data, kind="scatter", diag_kind="kde", hue="target",
              palette="muted", plot_kws={'alpha':0.7})
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -141,7 +148,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn.datasets
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -150,6 +159,7 @@ data["target"] = target
 
 sns.pairplot(data, kind="scatter", diag_kind="kde", hue="target",
              palette="muted", plot_kws={'alpha':0.7})
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -199,12 +209,14 @@ This script demonstrates **Seaborn**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 data = sns.load_dataset("iris")
 sns.pairplot(data, kind="scatter", diag_kind="kde", hue="species",
              palette="muted", plot_kws={'alpha':0.7})
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -236,12 +248,14 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 data = sns.load_dataset("iris")
 sns.pairplot(data, kind="scatter", diag_kind="kde", hue="species",
              palette="muted", plot_kws={'alpha':0.7})
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -278,6 +292,7 @@ This script demonstrates **Datasets**.
 
 ```python
 import seaborn as sns
+# 打印输出 / Print output
 print(sns.get_dataset_names())
 ```
 
@@ -308,12 +323,25 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import seaborn as sns
+# 打印输出 / Print output
 print(sns.get_dataset_names())
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 5 of 16
+
+---
+
+### Housing
+
+
+
+---
+
+### Diabetes
+
+
 
 ---
 
@@ -343,10 +371,12 @@ This script demonstrates **Openml**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn.datasets
 
 data = sklearn.datasets.fetch_openml(data_id=42437, return_X_y=False, as_frame=True)
 data = data["frame"]
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -376,10 +406,12 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn.datasets
 
 data = sklearn.datasets.fetch_openml(data_id=42437, return_X_y=False, as_frame=True)
 data = data["frame"]
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -413,15 +445,30 @@ This script demonstrates **Logistic**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏋️ 训练模型 / Train Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.linear_model import LogisticRegression
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import fetch_openml
 
 X, y = fetch_openml(data_id=42437, return_X_y=True, as_frame=False)
+# 逻辑回归：线性分类器 / Logistic Regression: linear classifier
 clf = LogisticRegression(random_state=0).fit(X, y)
+# 打印输出 / Print output
 print(clf.score(X,y)) # accuracy
+# 打印输出 / Print output
 print(clf.coef_)      # coefficient in logistic regression
 ```
 
@@ -452,12 +499,17 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.linear_model import LogisticRegression
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import fetch_openml
 
 X, y = fetch_openml(data_id=42437, return_X_y=True, as_frame=False)
+# 逻辑回归：线性分类器 / Logistic Regression: linear classifier
 clf = LogisticRegression(random_state=0).fit(X, y)
+# 打印输出 / Print output
 print(clf.score(X,y)) # accuracy
+# 打印输出 / Print output
 print(clf.coef_)      # coefficient in logistic regression
 ```
 
@@ -493,7 +545,9 @@ This script demonstrates **Tfds**.
 ## Step 1 — Step 1
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow_datasets as tfds
+# 打印输出 / Print output
 print(tfds.list_builders())
 ```
 
@@ -523,7 +577,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow_datasets as tfds
+# 打印输出 / Print output
 print(tfds.list_builders())
 ```
 
@@ -559,8 +615,10 @@ This script demonstrates **Mnist**.
 ## Step 1 — Step 1
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow_datasets as tfds
 ds = tfds.load("mnist", split="train", shuffle_files=True)
+# 打印输出 / Print output
 print(ds)
 ```
 
@@ -590,14 +648,22 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow_datasets as tfds
 ds = tfds.load("mnist", split="train", shuffle_files=True)
+# 打印输出 / Print output
 print(ds)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 11 of 16
+
+---
+
+### Lenet5
+
+
 
 ---
 
@@ -627,12 +693,17 @@ This script demonstrates **Sklearn**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_circles
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 data, target = make_circles(n_samples=500, shuffle=True, factor=0.7, noise=0.1)
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(6,6))
+# 绘制散点图 / Draw scatter plot
 plt.scatter(data[:,0], data[:,1], c=target, alpha=0.8, cmap="Set1")
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -666,12 +737,17 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_circles
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 data, target = make_circles(n_samples=500, shuffle=True, factor=0.7, noise=0.1)
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(6,6))
+# 绘制散点图 / Draw scatter plot
 plt.scatter(data[:,0], data[:,1], c=target, alpha=0.8, cmap="Set1")
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -707,15 +783,19 @@ This script demonstrates **Make Blobs**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 data, target = make_blobs(n_samples=500, n_features=3, centers=4,
                           shuffle=True, random_state=42, cluster_std=2.5)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(8,8))
 ax = fig.add_subplot(projection='3d')
 ax.scatter(data[:,0], data[:,1], data[:,2], c=target, alpha=0.7, cmap="Set1")
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -748,15 +828,19 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 data, target = make_blobs(n_samples=500, n_features=3, centers=4,
                           shuffle=True, random_state=42, cluster_std=2.5)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(8,8))
 ax = fig.add_subplot(projection='3d')
 ax.scatter(data[:,0], data[:,1], data[:,2], c=target, alpha=0.7, cmap="Set1")
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -792,11 +876,14 @@ This script demonstrates **Make S Curve**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_s_curve, make_swiss_roll
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 data, target = make_s_curve(n_samples=5000, random_state=42)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(15,8))
 ax = fig.add_subplot(121, projection='3d')
 ax.scatter(data[:,0], data[:,1], data[:,2], c=target, alpha=0.7, cmap="viridis")
@@ -805,6 +892,7 @@ data, target = make_swiss_roll(n_samples=5000, random_state=42)
 ax = fig.add_subplot(122, projection='3d')
 ax.scatter(data[:,0], data[:,1], data[:,2], c=target, alpha=0.7, cmap="viridis")
 
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -837,11 +925,14 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_s_curve, make_swiss_roll
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 data, target = make_s_curve(n_samples=5000, random_state=42)
 
+# 创建画布 / Create figure canvas
 fig = plt.figure(figsize=(15,8))
 ax = fig.add_subplot(121, projection='3d')
 ax.scatter(data[:,0], data[:,1], data[:,2], c=target, alpha=0.7, cmap="viridis")
@@ -850,12 +941,19 @@ data, target = make_swiss_roll(n_samples=5000, random_state=42)
 ax = fig.add_subplot(122, projection='3d')
 ax.scatter(data[:,0], data[:,1], data[:,2], c=target, alpha=0.7, cmap="viridis")
 
+# 显示图表 / Display the plot
 plt.show()
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 15 of 16
+
+---
+
+### Regression
+
+
 
 ---
 
@@ -884,11 +982,27 @@ This script demonstrates **Generate 10-dimensional features and 3-class targets*
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_classification
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.svm import SVC
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 ```
 
@@ -905,6 +1019,7 @@ X, y = make_classification(n_samples=1000, n_features=10, n_classes=3,
 ## Step 3 — Run SVC on the data
 
 ```python
+# 支持向量机 / Support Vector Machine
 clf = SVC(kernel="rbf")
 clf.fit(X, y)
 ```
@@ -913,6 +1028,7 @@ clf.fit(X, y)
 ## Step 4 — Print the accuracy
 
 ```python
+# 打印输出 / Print output
 print(clf.score(X, y))
 ```
 
@@ -944,8 +1060,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_classification
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.svm import SVC
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Generate 10-dimensional features and 3-class targets
@@ -954,16 +1073,18 @@ X, y = make_classification(n_samples=1000, n_features=10, n_classes=3,
                            random_state=42)
 
 # Run SVC on the data
+# 支持向量机 / Support Vector Machine
 clf = SVC(kernel="rbf")
 clf.fit(X, y)
 
 # Print the accuracy
+# 打印输出 / Print output
 print(clf.score(X, y))
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 23 Summary / 第23章总结
 

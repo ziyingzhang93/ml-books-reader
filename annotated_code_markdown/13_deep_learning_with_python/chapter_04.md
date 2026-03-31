@@ -1,9 +1,15 @@
-# Python深度学习
+# Python 深度学习 / Deep Learning with Python
 ## Chapter 04
 
 ---
 
-### Chapter Summary
+### Version
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 04 Summary / 第04章总结
 

@@ -1,9 +1,15 @@
-# 从零构建Transformer
+# 从零构建Transformer / Building Transformers from Scratch
 ## Chapter 08
 
 ---
 
-### Chapter Summary
+### Mla
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 08 Summary / 第08章总结
 

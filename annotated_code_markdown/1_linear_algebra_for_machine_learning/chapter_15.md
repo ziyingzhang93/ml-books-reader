@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 15
+
+---
+
+### Lu Decomposition
+
+
 
 ---
 
@@ -54,7 +60,9 @@ A = array([[1, 2],
            [3, 4],
            [5, 6]])
 
+# 打印输出 / Print output
 print("A (shape: 3x2) =")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -69,10 +77,15 @@ print(A)
 ```python
 Q, R = qr(A, 'complete')     # QR 分解：完全模式 / QR decomposition: complete mode
 
+# 打印输出 / Print output
 print("Q (orthogonal / 正交矩阵) =")
+# 打印输出 / Print output
 print(Q)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("R (upper triangular / 上三角矩阵) =")
+# 打印输出 / Print output
 print(R)
 ```
 
@@ -86,7 +99,9 @@ If the decomposition is correct, $Q \cdot R$ should give back the original matri
 ```python
 B = Q.dot(R)        # Q·R should equal A / Q·R 应等于 A
 
+# 打印输出 / Print output
 print("Reconstructed B = Q · R =")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -131,7 +146,9 @@ from numpy.linalg import qr      # QR 分解函数 / QR decomposition function
 A = array([[1, 2],
            [3, 4],
            [5, 6]])
+# 打印输出 / Print output
 print("A (shape: 3x2) =")
+# 打印输出 / Print output
 print(A)
 
 # --- QR decomposition / QR 分解 ---
@@ -139,14 +156,20 @@ print(A)
 #   Q: orthogonal matrix   / 正交矩阵
 #   R: upper triangular    / 上三角矩阵
 Q, R = qr(A, 'complete')
+# 打印输出 / Print output
 print("\nQ (orthogonal / 正交矩阵) =")
+# 打印输出 / Print output
 print(Q)
+# 打印输出 / Print output
 print("\nR (upper triangular / 上三角矩阵) =")
+# 打印输出 / Print output
 print(R)
 
 # --- Reconstruct original matrix / 重构原矩阵 ---
 B = Q.dot(R)        # Q·R should equal A / Q·R 应等于 A
+# 打印输出 / Print output
 print("\nReconstructed B = Q · R =")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -206,7 +229,9 @@ A = array([[2, 1, 1],
            [1, 2, 1],
            [1, 1, 2]])
 
+# 打印输出 / Print output
 print("A (symmetric positive-definite / 对称正定) =")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -220,7 +245,9 @@ print(A)
 ```python
 L = cholesky(A)     # Cholesky 分解 / Cholesky decomposition
 
+# 打印输出 / Print output
 print("L (lower triangular / 下三角矩阵) =")
+# 打印输出 / Print output
 print(L)
 ```
 
@@ -234,7 +261,9 @@ If the decomposition is correct, $L \cdot L^T$ should give back the original mat
 ```python
 B = L.dot(L.T)      # L·L^T should equal A / L·L^T 应等于 A
 
+# 打印输出 / Print output
 print("Reconstructed B = L · L^T =")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -279,25 +308,31 @@ from numpy.linalg import cholesky    # Cholesky 分解函数 / Cholesky decompos
 A = array([[2, 1, 1],
            [1, 2, 1],
            [1, 1, 2]])
+# 打印输出 / Print output
 print("A (symmetric positive-definite / 对称正定) =")
+# 打印输出 / Print output
 print(A)
 
 # --- Cholesky decomposition / Cholesky 分解 ---
 # A = L · L^T
 #   L: lower triangular / 下三角矩阵
 L = cholesky(A)
+# 打印输出 / Print output
 print("\nL (lower triangular / 下三角矩阵) =")
+# 打印输出 / Print output
 print(L)
 
 # --- Reconstruct original matrix / 重构原矩阵 ---
 B = L.dot(L.T)      # L·L^T should equal A / L·L^T 应等于 A
+# 打印输出 / Print output
 print("\nReconstructed B = L · L^T =")
+# 打印输出 / Print output
 print(B)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 15 Summary / 第15章总结：Matrix Factorization
 

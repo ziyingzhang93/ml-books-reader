@@ -1,5 +1,11 @@
-# LSTM网络
+# LSTM 网络实战 / LSTM Networks with Python
 ## Lesson 07
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -32,6 +38,7 @@ This script demonstrates **create sequence**.
 from math import sin
 from math import pi
 from math import exp
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -42,6 +49,7 @@ from matplotlib import pyplot
 length = 100
 period = 10
 decay = 0.05
+# 生成整数序列 / Generate integer sequence
 sequence = [0.5 + 0.5 * sin(2 * pi * i / period) * exp(-decay * i) for i in range(length)]
 ```
 
@@ -82,11 +90,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 from math import sin
 from math import pi
 from math import exp
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # create sequence
 length = 100
 period = 10
 decay = 0.05
+# 生成整数序列 / Generate integer sequence
 sequence = [0.5 + 0.5 * sin(2 * pi * i / period) * exp(-decay * i) for i in range(length)]
 # plot sequence
 pyplot.plot(sequence)
@@ -122,6 +132,16 @@ This script demonstrates **generate damped sine wave in [0,1]**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
@@ -130,7 +150,9 @@ from math import pi
 from math import exp
 from random import randint
 from random import uniform
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -139,6 +161,7 @@ from matplotlib import pyplot
 
 ```python
 def generate_sequence(length, period, decay):
+ # 生成整数序列 / Generate integer sequence
 	return [0.5 + 0.5 * sin(2 * pi * i / period) * exp(-decay * i) for i in range(length)]
 ```
 
@@ -148,13 +171,18 @@ def generate_sequence(length, period, decay):
 ```python
 def generate_examples(length, n_patterns, output):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_patterns):
 		p = randint(10, 20)
 		d = uniform(0.01, 0.1)
 		sequence = generate_sequence(length + output, p, d)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(sequence[:-output])
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(sequence[-output:])
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X = array(X).reshape(n_patterns, length, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	y = array(y).reshape(n_patterns, output)
 	return X, y
 ```
@@ -164,6 +192,7 @@ def generate_examples(length, n_patterns, output):
 
 ```python
 X, y = generate_examples(20, 5, 5)
+# 获取长度 / Get length
 for i in range(len(X)):
 	pyplot.plot([x for x in X[i, :, 0]] + [x for x in y[i]], '-o')
 pyplot.show()
@@ -201,28 +230,37 @@ from math import pi
 from math import exp
 from random import randint
 from random import uniform
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # generate damped sine wave in [0,1]
 def generate_sequence(length, period, decay):
+ # 生成整数序列 / Generate integer sequence
 	return [0.5 + 0.5 * sin(2 * pi * i / period) * exp(-decay * i) for i in range(length)]
 
 # generate input and output pairs of damped sine waves
 def generate_examples(length, n_patterns, output):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_patterns):
 		p = randint(10, 20)
 		d = uniform(0.01, 0.1)
 		sequence = generate_sequence(length + output, p, d)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(sequence[:-output])
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(sequence[-output:])
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X = array(X).reshape(n_patterns, length, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	y = array(y).reshape(n_patterns, output)
 	return X, y
 
 # test problem generation
 X, y = generate_examples(20, 5, 5)
+# 获取长度 / Get length
 for i in range(len(X)):
 	pyplot.plot([x for x in X[i, :, 0]] + [x for x in y[i]], '-o')
 pyplot.show()
@@ -258,11 +296,30 @@ This script demonstrates **Example of one output for each input time step**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Example of one output for each input time step
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -270,8 +327,11 @@ from numpy import array
 ## Step 2 — define model where LSTM is also output layer
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(1, return_sequences=True, input_shape=(3,1)))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(optimizer='adam', loss='mse')
 ```
 
@@ -279,6 +339,7 @@ model.compile(optimizer='adam', loss='mse')
 ## Step 3 — input time steps
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = array([0.1, 0.2, 0.3]).reshape((1,3,1))
 ```
 
@@ -286,6 +347,7 @@ data = array([0.1, 0.2, 0.3]).reshape((1,3,1))
 ## Step 4 — make and show prediction
 
 ```python
+# 用模型做预测 / Make predictions with model
 print(model.predict(data))
 ```
 
@@ -323,22 +385,42 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # Example of one output for each input time step
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 # define model where LSTM is also output layer
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(1, return_sequences=True, input_shape=(3,1)))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(optimizer='adam', loss='mse')
 # input time steps
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 data = array([0.1, 0.2, 0.3]).reshape((1,3,1))
 # make and show prediction
+# 用模型做预测 / Make predictions with model
 print(model.predict(data))
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 4 of 6
+
+---
+
+### Lstm Single Layer
+
+
+
+---
+
+### Sine Wave
+
+
 
 ---
 
@@ -394,10 +476,15 @@ from math import pi
 from math import exp
 from random import randint
 from random import uniform
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 ```
 
@@ -406,6 +493,7 @@ from keras.layers import Dense
 
 ```python
 def generate_sequence(length, period, decay):
+ # 生成整数序列 / Generate integer sequence
 	return [0.5 + 0.5 * sin(2 * pi * i / period) * exp(-decay * i) for i in range(length)]
 ```
 
@@ -415,13 +503,18 @@ def generate_sequence(length, period, decay):
 ```python
 def generate_examples(length, n_patterns, output):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_patterns):
 		p = randint(10, 20)
 		d = uniform(0.01, 0.1)
 		sequence = generate_sequence(length + output, p, d)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(sequence[:-output])
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(sequence[-output:])
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X = array(X).reshape(n_patterns, length, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	y = array(y).reshape(n_patterns, output)
 	return X, y
 ```
@@ -438,10 +531,15 @@ output = 5
 ## Step 5 — define model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(20, return_sequences=True, input_shape=(length, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(20))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(output))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='mae', optimizer='adam')
 model.summary()
 ```
@@ -451,6 +549,7 @@ model.summary()
 
 ```python
 X, y = generate_examples(length, 10000, output)
+# 训练模型 / Train the model
 history = model.fit(X, y, batch_size=10, epochs=1)
 ```
 
@@ -459,7 +558,9 @@ history = model.fit(X, y, batch_size=10, epochs=1)
 
 ```python
 X, y = generate_examples(length, 1000, output)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 loss = model.evaluate(X, y, verbose=0)
+# 打印输出 / Print output
 print('MAE: %f' % loss)
 ```
 
@@ -468,6 +569,7 @@ print('MAE: %f' % loss)
 
 ```python
 X, y = generate_examples(length, 1, output)
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(X, verbose=0)
 pyplot.plot(y[0], label='y')
 pyplot.plot(yhat[0], label='yhat')
@@ -519,26 +621,37 @@ from math import pi
 from math import exp
 from random import randint
 from random import uniform
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LSTM
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 
 # generate damped sine wave in [0,1]
 def generate_sequence(length, period, decay):
+ # 生成整数序列 / Generate integer sequence
 	return [0.5 + 0.5 * sin(2 * pi * i / period) * exp(-decay * i) for i in range(length)]
 
 # generate input and output pairs of damped sine waves
 def generate_examples(length, n_patterns, output):
 	X, y = list(), list()
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_patterns):
 		p = randint(10, 20)
 		d = uniform(0.01, 0.1)
 		sequence = generate_sequence(length + output, p, d)
+  # 添加元素到列表末尾 / Append element to list end
 		X.append(sequence[:-output])
+  # 添加元素到列表末尾 / Append element to list end
 		y.append(sequence[-output:])
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X = array(X).reshape(n_patterns, length, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	y = array(y).reshape(n_patterns, output)
 	return X, y
 
@@ -547,24 +660,33 @@ length = 50
 output = 5
 
 # define model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(20, return_sequences=True, input_shape=(length, 1)))
+# 向模型添加一层 / Add a layer to the model
 model.add(LSTM(20))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(output))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='mae', optimizer='adam')
 model.summary()
 
 # fit model
 X, y = generate_examples(length, 10000, output)
+# 训练模型 / Train the model
 history = model.fit(X, y, batch_size=10, epochs=1)
 
 # evaluate model
 X, y = generate_examples(length, 1000, output)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 loss = model.evaluate(X, y, verbose=0)
+# 打印输出 / Print output
 print('MAE: %f' % loss)
 
 # prediction on new data
 X, y = generate_examples(length, 1, output)
+# 用模型做预测 / Make predictions with model
 yhat = model.predict(X, verbose=0)
 pyplot.plot(y[0], label='y')
 pyplot.plot(yhat[0], label='yhat')

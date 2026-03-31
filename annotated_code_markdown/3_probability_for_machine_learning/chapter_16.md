@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 16
 
 ---
@@ -30,6 +30,7 @@ $$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$$
 ## Step 1 — Define the Problem / 定义问题
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Problem: An elderly person fell. What's the probability they died?
@@ -42,13 +43,21 @@ P_died_given_elderly = 0.10  # P(Died | Elderly)
 P_elderly = 0.15             # P(Elderly)
 P_died = 0.05                # P(Died)
 
+# 打印输出 / Print output
 print(f'Fall and Die Problem / 跌倒和死亡问题')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Given Information / 给定信息:')
+# 打印输出 / Print output
 print(f'P(Died | Elderly) = {P_died_given_elderly}')
+# 打印输出 / Print output
 print(f'P(Elderly) = {P_elderly}')
+# 打印输出 / Print output
 print(f'P(Died) = {P_died}')
+# 打印输出 / Print output
 print(f'\nQuestion / 问题:')
+# 打印输出 / Print output
 print(f'P(Elderly | Died) = ?')
 ```
 
@@ -60,15 +69,25 @@ print(f'P(Elderly | Died) = ?')
 
 P_elderly_given_died = (P_died_given_elderly * P_elderly) / P_died
 
+# 打印输出 / Print output
 print(f'\nBayes Theorem Application / 贝叶斯定理应用:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'\nP(Elderly | Died) = P(Died | Elderly) × P(Elderly) / P(Died)')
+# 打印输出 / Print output
 print(f'\nSubstituting values / 代入值:')
+# 打印输出 / Print output
 print(f'P(Elderly | Died) = {P_died_given_elderly} × {P_elderly} / {P_died}')
+# 打印输出 / Print output
 print(f'P(Elderly | Died) = {P_died_given_elderly * P_elderly} / {P_died}')
+# 打印输出 / Print output
 print(f'P(Elderly | Died) = {P_elderly_given_died:.4f}')
+# 打印输出 / Print output
 print(f'\nInterpretation / 解释:')
+# 打印输出 / Print output
 print(f'Of all people who died from falls, {P_elderly_given_died*100:.2f}% were elderly')
+# 打印输出 / Print output
 print(f'在所有死于跌倒的人中，{P_elderly_given_died*100:.2f}%是老年人')
 ```
 
@@ -86,13 +105,21 @@ elderly_deaths = elderly * P_died_given_elderly
 total_deaths = total_people * P_died
 fraction_elderly_among_deaths = elderly_deaths / total_deaths
 
+# 打印输出 / Print output
 print(f'\nIntuitive Verification / 直觉验证:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Total population: {total_people}')
+# 打印输出 / Print output
 print(f'Elderly (15%): {elderly:.0f}')
+# 打印输出 / Print output
 print(f'Elderly deaths (10% of elderly): {elderly_deaths:.0f}')
+# 打印输出 / Print output
 print(f'Total deaths (5% of all): {total_deaths:.0f}')
+# 打印输出 / Print output
 print(f'\nFraction of deaths that are elderly: {fraction_elderly_among_deaths:.4f}')
+# 打印输出 / Print output
 print(f'This matches our calculation: {P_elderly_given_died:.4f}')
 ```
 
@@ -137,6 +164,7 @@ $$P(\text{flagged}) = P(\text{flagged}|\text{spam}) \cdot P(\text{spam}) + P(\te
 ## Step 1 — Define Problem / 定义问题
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Email spam filter problem
@@ -150,14 +178,23 @@ P_not_spam = 1 - P_spam
 P_flagged_given_spam = 0.95
 P_flagged_given_not_spam = 0.05
 
+# 打印输出 / Print output
 print(f'Spam Detection Problem / 垃圾邮件检测问题')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Given Information / 给定信息:')
+# 打印输出 / Print output
 print(f'P(Spam) = {P_spam}')
+# 打印输出 / Print output
 print(f'P(Not Spam) = {P_not_spam}')
+# 打印输出 / Print output
 print(f'P(Flagged | Spam) = {P_flagged_given_spam}')
+# 打印输出 / Print output
 print(f'P(Flagged | Not Spam) = {P_flagged_given_not_spam}')
+# 打印输出 / Print output
 print(f'\nQuestion / 问题:')
+# 打印输出 / Print output
 print(f'If an email is flagged, what is P(Spam | Flagged)?')
 ```
 
@@ -169,11 +206,17 @@ print(f'If an email is flagged, what is P(Spam | Flagged)?')
 
 P_flagged = (P_flagged_given_spam * P_spam) + (P_flagged_given_not_spam * P_not_spam)
 
+# 打印输出 / Print output
 print(f'\nLaw of Total Probability / 全概率法则:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'\nP(Flagged) = P(Flagged|Spam)×P(Spam) + P(Flagged|NotSpam)×P(NotSpam)')
+# 打印输出 / Print output
 print(f'\nP(Flagged) = {P_flagged_given_spam}×{P_spam} + {P_flagged_given_not_spam}×{P_not_spam}')
+# 打印输出 / Print output
 print(f'P(Flagged) = {P_flagged_given_spam * P_spam} + {P_flagged_given_not_spam * P_not_spam}')
+# 打印输出 / Print output
 print(f'P(Flagged) = {P_flagged:.4f}')
 ```
 
@@ -185,14 +228,23 @@ print(f'P(Flagged) = {P_flagged:.4f}')
 
 P_spam_given_flagged = (P_flagged_given_spam * P_spam) / P_flagged
 
+# 打印输出 / Print output
 print(f'\nBayes Theorem Application / 贝叶斯定理应用:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'\nP(Spam | Flagged) = P(Flagged | Spam) × P(Spam) / P(Flagged)')
+# 打印输出 / Print output
 print(f'\nP(Spam | Flagged) = {P_flagged_given_spam} × {P_spam} / {P_flagged:.4f}')
+# 打印输出 / Print output
 print(f'P(Spam | Flagged) = {P_flagged_given_spam * P_spam:.4f} / {P_flagged:.4f}')
+# 打印输出 / Print output
 print(f'P(Spam | Flagged) = {P_spam_given_flagged:.4f}')
+# 打印输出 / Print output
 print(f'\nInterpretation / 解释:')
+# 打印输出 / Print output
 print(f'If an email is flagged, there is a {P_spam_given_flagged*100:.1f}% chance it is actually spam')
+# 打印输出 / Print output
 print(f'如果电子邮件被标记，它实际是垃圾邮件的概率是{P_spam_given_flagged*100:.1f}%')
 ```
 
@@ -208,14 +260,23 @@ not_spam_flagged = not_spam * P_flagged_given_not_spam
 total_flagged = spam_flagged + not_spam_flagged
 actual_proportion = spam_flagged / total_flagged
 
+# 打印输出 / Print output
 print(f'\nIntuitive Verification / 直觉验证:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Out of {total:,} emails:')
+# 打印输出 / Print output
 print(f'  Spam: {spam:.0f}, Flagged: {spam_flagged:.0f}')
+# 打印输出 / Print output
 print(f'  Not Spam: {not_spam:.0f}, Flagged: {not_spam_flagged:.0f}')
+# 打印输出 / Print output
 print(f'\nTotal flagged: {total_flagged:.0f}')
+# 打印输出 / Print output
 print(f'Of these, {spam_flagged:.0f} are actually spam')
+# 打印输出 / Print output
 print(f'Proportion: {actual_proportion:.4f}')
+# 打印输出 / Print output
 print(f'\nThis matches our Bayes calculation: {P_spam_given_flagged:.4f}')
 ```
 
@@ -258,6 +319,7 @@ $$P(\text{lying}|\text{positive}) = \frac{P(\text{positive}|\text{lying}) \cdot 
 ## Step 1 — Define Problem / 定义问题
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Lie detector test problem
@@ -271,15 +333,25 @@ P_positive_given_not_lying = 0.2
 P_lying = 0.1
 P_not_lying = 1 - P_lying
 
+# 打印输出 / Print output
 print(f'Lie Detector Problem / 谎言检测器问题')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Test Characteristics / 测试特征:')
+# 打印输出 / Print output
 print(f'P(Positive | Lying) = {P_positive_given_lying}  (90% sensitivity)')
+# 打印输出 / Print output
 print(f'P(Positive | Not Lying) = {P_positive_given_not_lying}  (20% false positive)')
+# 打印输出 / Print output
 print(f'\nPrior Beliefs / 先验信念:')
+# 打印输出 / Print output
 print(f'P(Lying) = {P_lying}')
+# 打印输出 / Print output
 print(f'P(Not Lying) = {P_not_lying}')
+# 打印输出 / Print output
 print(f'\nQuestion / 问题:')
+# 打印输出 / Print output
 print(f'If test is positive, what is P(Lying | Positive)?')
 ```
 
@@ -291,11 +363,17 @@ print(f'If test is positive, what is P(Lying | Positive)?')
 
 P_positive = (P_positive_given_lying * P_lying) + (P_positive_given_not_lying * P_not_lying)
 
+# 打印输出 / Print output
 print(f'\nTotal Probability Calculation / 全概率计算:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'\nP(Positive) = P(Pos|Lying)×P(Lying) + P(Pos|NotLying)×P(NotLying)')
+# 打印输出 / Print output
 print(f'\nP(Positive) = {P_positive_given_lying}×{P_lying} + {P_positive_given_not_lying}×{P_not_lying}')
+# 打印输出 / Print output
 print(f'P(Positive) = {P_positive_given_lying*P_lying:.3f} + {P_positive_given_not_lying*P_not_lying:.3f}')
+# 打印输出 / Print output
 print(f'P(Positive) = {P_positive:.3f}')
 ```
 
@@ -307,14 +385,23 @@ print(f'P(Positive) = {P_positive:.3f}')
 
 P_lying_given_positive = (P_positive_given_lying * P_lying) / P_positive
 
+# 打印输出 / Print output
 print(f'\nBayes Theorem Application / 贝叶斯定理应用:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'\nP(Lying | Positive) = P(Pos | Lying) × P(Lying) / P(Positive)')
+# 打印输出 / Print output
 print(f'\nP(Lying | Positive) = {P_positive_given_lying} × {P_lying} / {P_positive:.3f}')
+# 打印输出 / Print output
 print(f'P(Lying | Positive) = {P_positive_given_lying * P_lying:.3f} / {P_positive:.3f}')
+# 打印输出 / Print output
 print(f'P(Lying | Positive) = {P_lying_given_positive:.4f}')
+# 打印输出 / Print output
 print(f'\nInterpretation / 解释:')
+# 打印输出 / Print output
 print(f'Even with a positive result, there is only a {P_lying_given_positive*100:.1f}% chance the person is lying!')
+# 打印输出 / Print output
 print(f'即使测试为正，该人说谎的概率仅为{P_lying_given_positive*100:.1f}%！')
 ```
 
@@ -325,20 +412,35 @@ print(f'即使测试为正，该人说谎的概率仅为{P_lying_given_positive*
 # Many people would think a 90% accurate test means 90% probability when positive
 # But the low base rate (10% are actually lying) means false positives dominate!
 
+# 打印输出 / Print output
 print(f'\nBase Rate Fallacy / 基本速率谬误:')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'\nIntuitive but WRONG reasoning:')
+# 打印输出 / Print output
 print(f'  "Test is 90% accurate, so positive = 90% chance lying"')
+# 打印输出 / Print output
 print(f'\nCorrect reasoning (Bayes):  {P_lying_given_positive*100:.1f}%')
+# 打印输出 / Print output
 print(f'\nWhy the difference?')
+# 打印输出 / Print output
 print(f'  Out of 1000 people:')
+# 打印输出 / Print output
 print(f'    100 are actually lying')
+# 打印输出 / Print output
 print(f'    900 are not lying')
+# 打印输出 / Print output
 print(f'\n  Test results:')
+# 打印输出 / Print output
 print(f'    Of 100 liars: {int(100 * P_positive_given_lying)} test positive (true positives)')
+# 打印输出 / Print output
 print(f'    Of 900 truthful: {int(900 * P_positive_given_not_lying)} test positive (false positives)')
+# 打印输出 / Print output
 print(f'\n  Total positive: {int(100 * P_positive_given_lying) + int(900 * P_positive_given_not_lying)}')
+# 打印输出 / Print output
 print(f'  True positives: {int(100 * P_positive_given_lying)}')
+# 打印输出 / Print output
 print(f'  Proportion: {int(100 * P_positive_given_lying) / (int(100 * P_positive_given_lying) + int(900 * P_positive_given_not_lying)):.4f}')
 ```
 
@@ -351,5 +453,11 @@ print(f'  Proportion: {int(100 * P_positive_given_lying) / (int(100 * P_positive
 | `numpy` | 数值计算库 | Numerical computing library |
 
 ## Chapter 16 Complete / 第16章完成\n\nThis chapter covered Bayes' theorem applications: the foundation for probabilistic reasoning and machine learning classification.
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

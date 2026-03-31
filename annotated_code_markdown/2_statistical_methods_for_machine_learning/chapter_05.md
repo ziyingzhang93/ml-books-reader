@@ -1,5 +1,11 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 05
+
+---
+
+### Line Plot
+
+
 
 ---
 
@@ -29,6 +35,7 @@
 # Import random number generation and plotting library / 导入随机数生成和绘图库
 from random import seed
 from random import randint
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -36,6 +43,7 @@ from matplotlib import pyplot
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Define category labels / 定义类别标签
@@ -87,10 +95,12 @@ pyplot.show()
 # ===== Section 1: Imports =====
 from random import seed
 from random import randint
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # ===== Section 2: Prepare Categorical Data =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Define categories / 定义类别
@@ -138,8 +148,11 @@ pyplot.show()
 
 ```python
 # Import random number generation and plotting library / 导入随机数生成和绘图库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -147,6 +160,7 @@ from matplotlib import pyplot
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 1000 random samples from standard normal distribution N(0,1) / 从标准正态分布N(0,1)生成1000个样本
@@ -189,12 +203,16 @@ pyplot.show()
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # ===== Section 2: Generate Continuous Data =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 1000 samples from standard normal N(0,1) / 从标准正态分布N(0,1)生成1000个样本
@@ -239,8 +257,11 @@ pyplot.show()
 
 ```python
 # Import random number generation and plotting library / 导入随机数生成和绘图库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -248,6 +269,7 @@ from matplotlib import pyplot
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate three distributions with different scales / 生成三个不同规模的分布
@@ -294,12 +316,16 @@ pyplot.show()
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # ===== Section 2: Generate Multiple Distributions =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate three distributions with increasing variance / 生成三个方差递增的分布
@@ -345,8 +371,11 @@ pyplot.show()
 
 ```python
 # Import random number generation and plotting library / 导入随机数生成和绘图库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -354,6 +383,7 @@ from matplotlib import pyplot
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # First variable: random normal scaled and centered / 第一个变量：随机正态缩放和居中
@@ -400,12 +430,16 @@ pyplot.show()
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # ===== Section 2: Generate Correlated Data =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate first variable / 生成第一个变量
@@ -429,7 +463,7 @@ pyplot.show()
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 5: Data Visualization
 # 第5章：数据可视化

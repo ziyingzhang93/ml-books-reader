@@ -1,9 +1,9 @@
-# 时间序列预测
+# 时间序列预测 / Time Series Forecasting with Python
 ## Chapter 24
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 24 Summary / 第24章总结
 
@@ -76,10 +76,14 @@ This script demonstrates **fit an ARIMA model and plot residual errors**.
 ## Step 1 — fit an ARIMA model and plot residual errors
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -89,6 +93,7 @@ from matplotlib import pyplot
 ```python
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 series.index = series.index.to_period('M')
 ```
@@ -98,6 +103,7 @@ series.index = series.index.to_period('M')
 
 ```python
 model = ARIMA(series, order=(5,1,0))
+# 训练模型 / Train the model
 model_fit = model.fit()
 ```
 
@@ -105,6 +111,7 @@ model_fit = model.fit()
 ## Step 4 — summary of fit model
 
 ```python
+# 打印输出 / Print output
 print(model_fit.summary())
 ```
 
@@ -129,6 +136,7 @@ pyplot.show()
 ## Step 7 — summary stats of residuals
 
 ```python
+# 生成统计摘要（均值、标准差等） / Generate statistical summary (mean, std, etc.)
 print(residuals.describe())
 ```
 
@@ -165,20 +173,27 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # fit an ARIMA model and plot residual errors
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import DataFrame
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # load dataset
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 series.index = series.index.to_period('M')
 # fit model
 model = ARIMA(series, order=(5,1,0))
+# 训练模型 / Train the model
 model_fit = model.fit()
 # summary of fit model
+# 打印输出 / Print output
 print(model_fit.summary())
 # line plot of residuals
 residuals = DataFrame(model_fit.resid)
@@ -188,6 +203,7 @@ pyplot.show()
 residuals.plot(kind='kde')
 pyplot.show()
 # summary stats of residuals
+# 生成统计摘要（均值、标准差等） / Generate statistical summary (mean, std, etc.)
 print(residuals.describe())
 ```
 
@@ -243,10 +259,14 @@ This script demonstrates **evaluate an ARIMA model using a walk-forward validati
 ## Step 1 — evaluate an ARIMA model using a walk-forward validation
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 ```
@@ -257,6 +277,7 @@ from math import sqrt
 ```python
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 series.index = series.index.to_period('M')
 ```
@@ -265,8 +286,11 @@ series.index = series.index.to_period('M')
 ## Step 3 — split into train and test sets
 
 ```python
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
+# 获取长度 / Get length
 size = int(len(X) * 0.66)
+# 获取长度 / Get length
 train, test = X[0:size], X[size:len(X)]
 history = [x for x in train]
 predictions = list()
@@ -276,14 +300,19 @@ predictions = list()
 ## Step 4 — walk-forward validation
 
 ```python
+# 获取长度 / Get length
 for t in range(len(test)):
 	model = ARIMA(history, order=(5,1,0))
+ # 训练模型 / Train the model
 	model_fit = model.fit()
 	output = model_fit.forecast()
 	yhat = output[0]
+ # 添加元素到列表末尾 / Append element to list end
 	predictions.append(yhat)
 	obs = test[t]
+ # 添加元素到列表末尾 / Append element to list end
 	history.append(obs)
+ # 打印输出 / Print output
 	print('predicted=%f, expected=%f' % (yhat, obs))
 ```
 
@@ -291,7 +320,9 @@ for t in range(len(test)):
 ## Step 5 — evaluate forecasts
 
 ```python
+# 计算均方误差 / Calculate Mean Squared Error
 rmse = sqrt(mean_squared_error(test, predictions))
+# 打印输出 / Print output
 print('Test RMSE: %.3f' % rmse)
 ```
 
@@ -336,35 +367,50 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # evaluate an ARIMA model using a walk-forward validation
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from statsmodels.tsa.arima.model import ARIMA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 from math import sqrt
 # load dataset
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 series.index = series.index.to_period('M')
 # split into train and test sets
+# 转换为NumPy数组 / Convert to NumPy array
 X = series.values
+# 获取长度 / Get length
 size = int(len(X) * 0.66)
+# 获取长度 / Get length
 train, test = X[0:size], X[size:len(X)]
 history = [x for x in train]
 predictions = list()
 # walk-forward validation
+# 获取长度 / Get length
 for t in range(len(test)):
 	model = ARIMA(history, order=(5,1,0))
+ # 训练模型 / Train the model
 	model_fit = model.fit()
 	output = model_fit.forecast()
 	yhat = output[0]
+ # 添加元素到列表末尾 / Append element to list end
 	predictions.append(yhat)
 	obs = test[t]
+ # 添加元素到列表末尾 / Append element to list end
 	history.append(obs)
+ # 打印输出 / Print output
 	print('predicted=%f, expected=%f' % (yhat, obs))
 # evaluate forecasts
+# 计算均方误差 / Calculate Mean Squared Error
 rmse = sqrt(mean_squared_error(test, predictions))
+# 打印输出 / Print output
 print('Test RMSE: %.3f' % rmse)
 # plot forecasts against actual outcomes
 pyplot.plot(test)
@@ -418,9 +464,13 @@ This script demonstrates **autocorrelation plot of time series**.
 ## Step 1 — autocorrelation plot of time series
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas.plotting import autocorrelation_plot
 ```
 
@@ -430,6 +480,7 @@ from pandas.plotting import autocorrelation_plot
 ```python
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 ```
 
@@ -471,13 +522,18 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # autocorrelation plot of time series
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas.plotting import autocorrelation_plot
 # load dataset
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 # autocorrelation plot
 autocorrelation_plot(series)
@@ -530,8 +586,11 @@ This script demonstrates **load and plot dataset**.
 ## Step 1 — load and plot dataset
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -541,6 +600,7 @@ from matplotlib import pyplot
 ```python
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 ```
 
@@ -548,6 +608,7 @@ series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, 
 ## Step 3 — summarize first few rows
 
 ```python
+# 查看前几行数据（快速预览） / View first rows (quick preview)
 print(series.head())
 ```
 
@@ -590,14 +651,19 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # load and plot dataset
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import datetime
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # load dataset
 def parser(x):
 	return datetime.strptime('190'+x, '%Y-%m')
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('shampoo-sales.csv', header=0, index_col=0, parse_dates=True, squeeze=True, date_parser=parser)
 # summarize first few rows
+# 查看前几行数据（快速预览） / View first rows (quick preview)
 print(series.head())
 # line plot
 series.plot()

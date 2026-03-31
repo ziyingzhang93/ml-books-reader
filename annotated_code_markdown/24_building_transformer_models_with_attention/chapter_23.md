@@ -1,4 +1,4 @@
-# Transformer
+# 注意力与Transformer / Transformer Models with Attention
 ## Chapter 23
 
 ---
@@ -84,9 +84,20 @@ This script demonstrates **Answering**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import pipeline
 text = open("article.txt").read()
 question = "What is BOE doing?"
@@ -94,6 +105,7 @@ question = "What is BOE doing?"
 answering = pipeline("question-answering",
                      model='distilbert-base-uncased-distilled-squad')
 result = answering(question=question, context=text)
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -123,6 +135,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import pipeline
 text = open("article.txt").read()
 question = "What is BOE doing?"
@@ -130,12 +143,13 @@ question = "What is BOE doing?"
 answering = pipeline("question-answering",
                      model='distilbert-base-uncased-distilled-squad')
 result = answering(question=question, context=text)
+# 打印输出 / Print output
 print(result)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 23 Summary / 第23章总结
 

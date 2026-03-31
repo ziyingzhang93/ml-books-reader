@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 20
 
 ---
@@ -35,9 +35,13 @@ from sympy import diff, sqrt, pprint
 f = x**2 - 10
 g = sqrt(f)
 result = diff(g, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(g)
+# 打印输出 / Print output
 print("has derivative")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -67,9 +71,13 @@ from sympy import diff, sqrt, pprint
 f = x**2 - 10
 g = sqrt(f)
 result = diff(g, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(g)
+# 打印输出 / Print output
 print("has derivative")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -111,9 +119,13 @@ from sympy import diff, cos, pprint
 u = x**3 - 1
 h = cos(u)
 result = diff(h, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("has derivative")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -143,9 +155,13 @@ from sympy import diff, cos, pprint
 u = x**3 - 1
 h = cos(u)
 result = diff(h, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("has derivative")
+# 打印输出 / Print output
 pprint(result)
 ```
 
@@ -187,9 +203,13 @@ from sympy import diff, sqrt, cos, simplify, pprint
 u = x * sqrt(x**2 - 10)
 h = cos(u)
 result = diff(h, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("has derivative")
+# 打印输出 / Print output
 pprint(simplify(result))
 ```
 
@@ -219,9 +239,13 @@ from sympy import diff, sqrt, cos, simplify, pprint
 u = x * sqrt(x**2 - 10)
 h = cos(u)
 result = diff(h, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("has derivative")
+# 打印输出 / Print output
 pprint(simplify(result))
 ```
 
@@ -265,11 +289,17 @@ t = 2*x - y
 h = s**2 + t**3
 dhdx = diff(h, x)
 dhdy = diff(h, y)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("Derivative with respect to x")
+# 打印输出 / Print output
 pprint(dhdx)
+# 打印输出 / Print output
 print("Derivative with respect to y")
+# 打印输出 / Print output
 pprint(dhdy)
 ```
 
@@ -301,11 +331,17 @@ t = 2*x - y
 h = s**2 + t**3
 dhdx = diff(h, x)
 dhdy = diff(h, y)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("Derivative with respect to x")
+# 打印输出 / Print output
 pprint(dhdx)
+# 打印输出 / Print output
 print("Derivative with respect to y")
+# 打印输出 / Print output
 pprint(dhdy)
 ```
 
@@ -350,11 +386,17 @@ t = x + y
 h = r**2 - r*s + t**3
 dhdx = diff(h, x)
 dhdy = diff(h, y)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("Derivative with respect to x")
+# 打印输出 / Print output
 pprint(dhdx)
+# 打印输出 / Print output
 print("Derivative with respect to y")
+# 打印输出 / Print output
 pprint(dhdy)
 ```
 
@@ -387,17 +429,23 @@ t = x + y
 h = r**2 - r*s + t**3
 dhdx = diff(h, x)
 dhdy = diff(h, y)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("Derivative with respect to x")
+# 打印输出 / Print output
 pprint(dhdx)
+# 打印输出 / Print output
 print("Derivative with respect to y")
+# 打印输出 / Print output
 pprint(dhdy)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 20 Summary / 第20章总结
 

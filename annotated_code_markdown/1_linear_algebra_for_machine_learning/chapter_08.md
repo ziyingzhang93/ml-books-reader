@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 08
 
 ---
@@ -35,6 +35,7 @@ First, we import the `array` function from NumPy, which is used to create numeri
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -49,6 +50,7 @@ v = array([1, 2, 3])
 
 # Print the vector to see its representation
 # 打印向量以查看其表示
+# 打印输出 / Print output
 print(v)
 ```
 
@@ -69,8 +71,10 @@ print(v)
 
 ```python
 # --- Vector Creation / 向量创建 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 v = array([1, 2, 3])
+# 打印输出 / Print output
 print(v)
 ```
 
@@ -108,6 +112,7 @@ We import NumPy's array function to work with vectors.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -138,6 +143,7 @@ c = a + b
 
 # Print the result
 # 打印结果
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -158,10 +164,12 @@ print(c)
 
 ```python
 # --- Vector Addition / 向量加法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 a = array([1, 2, 3])
 b = array([1, 2, 3])
 c = a + b
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -199,6 +207,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -229,6 +238,7 @@ c = a - b
 
 # Print the result
 # 打印结果
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -249,10 +259,12 @@ print(c)
 
 ```python
 # --- Vector Subtraction / 向量减法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 a = array([1, 2, 3])
 b = array([0.5, 0.5, 0.5])
 c = a - b
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -290,6 +302,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -320,6 +333,7 @@ c = a * b
 
 # Print the result (note: this is NOT the dot product)
 # 打印结果（注意：这不是点积）
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -340,10 +354,12 @@ print(c)
 
 ```python
 # --- Vector Element-wise Multiplication / 向量按元素乘法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 a = array([1, 2, 3])
 b = array([1, 2, 3])
 c = a * b
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -381,6 +397,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -411,6 +428,7 @@ c = a / b
 
 # Print the result
 # 打印结果
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -431,10 +449,12 @@ print(c)
 
 ```python
 # --- Vector Element-wise Division / 向量按元素除法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 a = array([1, 2, 3])
 b = array([1, 2, 3])
 c = a / b
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -472,6 +492,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -502,6 +523,7 @@ c = a.dot(b)
 
 # Print the scalar result
 # 打印标量结果
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -516,6 +538,7 @@ d = a @ b
 
 # Print the result (same as c)
 # 打印结果（与 c 相同）
+# 打印输出 / Print output
 print(d)
 ```
 
@@ -536,6 +559,7 @@ print(d)
 
 ```python
 # --- Vector Dot Product / 向量点积 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 a = array([1, 2, 3])
 b = array([1, 2, 3])
@@ -543,11 +567,13 @@ b = array([1, 2, 3])
 # Using .dot() method
 # 使用 .dot() 方法
 c = a.dot(b)
+# 打印输出 / Print output
 print(c)
 
 # Using @ operator
 # 使用 @ 运算符
 d = a @ b
+# 打印输出 / Print output
 print(d)
 ```
 
@@ -585,6 +611,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -615,6 +642,7 @@ c = s * a
 
 # Print the result (each element is scaled by s)
 # 打印结果（每个元素都被 s 缩放）
+# 打印输出 / Print output
 print(c)
 ```
 
@@ -635,16 +663,18 @@ print(c)
 
 ```python
 # --- Vector Scalar Multiplication / 向量标量乘法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 a = array([1, 2, 3])
 s = 0.5
 c = s * a
+# 打印输出 / Print output
 print(c)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 08 Summary / 第08章总结：Vector Operations
 

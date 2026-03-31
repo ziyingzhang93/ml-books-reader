@@ -1,4 +1,4 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 07
 
 ---
@@ -29,6 +29,7 @@ This script demonstrates **Indentprint**.
 ## Step 1 — Step 1
 
 ```python
+# 打印输出 / Print output
 def indentprint(x, indent=0, prefix="", suffix=""):
     if isinstance(x, dict):
         printdict(x, indent, prefix, suffix)
@@ -41,26 +42,38 @@ def indentprint(x, indent=0, prefix="", suffix=""):
 
 def printdict(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "{")
+    # 同时获取索引和值 / Get both index and value
     for n, key in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(x[key], indent+2, str(key)+": ", comma)
+    # 打印输出 / Print output
     print(spaces + "}" + suffix)
 
 def printlist(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "[")
+    # 同时获取索引和值 / Get both index and value
     for n, item in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(item, indent+2, "", comma)
+    # 打印输出 / Print output
     print(spaces + "]" + suffix)
 
 def printstring(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + '"' + str(x) + '"' + suffix)
 
 def printnumber(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + str(x) + suffix)
 
 data = {
@@ -78,6 +91,7 @@ data = {
     },
 }
 
+# 打印输出 / Print output
 indentprint(data)
 ```
 
@@ -101,6 +115,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 打印输出 / Print output
 def indentprint(x, indent=0, prefix="", suffix=""):
     if isinstance(x, dict):
         printdict(x, indent, prefix, suffix)
@@ -113,26 +128,38 @@ def indentprint(x, indent=0, prefix="", suffix=""):
 
 def printdict(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "{")
+    # 同时获取索引和值 / Get both index and value
     for n, key in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(x[key], indent+2, str(key)+": ", comma)
+    # 打印输出 / Print output
     print(spaces + "}" + suffix)
 
 def printlist(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "[")
+    # 同时获取索引和值 / Get both index and value
     for n, item in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(item, indent+2, "", comma)
+    # 打印输出 / Print output
     print(spaces + "]" + suffix)
 
 def printstring(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + '"' + str(x) + '"' + suffix)
 
 def printnumber(x, indent, prefix, suffix):
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + str(x) + suffix)
 
 data = {
@@ -150,6 +177,7 @@ data = {
     },
 }
 
+# 打印输出 / Print output
 indentprint(data)
 ```
 
@@ -185,7 +213,9 @@ This script demonstrates **Indentprint**.
 ## Step 1 — Step 1
 
 ```python
+# 打印输出 / Print output
 def indentprint(x, indent=0, prefix="", suffix=""):
+    # 打印输出 / Print output
     print(f'indentprint(x, {indent}, "{prefix}", "{suffix}")')
     if isinstance(x, dict):
         printdict(x, indent, prefix, suffix)
@@ -197,31 +227,47 @@ def indentprint(x, indent=0, prefix="", suffix=""):
         printnumber(x, indent, prefix, suffix)
 
 def printdict(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printdict(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "{")
+    # 同时获取索引和值 / Get both index and value
     for n, key in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(x[key], indent+2, str(key)+": ", comma)
+    # 打印输出 / Print output
     print(spaces + "}" + suffix)
 
 def printlist(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printlist(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "[")
+    # 同时获取索引和值 / Get both index and value
     for n, item in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(item, indent+2, "", comma)
+    # 打印输出 / Print output
     print(spaces + "]" + suffix)
 
 def printstring(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printstring(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + '"' + str(x) + '"' + suffix)
 
 def printnumber(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printnumber(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + str(x) + suffix)
 
 data = {
@@ -239,6 +285,7 @@ data = {
     },
 }
 
+# 打印输出 / Print output
 indentprint(data)
 ```
 
@@ -262,7 +309,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 打印输出 / Print output
 def indentprint(x, indent=0, prefix="", suffix=""):
+    # 打印输出 / Print output
     print(f'indentprint(x, {indent}, "{prefix}", "{suffix}")')
     if isinstance(x, dict):
         printdict(x, indent, prefix, suffix)
@@ -274,31 +323,47 @@ def indentprint(x, indent=0, prefix="", suffix=""):
         printnumber(x, indent, prefix, suffix)
 
 def printdict(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printdict(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "{")
+    # 同时获取索引和值 / Get both index and value
     for n, key in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(x[key], indent+2, str(key)+": ", comma)
+    # 打印输出 / Print output
     print(spaces + "}" + suffix)
 
 def printlist(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printlist(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + "[")
+    # 同时获取索引和值 / Get both index and value
     for n, item in enumerate(x):
+        # 获取长度 / Get length
         comma = "," if n!=len(x)-1 else ""
+        # 打印输出 / Print output
         indentprint(item, indent+2, "", comma)
+    # 打印输出 / Print output
     print(spaces + "]" + suffix)
 
 def printstring(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printstring(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + '"' + str(x) + '"' + suffix)
 
 def printnumber(x, indent, prefix, suffix):
+    # 打印输出 / Print output
     print(f'printnumber(x, {indent}, "{prefix}", "{suffix}")')
     spaces = " " * indent
+    # 打印输出 / Print output
     print(spaces + prefix + str(x) + suffix)
 
 data = {
@@ -316,6 +381,7 @@ data = {
     },
 }
 
+# 打印输出 / Print output
 indentprint(data)
 ```
 
@@ -352,6 +418,7 @@ This script demonstrates **Printstack**.
 
 ```python
 import traceback
+# 导入随机数生成模块 / Import random number module
 import random
 
 def compute():
@@ -361,10 +428,13 @@ def compute():
 
 def compute_many(n_times):
     try:
+        # 生成整数序列 / Generate integer sequence
         for _ in range(n_times):
             x = compute()
+        # 打印输出 / Print output
         print(f"Completed {n_times} times")
     except:
+        # 打印输出 / Print output
         print("Something wrong")
         traceback.print_exc()
 
@@ -392,6 +462,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import traceback
+# 导入随机数生成模块 / Import random number module
 import random
 
 def compute():
@@ -401,10 +472,13 @@ def compute():
 
 def compute_many(n_times):
     try:
+        # 生成整数序列 / Generate integer sequence
         for _ in range(n_times):
             x = compute()
+        # 打印输出 / Print output
         print(f"Completed {n_times} times")
     except:
+        # 打印输出 / Print output
         print("Something wrong")
         traceback.print_exc()
 
@@ -444,19 +518,23 @@ This script demonstrates **print the function name and line number of the script
 
 ```python
 import traceback
+# 导入随机数生成模块 / Import random number module
 import random
 
 def print_tb_with_local():
     """Print stack trace with local variables. This does not need to be in
+    # 打印输出 / Print output
     exception. Print is using the system's print() function to stderr.
     """
     import traceback, sys
     tb = sys.exc_info()[2]
     stack = []
     while tb:
+        # 添加元素到列表末尾 / Append element to list end
         stack.append(tb.tb_frame)
         tb = tb.tb_next
     traceback.print_exc()
+    # 打印输出 / Print output
     print("Locals by frame, most recent call first", file=sys.stderr)
     for frame in stack:
 ```
@@ -465,6 +543,7 @@ def print_tb_with_local():
 ## Step 2 — print the function name and line number of the script
 
 ```python
+# 打印输出 / Print output
 print("Frame {0} in {1} at line {2}".format(
             frame.f_code.co_name,
             frame.f_code.co_filename,
@@ -475,16 +554,22 @@ print("Frame {0} in {1} at line {2}".format(
 ## Step 3 — print each variable defined inside each function
 
 ```python
+# 获取字典的键值对 / Get dict key-value pairs
 for key, value in frame.f_locals.items():
+            # 打印输出 / Print output
             print(f"\t{key} = ", file=sys.stderr)
             try:
                 if '__repr__' in dir(value):
+                    # 打印输出 / Print output
                     print(value.__repr__(), file=sys.stderr)
                 elif '__str__' in dir(value):
+                    # 打印输出 / Print output
                     print(value.__str__(), file=sys.stderr)
                 else:
+                    # 打印输出 / Print output
                     print(value, file=sys.stderr)
             except:
+                # 打印输出 / Print output
                 print("", file=sys.stderr)
 
 def compute():
@@ -494,10 +579,13 @@ def compute():
 
 def compute_many(n_times):
     try:
+        # 生成整数序列 / Generate integer sequence
         for _ in range(n_times):
             x = compute()
+        # 打印输出 / Print output
         print(f"Completed {n_times} times")
     except:
+        # 打印输出 / Print output
         print("Something wrong")
         print_tb_with_local()
 
@@ -525,37 +613,48 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import traceback
+# 导入随机数生成模块 / Import random number module
 import random
 
 def print_tb_with_local():
     """Print stack trace with local variables. This does not need to be in
+    # 打印输出 / Print output
     exception. Print is using the system's print() function to stderr.
     """
     import traceback, sys
     tb = sys.exc_info()[2]
     stack = []
     while tb:
+        # 添加元素到列表末尾 / Append element to list end
         stack.append(tb.tb_frame)
         tb = tb.tb_next
     traceback.print_exc()
+    # 打印输出 / Print output
     print("Locals by frame, most recent call first", file=sys.stderr)
     for frame in stack:
         # print the function name and line number of the script
+        # 打印输出 / Print output
         print("Frame {0} in {1} at line {2}".format(
             frame.f_code.co_name,
             frame.f_code.co_filename,
             frame.f_lineno), file=sys.stderr)
         # print each variable defined inside each function
+        # 获取字典的键值对 / Get dict key-value pairs
         for key, value in frame.f_locals.items():
+            # 打印输出 / Print output
             print(f"\t{key} = ", file=sys.stderr)
             try:
                 if '__repr__' in dir(value):
+                    # 打印输出 / Print output
                     print(value.__repr__(), file=sys.stderr)
                 elif '__str__' in dir(value):
+                    # 打印输出 / Print output
                     print(value.__str__(), file=sys.stderr)
                 else:
+                    # 打印输出 / Print output
                     print(value, file=sys.stderr)
             except:
+                # 打印输出 / Print output
                 print("", file=sys.stderr)
 
 def compute():
@@ -565,10 +664,13 @@ def compute():
 
 def compute_many(n_times):
     try:
+        # 生成整数序列 / Generate integer sequence
         for _ in range(n_times):
             x = compute()
+        # 打印输出 / Print output
         print(f"Completed {n_times} times")
     except:
+        # 打印输出 / Print output
         print("Something wrong")
         print_tb_with_local()
 
@@ -605,13 +707,33 @@ This script demonstrates **define model**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 生成等差数组 / Generate array with step
 sequence = np.arange(0.1, 1.0, 0.1)  # 0.1 to 0.9
+# 获取长度 / Get length
 n_in = len(sequence)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 sequence = sequence.reshape((1, n_in, 1))
 ```
 
@@ -619,18 +741,24 @@ sequence = sequence.reshape((1, n_in, 1))
 ## Step 2 — define model
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow as tf
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import LSTM, RepeatVector, Dense, TimeDistributed, Input
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras import Sequential, Model
 
 model = Sequential([
     LSTM(100, activation="relu", input_shape=(n_in+1, 1)),
     RepeatVector(n_in),
     LSTM(100, activation="relu", return_sequences=True),
+    # 全连接层（Keras） / Fully connected layer (Keras)
     TimeDistributed(Dense(1))
 ])
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(optimizer="adam", loss="mse")
 
+# 训练模型 / Train the model
 model.fit(sequence, sequence, epochs=300, verbose=0)
 ```
 
@@ -668,31 +796,41 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 生成等差数组 / Generate array with step
 sequence = np.arange(0.1, 1.0, 0.1)  # 0.1 to 0.9
+# 获取长度 / Get length
 n_in = len(sequence)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 sequence = sequence.reshape((1, n_in, 1))
 
 # define model
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow as tf
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import LSTM, RepeatVector, Dense, TimeDistributed, Input
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras import Sequential, Model
 
 model = Sequential([
     LSTM(100, activation="relu", input_shape=(n_in+1, 1)),
     RepeatVector(n_in),
     LSTM(100, activation="relu", return_sequences=True),
+    # 全连接层（Keras） / Fully connected layer (Keras)
     TimeDistributed(Dense(1))
 ])
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(optimizer="adam", loss="mse")
 
+# 训练模型 / Train the model
 model.fit(sequence, sequence, epochs=300, verbose=0)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 07 Summary / 第07章总结
 

@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 26
 
 ---
@@ -82,5 +82,11 @@ print('Median: %.3f' % quartiles[1])
 print('Q3: %.3f' % quartiles[2])
 print('Max: %.3f' % data_max)
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

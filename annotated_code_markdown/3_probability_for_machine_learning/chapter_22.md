@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 22
 
 ---
@@ -26,6 +26,7 @@ This notebook plots two probability distributions P and Q as bar charts. These d
 ## Step 1 — Define Distributions and Plot / 定义分布并绘制
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot# define distributionsevents = ['red', 'green', 'blue']p = [0.10, 0.40, 0.50]  # Distribution Pq = [0.80, 0.15, 0.05]  # Distribution Qprint('P=%.3f Q=%.3f' % (sum(p), sum(q)))# plot first distribution (P)pyplot.subplot(2, 1, 1)pyplot.bar(events, p)# plot second distribution (Q)pyplot.subplot(2, 1, 2)pyplot.bar(events, q)# show the plotpyplot.show()
 ```
 
@@ -46,6 +47,7 @@ from matplotlib import pyplot# define distributionsevents = ['red', 'green', 'bl
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplotevents = ['red', 'green', 'blue']p = [0.10, 0.40, 0.50]q = [0.80, 0.15, 0.05]print('P=%.3f Q=%.3f' % (sum(p), sum(q)))pyplot.subplot(2,1,1)pyplot.bar(events, p)pyplot.subplot(2,1,2)pyplot.bar(events, q)pyplot.show()
 ```
 
@@ -88,6 +90,7 @@ from math import log2# calculate the kl divergence (forward and reverse)def kl_d
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 from math import log2def kl_divergence(p, q):    return sum(p[i] * log2(p[i]/q[i]) for i in range(len(p)))p = [0.10, 0.40, 0.50]q = [0.80, 0.15, 0.05]kl_pq = kl_divergence(p, q)print('KL(P || Q): %.3f bits' % kl_pq)kl_qp = kl_divergence(q, p)print('KL(Q || P): %.3f bits' % kl_qp)
 ```
 
@@ -130,8 +133,15 @@ from scipy.special import rel_entr# define distributionsp = [0.10, 0.40, 0.50]q 
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 from scipy.special import rel_entrp = [0.10, 0.40, 0.50]q = [0.80, 0.15, 0.05]kl_pq = rel_entr(p, q)print('KL(P || Q): %.3f nats' % sum(kl_pq))kl_qp = rel_entr(q, p)print('KL(Q || P): %.3f nats' % sum(kl_qp))
 ```
+
+---
+
+### Js Divergence
+
+
 
 ---
 
@@ -158,6 +168,7 @@ This notebook calculates Jensen-Shannon distance using scipy.spatial.distance.je
 ## Step 1 — Calculate Jensen-Shannon Distance Using SciPy / 使用SciPy计算Jensen-Shannon距离
 
 ```python
+# 打印输出 / Print output
 from scipy.spatial.distance import jensenshannonfrom numpy import asarray# define distributionsp = asarray([0.10, 0.40, 0.50])q = asarray([0.80, 0.15, 0.05])# calculate JS distance (base=2 for bits)js_pq = jensenshannon(p, q, base=2)print('JS(P || Q) Distance: %.3f' % js_pq)# calculate JS distance (symmetric, so same result)js_qp = jensenshannon(q, p, base=2)print('JS(Q || P) Distance: %.3f' % js_qp)
 ```
 
@@ -178,12 +189,13 @@ from scipy.spatial.distance import jensenshannonfrom numpy import asarray# defin
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 from scipy.spatial.distance import jensenshannonfrom numpy import asarrayp = asarray([0.10, 0.40, 0.50])q = asarray([0.80, 0.15, 0.05])js_pq = jensenshannon(p, q, base=2)print('JS(P || Q) Distance: %.3f' % js_pq)js_qp = jensenshannon(q, p, base=2)print('JS(Q || P) Distance: %.3f' % js_qp)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 22: Divergence Measures
 

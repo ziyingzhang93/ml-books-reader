@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 10
 
 ---
@@ -46,7 +46,9 @@ x = symbols('x')
 ## Step 3 — find the first derivative of sine and cosine with respect to x
 
 ```python
+# 打印输出 / Print output
 print('The first derivative of sine is:', diff(sin(x), x))
+# 打印输出 / Print output
 print('The first derivative of cosine is:', diff(cos(x), x))
 ```
 
@@ -54,7 +56,9 @@ print('The first derivative of cosine is:', diff(cos(x), x))
 ## Step 4 — find the second derivative of sine and cosine with respect to x
 
 ```python
+# 打印输出 / Print output
 print('\nThe second derivative of sine is:', diff(sin(x), x, x))
+# 打印输出 / Print output
 print('The second derivative of cosine is:', diff(cos(x), x, x))
 ```
 
@@ -62,7 +66,9 @@ print('The second derivative of cosine is:', diff(cos(x), x, x))
 ## Step 5 — find the second derivative of sine and cosine with respect to x
 
 ```python
+# 打印输出 / Print output
 print('\nThe second derivative of sine is:', diff(sin(x), x, 2))
+# 打印输出 / Print output
 print('The second derivative of cosine is:', diff(cos(x), x, 2))
 ```
 
@@ -96,21 +102,27 @@ from sympy import symbols
 x = symbols('x')
 
 # find the first derivative of sine and cosine with respect to x
+# 打印输出 / Print output
 print('The first derivative of sine is:', diff(sin(x), x))
+# 打印输出 / Print output
 print('The first derivative of cosine is:', diff(cos(x), x))
 
 # find the second derivative of sine and cosine with respect to x
+# 打印输出 / Print output
 print('\nThe second derivative of sine is:', diff(sin(x), x, x))
+# 打印输出 / Print output
 print('The second derivative of cosine is:', diff(cos(x), x, x))
 
 # find the second derivative of sine and cosine with respect to x
+# 打印输出 / Print output
 print('\nThe second derivative of sine is:', diff(sin(x), x, 2))
+# 打印输出 / Print output
 print('The second derivative of cosine is:', diff(cos(x), x, 2))
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 10 Summary / 第10章总结
 

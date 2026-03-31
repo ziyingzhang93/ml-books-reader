@@ -1,4 +1,4 @@
-# GAN
+# 生成对抗网络 / Generative Adversarial Networks
 ## Chapter 18
 
 ---
@@ -26,21 +26,44 @@ This script demonstrates **create and plot the infogan model for mnist**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+```
+
+---
 ## Step 1 — create and plot the infogan model for mnist
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import Adam
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Reshape
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LeakyReLU
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import BatchNormalization
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.initializers import RandomNormal
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 ```
 
@@ -69,6 +92,7 @@ in_image = Input(shape=in_shape)
 ## Step 5 — downsample to 14x14
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 d = Conv2D(64, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(in_image)
 	d = LeakyReLU(alpha=0.1)(d)
 ```
@@ -77,6 +101,7 @@ d = Conv2D(64, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(in
 ## Step 6 — downsample to 7x7
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 d = Conv2D(128, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
@@ -86,6 +111,7 @@ d = Conv2D(128, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(d
 ## Step 7 — normal
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 d = Conv2D(256, (4,4), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
@@ -95,6 +121,7 @@ d = Conv2D(256, (4,4), padding='same', kernel_initializer=init)(d)
 ## Step 8 — flatten feature maps
 
 ```python
+# 展平层：多维→一维 / Flatten: multi-dim → 1D
 d = Flatten()(d)
 ```
 
@@ -102,6 +129,7 @@ d = Flatten()(d)
 ## Step 9 — real/fake output
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 out_classifier = Dense(1, activation='sigmoid')(d)
 ```
 
@@ -116,6 +144,7 @@ d_model = Model(in_image, out_classifier)
 ## Step 11 — compile d model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 d_model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.0002, beta_1=0.5))
 ```
 
@@ -123,6 +152,7 @@ d_model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.0002, beta_1=0.5
 ## Step 12 — create q model layers
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 q = Dense(128)(d)
 	q = BatchNormalization()(q)
 	q = LeakyReLU(alpha=0.1)(q)
@@ -132,6 +162,7 @@ q = Dense(128)(d)
 ## Step 13 — q model output
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 out_codes = Dense(n_cat, activation='softmax')(q)
 ```
 
@@ -169,6 +200,7 @@ in_lat = Input(shape=(gen_input_size,))
 
 ```python
 n_nodes = 512 * 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	gen = Dense(n_nodes, kernel_initializer=init)(in_lat)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
@@ -179,6 +211,7 @@ n_nodes = 512 * 7 * 7
 ## Step 19 — normal
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 gen = Conv2D(128, (4,4), padding='same', kernel_initializer=init)(gen)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
@@ -257,6 +290,7 @@ model = Model(g_model.input, [d_output, q_output])
 
 ```python
 opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss=['binary_crossentropy', 'categorical_crossentropy'], optimizer=opt)
 	return model
 ```
@@ -337,18 +371,31 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # create and plot the infogan model for mnist
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import Adam
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Reshape
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LeakyReLU
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import BatchNormalization
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.initializers import RandomNormal
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 
 # define the standalone discriminator model
@@ -358,29 +405,37 @@ def define_discriminator(n_cat, in_shape=(28,28,1)):
 	# image input
 	in_image = Input(shape=in_shape)
 	# downsample to 14x14
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	d = Conv2D(64, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(in_image)
 	d = LeakyReLU(alpha=0.1)(d)
 	# downsample to 7x7
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	d = Conv2D(128, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
 	# normal
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	d = Conv2D(256, (4,4), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
 	# flatten feature maps
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	d = Flatten()(d)
 	# real/fake output
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	out_classifier = Dense(1, activation='sigmoid')(d)
 	# define d model
 	d_model = Model(in_image, out_classifier)
 	# compile d model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	d_model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.0002, beta_1=0.5))
 	# create q model layers
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	q = Dense(128)(d)
 	q = BatchNormalization()(q)
 	q = LeakyReLU(alpha=0.1)(q)
 	# q model output
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	out_codes = Dense(n_cat, activation='softmax')(q)
 	# define q model
 	q_model = Model(in_image, out_codes)
@@ -394,11 +449,13 @@ def define_generator(gen_input_size):
 	in_lat = Input(shape=(gen_input_size,))
 	# foundation for 7x7 image
 	n_nodes = 512 * 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	gen = Dense(n_nodes, kernel_initializer=init)(in_lat)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
 	gen = Reshape((7, 7, 512))(gen)
 	# normal
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	gen = Conv2D(128, (4,4), padding='same', kernel_initializer=init)(gen)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
@@ -428,6 +485,7 @@ def define_gan(g_model, d_model, q_model):
 	model = Model(g_model.input, [d_output, q_output])
 	# compile model
 	opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss=['binary_crossentropy', 'categorical_crossentropy'], optimizer=opt)
 	return model
 
@@ -500,26 +558,47 @@ This script demonstrates **example of training an infogan on mnist**.
 ## Step 1 — example of training an infogan on mnist
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import expand_dims
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randint
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.mnist import load_data
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import Adam
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.initializers import RandomNormal
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Reshape
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LeakyReLU
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import BatchNormalization
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -548,6 +627,7 @@ in_image = Input(shape=in_shape)
 ## Step 5 — downsample to 14x14
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 d = Conv2D(64, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(in_image)
 	d = LeakyReLU(alpha=0.1)(d)
 ```
@@ -556,6 +636,7 @@ d = Conv2D(64, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(in
 ## Step 6 — downsample to 7x7
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 d = Conv2D(128, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
@@ -565,6 +646,7 @@ d = Conv2D(128, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(d
 ## Step 7 — normal
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 d = Conv2D(256, (4,4), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
@@ -574,6 +656,7 @@ d = Conv2D(256, (4,4), padding='same', kernel_initializer=init)(d)
 ## Step 8 — flatten feature maps
 
 ```python
+# 展平层：多维→一维 / Flatten: multi-dim → 1D
 d = Flatten()(d)
 ```
 
@@ -581,6 +664,7 @@ d = Flatten()(d)
 ## Step 9 — real/fake output
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 out_classifier = Dense(1, activation='sigmoid')(d)
 ```
 
@@ -595,6 +679,7 @@ d_model = Model(in_image, out_classifier)
 ## Step 11 — compile d model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 d_model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.0002, beta_1=0.5))
 ```
 
@@ -602,6 +687,7 @@ d_model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.0002, beta_1=0.5
 ## Step 12 — create q model layers
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 q = Dense(128)(d)
 	q = BatchNormalization()(q)
 	q = LeakyReLU(alpha=0.1)(q)
@@ -611,6 +697,7 @@ q = Dense(128)(d)
 ## Step 13 — q model output
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 out_codes = Dense(n_cat, activation='softmax')(q)
 ```
 
@@ -648,6 +735,7 @@ in_lat = Input(shape=(gen_input_size,))
 
 ```python
 n_nodes = 512 * 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	gen = Dense(n_nodes, kernel_initializer=init)(in_lat)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
@@ -658,6 +746,7 @@ n_nodes = 512 * 7 * 7
 ## Step 19 — normal
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 gen = Conv2D(128, (4,4), padding='same', kernel_initializer=init)(gen)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
@@ -736,6 +825,7 @@ model = Model(g_model.input, [d_output, q_output])
 
 ```python
 opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss=['binary_crossentropy', 'categorical_crossentropy'], optimizer=opt)
 	return model
 ```
@@ -751,6 +841,7 @@ def load_real_samples():
 ## Step 31 — load dataset
 
 ```python
+# 加载数据集 / Load dataset
 (trainX, _), (_, _) = load_data()
 ```
 
@@ -765,6 +856,7 @@ X = expand_dims(trainX, axis=-1)
 ## Step 33 — convert from ints to floats
 
 ```python
+# 转换数据类型 / Convert data type
 X = X.astype('float32')
 ```
 
@@ -773,6 +865,7 @@ X = X.astype('float32')
 
 ```python
 X = (X - 127.5) / 127.5
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	print(X.shape)
 	return X
 ```
@@ -788,6 +881,7 @@ def generate_real_samples(dataset, n_samples):
 ## Step 36 — choose random instances
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 ix = randint(0, dataset.shape[0], n_samples)
 ```
 
@@ -824,6 +918,7 @@ z_latent = randn(latent_dim * n_samples)
 ## Step 41 — reshape into a batch of inputs for the network
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 z_latent = z_latent.reshape(n_samples, latent_dim)
 ```
 
@@ -903,6 +998,7 @@ X = (X + 1) / 2.0
 ## Step 52 — plot images
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(100):
 ```
 
@@ -941,6 +1037,7 @@ filename1 = 'generated_plot_%04d.png' % (step+1)
 
 ```python
 filename2 = 'model_%04d.h5' % (step+1)
+ # 保存模型到文件 / Save model to file
 	g_model.save(filename2)
 ```
 
@@ -949,7 +1046,9 @@ filename2 = 'model_%04d.h5' % (step+1)
 
 ```python
 filename3 = 'gan_model_%04d.h5' % (step+1)
+ # 保存模型到文件 / Save model to file
 	gan_model.save(filename3)
+ # 打印输出 / Print output
 	print('>Saved: %s, %s, and %s' % (filename1, filename2, filename3))
 ```
 
@@ -964,6 +1063,7 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_cat, n_epochs=100,
 ## Step 60 — calculate the number of batches per training epoch
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 bat_per_epo = int(dataset.shape[0] / n_batch)
 ```
 
@@ -985,6 +1085,7 @@ half_batch = int(n_batch / 2)
 ## Step 63 — manually enumerate epochs
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(n_steps):
 ```
 
@@ -1041,6 +1142,7 @@ _,g_1,g_2 = gan_model.train_on_batch(z_input, [y_gan, cat_codes])
 ## Step 71 — summarize loss on this batch
 
 ```python
+# 打印输出 / Print output
 print('>%d, d[%.3f,%.3f], g[%.3f] q[%.3f]' % (i+1, d_loss1, d_loss2, g_1, g_2))
 ```
 
@@ -1140,26 +1242,47 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of training an infogan on mnist
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import expand_dims
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randint
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.mnist import load_data
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import Adam
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.initializers import RandomNormal
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Reshape
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LeakyReLU
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import BatchNormalization
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # define the standalone discriminator model
@@ -1169,29 +1292,37 @@ def define_discriminator(n_cat, in_shape=(28,28,1)):
 	# image input
 	in_image = Input(shape=in_shape)
 	# downsample to 14x14
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	d = Conv2D(64, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(in_image)
 	d = LeakyReLU(alpha=0.1)(d)
 	# downsample to 7x7
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	d = Conv2D(128, (4,4), strides=(2,2), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
 	# normal
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	d = Conv2D(256, (4,4), padding='same', kernel_initializer=init)(d)
 	d = LeakyReLU(alpha=0.1)(d)
 	d = BatchNormalization()(d)
 	# flatten feature maps
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	d = Flatten()(d)
 	# real/fake output
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	out_classifier = Dense(1, activation='sigmoid')(d)
 	# define d model
 	d_model = Model(in_image, out_classifier)
 	# compile d model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	d_model.compile(loss='binary_crossentropy', optimizer=Adam(lr=0.0002, beta_1=0.5))
 	# create q model layers
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	q = Dense(128)(d)
 	q = BatchNormalization()(q)
 	q = LeakyReLU(alpha=0.1)(q)
 	# q model output
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	out_codes = Dense(n_cat, activation='softmax')(q)
 	# define q model
 	q_model = Model(in_image, out_codes)
@@ -1205,11 +1336,13 @@ def define_generator(gen_input_size):
 	in_lat = Input(shape=(gen_input_size,))
 	# foundation for 7x7 image
 	n_nodes = 512 * 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	gen = Dense(n_nodes, kernel_initializer=init)(in_lat)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
 	gen = Reshape((7, 7, 512))(gen)
 	# normal
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	gen = Conv2D(128, (4,4), padding='same', kernel_initializer=init)(gen)
 	gen = Activation('relu')(gen)
 	gen = BatchNormalization()(gen)
@@ -1239,25 +1372,30 @@ def define_gan(g_model, d_model, q_model):
 	model = Model(g_model.input, [d_output, q_output])
 	# compile model
 	opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss=['binary_crossentropy', 'categorical_crossentropy'], optimizer=opt)
 	return model
 
 # load images
 def load_real_samples():
 	# load dataset
+ # 加载数据集 / Load dataset
 	(trainX, _), (_, _) = load_data()
 	# expand to 3d, e.g. add channels
 	X = expand_dims(trainX, axis=-1)
 	# convert from ints to floats
+ # 转换数据类型 / Convert data type
 	X = X.astype('float32')
 	# scale from [0,255] to [-1,1]
 	X = (X - 127.5) / 127.5
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	print(X.shape)
 	return X
 
 # select real samples
 def generate_real_samples(dataset, n_samples):
 	# choose random instances
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	ix = randint(0, dataset.shape[0], n_samples)
 	# select images and labels
 	X = dataset[ix]
@@ -1270,6 +1408,7 @@ def generate_latent_points(latent_dim, n_cat, n_samples):
 	# generate points in the latent space
 	z_latent = randn(latent_dim * n_samples)
 	# reshape into a batch of inputs for the network
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	z_latent = z_latent.reshape(n_samples, latent_dim)
 	# generate categorical codes
 	cat_codes = randint(0, n_cat, n_samples)
@@ -1296,6 +1435,7 @@ def summarize_performance(step, g_model, gan_model, latent_dim, n_cat, n_samples
 	# scale from [-1,1] to [0,1]
 	X = (X + 1) / 2.0
 	# plot images
+ # 生成整数序列 / Generate integer sequence
 	for i in range(100):
 		# define subplot
 		pyplot.subplot(10, 10, 1 + i)
@@ -1309,21 +1449,26 @@ def summarize_performance(step, g_model, gan_model, latent_dim, n_cat, n_samples
 	pyplot.close()
 	# save the generator model
 	filename2 = 'model_%04d.h5' % (step+1)
+ # 保存模型到文件 / Save model to file
 	g_model.save(filename2)
 	# save the gan model
 	filename3 = 'gan_model_%04d.h5' % (step+1)
+ # 保存模型到文件 / Save model to file
 	gan_model.save(filename3)
+ # 打印输出 / Print output
 	print('>Saved: %s, %s, and %s' % (filename1, filename2, filename3))
 
 # train the generator and discriminator
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_cat, n_epochs=100, n_batch=64):
 	# calculate the number of batches per training epoch
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	bat_per_epo = int(dataset.shape[0] / n_batch)
 	# calculate the number of training iterations
 	n_steps = bat_per_epo * n_epochs
 	# calculate the size of half a batch of samples
 	half_batch = int(n_batch / 2)
 	# manually enumerate epochs
+ # 生成整数序列 / Generate integer sequence
 	for i in range(n_steps):
 		# get randomly selected 'real' samples
 		X_real, y_real = generate_real_samples(dataset, half_batch)
@@ -1340,6 +1485,7 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_cat, n_epochs=100,
 		# update the g via the d and q error
 		_,g_1,g_2 = gan_model.train_on_batch(z_input, [y_gan, cat_codes])
 		# summarize loss on this batch
+  # 打印输出 / Print output
 		print('>%d, d[%.3f,%.3f], g[%.3f] q[%.3f]' % (i+1, d_loss1, d_loss2, g_1, g_2))
 		# evaluate the model performance every 'epoch'
 		if (i+1) % (bat_per_epo * 10) == 0:
@@ -1365,6 +1511,12 @@ train(g_model, d_model, gan_model, dataset, latent_dim, n_cat)
 ---
 
 ➡️ **Next / 下一步**: File 3 of 4
+
+---
+
+### Inference Infogan
+
+
 
 ---
 
@@ -1409,11 +1561,17 @@ This script demonstrates **example of testing different values of the categorica
 
 ```python
 from math import sqrt
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -1435,6 +1593,7 @@ z_latent = randn(latent_dim * n_samples)
 ## Step 4 — reshape into a batch of inputs for the network
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 z_latent = z_latent.reshape(n_samples, latent_dim)
 ```
 
@@ -1442,6 +1601,7 @@ z_latent = z_latent.reshape(n_samples, latent_dim)
 ## Step 5 — define categorical codes
 
 ```python
+# 生成整数序列 / Generate integer sequence
 cat_codes = asarray([digit for _ in range(n_samples)])
 ```
 
@@ -1471,6 +1631,7 @@ def save_plot(examples, n_examples):
 ## Step 9 — plot images
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(n_examples):
 ```
 
@@ -1500,6 +1661,7 @@ pyplot.imshow(examples[i, :, :, 0], cmap='gray_r')
 ## Step 13 — load model
 
 ```python
+# 从文件加载模型 / Load model from file
 model = load_model('model_93700.h5')
 ```
 
@@ -1542,6 +1704,7 @@ z_input, _ = generate_latent_points(latent_dim, n_cat, n_samples, digit)
 ## Step 19 — predict outputs
 
 ```python
+# 用模型做预测 / Make predictions with model
 X = model.predict(z_input)
 ```
 
@@ -1590,11 +1753,17 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # example of testing different values of the categorical control variable
 from math import sqrt
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # generate points in latent space as input for the generator
@@ -1602,8 +1771,10 @@ def generate_latent_points(latent_dim, n_cat, n_samples, digit):
 	# generate points in the latent space
 	z_latent = randn(latent_dim * n_samples)
 	# reshape into a batch of inputs for the network
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	z_latent = z_latent.reshape(n_samples, latent_dim)
 	# define categorical codes
+ # 生成整数序列 / Generate integer sequence
 	cat_codes = asarray([digit for _ in range(n_samples)])
 	# one hot encode
 	cat_codes = to_categorical(cat_codes, num_classes=n_cat)
@@ -1614,6 +1785,7 @@ def generate_latent_points(latent_dim, n_cat, n_samples, digit):
 # create and save a plot of generated images
 def save_plot(examples, n_examples):
 	# plot images
+ # 生成整数序列 / Generate integer sequence
 	for i in range(n_examples):
 		# define subplot
 		pyplot.subplot(sqrt(n_examples), sqrt(n_examples), 1 + i)
@@ -1624,6 +1796,7 @@ def save_plot(examples, n_examples):
 	pyplot.show()
 
 # load model
+# 从文件加载模型 / Load model from file
 model = load_model('model_93700.h5')
 # number of categorical control codes
 n_cat = 10
@@ -1636,6 +1809,7 @@ digit = 1
 # generate points in latent space and control codes
 z_input, _ = generate_latent_points(latent_dim, n_cat, n_samples, digit)
 # predict outputs
+# 用模型做预测 / Make predictions with model
 X = model.predict(z_input)
 # scale from [-1,1] to [0,1]
 X = (X + 1) / 2.0
@@ -1645,7 +1819,7 @@ save_plot(X, n_samples)
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 18 Summary / 第18章总结
 

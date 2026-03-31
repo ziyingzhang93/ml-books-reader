@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Appendix C
 
 ---
@@ -33,7 +33,9 @@ from sympy import *
 
 x = Symbol("x")
 expression = x**2 * sin(cos(x))
+# 打印输出 / Print output
 print(expression)
+# 打印输出 / Print output
 print(diff(expression))
 ```
 
@@ -61,7 +63,9 @@ from sympy import *
 
 x = Symbol("x")
 expression = x**2 * sin(cos(x))
+# 打印输出 / Print output
 print(expression)
+# 打印输出 / Print output
 print(diff(expression))
 ```
 
@@ -101,8 +105,11 @@ from sympy import *
 
 w, x, b = symbols("w x b")
 y = tanh(w*x + b)
+# 打印输出 / Print output
 print(y)
+# 打印输出 / Print output
 print(diff(y, w))
+# 打印输出 / Print output
 print(diff(y, b))
 ```
 
@@ -130,8 +137,11 @@ from sympy import *
 
 w, x, b = symbols("w x b")
 y = tanh(w*x + b)
+# 打印输出 / Print output
 print(y)
+# 打印输出 / Print output
 print(diff(y, w))
+# 打印输出 / Print output
 print(diff(y, b))
 ```
 
@@ -171,8 +181,11 @@ from sympy import *
 from sympy.abc import w, x, b
 
 y = tanh(w*x + b)
+# 打印输出 / Print output
 pprint(y)
+# 打印输出 / Print output
 pprint(diff(y, w))
+# 打印输出 / Print output
 pprint(diff(y, b))
 ```
 
@@ -200,14 +213,17 @@ from sympy import *
 from sympy.abc import w, x, b
 
 y = tanh(w*x + b)
+# 打印输出 / Print output
 pprint(y)
+# 打印输出 / Print output
 pprint(diff(y, w))
+# 打印输出 / Print output
 pprint(diff(y, b))
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter appendix_c Summary / 第appendix_c章总结
 

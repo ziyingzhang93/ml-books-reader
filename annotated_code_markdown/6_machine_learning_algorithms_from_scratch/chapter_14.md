@@ -1,5 +1,11 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 14
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -38,6 +44,7 @@ from math import sqrt
 ```python
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -51,6 +58,7 @@ def get_best_matching_unit(codebooks, test_row):
 	distances = list()
 	for codebook in codebooks:
 		dist = euclidean_distance(codebook, test_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((codebook, dist))
 	distances.sort(key=lambda tup: tup[1])
 	return distances[0][0]
@@ -72,6 +80,7 @@ dataset = [[2.7810836,2.550537003,0],
 	[7.673756466,3.508563011,1]]
 test_row = dataset[0]
 bmu = get_best_matching_unit(dataset, test_row)
+# 打印输出 / Print output
 print(bmu)
 ```
 
@@ -107,6 +116,7 @@ from math import sqrt
 # calculate the Euclidean distance between two vectors
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -116,6 +126,7 @@ def get_best_matching_unit(codebooks, test_row):
 	distances = list()
 	for codebook in codebooks:
 		dist = euclidean_distance(codebook, test_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((codebook, dist))
 	distances.sort(key=lambda tup: tup[1])
 	return distances[0][0]
@@ -133,12 +144,25 @@ dataset = [[2.7810836,2.550537003,0],
 	[7.673756466,3.508563011,1]]
 test_row = dataset[0]
 bmu = get_best_matching_unit(dataset, test_row)
+# 打印输出 / Print output
 print(bmu)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 2 of 4
+
+---
+
+### Euclidean Distance
+
+
+
+---
+
+### Lvq Ionosphere
+
+
 
 ---
 
@@ -179,6 +203,7 @@ from random import seed
 ```python
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -192,6 +217,7 @@ def get_best_matching_unit(codebooks, test_row):
 	distances = list()
 	for codebook in codebooks:
 		dist = euclidean_distance(codebook, test_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((codebook, dist))
 	distances.sort(key=lambda tup: tup[1])
 	return distances[0][0]
@@ -202,8 +228,11 @@ def get_best_matching_unit(codebooks, test_row):
 
 ```python
 def random_codebook(train):
+ # 获取长度 / Get length
 	n_records = len(train)
+ # 获取长度 / Get length
 	n_features = len(train[0])
+ # 生成整数序列 / Generate integer sequence
 	codebook = [train[randrange(n_records)][i] for i in range(n_features)]
 	return codebook
 ```
@@ -213,12 +242,15 @@ def random_codebook(train):
 
 ```python
 def train_codebooks(train, n_codebooks, lrate, epochs):
+ # 生成整数序列 / Generate integer sequence
 	codebooks = [random_codebook(train) for i in range(n_codebooks)]
+ # 生成整数序列 / Generate integer sequence
 	for epoch in range(epochs):
 		rate = lrate * (1.0-(epoch/float(epochs)))
 		sum_error = 0.0
 		for row in train:
 			bmu = get_best_matching_unit(codebooks, row)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				error = row[i] - bmu[i]
 				sum_error += error**2
@@ -226,6 +258,7 @@ def train_codebooks(train, n_codebooks, lrate, epochs):
 					bmu[i] += rate * error
 				else:
 					bmu[i] -= rate * error
+  # 打印输出 / Print output
 		print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, rate, sum_error))
 	return codebooks
 ```
@@ -234,6 +267,7 @@ def train_codebooks(train, n_codebooks, lrate, epochs):
 ## Step 6 — Test the training function
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[2.7810836,2.550537003,0],
 	[1.465489372,2.362125076,0],
@@ -249,6 +283,7 @@ learn_rate = 0.3
 n_epochs = 10
 n_codebooks = 2
 codebooks = train_codebooks(dataset, n_codebooks, learn_rate, n_epochs)
+# 打印输出 / Print output
 print('Codebooks: %s' % codebooks)
 ```
 
@@ -287,6 +322,7 @@ from random import seed
 # calculate the Euclidean distance between two vectors
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -296,25 +332,32 @@ def get_best_matching_unit(codebooks, test_row):
 	distances = list()
 	for codebook in codebooks:
 		dist = euclidean_distance(codebook, test_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((codebook, dist))
 	distances.sort(key=lambda tup: tup[1])
 	return distances[0][0]
 
 # Create a random codebook vector
 def random_codebook(train):
+ # 获取长度 / Get length
 	n_records = len(train)
+ # 获取长度 / Get length
 	n_features = len(train[0])
+ # 生成整数序列 / Generate integer sequence
 	codebook = [train[randrange(n_records)][i] for i in range(n_features)]
 	return codebook
 
 # Train a set of codebook vectors
 def train_codebooks(train, n_codebooks, lrate, epochs):
+ # 生成整数序列 / Generate integer sequence
 	codebooks = [random_codebook(train) for i in range(n_codebooks)]
+ # 生成整数序列 / Generate integer sequence
 	for epoch in range(epochs):
 		rate = lrate * (1.0-(epoch/float(epochs)))
 		sum_error = 0.0
 		for row in train:
 			bmu = get_best_matching_unit(codebooks, row)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				error = row[i] - bmu[i]
 				sum_error += error**2
@@ -322,10 +365,12 @@ def train_codebooks(train, n_codebooks, lrate, epochs):
 					bmu[i] += rate * error
 				else:
 					bmu[i] -= rate * error
+  # 打印输出 / Print output
 		print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, rate, sum_error))
 	return codebooks
 
 # Test the training function
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 dataset = [[2.7810836,2.550537003,0],
 	[1.465489372,2.362125076,0],
@@ -341,6 +386,7 @@ learn_rate = 0.3
 n_epochs = 10
 n_codebooks = 2
 codebooks = train_codebooks(dataset, n_codebooks, learn_rate, n_epochs)
+# 打印输出 / Print output
 print('Codebooks: %s' % codebooks)
 ```
 

@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 12
 
 ---
@@ -34,15 +34,22 @@ from sympy.abc import x
 
 expression = ln(x-1)/(x-2)
 result = limit(expression, x, 2)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = 2 is", result)
+# 打印输出 / Print output
 print()
 
 expression = ln(x)/x
 result = limit(expression, x, oo)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = infinity is", result)
 ```
 
@@ -71,15 +78,22 @@ from sympy.abc import x
 
 expression = ln(x-1)/(x-2)
 result = limit(expression, x, 2)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = 2 is", result)
+# 打印输出 / Print output
 print()
 
 expression = ln(x)/x
 result = limit(expression, x, oo)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = infinity is", result)
 ```
 
@@ -120,22 +134,33 @@ from sympy.abc import x
 
 expression = x * sin(1/x)
 result = limit(expression, x, oo)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = infinity is", result)
+# 打印输出 / Print output
 print()
 
 expression = 1/(1-cos(x)) - 1/x
 result = limit(expression, x, 0)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = 0 is", result)
+# 打印输出 / Print output
 print()
 
 expression = (1+x)**(1/x)
 result = limit(expression, x, oo)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = infinity is", result)
 ```
 
@@ -164,28 +189,39 @@ from sympy.abc import x
 
 expression = x * sin(1/x)
 result = limit(expression, x, oo)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = infinity is", result)
+# 打印输出 / Print output
 print()
 
 expression = 1/(1-cos(x)) - 1/x
 result = limit(expression, x, 0)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = 0 is", result)
+# 打印输出 / Print output
 print()
 
 expression = (1+x)**(1/x)
 result = limit(expression, x, oo)
+# 打印输出 / Print output
 print("Limit of")
+# 打印输出 / Print output
 pprint(expression)
+# 打印输出 / Print output
 print("at x = infinity is", result)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 12 Summary / 第12章总结
 

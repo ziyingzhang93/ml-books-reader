@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 10
 
 ---
@@ -32,12 +32,15 @@ where $\mu$ is the mean and $\sigma$ is the standard deviation.
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from scipy.stats import norm
 
 # 创建样本空间：从-5到5，步长0.001
 # Create sample space: from -5 to 5 with step 0.001
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(-5, 5, 0.001)
 ```
 
@@ -50,7 +53,9 @@ pdf = norm.pdf(sample_space, 0.0, 1.0)
 
 # 打印前几个值检查
 # Print first few values for inspection
+# 打印输出 / Print output
 print("First 5 PDF values:")
+# 打印输出 / Print output
 print(pdf[:5])
 ```
 
@@ -72,7 +77,9 @@ pyplot.show()
 # 1. 对称性 (Symmetry)：关于均值对称 (symmetric around mean)
 # 2. 峰值 (Peak)：在均值处达到最大值 (maximum at mean)
 # 3. 尾部 (Tails)：渐近于零 (asymptotic to zero)
+# 打印输出 / Print output
 print(f"Maximum PDF value: {pdf.max():.6f}")
+# 打印输出 / Print output
 print(f"Location of maximum: x = {sample_space[pdf.argmax()]:.3f}")
 ```
 
@@ -94,11 +101,14 @@ print(f"Location of maximum: x = {sample_space[pdf.argmax()]:.3f}")
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from scipy.stats import norm
 
 # Create sample space from -5 to 5 with step 0.001
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(-5, 5, 0.001)
 
 # Compute Gaussian PDF with mean=0.0, std=1.0
@@ -113,7 +123,9 @@ pyplot.title('Gaussian PDF (μ=0, σ=1)')
 pyplot.grid(True, alpha=0.3)
 pyplot.show()
 
+# 打印输出 / Print output
 print(f"Maximum PDF value: {pdf.max():.6f}")
+# 打印输出 / Print output
 print(f"Location of maximum: x = {sample_space[pdf.argmax()]:.3f}")
 ```
 
@@ -146,12 +158,15 @@ $$F(x) = P(X \leq x) = \int_{-\infty}^{x} \frac{1}{\sigma\sqrt{2\pi}} \exp\left(
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from scipy.stats import norm
 
 # 创建样本空间：从-5到5，步长0.001
 # Create sample space: from -5 to 5 with step 0.001
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(-5, 5, 0.001)
 ```
 
@@ -164,12 +179,16 @@ cdf = norm.cdf(sample_space)
 
 # CDF的关键性质：
 # Key properties of CDF:
+# 打印输出 / Print output
 print(f"CDF at x=-5: {cdf[0]:.6f}")
+# 打印输出 / Print output
 print(f"CDF at x=0 (mean): {norm.cdf(0):.6f}")
+# 打印输出 / Print output
 print(f"CDF at x=5: {cdf[-1]:.6f}")
 
 # CDF单调递增，从0到1
 # CDF is monotonically increasing from 0 to 1
+# 打印输出 / Print output
 print(f"CDF is monotonic: {(cdf == sorted(cdf)).all()}")
 ```
 
@@ -199,8 +218,11 @@ prob_less_than_0 = norm.cdf(0)
 prob_less_than_1 = norm.cdf(1)
 prob_between_0_and_1 = prob_less_than_1 - prob_less_than_0
 
+# 打印输出 / Print output
 print(f"P(X ≤ 0) = {prob_less_than_0:.4f}")
+# 打印输出 / Print output
 print(f"P(X ≤ 1) = {prob_less_than_1:.4f}")
+# 打印输出 / Print output
 print(f"P(0 < X ≤ 1) = {prob_between_0_and_1:.4f}")
 
 # 68-95-99.7规则（经验法则）
@@ -209,9 +231,13 @@ within_1_sigma = norm.cdf(1) - norm.cdf(-1)
 within_2_sigma = norm.cdf(2) - norm.cdf(-2)
 within_3_sigma = norm.cdf(3) - norm.cdf(-3)
 
+# 打印输出 / Print output
 print(f"\nEmpirical Rule / 经验法则:")
+# 打印输出 / Print output
 print(f"Within 1σ: {within_1_sigma:.4f} (≈68%)")
+# 打印输出 / Print output
 print(f"Within 2σ: {within_2_sigma:.4f} (≈95%)")
+# 打印输出 / Print output
 print(f"Within 3σ: {within_3_sigma:.4f} (≈99.7%)")
 ```
 
@@ -233,11 +259,14 @@ print(f"Within 3σ: {within_3_sigma:.4f} (≈99.7%)")
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from scipy.stats import norm
 
 # Create sample space from -5 to 5
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(-5, 5, 0.001)
 
 # Compute Gaussian CDF
@@ -257,7 +286,9 @@ pyplot.show()
 # Compute probabilities
 prob_between_0_and_1 = norm.cdf(1) - norm.cdf(0)
 within_1_sigma = norm.cdf(1) - norm.cdf(-1)
+# 打印输出 / Print output
 print(f"P(0 < X ≤ 1) = {prob_between_0_and_1:.4f}")
+# 打印输出 / Print output
 print(f"Within 1σ: {within_1_sigma:.4f}")
 ```
 
@@ -307,8 +338,10 @@ where $\nu$ is the degrees of freedom.
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 from scipy.stats import t, norm
@@ -319,6 +352,7 @@ from scipy.stats import t, norm
 
 # Create sample space
 
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(-5, 5, 0.001)
 ```
 
@@ -329,8 +363,10 @@ sample_space = arange(-5, 5, 0.001)
 
 # Use degrees of freedom = len(sample_space) - 1
 
+# 获取长度 / Get length
 dof = len(sample_space) - 1
 
+# 打印输出 / Print output
 print(f"Degrees of freedom: {dof}")
 
 
@@ -377,8 +413,10 @@ pyplot.show()
 
 
 
+# 打印输出 / Print output
 print(f"Max t-PDF: {pdf_t.max():.6f}")
 
+# 打印输出 / Print output
 print(f"Max Gaussian PDF: {pdf_gaussian.max():.6f}")
 ```
 
@@ -431,8 +469,10 @@ pyplot.show()
 
 
 
+# 打印输出 / Print output
 print("Notice: t 分布有更厚的尾部（heavier tails）")
 
+# 打印输出 / Print output
 print("Notice: t-distribution has heavier tails than Gaussian")
 ```
 
@@ -458,16 +498,20 @@ print("Notice: t-distribution has heavier tails than Gaussian")
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 from scipy.stats import t, norm
 
 
 
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(-5, 5, 0.001)
 
+# 获取长度 / Get length
 dof = len(sample_space) - 1
 
 
@@ -531,6 +575,12 @@ pyplot.show()
 
 ---
 
+### Students T Cdf
+
+
+
+---
+
 ### Chi Squared Pdf
 
 # 10.5 — Chi-Squared Probability Density Function / 卡方概率密度函数
@@ -574,8 +624,10 @@ where $k$ is the degrees of freedom (positive integer).
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 from scipy.stats import chi2
@@ -586,6 +638,7 @@ from scipy.stats import chi2
 
 # Create sample space: from 0 to 50 (chi-squared only has positive values)
 
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(0, 50, 0.01)
 ```
 
@@ -608,12 +661,16 @@ pdf = chi2.pdf(sample_space, dof)
 
 
 
+# 打印输出 / Print output
 print(f"Degrees of freedom: {dof}")
 
+# 打印输出 / Print output
 print(f"Mean of chi-squared: {dof}")
 
+# 打印输出 / Print output
 print(f"Variance of chi-squared: {2*dof}")
 
+# 打印输出 / Print output
 print(f"Max PDF value: {pdf.max():.6f}")
 ```
 
@@ -682,14 +739,19 @@ pyplot.show()
 
 
 
+# 打印输出 / Print output
 print("Key observations / 关键观察:")
 
+# 打印输出 / Print output
 print("1. 小自由度：分布更陡峭（Small df: distribution more skewed）")
 
+# 打印输出 / Print output
 print("2. 大自由度：分布更对称（Large df: distribution more symmetric）")
 
+# 打印输出 / Print output
 print("3. 均值 = 自由度 (Mean = df)")
 
+# 打印输出 / Print output
 print("4. 总是右偏（Always right-skewed）")
 ```
 
@@ -702,6 +764,7 @@ print("4. 总是右偏（Always right-skewed）")
 
 from scipy.stats import chi2
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 
@@ -724,20 +787,27 @@ kurt_val = chi2.stats(dof_val, moments='k')
 
 
 
+# 打印输出 / Print output
 print(f"Chi-Squared Distribution (df={dof_val}):")
 
+# 打印输出 / Print output
 print(f"Mean / 均值: {mean_val:.4f}")
 
+# 打印输出 / Print output
 print(f"Variance / 方差: {var_val:.4f}")
 
+# 打印输出 / Print output
 print(f"Standard Deviation / 标准差: {np.sqrt(var_val):.4f}")
 
+# 打印输出 / Print output
 print(f"Skewness / 偏度: {skew_val:.4f}")
 
+# 打印输出 / Print output
 print(f"Excess Kurtosis / 超额峰度: {kurt_val:.4f}")
 
 
 
+# 打印输出 / Print output
 print(f"\n68% of data within [μ-σ, μ+σ] / 68% 数据在 [μ-σ, μ+σ] 内")
 
 lower = mean_val - np.sqrt(var_val)
@@ -746,6 +816,7 @@ upper = mean_val + np.sqrt(var_val)
 
 prob = chi2.cdf(upper, dof_val) - chi2.cdf(max(0, lower), dof_val)
 
+# 打印输出 / Print output
 print(f"Actual probability / 实际概率: {prob:.4f}")
 ```
 
@@ -771,16 +842,20 @@ print(f"Actual probability / 实际概率: {prob:.4f}")
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 from scipy.stats import chi2
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 
 
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(0, 50, 0.01)
 
 dof = 20
@@ -885,8 +960,10 @@ The chi-squared CDF is used to compute p-values and critical values for chi-squa
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 from scipy.stats import chi2
@@ -897,6 +974,7 @@ from scipy.stats import chi2
 
 # Create sample space
 
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(0, 50, 0.01)
 ```
 
@@ -919,10 +997,13 @@ cdf = chi2.cdf(sample_space, dof)
 
 
 
+# 打印输出 / Print output
 print(f"Degrees of freedom: {dof}")
 
+# 打印输出 / Print output
 print(f"CDF at x={dof}: {chi2.cdf(dof, dof):.4f}")
 
+# 打印输出 / Print output
 print(f"This means ~{chi2.cdf(dof, dof)*100:.1f}% of values are below the mean")
 ```
 
@@ -965,8 +1046,10 @@ alpha_levels = [0.10, 0.05, 0.01]
 
 
 
+# 打印输出 / Print output
 print(f"Critical values for χ² distribution (df={dof}):")
 
+# 打印输出 / Print output
 print("="*50)
 
 
@@ -975,12 +1058,16 @@ for alpha in alpha_levels:
 
     critical_value = chi2.ppf(1 - alpha, dof)
 
+    # 打印输出 / Print output
     print(f"α = {alpha} (significance level):")
 
+    # 打印输出 / Print output
     print(f"  Critical value: {critical_value:.4f}")
 
+    # 打印输出 / Print output
     print(f"  Reject H0 if χ² > {critical_value:.4f}")
 
+    # 打印输出 / Print output
     print()
 ```
 
@@ -1051,20 +1138,28 @@ p_value = 1 - chi2.cdf(observed_chi2, dof_test)
 
 
 
+# 打印输出 / Print output
 print(f"Hypothesis Test / 假设检验:")
 
+# 打印输出 / Print output
 print(f"Null Hypothesis (H0): Data follows expected distribution")
 
+# 打印输出 / Print output
 print(f"Alternative Hypothesis (H1): Data does not follow expected distribution")
 
+# 打印输出 / Print output
 print()
 
+# 打印输出 / Print output
 print(f"Observed χ² statistic: {observed_chi2:.4f}")
 
+# 打印输出 / Print output
 print(f"Degrees of freedom: {dof_test}")
 
+# 打印输出 / Print output
 print(f"p-value: {p_value:.6f}")
 
+# 打印输出 / Print output
 print()
 
 
@@ -1077,14 +1172,18 @@ alpha_test = 0.05
 
 if p_value < alpha_test:
 
+    # 打印输出 / Print output
     print(f"Result / 结果: REJECT H0 (p-value = {p_value:.6f} < α = {alpha_test})")
 
+    # 打印输出 / Print output
     print("Data significantly differs from expected distribution")
 
 else:
 
+    # 打印输出 / Print output
     print(f"Result / 结果: FAIL TO REJECT H0 (p-value = {p_value:.6f} >= α = {alpha_test})")
 
+    # 打印输出 / Print output
     print("Data is consistent with expected distribution")
 ```
 
@@ -1110,14 +1209,17 @@ else:
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
 
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 from scipy.stats import chi2
 
 
 
+# 生成整数序列 / Generate integer sequence
 sample_space = arange(0, 50, 0.01)
 
 dof = 20
@@ -1152,12 +1254,14 @@ pyplot.show()
 
 # Critical values
 
+# 打印输出 / Print output
 print(f"Critical values for χ² (df={dof}):")
 
 for alpha in [0.10, 0.05, 0.01]:
 
     critical = chi2.ppf(1 - alpha, dof)
 
+    # 打印输出 / Print output
     print(f"α = {alpha}: {critical:.4f}")
 
 
@@ -1170,12 +1274,13 @@ dof_test = 10
 
 p_value = 1 - chi2.cdf(observed_chi2, dof_test)
 
+# 打印输出 / Print output
 print(f"\nObserved χ² = {observed_chi2}, p-value = {p_value:.6f}")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 10: Distribution Functions
 # 第10章：分布函数

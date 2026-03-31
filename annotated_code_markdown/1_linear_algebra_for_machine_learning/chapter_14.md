@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 14
 
 ---
@@ -37,6 +37,7 @@ A 3D tensor T with shape (3, 3, 3) contains 27 elements arranged in 3 matrices o
 Create a 3×3×3 tensor (3D array) to introduce tensor data structure.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create a 3D tensor (3x3x3 array)
@@ -47,11 +48,16 @@ T = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("Tensor T shape / 张量 T 的形状:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"T.shape = {T.shape}")
+# 打印输出 / Print output
 print(f"T 的维度 = {T.ndim}")
 
+# 打印输出 / Print output
 print("\nTensor T / 张量 T:")
+# 打印输出 / Print output
 print(T)
 ```
 
@@ -65,17 +71,23 @@ Access elements and sub-tensors of the 3D tensor.
 
 # Get the first matrix (2D slice)
 # 获取第一个矩阵（2D 切片）
+# 打印输出 / Print output
 print("First matrix T[0] / 第一个矩阵 T[0]:")
+# 打印输出 / Print output
 print(T[0])
 
 # Get a specific row from the first matrix
 # 从第一个矩阵获取特定行
+# 打印输出 / Print output
 print("\nFirst row of first matrix T[0,0] / 第一个矩阵的第一行 T[0,0]:")
+# 打印输出 / Print output
 print(T[0,0])
 
 # Get a single element
 # 获取单个元素
+# 打印输出 / Print output
 print("\nSingle element T[0,0,0] / 单个元素 T[0,0,0]:")
+# 打印输出 / Print output
 print(T[0,0,0])
 ```
 
@@ -87,19 +99,29 @@ Explore key properties of the tensor.
 # Tensor properties
 # 张量的属性
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape (dimensions): {T.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"形状（维度）：{T.shape}")
 
+# 打印输出 / Print output
 print(f"\nNumber of dimensions (ndim): {T.ndim}")
+# 打印输出 / Print output
 print(f"维度数（ndim）：{T.ndim}")
 
+# 打印输出 / Print output
 print(f"\nTotal elements (size): {T.size}")
+# 打印输出 / Print output
 print(f"总元素数（size）：{T.size}")
 
+# 打印输出 / Print output
 print(f"\nData type (dtype): {T.dtype}")
+# 打印输出 / Print output
 print(f"数据类型（dtype）：{T.dtype}")
 
+# 打印输出 / Print output
 print(f"\nExplanation: A 3×3×3 tensor contains {T.size} elements")
+# 打印输出 / Print output
 print(f"解释：一个 3×3×3 张量包含 {T.size} 个元素")
 ```
 
@@ -121,6 +143,7 @@ print(f"解释：一个 3×3×3 张量包含 {T.size} 个元素")
 
 ```python
 # --- Create Tensor / 创建张量 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Step 1: Create a 3D tensor
@@ -131,23 +154,35 @@ T = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("Tensor T shape / 张量 T 的形状:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"T.shape = {T.shape}")
+# 打印输出 / Print output
 print(f"T.ndim = {T.ndim}")
+# 打印输出 / Print output
 print(f"T.size = {T.size}")
 
 # Step 2: Tensor indexing and slicing
 # 步骤 2：张量索引和切片
+# 打印输出 / Print output
 print("\nFirst matrix T[0] / 第一个矩阵 T[0]:")
+# 打印输出 / Print output
 print(T[0])
 
+# 打印输出 / Print output
 print("\nFirst row of first matrix T[0,0] / 第一个矩阵的第一行 T[0,0]:")
+# 打印输出 / Print output
 print(T[0,0])
 
+# 打印输出 / Print output
 print("\nSingle element T[0,0,0] / 单个元素 T[0,0,0]:")
+# 打印输出 / Print output
 print(T[0,0,0])
 
+# 打印输出 / Print output
 print("\nFull tensor / 完整张量:")
+# 打印输出 / Print output
 print(T)
 ```
 
@@ -184,6 +219,7 @@ Element-wise addition requires both tensors to have identical shapes. Broadcasti
 Create two 3×3×3 tensors to demonstrate addition.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create first 3D tensor
@@ -194,8 +230,11 @@ A = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("Tensor A / 张量 A:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {A.shape}")
+# 打印输出 / Print output
 print(A)
 
 # Create second 3D tensor (same shape)
@@ -206,8 +245,11 @@ B = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("\nTensor B / 张量 B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {B.shape}")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -220,13 +262,20 @@ Add the two tensors element-wise using the `+` operator.
 # 执行逐元素加法
 C = A + B
 
+# 打印输出 / Print output
 print("Result C = A + B / 结果 C = A + B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {C.shape}")
+# 打印输出 / Print output
 print(C)
 
+# 打印输出 / Print output
 print("\nVerification (sample elements) / 验证（样本元素）:")
+# 打印输出 / Print output
 print(f"A[0,0,0] + B[0,0,0] = {A[0,0,0]} + {B[0,0,0]} = {C[0,0,0]}")
+# 打印输出 / Print output
 print(f"A[1,1,1] + B[1,1,1] = {A[1,1,1]} + {B[1,1,1]} = {C[1,1,1]}")
+# 打印输出 / Print output
 print(f"A[2,2,2] + B[2,2,2] = {A[2,2,2]} + {B[2,2,2]} = {C[2,2,2]}")
 ```
 
@@ -248,6 +297,7 @@ print(f"A[2,2,2] + B[2,2,2] = {A[2,2,2]} + {B[2,2,2]} = {C[2,2,2]}")
 
 ```python
 # --- Tensor Addition / 张量加法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Step 1: Create two 3D tensors
@@ -264,19 +314,31 @@ B = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("Tensor A / 张量 A (shape: 3x3x3):")
+# 打印输出 / Print output
 print(A)
 
+# 打印输出 / Print output
 print("\nTensor B / 张量 B (shape: 3x3x3):")
+# 打印输出 / Print output
 print(B)
 
 # Step 2: Perform tensor addition
 # 步骤 2：执行张量加法
 C = A + B
 
+# 打印输出 / Print output
 print("\nResult C = A + B / 结果 C = A + B (shape: 3x3x3):")
+# 打印输出 / Print output
 print(C)
 ```
+
+---
+
+### Tensor Subtraction
+
+
 
 ---
 
@@ -311,6 +373,7 @@ Properties: Commutative ($A \odot B = B \odot A$), Associative ($(A \odot B) \od
 Create two 3×3×3 tensors for Hadamard product demonstration.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create first 3D tensor
@@ -321,8 +384,11 @@ A = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("Tensor A / 张量 A:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {A.shape}")
+# 打印输出 / Print output
 print(A)
 
 # Create second 3D tensor (same shape)
@@ -333,8 +399,11 @@ B = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("\nTensor B / 张量 B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {B.shape}")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -347,13 +416,20 @@ Multiply tensors element-wise using the `*` operator (in NumPy, `*` is Hadamard 
 # 执行逐元素乘法（Hadamard 积）
 C = A * B
 
+# 打印输出 / Print output
 print("Result C = A ⊙ B (Hadamard product) / 结果 C = A ⊙ B（Hadamard 积）:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {C.shape}")
+# 打印输出 / Print output
 print(C)
 
+# 打印输出 / Print output
 print("\nVerification (sample elements) / 验证（样本元素）:")
+# 打印输出 / Print output
 print(f"A[0,0,0] * B[0,0,0] = {A[0,0,0]} * {B[0,0,0]} = {C[0,0,0]}")
+# 打印输出 / Print output
 print(f"A[1,1,1] * B[1,1,1] = {A[1,1,1]} * {B[1,1,1]} = {C[1,1,1]}")
+# 打印输出 / Print output
 print(f"A[2,2,2] * B[2,2,2] = {A[2,2,2]} * {B[2,2,2]} = {C[2,2,2]}")
 ```
 
@@ -367,7 +443,9 @@ Demonstrate key properties of the Hadamard product.
 C1 = A * B
 C2 = B * A
 
+# 打印输出 / Print output
 print("Commutativity property / 可交换性质:")
+# 打印输出 / Print output
 print(f"A ⊙ B == B ⊙ A: {(C1 == C2).all()}")
 
 # Test with a zero tensor
@@ -375,6 +453,7 @@ print(f"A ⊙ B == B ⊙ A: {(C1 == C2).all()}")
 Zero = array([[[0]*3]*3]*3)
 C3 = A * Zero
 
+# 打印输出 / Print output
 print(f"\nA ⊙ 0 = 0: {(C3 == Zero).all()}")
 
 # Test with an identity tensor (all ones)
@@ -382,6 +461,7 @@ print(f"\nA ⊙ 0 = 0: {(C3 == Zero).all()}")
 Ones = array([[[1]*3]*3]*3)
 C4 = A * Ones
 
+# 打印输出 / Print output
 print(f"A ⊙ 1 = A: {(C4 == A).all()}")
 ```
 
@@ -404,6 +484,7 @@ print(f"A ⊙ 1 = A: {(C4 == A).all()}")
 
 ```python
 # --- Tensor Hadamard Product / 张量 Hadamard 积 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Step 1: Create two 3D tensors
@@ -420,23 +501,30 @@ B = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ])
 
+# 打印输出 / Print output
 print("Tensor A / 张量 A (shape: 3x3x3):")
+# 打印输出 / Print output
 print(A)
 
+# 打印输出 / Print output
 print("\nTensor B / 张量 B (shape: 3x3x3):")
+# 打印输出 / Print output
 print(B)
 
 # Step 2: Perform Hadamard product (element-wise multiplication)
 # 步骤 2：执行 Hadamard 积（逐元素乘法）
 C = A * B
 
+# 打印输出 / Print output
 print("\nResult C = A ⊙ B (Hadamard product) / 结果 C = A ⊙ B（Hadamard 积）:")
+# 打印输出 / Print output
 print(C)
 
 # Step 3: Verify commutativity
 # 步骤 3：验证可交换性
 C1 = A * B
 C2 = B * A
+# 打印输出 / Print output
 print(f"\nCommutativity: A ⊙ B == B ⊙ A: {(C1 == C2).all()}")
 ```
 
@@ -473,6 +561,7 @@ Care required: $B_{ijk...} \neq 0$ for all elements. Division by zero results in
 Create two 3×3×3 tensors for division demonstration.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create first 3D tensor
@@ -483,8 +572,11 @@ A = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ], dtype=float)
 
+# 打印输出 / Print output
 print("Tensor A / 张量 A:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {A.shape}")
+# 打印输出 / Print output
 print(A)
 
 # Create second 3D tensor (same shape, all positive)
@@ -495,8 +587,11 @@ B = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ], dtype=float)
 
+# 打印输出 / Print output
 print("\nTensor B / 张量 B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {B.shape}")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -509,13 +604,20 @@ Divide tensor A by tensor B element-wise using the `/` operator.
 # 执行逐元素除法
 C = A / B
 
+# 打印输出 / Print output
 print("Result C = A / B (Element-wise division) / 结果 C = A / B（逐元素除法）:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {C.shape}")
+# 打印输出 / Print output
 print(C)
 
+# 打印输出 / Print output
 print("\nVerification (sample elements) / 验证（样本元素）:")
+# 打印输出 / Print output
 print(f"A[0,0,0] / B[0,0,0] = {A[0,0,0]} / {B[0,0,0]} = {C[0,0,0]}")
+# 打印输出 / Print output
 print(f"A[1,1,1] / B[1,1,1] = {A[1,1,1]} / {B[1,1,1]} = {C[1,1,1]}")
+# 打印输出 / Print output
 print(f"A[2,2,2] / B[2,2,2] = {A[2,2,2]} / {B[2,2,2]} = {C[2,2,2]}")
 ```
 
@@ -529,25 +631,35 @@ Demonstrate that division is not commutative and show handling of division by ze
 C1 = A / B
 C2 = B / A
 
+# 打印输出 / Print output
 print("Non-commutativity property / 非交换性质:")
+# 打印输出 / Print output
 print(f"A / B == B / A: {(C1 == C2).all()}")
+# 打印输出 / Print output
 print(f"\nA/B at [0,0,0]: {C1[0,0,0]}")
+# 打印输出 / Print output
 print(f"B/A at [0,0,0]: {C2[0,0,0]}")
 
 # Handle division by zero
 # 处理被零除
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 B_with_zero = B.copy()
 B_with_zero[0,0,0] = 0  # Set one element to zero
 
+# 打印输出 / Print output
 print("\nDivision by zero handling / 被零除处理:")
 C3 = A / B_with_zero
+# 打印输出 / Print output
 print(f"A[0,0,0] / 0 = {C3[0,0,0]}")
+# 打印输出 / Print output
 print(f"Result is inf (infinity) / 结果是 inf（无穷大）")
 
 # Check for NaN or inf
 # 检查 NaN 或 inf
+# 打印输出 / Print output
 print(f"\nContains inf: {np.isinf(C3).any()}")
+# 打印输出 / Print output
 print(f"Contains nan: {np.isnan(C3).any()}")
 ```
 
@@ -569,7 +681,9 @@ print(f"Contains nan: {np.isnan(C3).any()}")
 
 ```python
 # --- Tensor Division / 张量除法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Step 1: Create two 3D tensors
@@ -586,24 +700,32 @@ B = array([
   [[21,22,23], [24,25,26], [27,28,29]]
 ], dtype=float)
 
+# 打印输出 / Print output
 print("Tensor A / 张量 A (shape: 3x3x3):")
+# 打印输出 / Print output
 print(A)
 
+# 打印输出 / Print output
 print("\nTensor B / 张量 B (shape: 3x3x3):")
+# 打印输出 / Print output
 print(B)
 
 # Step 2: Perform element-wise division
 # 步骤 2：执行逐元素除法
 C = A / B
 
+# 打印输出 / Print output
 print("\nResult C = A / B (Element-wise division) / 结果 C = A / B（逐元素除法）:")
+# 打印输出 / Print output
 print(C)
 
 # Step 3: Test non-commutativity
 # 步骤 3：测试非交换性
 C1 = A / B
 C2 = B / A
+# 打印输出 / Print output
 print(f"\nA / B == B / A: {(C1 == C2).all()}")
+# 打印输出 / Print output
 print(f"Division is NOT commutative / 除法不是可交换的")
 ```
 
@@ -641,23 +763,31 @@ Result shape: (m, n) for vectors of lengths m and n
 Create two 1D vectors (arrays) for tensor product computation.
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import tensordot
 
 # Create first vector
 # 创建第一个向量
 A = array([1, 2])
 
+# 打印输出 / Print output
 print("Vector A / 向量 A:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {A.shape}")
+# 打印输出 / Print output
 print(A)
 
 # Create second vector
 # 创建第二个向量
 B = array([3, 4])
 
+# 打印输出 / Print output
 print("\nVector B / 向量 B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {B.shape}")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -670,9 +800,13 @@ Use `tensordot()` with `axes=0` to compute the outer product (tensor product).
 # 使用 tensordot(A, B, axes=0) 计算张量积
 C = tensordot(A, B, axes=0)
 
+# 打印输出 / Print output
 print("Tensor Product C = A ⊗ B / 张量积 C = A ⊗ B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Result shape: {C.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"结果形状：{C.shape}")
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -683,21 +817,32 @@ Verify the tensor product by comparing with manual element-wise computation.
 ```python
 # Manually compute outer product to verify
 # 手动计算外积以验证
+# 打印输出 / Print output
 print("Manual verification / 手动验证:")
+# 打印输出 / Print output
 print(f"\nA[0] * B = {A[0]} * {B} = {A[0] * B}")
+# 打印输出 / Print output
 print(f"A[1] * B = {A[1]} * {B} = {A[1] * B}")
 
+# 打印输出 / Print output
 print(f"\nTensor product elements / 张量积元素:")
+# 打印输出 / Print output
 print(f"C[0,0] = A[0] * B[0] = {A[0]} * {B[0]} = {C[0,0]}")
+# 打印输出 / Print output
 print(f"C[0,1] = A[0] * B[1] = {A[0]} * {B[1]} = {C[0,1]}")
+# 打印输出 / Print output
 print(f"C[1,0] = A[1] * B[0] = {A[1]} * {B[0]} = {C[1,0]}")
+# 打印输出 / Print output
 print(f"C[1,1] = A[1] * B[1] = {A[1]} * {B[1]} = {C[1,1]}")
 
 # Compare with outer product using numpy's outer
 # 使用 numpy 的 outer 与外积比较
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 C_outer = np.outer(A, B)
+# 打印输出 / Print output
 print(f"\nComparison with np.outer / 与 np.outer 的比较:")
+# 打印输出 / Print output
 print(f"Results are equal: {np.allclose(C, C_outer)}")
 ```
 
@@ -719,8 +864,11 @@ print(f"Results are equal: {np.allclose(C, C_outer)}")
 
 ```python
 # --- Tensor Product / 张量积 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import tensordot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Step 1: Create two vectors
@@ -728,33 +876,45 @@ import numpy as np
 A = array([1, 2])
 B = array([3, 4])
 
+# 打印输出 / Print output
 print("Vector A / 向量 A:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {A.shape}")
+# 打印输出 / Print output
 print(A)
 
+# 打印输出 / Print output
 print("\nVector B / 向量 B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Shape: {B.shape}")
+# 打印输出 / Print output
 print(B)
 
 # Step 2: Compute tensor product
 # 步骤 2：计算张量积
 C = tensordot(A, B, axes=0)
 
+# 打印输出 / Print output
 print("\nTensor Product C = A ⊗ B / 张量积 C = A ⊗ B:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Result shape: {C.shape}")
+# 打印输出 / Print output
 print(C)
 
 # Step 3: Verify with numpy.outer
 # 步骤 3：用 numpy.outer 验证
 C_outer = np.outer(A, B)
+# 打印输出 / Print output
 print(f"\nVerification with np.outer / 用 np.outer 验证:")
+# 打印输出 / Print output
 print(f"Results are equal: {np.allclose(C, C_outer)}")
+# 打印输出 / Print output
 print(C_outer)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 14 Summary / 第14章总结：Tensors
 

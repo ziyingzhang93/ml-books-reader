@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 17
 
 ---
@@ -28,12 +28,16 @@ Bootstrap is a resampling technique that estimates the distribution of a statist
 ```python
 # Import required libraries
 # 导入所需库
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.utils import resample
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # Set random seed for reproducibility
 # 设置随机种子以保证可重复性
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 ```
 
@@ -42,13 +46,18 @@ np.random.seed(42)
 ```python
 # Generate a small original dataset
 # 生成一个小的原始数据集
+# 创建NumPy数组 / Create NumPy array
 data = np.array([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
 
 # Display original data
 # 显示原始数据
+# 打印输出 / Print output
 print(f"Original data: {data}")
+# 打印输出 / Print output
 print(f"Original data size: {len(data)}")
+# 计算均值 / Calculate mean
 print(f"Original mean: {np.mean(data):.2f}")
+# 计算标准差 / Calculate standard deviation
 print(f"Original std: {np.std(data):.2f}")
 ```
 
@@ -67,29 +76,41 @@ oob_indices_list = []
 
 # Perform bootstrap resampling
 # 执行自助重采样
+# 生成整数序列 / Generate integer sequence
 for i in range(n_iterations):
     # Resample with replacement
     # 有放回地重采样
+    # 生成随机数 / Generate random numbers
     indices = np.random.choice(len(data), len(data), replace=True)
     bootstrap_sample = data[indices]
     
     # Calculate out-of-bag (OOB) indices
     # 计算袋外(OOB)指标
+    # 生成等差数组 / Generate array with step
     oob_indices = np.setdiff1d(np.arange(len(data)), np.unique(indices))
     
     # Store results
     # 存储结果
+    # 计算均值 / Calculate mean
     bootstrap_means.append(np.mean(bootstrap_sample))
+    # 添加元素到列表末尾 / Append element to list end
     bootstrap_samples.append(bootstrap_sample)
+    # 添加元素到列表末尾 / Append element to list end
     oob_indices_list.append(oob_indices)
     
     # Print details for each iteration
     # 打印每次迭代的细节
+    # 打印输出 / Print output
     print(f"\nBootstrap sample {i+1}:")
+    # 打印输出 / Print output
     print(f"  Indices: {sorted(indices)}")
+    # 打印输出 / Print output
     print(f"  Sample: {bootstrap_sample}")
+    # 计算均值 / Calculate mean
     print(f"  Mean: {np.mean(bootstrap_sample):.2f}")
+    # 打印输出 / Print output
     print(f"  OOB indices: {oob_indices}")
+    # 打印输出 / Print output
     print(f"  OOB data: {data[oob_indices]}")
 ```
 
@@ -98,14 +119,20 @@ for i in range(n_iterations):
 ```python
 # Convert to array for analysis
 # 转换为数组以进行分析
+# 创建NumPy数组 / Create NumPy array
 bootstrap_means = np.array(bootstrap_means)
 
 # Calculate bootstrap statistics
 # 计算自助统计量
+# 打印输出 / Print output
 print(f"\nBootstrap Statistics:")
+# 计算均值 / Calculate mean
 print(f"Mean of bootstrap means: {np.mean(bootstrap_means):.2f}")
+# 计算标准差 / Calculate standard deviation
 print(f"Std of bootstrap means: {np.std(bootstrap_means):.2f}")
+# 求最小值 / Find minimum value
 print(f"Min bootstrap mean: {np.min(bootstrap_means):.2f}")
+# 求最大值 / Find maximum value
 print(f"Max bootstrap mean: {np.max(bootstrap_means):.2f}")
 ```
 
@@ -119,6 +146,7 @@ fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 # Plot 1: Histogram of bootstrap means
 # 图1: 自助均值的直方图
 axes[0].hist(bootstrap_means, bins=5, edgecolor='black', alpha=0.7)
+# 计算均值 / Calculate mean
 axes[0].axvline(np.mean(data), color='red', linestyle='--', linewidth=2, label='Original mean')
 axes[0].set_xlabel('Mean Value')
 axes[0].set_ylabel('Frequency')
@@ -136,6 +164,7 @@ axes[1].grid(True, alpha=0.3)
 axes[1].legend()
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -167,42 +196,63 @@ plt.show()
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.utils import resample
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 创建NumPy数组 / Create NumPy array
 data = np.array([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
 
+# 打印输出 / Print output
 print(f"Original data: {data}")
+# 计算均值 / Calculate mean
 print(f"Original mean: {np.mean(data):.2f}")
 
 n_iterations = 100
 bootstrap_means = []
 
+# 生成整数序列 / Generate integer sequence
 for i in range(n_iterations):
+    # 生成随机数 / Generate random numbers
     indices = np.random.choice(len(data), len(data), replace=True)
     bootstrap_sample = data[indices]
+    # 计算均值 / Calculate mean
     bootstrap_means.append(np.mean(bootstrap_sample))
+    # 生成等差数组 / Generate array with step
     oob_indices = np.setdiff1d(np.arange(len(data)), np.unique(indices))
 
+# 创建NumPy数组 / Create NumPy array
 bootstrap_means = np.array(bootstrap_means)
+# 计算均值 / Calculate mean
 print(f"Bootstrap mean: {np.mean(bootstrap_means):.2f}")
+# 计算标准差 / Calculate standard deviation
 print(f"Bootstrap std: {np.std(bootstrap_means):.2f}")
 
+# 绘制直方图 / Draw histogram
 plt.hist(bootstrap_means, bins=15, edgecolor='black', alpha=0.7)
+# 计算均值 / Calculate mean
 plt.axvline(np.mean(data), color='red', linestyle='--', linewidth=2, label='Original mean')
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('Mean Value')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('Frequency')
+# 设置图表标题 / Set chart title
 plt.title('Bootstrap Distribution of Means')
+# 显示图例 / Show legend
 plt.legend()
 plt.grid(True, alpha=0.3)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 17: Bootstrap
 # 第17章：自助法

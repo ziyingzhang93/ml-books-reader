@@ -1,4 +1,4 @@
-# GAN
+# 生成对抗网络 / Generative Adversarial Networks
 ## Chapter 06
 
 ---
@@ -29,6 +29,7 @@ This script demonstrates **demonstrate simple x^2 function**.
 ## Step 1 — demonstrate simple x^2 function
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -89,6 +90,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # demonstrate simple x^2 function
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # simple function
@@ -133,11 +135,24 @@ This script demonstrates **example of generating random samples from X^2**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
+---
 ## Step 1 — example of generating random samples from X^2
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -166,7 +181,9 @@ X2 = X1 * X1
 ## Step 5 — stack arrays
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	return hstack((X1, X2))
 ```
@@ -214,8 +231,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of generating random samples from X^2
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # generate randoms sample from x^2
@@ -225,7 +245,9 @@ def generate_samples(n=100):
 	# generate outputs X^2 (quadratic)
 	X2 = X1 * X1
 	# stack arrays
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	return hstack((X1, X2))
 
@@ -266,11 +288,27 @@ This script demonstrates **define the discriminator model**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — define the discriminator model
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 ```
 
@@ -279,8 +317,11 @@ from keras.utils.vis_utils import plot_model
 
 ```python
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 ```
 
@@ -288,6 +329,7 @@ def define_discriminator(n_inputs=2):
 ## Step 3 — compile model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 ```
@@ -345,16 +387,23 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # define the discriminator model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 
 # define the standalone discriminator model
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 	# compile model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 
@@ -397,14 +446,39 @@ This script demonstrates **define and fit a discriminator model**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — define and fit a discriminator model
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 ```
 
@@ -413,8 +487,11 @@ from keras.layers import Dense
 
 ```python
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 ```
 
@@ -422,6 +499,7 @@ def define_discriminator(n_inputs=2):
 ## Step 3 — compile model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 ```
@@ -451,7 +529,9 @@ X2 = X1 * X1
 ## Step 7 — stack arrays
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	X = hstack((X1, X2))
 ```
@@ -489,7 +569,9 @@ X2 = -1 + rand(n) * 2
 ## Step 12 — stack arrays
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	X = hstack((X1, X2))
 ```
@@ -514,6 +596,7 @@ def train_discriminator(model, n_epochs=1000, n_batch=128):
 ## Step 15 — run epochs manually
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(n_epochs):
 ```
 
@@ -549,8 +632,11 @@ model.train_on_batch(X_fake, y_fake)
 ## Step 20 — evaluate the model
 
 ```python
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, acc_real = model.evaluate(X_real, y_real, verbose=0)
+  # 评估模型在测试集上的表现 / Evaluate model on test set
 		_, acc_fake = model.evaluate(X_fake, y_fake, verbose=0)
+  # 打印输出 / Print output
 		print(i, acc_real, acc_fake)
 ```
 
@@ -603,19 +689,29 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # define and fit a discriminator model
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
 
 # define the standalone discriminator model
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 	# compile model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 
@@ -626,7 +722,9 @@ def generate_real_samples(n):
 	# generate outputs X^2
 	X2 = X1 * X1
 	# stack arrays
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	X = hstack((X1, X2))
 	# generate class labels
@@ -640,7 +738,9 @@ def generate_fake_samples(n):
 	# generate outputs in [-1, 1]
 	X2 = -1 + rand(n) * 2
 	# stack arrays
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	X = hstack((X1, X2))
 	# generate class labels
@@ -651,6 +751,7 @@ def generate_fake_samples(n):
 def train_discriminator(model, n_epochs=1000, n_batch=128):
 	half_batch = int(n_batch / 2)
 	# run epochs manually
+ # 生成整数序列 / Generate integer sequence
 	for i in range(n_epochs):
 		# generate real examples
 		X_real, y_real = generate_real_samples(half_batch)
@@ -661,8 +762,11 @@ def train_discriminator(model, n_epochs=1000, n_batch=128):
 		# update model
 		model.train_on_batch(X_fake, y_fake)
 		# evaluate the model
+  # 评估模型在测试集上的表现 / Evaluate model on test set
 		_, acc_real = model.evaluate(X_real, y_real, verbose=0)
+  # 评估模型在测试集上的表现 / Evaluate model on test set
 		_, acc_fake = model.evaluate(X_fake, y_fake, verbose=0)
+  # 打印输出 / Print output
 		print(i, acc_real, acc_fake)
 
 # define the discriminator model
@@ -703,8 +807,11 @@ This script demonstrates **define the generator model**.
 ## Step 1 — define the generator model
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 ```
 
@@ -713,8 +820,11 @@ from keras.utils.vis_utils import plot_model
 
 ```python
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 ```
@@ -768,14 +878,20 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # define the generator model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 
 # define the standalone generator model
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 
@@ -834,9 +950,13 @@ This script demonstrates **define and use the generator model**.
 ## Step 1 — define and use the generator model
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -845,8 +965,11 @@ from matplotlib import pyplot
 
 ```python
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 ```
@@ -869,6 +992,7 @@ x_input = randn(latent_dim * n)
 ## Step 5 — reshape into a batch of inputs for the network
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 x_input = x_input.reshape(n, latent_dim)
 	return x_input
 ```
@@ -954,15 +1078,22 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # define and use the generator model
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # define the standalone generator model
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 
@@ -971,6 +1102,7 @@ def generate_latent_points(latent_dim, n):
 	# generate points in the latent space
 	x_input = randn(latent_dim * n)
 	# reshape into a batch of inputs for the network
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	x_input = x_input.reshape(n, latent_dim)
 	return x_input
 
@@ -1022,11 +1154,27 @@ This script demonstrates **demonstrate creating the three models in the gan**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — demonstrate creating the three models in the gan
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 ```
 
@@ -1035,8 +1183,11 @@ from keras.utils.vis_utils import plot_model
 
 ```python
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 ```
 
@@ -1044,6 +1195,7 @@ def define_discriminator(n_inputs=2):
 ## Step 3 — compile model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 ```
@@ -1053,8 +1205,11 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 
 ```python
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 ```
@@ -1077,6 +1232,7 @@ discriminator.trainable = False
 ## Step 7 — connect them
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
 ```
 
@@ -1084,6 +1240,7 @@ model = Sequential()
 ## Step 8 — add generator
 
 ```python
+# 向模型添加一层 / Add a layer to the model
 model.add(generator)
 ```
 
@@ -1091,6 +1248,7 @@ model.add(generator)
 ## Step 9 — add the discriminator
 
 ```python
+# 向模型添加一层 / Add a layer to the model
 model.add(discriminator)
 ```
 
@@ -1098,6 +1256,7 @@ model.add(discriminator)
 ## Step 10 — compile model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam')
 	return model
 ```
@@ -1176,23 +1335,33 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # demonstrate creating the three models in the gan
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 
 # define the standalone discriminator model
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 	# compile model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 
 # define the standalone generator model
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 
@@ -1201,12 +1370,16 @@ def define_gan(generator, discriminator):
 	# make weights in the discriminator not trainable
 	discriminator.trainable = False
 	# connect them
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
 	# add generator
+ # 向模型添加一层 / Add a layer to the model
 	model.add(generator)
 	# add the discriminator
+ # 向模型添加一层 / Add a layer to the model
 	model.add(discriminator)
 	# compile model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer='adam')
 	return model
 
@@ -1272,13 +1445,21 @@ This script demonstrates **train a generative adversarial network on a one-dimen
 ## Step 1 — train a generative adversarial network on a one-dimensional function
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -1287,8 +1468,11 @@ from matplotlib import pyplot
 
 ```python
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 ```
 
@@ -1296,6 +1480,7 @@ def define_discriminator(n_inputs=2):
 ## Step 3 — compile model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 ```
@@ -1305,8 +1490,11 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 
 ```python
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 ```
@@ -1329,6 +1517,7 @@ discriminator.trainable = False
 ## Step 7 — connect them
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
 ```
 
@@ -1336,6 +1525,7 @@ model = Sequential()
 ## Step 8 — add generator
 
 ```python
+# 向模型添加一层 / Add a layer to the model
 model.add(generator)
 ```
 
@@ -1343,6 +1533,7 @@ model.add(generator)
 ## Step 9 — add the discriminator
 
 ```python
+# 向模型添加一层 / Add a layer to the model
 model.add(discriminator)
 ```
 
@@ -1350,6 +1541,7 @@ model.add(discriminator)
 ## Step 10 — compile model
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam')
 	return model
 ```
@@ -1379,7 +1571,9 @@ X2 = X1 * X1
 ## Step 14 — stack arrays
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	X = hstack((X1, X2))
 ```
@@ -1410,6 +1604,7 @@ x_input = randn(latent_dim * n)
 ## Step 18 — reshape into a batch of inputs for the network
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 x_input = x_input.reshape(n, latent_dim)
 	return x_input
 ```
@@ -1482,6 +1677,7 @@ _, acc_fake = discriminator.evaluate(x_fake, y_fake, verbose=0)
 ## Step 28 — summarize discriminator performance
 
 ```python
+# 打印输出 / Print output
 print(epoch, acc_real, acc_fake)
 ```
 
@@ -1520,6 +1716,7 @@ half_batch = int(n_batch / 2)
 ## Step 33 — manually enumerate epochs
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(n_epochs):
 ```
 
@@ -1645,28 +1842,43 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # train a generative adversarial network on a one-dimensional function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import hstack
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # define the standalone discriminator model
 def define_discriminator(n_inputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(25, activation='relu', kernel_initializer='he_uniform', input_dim=n_inputs))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(1, activation='sigmoid'))
 	# compile model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	return model
 
 # define the standalone generator model
 def define_generator(latent_dim, n_outputs=2):
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(15, activation='relu', kernel_initializer='he_uniform', input_dim=latent_dim))
+ # 向模型添加一层 / Add a layer to the model
 	model.add(Dense(n_outputs, activation='linear'))
 	return model
 
@@ -1675,12 +1887,16 @@ def define_gan(generator, discriminator):
 	# make weights in the discriminator not trainable
 	discriminator.trainable = False
 	# connect them
+ # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 	model = Sequential()
 	# add generator
+ # 向模型添加一层 / Add a layer to the model
 	model.add(generator)
 	# add the discriminator
+ # 向模型添加一层 / Add a layer to the model
 	model.add(discriminator)
 	# compile model
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer='adam')
 	return model
 
@@ -1691,7 +1907,9 @@ def generate_real_samples(n):
 	# generate outputs X^2
 	X2 = X1 * X1
 	# stack arrays
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X1 = X1.reshape(n, 1)
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	X2 = X2.reshape(n, 1)
 	X = hstack((X1, X2))
 	# generate class labels
@@ -1703,6 +1921,7 @@ def generate_latent_points(latent_dim, n):
 	# generate points in the latent space
 	x_input = randn(latent_dim * n)
 	# reshape into a batch of inputs for the network
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	x_input = x_input.reshape(n, latent_dim)
 	return x_input
 
@@ -1727,6 +1946,7 @@ def summarize_performance(epoch, generator, discriminator, latent_dim, n=100):
 	# evaluate discriminator on fake examples
 	_, acc_fake = discriminator.evaluate(x_fake, y_fake, verbose=0)
 	# summarize discriminator performance
+ # 打印输出 / Print output
 	print(epoch, acc_real, acc_fake)
 	# scatter plot real and fake data points
 	pyplot.scatter(x_real[:, 0], x_real[:, 1], color='red')
@@ -1741,6 +1961,7 @@ def train(g_model, d_model, gan_model, latent_dim, n_epochs=10000, n_batch=128, 
 	# determine half the size of one batch, for updating the discriminator
 	half_batch = int(n_batch / 2)
 	# manually enumerate epochs
+ # 生成整数序列 / Generate integer sequence
 	for i in range(n_epochs):
 		# prepare real samples
 		x_real, y_real = generate_real_samples(half_batch)
@@ -1770,5 +1991,11 @@ gan_model = define_gan(generator, discriminator)
 # train model
 train(generator, discriminator, gan_model, latent_dim)
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

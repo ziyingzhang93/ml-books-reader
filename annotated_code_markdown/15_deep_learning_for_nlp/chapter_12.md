@@ -1,5 +1,23 @@
-# NLP深度学习
+# NLP 深度学习 / Deep Learning for NLP
 ## Chapter 12
+
+---
+
+### Example Word2Vec
+
+
+
+---
+
+### Plot Model
+
+
+
+---
+
+### Word Vector Arithmetic
+
+
 
 ---
 
@@ -55,6 +73,7 @@ model = KeyedVectors.load_word2vec_format(filename, binary=False)
 
 ```python
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -91,7 +110,14 @@ filename = 'glove.6B.100d.txt.word2vec'
 model = KeyedVectors.load_word2vec_format(filename, binary=False)
 # calculate: (king - man) + woman = ?
 result = model.most_similar(positive=['woman', 'king'], negative=['man'], topn=1)
+# 打印输出 / Print output
 print(result)
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

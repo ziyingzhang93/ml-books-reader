@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 15
 
 ---
@@ -47,50 +47,77 @@ We fit a linear regression model and calculate its Mean Squared Error (MSE) and 
 ## Step 1 — Generate Data and Fit Model / 生成数据和拟合模型
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.linear_model import LinearRegression
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
 
 # Generate synthetic data / 生成合成数据
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = np.linspace(0, 10, 100).reshape(-1, 1)
+# 生成随机数 / Generate random numbers
 y = 2.5 * X.ravel() + np.random.normal(0, 2, 100)  # y = 2.5x + noise
 
 # Fit linear regression / 拟合线性回归
 model = LinearRegression()
+# 训练模型 / Train the model
 model.fit(X, y)
 
 # Make predictions / 进行预测
+# 用模型做预测 / Make predictions with model
 y_pred = model.predict(X)
 
 # Calculate metrics / 计算指标
+# 计算均方误差 / Calculate Mean Squared Error
 mse = mean_squared_error(y, y_pred)
+# 获取长度 / Get length
 n_samples = len(y)
 n_params = X.shape[1] + 1  # intercept + coefficients / 截距 + 系数
 
+# 打印输出 / Print output
 print(f'Linear Regression / 线性回归')
+# 打印输出 / Print output
 print(f'=' * 60)
+# 打印输出 / Print output
 print(f'Model: y = {model.intercept_:.4f} + {model.coef_[0]:.4f}*x')
+# 打印输出 / Print output
 print(f'\nMetrics / 指标:')
+# 打印输出 / Print output
 print(f'Sample size (n): {n_samples}')
+# 打印输出 / Print output
 print(f'Number of parameters (k): {n_params}')
+# 打印输出 / Print output
 print(f'Mean Squared Error (MSE): {mse:.6f}')
+# 打印输出 / Print output
 print(f'Residual Sum of Squares: {mse * n_samples:.6f}')
 ```
 
 ## Step 2 — Visualize Fit / 可视化拟合
 
 ```python
+# 创建画布 / Create figure canvas
 plt.figure(figsize=(10, 6))
+# 绘制散点图 / Draw scatter plot
 plt.scatter(X, y, alpha=0.5, s=50, label='Data')
+# 绘制折线图 / Draw line plot
 plt.plot(X, y_pred, 'r-', linewidth=2, label=f'Fit: y = {model.intercept_:.2f} + {model.coef_[0]:.2f}x')
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('X')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('y')
+# 设置图表标题 / Set chart title
 plt.title('Linear Regression Fit')
+# 显示图例 / Show legend
 plt.legend()
 plt.grid(alpha=0.3)
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -170,36 +197,58 @@ where $n$ is sample size and $k$ is number of parameters
 ## Step 1 — Calculate AIC / 计算AIC
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.linear_model import LinearRegression
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import PolynomialFeatures
 
 # Generate data / 生成数据
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = np.linspace(0, 10, 100).reshape(-1, 1)
+# 生成随机数 / Generate random numbers
 y = 2.5 * X.ravel() + np.random.normal(0, 2, 100)
 
 # Fit linear model and calculate AIC / 拟合线性模型并计算AIC
 model = LinearRegression()
+# 训练模型 / Train the model
 model.fit(X, y)
+# 用模型做预测 / Make predictions with model
 y_pred = model.predict(X)
+# 计算均方误差 / Calculate Mean Squared Error
 mse = mean_squared_error(y, y_pred)
 
+# 获取长度 / Get length
 n = len(y)
 k = 2  # intercept + 1 coefficient
 aic = n * np.log(mse) + 2 * k
 
+# 打印输出 / Print output
 print(f'AIC Calculation / AIC计算')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'Sample size (n): {n}')
+# 打印输出 / Print output
 print(f'Number of parameters (k): {k}')
+# 打印输出 / Print output
 print(f'MSE: {mse:.6f}')
+# 打印输出 / Print output
 print(f'log(MSE): {np.log(mse):.6f}')
+# 打印输出 / Print output
 print(f'\nAIC = n*log(MSE) + 2k')
+# 打印输出 / Print output
 print(f'AIC = {n}*{np.log(mse):.6f} + 2*{k}')
+# 打印输出 / Print output
 print(f'AIC = {n*np.log(mse):.6f} + {2*k}')
+# 打印输出 / Print output
 print(f'AIC = {aic:.6f}')
 ```
 
@@ -214,23 +263,33 @@ k_vals = []
 
 for degree in degrees:
     poly_features = PolynomialFeatures(degree=degree)
+    # 拟合并转换数据（一步完成） / Fit and transform data (one step)
     X_poly = poly_features.fit_transform(X)
     
     model = LinearRegression()
+    # 训练模型 / Train the model
     model.fit(X_poly, y)
+    # 用模型做预测 / Make predictions with model
     y_pred = model.predict(X_poly)
     
+    # 计算均方误差 / Calculate Mean Squared Error
     mse = mean_squared_error(y, y_pred)
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     k = X_poly.shape[1]  # number of features
     aic = n * np.log(mse) + 2 * k
     
+    # 添加元素到列表末尾 / Append element to list end
     mse_vals.append(mse)
+    # 添加元素到列表末尾 / Append element to list end
     aic_vals.append(aic)
+    # 添加元素到列表末尾 / Append element to list end
     k_vals.append(k)
     
+    # 打印输出 / Print output
     print(f'Degree {degree}: k={k:2d}, MSE={mse:10.6f}, AIC={aic:10.4f}')
 
 best_degree = degrees[np.argmin(aic_vals)]
+# 打印输出 / Print output
 print(f'\nBest model (by AIC): Degree {best_degree}')
 ```
 
@@ -256,6 +315,7 @@ axes[1].legend()
 axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -279,7 +339,13 @@ plt.show()
 
 ---
 
-### Chapter Summary
+### Linear Regression Bic
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 15: Information Criteria
 

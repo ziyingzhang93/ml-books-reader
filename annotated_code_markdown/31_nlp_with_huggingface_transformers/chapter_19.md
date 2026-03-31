@@ -1,5 +1,17 @@
-# HF Transformers
+# HuggingFace Transformers NLP / NLP with HF Transformers
 ## Chapter 19
+
+---
+
+### Index
+
+
+
+---
+
+### Cosine
+
+
 
 ---
 
@@ -27,11 +39,23 @@ This script demonstrates **Tokenize each text and convert to PyTorch tensors**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 import faiss
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoTokenizer, AutoModel
 
 tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
@@ -46,6 +70,7 @@ def generate_embedding(docs, model, tokenizer):
 ```python
 inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
                        max_length=512)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = model(**inputs)
 ```
@@ -57,6 +82,7 @@ inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
 attention_mask = inputs["attention_mask"]
     embeddings = outputs.last_hidden_state
 
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     expanded_mask = attention_mask.unsqueeze(-1).expand(embeddings.shape).float()
     sum_embeddings = torch.sum(embeddings * expanded_mask, axis=1)
     sum_mask = torch.clamp(expanded_mask.sum(axis=1), min=1e-9)
@@ -91,6 +117,7 @@ distances, indices = index.search(query_embedding, k)  # 1xk matrices
 
 ```python
 retrieved_docs = [(documents[idx], float(distances[0][i]))
+                      # 同时获取索引和值 / Get both index and value
                       for i, idx in enumerate(indices[0])]
     return retrieved_docs
 ```
@@ -128,9 +155,11 @@ then create FAISS index for efficient similarity search
 
 ```python
 document_embeddings = generate_embedding(documents, model, tokenizer)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 dimension = document_embeddings.shape[1]   # Dimension of the embeddings
 index = faiss.IndexFlatL2(dimension)       # Using L2 (Euclidean) distance
 index.add(document_embeddings)             # Add embeddings to the index
+# 打印输出 / Print output
 print(f"Created index with {index.ntotal} documents")
 ```
 
@@ -146,10 +175,15 @@ retrieved_docs = retrieve_documents(query, index, documents)
 ## Step 11 — Print the retrieved documents
 
 ```python
+# 打印输出 / Print output
 print(f"Query: {query}\n")
+# 同时获取索引和值 / Get both index and value
 for i, (doc, distance) in enumerate(retrieved_docs):
+    # 打印输出 / Print output
     print(f"Document {i+1} (Distance: {distance:.4f}):")
+    # 打印输出 / Print output
     print(doc)
+    # 打印输出 / Print output
     print()
 ```
 
@@ -184,7 +218,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import faiss
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoTokenizer, AutoModel
 
 tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
@@ -194,6 +230,7 @@ def generate_embedding(docs, model, tokenizer):
     # Tokenize each text and convert to PyTorch tensors
     inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
                        max_length=512)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = model(**inputs)
 
@@ -201,6 +238,7 @@ def generate_embedding(docs, model, tokenizer):
     attention_mask = inputs["attention_mask"]
     embeddings = outputs.last_hidden_state
 
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     expanded_mask = attention_mask.unsqueeze(-1).expand(embeddings.shape).float()
     sum_embeddings = torch.sum(embeddings * expanded_mask, axis=1)
     sum_mask = torch.clamp(expanded_mask.sum(axis=1), min=1e-9)
@@ -216,6 +254,7 @@ def retrieve_documents(query, index, documents, k=3):
     distances, indices = index.search(query_embedding, k)  # 1xk matrices
     # Return the retrieved documents and their distances
     retrieved_docs = [(documents[idx], float(distances[0][i]))
+                      # 同时获取索引和值 / Get both index and value
                       for i, idx in enumerate(indices[0])]
     return retrieved_docs
 
@@ -245,9 +284,11 @@ documents = [
 # Generate embeddings for all documents,
 # then create FAISS index for efficient similarity search
 document_embeddings = generate_embedding(documents, model, tokenizer)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 dimension = document_embeddings.shape[1]   # Dimension of the embeddings
 index = faiss.IndexFlatL2(dimension)       # Using L2 (Euclidean) distance
 index.add(document_embeddings)             # Add embeddings to the index
+# 打印输出 / Print output
 print(f"Created index with {index.ntotal} documents")
 
 # Example query
@@ -255,10 +296,15 @@ query = "What is BERT?"
 retrieved_docs = retrieve_documents(query, index, documents)
 
 # Print the retrieved documents
+# 打印输出 / Print output
 print(f"Query: {query}\n")
+# 同时获取索引和值 / Get both index and value
 for i, (doc, distance) in enumerate(retrieved_docs):
+    # 打印输出 / Print output
     print(f"Document {i+1} (Distance: {distance:.4f}):")
+    # 打印输出 / Print output
     print(doc)
+    # 打印输出 / Print output
     print()
 ```
 
@@ -293,11 +339,26 @@ This script demonstrates **Tokenize each text and convert to PyTorch tensors**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 import faiss
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoTokenizer, AutoModel, AutoModelForSeq2SeqLM
 
 tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
@@ -314,6 +375,7 @@ def generate_embedding(docs, model, tokenizer):
 ```python
 inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
                        max_length=512)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = model(**inputs)
 ```
@@ -325,6 +387,7 @@ inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
 attention_mask = inputs["attention_mask"]
     embeddings = outputs.last_hidden_state
 
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     expanded_mask = attention_mask.unsqueeze(-1).expand(embeddings.shape).float()
     sum_embeddings = torch.sum(embeddings * expanded_mask, axis=1)
     sum_mask = torch.clamp(expanded_mask.sum(axis=1), min=1e-9)
@@ -359,6 +422,7 @@ distances, indices = index.search(query_embedding, k)  # 1xk matrices
 
 ```python
 retrieved_docs = [(documents[idx], float(distances[0][i]))
+                      # 同时获取索引和值 / Get both index and value
                       for i, idx in enumerate(indices[0])]
     return retrieved_docs
 
@@ -378,6 +442,7 @@ context = "\n".join(retrieved_docs)
 
 ```python
 inputs = gen_tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = gen_model.generate(
             inputs.input_ids,
@@ -416,6 +481,7 @@ documents = [
     "DeBERTa enhances BERT with disentangled attention and an enhanced mask decoder."
 ]
 document_embeddings = generate_embedding(documents, model, tokenizer)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 dimension = document_embeddings.shape[1]   # Dimension of the embeddings
 index = faiss.IndexFlatL2(dimension)       # Using L2 (Euclidean) distance
 index.add(document_embeddings)             # Add embeddings to the index
@@ -429,7 +495,9 @@ retrieved_docs = retrieve_documents(query, index, documents)
 
 ```python
 response = generate_response(query, [doc for doc, score in retrieved_docs])
+# 打印输出 / Print output
 print("Generated Response:")
+# 打印输出 / Print output
 print(response)
 ```
 
@@ -464,7 +532,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import faiss
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoTokenizer, AutoModel, AutoModelForSeq2SeqLM
 
 tokenizer = AutoTokenizer.from_pretrained("sentence-transformers/all-MiniLM-L6-v2")
@@ -476,6 +546,7 @@ def generate_embedding(docs, model, tokenizer):
     # Tokenize each text and convert to PyTorch tensors
     inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
                        max_length=512)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = model(**inputs)
 
@@ -483,6 +554,7 @@ def generate_embedding(docs, model, tokenizer):
     attention_mask = inputs["attention_mask"]
     embeddings = outputs.last_hidden_state
 
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     expanded_mask = attention_mask.unsqueeze(-1).expand(embeddings.shape).float()
     sum_embeddings = torch.sum(embeddings * expanded_mask, axis=1)
     sum_mask = torch.clamp(expanded_mask.sum(axis=1), min=1e-9)
@@ -498,6 +570,7 @@ def retrieve_documents(query, index, documents, k=3):
     distances, indices = index.search(query_embedding, k)  # 1xk matrices
     # Return the retrieved documents and their distances
     retrieved_docs = [(documents[idx], float(distances[0][i]))
+                      # 同时获取索引和值 / Get both index and value
                       for i, idx in enumerate(indices[0])]
     return retrieved_docs
 
@@ -508,6 +581,7 @@ def generate_response(query, retrieved_docs, max_length=150):
 
     # Generate a response
     inputs = gen_tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = gen_model.generate(
             inputs.input_ids,
@@ -542,6 +616,7 @@ documents = [
     "DeBERTa enhances BERT with disentangled attention and an enhanced mask decoder."
 ]
 document_embeddings = generate_embedding(documents, model, tokenizer)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 dimension = document_embeddings.shape[1]   # Dimension of the embeddings
 index = faiss.IndexFlatL2(dimension)       # Using L2 (Euclidean) distance
 index.add(document_embeddings)             # Add embeddings to the index
@@ -551,7 +626,9 @@ retrieved_docs = retrieve_documents(query, index, documents)
 
 # Generate a response for the example query
 response = generate_response(query, [doc for doc, score in retrieved_docs])
+# 打印输出 / Print output
 print("Generated Response:")
+# 打印输出 / Print output
 print(response)
 ```
 
@@ -585,12 +662,25 @@ This script demonstrates **Model to use in retriever**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 import faiss
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoTokenizer, AutoModel
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoModelForSeq2SeqLM
 ```
 
@@ -618,6 +708,7 @@ def generate_embedding(docs, model, tokenizer):
 ```python
 inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
                        max_length=512)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = model(**inputs)
 ```
@@ -629,6 +720,7 @@ inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
 attention_mask = inputs["attention_mask"]
     embeddings = outputs.last_hidden_state
 
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     expanded_mask = attention_mask.unsqueeze(-1).expand(embeddings.shape).float()
     sum_embeddings = torch.sum(embeddings * expanded_mask, axis=1)
     sum_mask = torch.clamp(expanded_mask.sum(axis=1), min=1e-9)
@@ -663,6 +755,7 @@ distances, indices = index.search(query_embedding, k)  # 1xk matrices
 
 ```python
 retrieved_docs = [(documents[idx], float(distances[0][i]))
+                      # 同时获取索引和值 / Get both index and value
                       for i, idx in enumerate(indices[0])]
     return retrieved_docs
 
@@ -685,6 +778,7 @@ if retrieved_docs:
 
 ```python
 inputs = gen_tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = gen_model.generate(
             inputs.input_ids,
@@ -736,9 +830,11 @@ then create FAISS index for efficient similarity search
 
 ```python
 document_embeddings = generate_embedding(documents, model, tokenizer)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 dimension = document_embeddings.shape[1]   # Dimension of the embeddings
 index = faiss.IndexFlatL2(dimension)       # Using L2 (Euclidean) distance
 index.add(document_embeddings)             # Add embeddings to the index
+# 打印输出 / Print output
 print(f"Created index with {index.ntotal} documents")
 ```
 
@@ -760,15 +856,25 @@ queries = [
 ```python
 for query in queries:
     response, retrieved_docs = rag_pipeline(query, documents)
+    # 打印输出 / Print output
     print(f"Query: {query}")
+    # 打印输出 / Print output
     print()
+    # 打印输出 / Print output
     print("Retrieved Documents:")
+    # 同时获取索引和值 / Get both index and value
     for i, (doc, distance) in enumerate(retrieved_docs):
+        # 打印输出 / Print output
         print(f"Document {i+1} (Distance: {distance:.4f}):")
+        # 打印输出 / Print output
         print(doc)
+    # 打印输出 / Print output
     print()
+    # 打印输出 / Print output
     print("Generated Response:")
+    # 打印输出 / Print output
     print(response)
+    # 打印输出 / Print output
     print("-" * 20)
 ```
 
@@ -803,8 +909,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import faiss
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoTokenizer, AutoModel
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import AutoModelForSeq2SeqLM
 
 # Model to use in retriever
@@ -818,6 +927,7 @@ def generate_embedding(docs, model, tokenizer):
     # Tokenize each text and convert to PyTorch tensors
     inputs = tokenizer(docs, padding=True, truncation=True, return_tensors="pt",
                        max_length=512)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = model(**inputs)
 
@@ -825,6 +935,7 @@ def generate_embedding(docs, model, tokenizer):
     attention_mask = inputs["attention_mask"]
     embeddings = outputs.last_hidden_state
 
+    # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
     expanded_mask = attention_mask.unsqueeze(-1).expand(embeddings.shape).float()
     sum_embeddings = torch.sum(embeddings * expanded_mask, axis=1)
     sum_mask = torch.clamp(expanded_mask.sum(axis=1), min=1e-9)
@@ -840,6 +951,7 @@ def retrieve_documents(query, index, documents, k=3):
     distances, indices = index.search(query_embedding, k)  # 1xk matrices
     # Return the retrieved documents and their distances
     retrieved_docs = [(documents[idx], float(distances[0][i]))
+                      # 同时获取索引和值 / Get both index and value
                       for i, idx in enumerate(indices[0])]
     return retrieved_docs
 
@@ -853,6 +965,7 @@ def generate_response(query, retrieved_docs, max_length=150):
 
     # Generate a response
     inputs = gen_tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
+    # 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
     with torch.no_grad():
         outputs = gen_model.generate(
             inputs.input_ids,
@@ -896,9 +1009,11 @@ documents = [
 # Generate embeddings for all documents,
 # then create FAISS index for efficient similarity search
 document_embeddings = generate_embedding(documents, model, tokenizer)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 dimension = document_embeddings.shape[1]   # Dimension of the embeddings
 index = faiss.IndexFlatL2(dimension)       # Using L2 (Euclidean) distance
 index.add(document_embeddings)             # Add embeddings to the index
+# 打印输出 / Print output
 print(f"Created index with {index.ntotal} documents")
 
 # Example queries
@@ -911,21 +1026,31 @@ queries = [
 # Run the RAG pipeline for each query
 for query in queries:
     response, retrieved_docs = rag_pipeline(query, documents)
+    # 打印输出 / Print output
     print(f"Query: {query}")
+    # 打印输出 / Print output
     print()
+    # 打印输出 / Print output
     print("Retrieved Documents:")
+    # 同时获取索引和值 / Get both index and value
     for i, (doc, distance) in enumerate(retrieved_docs):
+        # 打印输出 / Print output
         print(f"Document {i+1} (Distance: {distance:.4f}):")
+        # 打印输出 / Print output
         print(doc)
+    # 打印输出 / Print output
     print()
+    # 打印输出 / Print output
     print("Generated Response:")
+    # 打印输出 / Print output
     print(response)
+    # 打印输出 / Print output
     print("-" * 20)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 19 Summary / 第19章总结
 

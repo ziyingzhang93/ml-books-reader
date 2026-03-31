@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 07
+
+---
+
+### Shape
+
+
 
 ---
 
@@ -33,13 +39,17 @@ We create a 2×3 array with 2 rows. We'll iterate through each row and display i
 
 ```python
 # 导入asarray函数 / Import asarray function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # 创建二维数组 / Create 2D array
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nShape:", data.shape)
 ```
 
@@ -51,8 +61,11 @@ We loop from 0 to shape[0] (0 to 2), accessing each row with data[row, :]. This 
 
 ```python
 # 遍历行 / Iterate through rows
+# 打印输出 / Print output
 print("\nIterating through rows:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for row in range(data.shape[0]):
+    # 打印输出 / Print output
     print("Row {}: {}".format(row, data[row, :]))
 ```
 
@@ -78,18 +91,25 @@ for row in range(data.shape[0]):
 
 ```python
 # --- Iterate Through Rows / 遍历行 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # Create 2D array / 创建二维数组
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
 
 # Iterate through rows / 遍历行
+# 打印输出 / Print output
 print("\nIterating through rows:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for row in range(data.shape[0]):
+    # 打印输出 / Print output
     print("Row {}: {}".format(row, data[row, :]))
 ```
 
@@ -125,13 +145,17 @@ We create a 2×3 array with 3 columns. We'll iterate through each column and dis
 
 ```python
 # 导入asarray函数 / Import asarray function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # 创建二维数组 / Create 2D array
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nShape:", data.shape)
 ```
 
@@ -143,8 +167,11 @@ We loop from 0 to shape[1] (0 to 3), accessing each column with data[:, col]. Th
 
 ```python
 # 遍历列 / Iterate through columns
+# 打印输出 / Print output
 print("\nIterating through columns:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for col in range(data.shape[1]):
+    # 打印输出 / Print output
     print("Column {}: {}".format(col, data[:, col]))
 ```
 
@@ -170,18 +197,25 @@ for col in range(data.shape[1]):
 
 ```python
 # --- Iterate Through Columns / 遍历列 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # Create 2D array / 创建二维数组
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
 
 # Iterate through columns / 遍历列
+# 打印输出 / Print output
 print("\nIterating through columns:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 for col in range(data.shape[1]):
+    # 打印输出 / Print output
     print("Column {}: {}".format(col, data[:, col]))
 ```
 
@@ -217,12 +251,15 @@ We create a 2×3 array. We'll compute the sum of all elements regardless of row 
 
 ```python
 # 导入asarray函数 / Import asarray function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # 创建二维数组 / Create 2D array
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -234,12 +271,16 @@ We use .sum(axis=None) to add all elements: 1+2+3+4+5+6 = 21. This treats the en
 
 ```python
 # 显示数组 / Display array
+# 打印输出 / Print output
 print("\nArray:")
+# 打印输出 / Print output
 print(data)
 
 # 计算所有元素的和 / Sum all elements
 result = data.sum(axis=None)
+# 打印输出 / Print output
 print("\nSum (axis=None) - aggregate all elements:")
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -265,17 +306,22 @@ print(result)
 
 ```python
 # --- Aggregate All Elements (axis=None) / 聚合所有元素 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # Create 2D array / 创建二维数组
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 
 # Sum all elements / 求和所有元素
 result = data.sum(axis=None)
+# 打印输出 / Print output
 print("\nSum (axis=None) - aggregate all elements:")
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -311,12 +357,15 @@ We create a 2×3 array. We'll sum down each column (axis 0), giving us one resul
 
 ```python
 # 导入asarray函数 / Import asarray function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # 创建二维数组 / Create 2D array
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -328,12 +377,16 @@ We use .sum(axis=0) to add down each column: col1=[1+4], col2=[2+5], col3=[3+6] 
 
 ```python
 # 显示数组 / Display array
+# 打印输出 / Print output
 print("\nArray:")
+# 打印输出 / Print output
 print(data)
 
 # 沿axis=0求和 / Sum along axis 0
 result = data.sum(axis=0)
+# 打印输出 / Print output
 print("\nSum (axis=0) - sum down each column:")
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -359,17 +412,22 @@ print(result)
 
 ```python
 # --- Aggregate Along axis=0 / 沿axis=0聚合 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # Create 2D array / 创建二维数组
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 
 # Sum along axis 0 / 沿轴0求和
 result = data.sum(axis=0)
+# 打印输出 / Print output
 print("\nSum (axis=0) - sum down each column:")
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -405,12 +463,15 @@ We create a 2×3 array. We'll sum across each row (axis 1), giving us one result
 
 ```python
 # 导入asarray函数 / Import asarray function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # 创建二维数组 / Create 2D array
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -422,12 +483,16 @@ We use .sum(axis=1) to add across each row: row1=[1+2+3], row2=[4+5+6] = [6, 15]
 
 ```python
 # 显示数组 / Display array
+# 打印输出 / Print output
 print("\nArray:")
+# 打印输出 / Print output
 print(data)
 
 # 沿axis=1求和 / Sum along axis 1
 result = data.sum(axis=1)
+# 打印输出 / Print output
 print("\nSum (axis=1) - sum across each row:")
+# 打印输出 / Print output
 print(result)
 ```
 
@@ -453,23 +518,28 @@ print(result)
 
 ```python
 # --- Aggregate Along axis=1 / 沿axis=1聚合 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import asarray
 
 # Create 2D array / 创建二维数组
 data = [[1, 2, 3], [4, 5, 6]]
 data = asarray(data)
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 
 # Sum along axis 1 / 沿轴1求和
 result = data.sum(axis=1)
+# 打印输出 / Print output
 print("\nSum (axis=1) - sum across each row:")
+# 打印输出 / Print output
 print(result)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 07 Summary / 第07章总结：Aggregate Functions
 

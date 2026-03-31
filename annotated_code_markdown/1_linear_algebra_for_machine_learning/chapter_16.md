@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 16
+
+---
+
+### Eigendecomposition
+
+
 
 ---
 
@@ -57,11 +63,17 @@ A = array([[1, 2, 3],
 
 values, vectors = eig(A)     # eigendecomposition / 特征整
 
+# 打印输出 / Print output
 print("A =")
+# 打印输出 / Print output
 print(A)
+# 打印输出 / Print output
 print("\nEigenvalues / 特征值:")
+# 打印输出 / Print output
 print(values)
+# 打印输出 / Print output
 print("\nEigenvectors / 特征变数:")
+# 打印输出 / Print output
 print(vectors)
 ```
 
@@ -76,7 +88,9 @@ Extract the first eigenvector (first column) and multiply by $A$.
 # Extract first eigenvector (first column) / 提取第一个特征变数
 B = A.dot(vectors[:, 0])     # A · v / A 乘上 v
 
+# 打印输出 / Print output
 print("B = A · v (first eigenvector) / A 乘上第一个特征变数:")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -91,11 +105,17 @@ Multiply the first eigenvector by its corresponding eigenvalue. This should equa
 # Compute λ · v / 计算 λ 乘以 v
 C = vectors[:, 0] * values[0]     # λ · v / λ 乘以 v
 
+# 打印输出 / Print output
 print("C = λ · v (eigenvalue times eigenvector) / 特征值乘以特征变数:")
+# 打印输出 / Print output
 print(C)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Are B and C equal? / B 和 C 是否相等？")
+# 打印输出 / Print output
 print(f"B - C =")
+# 打印输出 / Print output
 print(B - C)
 ```
 
@@ -142,7 +162,9 @@ A = array([[1, 2, 3],
            [7, 8, 9]])
 
 values, vectors = eig(A)
+# 打印输出 / Print output
 print("A =")
+# 打印输出 / Print output
 print(A)
 
 # --- Verification / 验证 ---
@@ -151,16 +173,22 @@ print(A)
 
 # Left side: A·v / 左边：A 乘以 v
 B = A.dot(vectors[:, 0])
+# 打印输出 / Print output
 print("\nB = A · v[0]:")
+# 打印输出 / Print output
 print(B)
 
 # Right side: λ·v / 右边：λ 乘以 v
 C = vectors[:, 0] * values[0]
+# 打印输出 / Print output
 print("\nC = λ[0] · v[0]:")
+# 打印输出 / Print output
 print(C)
 
 # Check equality / 检查是否相等
+# 打印输出 / Print output
 print("\nDifference (should be ~0) / 差值（应为约 0）:")
+# 打印输出 / Print output
 print(B - C)
 ```
 
@@ -220,14 +248,20 @@ A = array([[1, 2, 3],
            [4, 5, 6],
            [7, 8, 9]])
 
+# 打印输出 / Print output
 print("A =")
+# 打印输出 / Print output
 print(A)
 
 values, vectors = eig(A)     # eigendecomposition / 特征整
 
+# 打印输出 / Print output
 print("\nEigenvalues / 特征值:")
+# 打印输出 / Print output
 print(values)
+# 打印输出 / Print output
 print("\nEigenvectors / 特征变数:")
+# 打印输出 / Print output
 print(vectors)
 ```
 
@@ -243,11 +277,17 @@ Q = vectors          # Q: matrix of eigenvectors / Q: 特征变数矩阵
 R = inv(Q)           # R: inverse of Q / R: Q 的逻永业逆
 L = diag(values)     # L: diagonal eigenvalue matrix / L: 对角特征值矩阵
 
+# 打印输出 / Print output
 print("Q (eigenvector matrix / 特征变数矩阵) =")
+# 打印输出 / Print output
 print(Q)
+# 打印输出 / Print output
 print("\nL (eigenvalue diagonal matrix / 对角特征值矩阵) =")
+# 打印输出 / Print output
 print(L)
+# 打印输出 / Print output
 print("\nR = Q^{-1} (inverse of Q / Q 的逻永业逆) =")
+# 打印输出 / Print output
 print(R)
 ```
 
@@ -261,13 +301,21 @@ Multiply back: $A = Q \cdot \Lambda \cdot Q^{-1}$
 ```python
 B = Q.dot(L).dot(R)     # A = Q · Λ · Q^{-1} / A = Q 乘以 Λ 乘以 Q^{-1}
 
+# 打印输出 / Print output
 print("Reconstructed B = Q · L · R =")
+# 打印输出 / Print output
 print(B)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Original A =")
+# 打印输出 / Print output
 print(A)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Difference (should be ~0) / 差值（应为约 0）:")
+# 打印输出 / Print output
 print(B - A)
 ```
 
@@ -314,7 +362,9 @@ from numpy.linalg import eig     # Eigendecomposition / 特征整
 A = array([[1, 2, 3],
            [4, 5, 6],
            [7, 8, 9]])
+# 打印输出 / Print output
 print("A =")
+# 打印输出 / Print output
 print(A)
 
 values, vectors = eig(A)
@@ -328,24 +378,34 @@ Q = vectors
 L = diag(values)
 R = inv(Q)
 
+# 打印输出 / Print output
 print("\nQ (eigenvector matrix) =")
+# 打印输出 / Print output
 print(Q)
+# 打印输出 / Print output
 print("\nΛ (eigenvalue diagonal matrix) =")
+# 打印输出 / Print output
 print(L)
+# 打印输出 / Print output
 print("\nQ^{-1} (inverse) =")
+# 打印输出 / Print output
 print(R)
 
 # --- Reconstruct original matrix / 重构原矩阵 ---
 B = Q.dot(L).dot(R)
+# 打印输出 / Print output
 print("\nReconstructed B = Q · Λ · Q^{-1} =")
+# 打印输出 / Print output
 print(B)
+# 打印输出 / Print output
 print("\nDifference (should be ~0) / 差值（应为约 0）:")
+# 打印输出 / Print output
 print(B - A)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 16 Summary / 第16章总结：Eigendecomposition
 

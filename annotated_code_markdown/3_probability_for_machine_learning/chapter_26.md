@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 26
 
 ---
@@ -23,9 +23,20 @@ This notebook plots log loss curves for correct and incorrect class predictions.
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Plot Log Loss for Each Class / 为每个类绘制对数损失
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import log_lossfrom matplotlib import pyplot# predictions as 0 to 1 in 0.01 incrementsyhat = [x*0.01 for x in range(0, 101)]# evaluate predictions for a 0 true value (low probability = high loss)losses_0 = [log_loss([0], [x], labels=[0,1]) for x in yhat]# evaluate predictions for a 1 true value (high probability = high loss)losses_1 = [log_loss([1], [x], labels=[0,1]) for x in yhat]# plot input to losspyplot.plot(yhat, losses_0, label='true=0')pyplot.plot(yhat, losses_1, label='true=1')pyplot.legend()pyplot.show()
 ```
 
@@ -48,6 +59,7 @@ from sklearn.metrics import log_lossfrom matplotlib import pyplot# predictions a
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import log_lossfrom matplotlib import pyplotyhat = [x*0.01 for x in range(0, 101)]losses_0 = [log_loss([0], [x], labels=[0,1]) for x in yhat]losses_1 = [log_loss([1], [x], labels=[0,1]) for x in yhat]pyplot.plot(yhat, losses_0, label='true=0')pyplot.plot(yhat, losses_1, label='true=1')pyplot.legend()pyplot.show()
 ```
 
@@ -73,9 +85,23 @@ This notebook plots log loss against fixed probability predictions on balanced d
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Log Loss with Balanced Dataset / 平衡数据集的对数损失
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import log_lossfrom matplotlib import pyplot# define a balanced dataset (50-50 split)testy = [0 for x in range(50)] + [1 for x in range(50)]# loss for predicting different fixed probability valuespredictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [log_loss(testy, [y for x in range(len(testy))]) for y in predictions]# plot predictions vs losspyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -99,6 +125,7 @@ from sklearn.metrics import log_lossfrom matplotlib import pyplot# define a bala
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import log_lossfrom matplotlib import pyplottesty = [0 for x in range(50)] + [1 for x in range(50)]predictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [log_loss(testy, [y for x in range(len(testy))]) for y in predictions]pyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -124,9 +151,20 @@ This notebook plots log loss on imbalanced data (100 class 0 vs 10 class 1). Imb
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Log Loss with Imbalanced Dataset / 不平衡数据集的对数损失
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import log_lossfrom matplotlib import pyplot# define an imbalanced datasettesty = [0 for x in range(100)] + [1 for x in range(10)]# loss for predicting different fixed probability valuespredictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [log_loss(testy, [y for x in range(len(testy))]) for y in predictions]# plot predictions vs losspyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -150,6 +188,7 @@ from sklearn.metrics import log_lossfrom matplotlib import pyplot# define an imb
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import log_lossfrom matplotlib import pyplottesty = [0 for x in range(100)] + [1 for x in range(10)]predictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [log_loss(testy, [y for x in range(len(testy))]) for y in predictions]pyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -176,9 +215,23 @@ This notebook plots Brier score (mean squared error) for binary predictions. Unl
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Brier Score Curve / Brier评分曲线
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import brier_score_lossfrom matplotlib import pyplot# predictions as 0 to 1 in 0.01 incrementsyhat = [x*0.01 for x in range(0, 101)]# evaluate predictions for a 1 true value (MSE penalty)losses = [brier_score_loss([1], [x], pos_label=[1]) for x in yhat]# plot input to losspyplot.plot(yhat, losses)pyplot.show()
 ```
 
@@ -201,6 +254,7 @@ from sklearn.metrics import brier_score_lossfrom matplotlib import pyplot# predi
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import brier_score_lossfrom matplotlib import pyplotyhat = [x*0.01 for x in range(0, 101)]losses = [brier_score_loss([1], [x], pos_label=[1]) for x in yhat]pyplot.plot(yhat, losses)pyplot.show()
 ```
 
@@ -227,9 +281,23 @@ This notebook plots Brier score against fixed predictions on balanced data. It s
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Brier Score with Balanced Dataset / 平衡数据集的Brier评分
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import brier_score_lossfrom matplotlib import pyplot# define a balanced datasettesty = [0 for x in range(50)] + [1 for x in range(50)]# brier score for predicting different fixed probability valuespredictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [brier_score_loss(testy, [y for x in range(len(testy))]) for y in predictions]# plot predictions vs losspyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -253,6 +321,7 @@ from sklearn.metrics import brier_score_lossfrom matplotlib import pyplot# defin
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import brier_score_lossfrom matplotlib import pyplottesty = [0 for x in range(50)] + [1 for x in range(50)]predictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [brier_score_loss(testy, [y for x in range(len(testy))]) for y in predictions]pyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -279,9 +348,23 @@ This notebook plots Brier score on imbalanced data. Like log loss, Brier score n
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Brier Score with Imbalanced Dataset / 不平衡数据集的Brier评分
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import brier_score_lossfrom matplotlib import pyplot# define an imbalanced datasettesty = [0 for x in range(100)] + [1 for x in range(10)]# brier score for predicting different fixed probability valuespredictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [brier_score_loss(testy, [y for x in range(len(testy))]) for y in predictions]# plot predictions vs losspyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -305,6 +388,7 @@ from sklearn.metrics import brier_score_lossfrom matplotlib import pyplot# defin
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import brier_score_lossfrom matplotlib import pyplottesty = [0 for x in range(100)] + [1 for x in range(10)]predictions = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]losses = [brier_score_loss(testy, [y for x in range(len(testy))]) for y in predictions]pyplot.plot(predictions, losses)pyplot.show()
 ```
 
@@ -379,12 +463,19 @@ from sklearn.datasets import make_classificationfrom sklearn.linear_model import
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_classificationfrom sklearn.linear_model import LogisticRegressionfrom sklearn.model_selection import train_test_splitfrom sklearn.metrics import roc_curvefrom matplotlib import pyplotX, y = make_classification(n_samples=1000, n_classes=2, random_state=1)trainX, testX, trainy, testy = train_test_split(X, y, test_size=0.5, random_state=2)model = LogisticRegression(solver='lbfgs')model.fit(trainX, trainy)probs = model.predict_proba(testX)probs = probs[:, 1]fpr, tpr, thresholds = roc_curve(testy, probs)pyplot.plot([0, 1], [0, 1], linestyle='--')pyplot.plot(fpr, tpr)pyplot.show()
 ```
 
 ---
 
-### Chapter Summary
+### Roc Auc
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 26: Probability Scoring
 

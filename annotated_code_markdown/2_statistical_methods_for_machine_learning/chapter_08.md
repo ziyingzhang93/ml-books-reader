@@ -1,5 +1,11 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 08
+
+---
+
+### Dice Rolls
+
+
 
 ---
 
@@ -30,9 +36,13 @@ $$\sqrt{n}\left(\bar{X}_n - \mu\right) \xrightarrow{d} N(0, \sigma^2) \text{ as 
 
 ```python
 # Import random integer generation, mean calculation, and plotting / 导入随机整数生成、均值计算和绘图
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -40,6 +50,7 @@ from matplotlib import pyplot
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -50,10 +61,14 @@ seed(1)
 # Each experiment: roll a die 50 times, calculate the mean / 每个实验：投掷骰子50次，计算均值
 # randint(1, 7, 50) generates 50 die rolls / randint(1, 7, 50)生成50次投掷
 # mean() calculates the average of those 50 rolls / mean()计算这50次投掷的平均值
+# 生成整数序列 / Generate integer sequence
 means = [mean(randint(1, 7, 50)) for _ in range(1000)]
 
+# 打印输出 / Print output
 print(f"Number of simulations: 1000")
+# 打印输出 / Print output
 print(f"Mean of sample means: {mean(means):.4f}")
+# 打印输出 / Print output
 print(f"Expected value (theoretical): 3.5")
 ```
 
@@ -70,7 +85,9 @@ pyplot.title('Central Limit Theorem: Distribution of Sample Means from 1000 Dice
 pyplot.grid(True, alpha=0.3)
 pyplot.show()
 
+# 打印输出 / Print output
 print("\nNote: Despite individual die rolls being uniformly distributed on {1,2,3,4,5,6},")
+# 打印输出 / Print output
 print("the distribution of sample means is approximately Gaussian!")
 ```
 
@@ -93,22 +110,31 @@ print("the distribution of sample means is approximately Gaussian!")
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randint
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # ===== Section 2: Set Seed =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # ===== Section 3: Run Multiple Simulations =====
 # Perform 1000 dice-rolling experiments (50 rolls each) / 执行1000次骰子投掷实验（每次50次投掷）
 # Record the mean of each experiment / 记录每个实验的均值
+# 生成整数序列 / Generate integer sequence
 means = [mean(randint(1, 7, 50)) for _ in range(1000)]
 
+# 打印输出 / Print output
 print(f"Number of simulations: 1000")
+# 打印输出 / Print output
 print(f"Mean of sample means: {mean(means):.4f}")
+# 打印输出 / Print output
 print(f"Expected value (theoretical): 3.5")
 
 # ===== Section 4: Visualize CLT =====
@@ -121,8 +147,16 @@ pyplot.title('Central Limit Theorem: Distribution of Sample Means from 1000 Dice
 pyplot.grid(True, alpha=0.3)
 pyplot.show()
 
+# 打印输出 / Print output
 print("\nNote: Despite individual die rolls being uniformly distributed on {1,2,3,4,5,6},")
+# 打印输出 / Print output
 print("the distribution of sample means is approximately Gaussian!")
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

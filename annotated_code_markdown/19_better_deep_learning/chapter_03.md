@@ -1,4 +1,4 @@
-# 优化深度学习
+# 优化深度学习 / Better Deep Learning
 ## Chapter 03
 
 ---
@@ -27,11 +27,24 @@ This script demonstrates **scatter plot of blobs dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
+---
 ## Step 1 — scatter plot of blobs dataset
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import where
 ```
 
@@ -46,6 +59,7 @@ X, y = make_blobs(n_samples=1000, centers=3, n_features=2, cluster_std=2, random
 ## Step 3 — scatter plot for each class value
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for class_value in range(3):
 ```
 
@@ -99,12 +113,16 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # scatter plot of blobs dataset
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import where
 # generate 2d classification dataset
 X, y = make_blobs(n_samples=1000, centers=3, n_features=2, cluster_std=2, random_state=2)
 # scatter plot for each class value
+# 生成整数序列 / Generate integer sequence
 for class_value in range(3):
 	# select indices of points with the class label
 	row_ix = where(y == class_value)
@@ -167,11 +185,17 @@ This script demonstrates **mlp for the blobs problem with batch gradient descent
 ## Step 1 — mlp for the blobs problem with batch gradient descent
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import SGD
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -202,8 +226,11 @@ trainy, testy = y[:n_train], y[n_train:]
 ## Step 5 — define model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(50, input_dim=2, activation='relu', kernel_initializer='he_uniform'))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(3, activation='softmax'))
 ```
 
@@ -212,6 +239,7 @@ model.add(Dense(3, activation='softmax'))
 
 ```python
 opt = SGD(lr=0.01, momentum=0.9)
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 ```
 
@@ -219,6 +247,7 @@ model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy
 ## Step 7 — fit model
 
 ```python
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=200, verbose=0, batch_size=len(trainX))
 ```
 
@@ -226,8 +255,11 @@ history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=200, 
 ## Step 8 — evaluate the model
 
 ```python
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 ```
 
@@ -293,11 +325,17 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # mlp for the blobs problem with batch gradient descent
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import SGD
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # generate 2d classification dataset
 X, y = make_blobs(n_samples=1000, centers=3, n_features=2, cluster_std=2, random_state=2)
@@ -308,17 +346,25 @@ n_train = 500
 trainX, testX = X[:n_train, :], X[n_train:, :]
 trainy, testy = y[:n_train], y[n_train:]
 # define model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(50, input_dim=2, activation='relu', kernel_initializer='he_uniform'))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(3, activation='softmax'))
 # compile model
 opt = SGD(lr=0.01, momentum=0.9)
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 # fit model
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=200, verbose=0, batch_size=len(trainX))
 # evaluate the model
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 # plot loss learning curves
 pyplot.subplot(211)
@@ -388,11 +434,17 @@ This script demonstrates **mlp for the blobs problem with stochastic gradient de
 ## Step 1 — mlp for the blobs problem with stochastic gradient descent
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import SGD
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -423,8 +475,11 @@ trainy, testy = y[:n_train], y[n_train:]
 ## Step 5 — define model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(50, input_dim=2, activation='relu', kernel_initializer='he_uniform'))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(3, activation='softmax'))
 ```
 
@@ -433,6 +488,7 @@ model.add(Dense(3, activation='softmax'))
 
 ```python
 opt = SGD(lr=0.01, momentum=0.9)
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 ```
 
@@ -440,6 +496,7 @@ model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy
 ## Step 7 — fit model
 
 ```python
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=200, verbose=0, batch_size=1)
 ```
 
@@ -447,8 +504,11 @@ history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=200, 
 ## Step 8 — evaluate the model
 
 ```python
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 ```
 
@@ -514,11 +574,17 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # mlp for the blobs problem with stochastic gradient descent
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_blobs
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import SGD
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import to_categorical
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # generate 2d classification dataset
 X, y = make_blobs(n_samples=1000, centers=3, n_features=2, cluster_std=2, random_state=2)
@@ -529,17 +595,25 @@ n_train = 500
 trainX, testX = X[:n_train, :], X[n_train:, :]
 trainy, testy = y[:n_train], y[n_train:]
 # define model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(50, input_dim=2, activation='relu', kernel_initializer='he_uniform'))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(3, activation='softmax'))
 # compile model
 opt = SGD(lr=0.01, momentum=0.9)
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
 # fit model
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=200, verbose=0, batch_size=1)
 # evaluate the model
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 # plot loss learning curves
 pyplot.subplot(211)
@@ -562,7 +636,25 @@ pyplot.show()
 
 ---
 
-### Chapter Summary
+### Mlp Stochastic Gd Lrate
+
+
+
+---
+
+### Mlp Minibatch Gd
+
+
+
+---
+
+### Mlp Evaluate Batch Sizes
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 03 Summary / 第03章总结
 

@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 17
 
 ---
@@ -55,7 +55,9 @@ A = array([[1, 2],
            [3, 4],
            [5, 6]])
 
+# 打印输出 / Print output
 print("A (3x2 matrix / 3×2 矩阵) =")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -71,13 +73,21 @@ print(A)
 ```python
 U, s, VT = svd(A)     # SVD 分解 / SVD decomposition
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("U (left singular vectors / 左特異向量, shape", U.shape, ") =")
+# 打印输出 / Print output
 print(U)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("s (singular values / 特異值) =")
+# 打印输出 / Print output
 print(s)
+# 打印输出 / Print output
 print()
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("VT (right singular vectors transposed / 右特異向量转置, shape", VT.shape, ") =")
+# 打印输出 / Print output
 print(VT)
 ```
 
@@ -122,7 +132,9 @@ from scipy.linalg import svd     # SVD 分解函数 / SVD decomposition function
 A = array([[1, 2],
            [3, 4],
            [5, 6]])
+# 打印输出 / Print output
 print("A (3x2) =")
+# 打印输出 / Print output
 print(A)
 
 # --- SVD decomposition / SVD 分解 ---
@@ -132,11 +144,17 @@ print(A)
 #   VT: right singular vectors transposed (nxn orthogonal) / 右特異向量转置
 U, s, VT = svd(A)
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nU (left singular vectors, shape", U.shape, ") =")
+# 打印输出 / Print output
 print(U)
+# 打印输出 / Print output
 print("\ns (singular values) =")
+# 打印输出 / Print output
 print(s)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nVT (right singular vectors transposed, shape", VT.shape, ") =")
+# 打印输出 / Print output
 print(VT)
 ```
 
@@ -190,13 +208,18 @@ A = array([[1, 2],
            [3, 4],
            [5, 6]])
 
+# 打印输出 / Print output
 print("A (3x2 rectangular matrix) =")
+# 打印输出 / Print output
 print(A)
 
 U, s, VT = svd(A)     # SVD 分解 / SVD decomposition
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nU shape:", U.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("s shape:", s.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("VT shape:", VT.shape)
 ```
 
@@ -213,12 +236,16 @@ SVD 返回 `s` 是一维数组，我们需要手工构建 $\Sigma$：
 
 ```python
 # Create m x n Sigma matrix / 创建 m x n Sigma 矩阵
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 Sigma = zeros((A.shape[0], A.shape[1]))
 
 # Fill diagonal with singular values / 将特異值填入对角
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 Sigma[:A.shape[1], :A.shape[1]] = diag(s)
 
+# 打印输出 / Print output
 print("Sigma (3x2 diagonal matrix / 对角矩阵) =")
+# 打印输出 / Print output
 print(Sigma)
 ```
 
@@ -232,10 +259,15 @@ Multiply back: $A = U \cdot \Sigma \cdot V^T$
 ```python
 B = U.dot(Sigma.dot(VT))     # U · Sigma · VT should equal A
 
+# 打印输出 / Print output
 print("Reconstructed B = U · Sigma · V^T =")
+# 打印输出 / Print output
 print(B)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Original A =")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -282,23 +314,31 @@ from scipy.linalg import svd     # SVD 分解函数 / SVD decomposition function
 A = array([[1, 2],
            [3, 4],
            [5, 6]])
+# 打印输出 / Print output
 print("A (3x2 matrix) =")
+# 打印输出 / Print output
 print(A)
 
 U, s, VT = svd(A)
 
 # --- Construct Sigma with correct shape / 构建正确形状的 Sigma 矩阵 ---
 # Create m x n zero matrix / 创建 m x n 零矩阵
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 Sigma = zeros((A.shape[0], A.shape[1]))
 # Fill diagonal with singular values / 将特異值填入对角
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 Sigma[:A.shape[1], :A.shape[1]] = diag(s)
+# 打印输出 / Print output
 print("\nSigma (3x2 diagonal matrix) =")
+# 打印输出 / Print output
 print(Sigma)
 
 # --- Reconstruct original matrix / 重构原矩阵 ---
 # A = U · Sigma · V^T
 B = U.dot(Sigma.dot(VT))
+# 打印输出 / Print output
 print("\nReconstructed B = U · Sigma · V^T =")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -349,13 +389,18 @@ A = array([[1, 2, 3],
            [4, 5, 6],
            [7, 8, 9]])
 
+# 打印输出 / Print output
 print("A (3x3 square matrix / 3×3 方阵) =")
+# 打印输出 / Print output
 print(A)
 
 U, s, VT = svd(A)     # SVD 分解 / SVD decomposition
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nU shape:", U.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("s shape:", s.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("VT shape:", VT.shape)
 ```
 
@@ -369,7 +414,9 @@ For square matrices, we can use `numpy.diag()` directly since $\Sigma$ is now sq
 ```python
 Sigma = diag(s)     # Create diagonal matrix from singular values / 从特異值创建对角矩阵
 
+# 打印输出 / Print output
 print("Sigma (3x3 diagonal matrix / 对角矩阵) =")
+# 打印输出 / Print output
 print(Sigma)
 ```
 
@@ -383,10 +430,15 @@ Multiply back: $A = U \cdot \Sigma \cdot V^T$
 ```python
 B = U.dot(Sigma.dot(VT))     # Reconstruct: A = U · Sigma · V^T / 重构：A = U 乘以 Sigma 乘以 VT
 
+# 打印输出 / Print output
 print("Reconstructed B = U · Sigma · V^T =")
+# 打印输出 / Print output
 print(B)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Original A =")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -432,7 +484,9 @@ from scipy.linalg import svd     # SVD 分解函数 / SVD decomposition function
 A = array([[1, 2, 3],
            [4, 5, 6],
            [7, 8, 9]])
+# 打印输出 / Print output
 print("A (3x3 square matrix) =")
+# 打印输出 / Print output
 print(A)
 
 U, s, VT = svd(A)
@@ -441,13 +495,17 @@ U, s, VT = svd(A)
 # For square matrices, Sigma is a true square diagonal matrix
 # 下方矩阵情下，Sigma 是真正的对角矩阵
 Sigma = diag(s)
+# 打印输出 / Print output
 print("\nSigma (3x3 diagonal matrix) =")
+# 打印输出 / Print output
 print(Sigma)
 
 # --- Reconstruct original matrix / 重构原矩阵 ---
 # A = U · Sigma · V^T
 B = U.dot(Sigma.dot(VT))
+# 打印输出 / Print output
 print("\nReconstructed B = U · Sigma · V^T =")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -509,8 +567,11 @@ A = array([[0.1, 0.2],
            [0.5, 0.6],
            [0.7, 0.8]])
 
+# 打印输出 / Print output
 print("A (4x2 rectangular matrix) =")
+# 打印输出 / Print output
 print(A)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", A.shape)
 ```
 
@@ -524,8 +585,11 @@ print("Shape:", A.shape)
 ```python
 B = pinv(A)     # Compute pseudoinverse / 计算哺伺曉总租绋贫
 
+# 打印输出 / Print output
 print("Pseudoinverse B = A^+ (2x4 matrix) =")
+# 打印输出 / Print output
 print(B)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", B.shape)
 ```
 
@@ -571,7 +635,9 @@ A = array([[0.1, 0.2],
            [0.3, 0.4],
            [0.5, 0.6],
            [0.7, 0.8]])
+# 打印输出 / Print output
 print("A (4x2 rectangular matrix) =")
+# 打印输出 / Print output
 print(A)
 
 # --- Compute pseudoinverse / 计算哺伺曉总租绋贫 ---
@@ -579,7 +645,9 @@ print(A)
 # The pseudoinverse shape is transposed: (2x4)
 # 哺伺曉总租绋贫的形状是转置的：(2x4)
 B = pinv(A)
+# 打印输出 / Print output
 print("\nPseudoinverse B = A^+ (2x4 matrix) =")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -634,12 +702,16 @@ A = array([[0.1, 0.2],
            [0.5, 0.6],
            [0.7, 0.8]])
 
+# 打印输出 / Print output
 print("A (4x2 rectangular matrix) =")
+# 打印输出 / Print output
 print(A)
 
 U, s, VT = svd(A)     # SVD 分解 / SVD decomposition
 
+# 打印输出 / Print output
 print("\nSingular values / 特異值:")
+# 打印输出 / Print output
 print(s)
 ```
 
@@ -654,16 +726,21 @@ The key step: take reciprocals of singular values and transpose to get the right
 # Compute reciprocals of singular values / 计算特異值的值数的你狗
 d = 1.0 / s     # Element-wise reciprocal / 按元素沈整敗0
 
+# 打印输出 / Print output
 print("Reciprocals of singular values / 特異值的值数的你狗:")
+# 打印输出 / Print output
 print(d)
 
 # Create m x n matrix (note the transposed shape!) / 创建 n x m 矩阵（注意形状）
 D = zeros(A.shape)     # Create zero matrix with shape of A / 创建与 A 同形状的零矩阵
 
 # Fill the diagonal (transposed) / 将值数的你狗填入对角
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 D[:A.shape[1], :A.shape[1]] = diag(d)
 
+# 打印输出 / Print output
 print("\nD = Sigma^+ (2x4 pseudoinverse of singular values) =")
+# 打印输出 / Print output
 print(D)
 ```
 
@@ -678,7 +755,9 @@ Apply the SVD pseudoinverse formula.
 # A^+ = V · D^T · U^T / A^+ = V 乘以 D^T 乘以 U^T
 B = VT.T.dot(D.T).dot(U.T)     # Pseudoinverse via SVD / 供 SVD 算算哺伺曉总租绋贫
 
+# 打印输出 / Print output
 print("Pseudoinverse B = V^T · D^T · U^T =")
+# 打印输出 / Print output
 print(B)
 ```
 
@@ -726,27 +805,43 @@ A = array([[0.1, 0.2],
            [0.3, 0.4],
            [0.5, 0.6],
            [0.7, 0.8]])
+# 打印输出 / Print output
 print("A (4x2 rectangular matrix) =")
+# 打印输出 / Print output
 print(A)
 
 U, s, VT = svd(A)
+# 打印输出 / Print output
 print("\nSingular values / 特異值:")
+# 打印输出 / Print output
 print(s)
 
 # --- Construct Sigma^+ / 构建 Sigma^+ ---
 # Compute reciprocals of singular values / 计算特異值的值数的你狗
 d = 1.0 / s
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 D = zeros(A.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 D[:A.shape[1], :A.shape[1]] = diag(d)
+# 打印输出 / Print output
 print("\nSigma^+ (pseudoinverse of singular values) =")
+# 打印输出 / Print output
 print(D)
 
 # --- Compute pseudoinverse / 计算哺伺曉总租绋贫 ---
 # A^+ = V Σ^+ U^T
 B = VT.T.dot(D.T).dot(U.T)
+# 打印输出 / Print output
 print("\nPseudoinverse B = V^T · Sigma^+ · U^T =")
+# 打印输出 / Print output
 print(B)
 ```
+
+---
+
+### Svd Data Reduction
+
+
 
 ---
 
@@ -781,6 +876,16 @@ This script demonstrates how to perform **data reduction using scikit-learn's `T
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+```
+
+---
 ## Step 1 — Import Libraries / 导入渪
 
 ```python
@@ -796,8 +901,11 @@ A = array([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
            [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
            [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]])
 
+# 打印输出 / Print output
 print("A (original 3x10 matrix) =")
+# 打印输出 / Print output
 print(A)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", A.shape)
 ```
 
@@ -812,6 +920,7 @@ Initialize with the desired number of components (dimensions to keep).
 # Create TruncatedSVD with 2 components / 使用 2 个维度剋成 TruncatedSVD
 svd = TruncatedSVD(n_components=2)     # Keep 2 components / 保留 2 个维度
 
+# 打印输出 / Print output
 print("TruncatedSVD model created with n_components=2 / 创建了 n_components=2 的模式")
 ```
 
@@ -827,8 +936,11 @@ Use the `.fit()` and `.transform()` interface to perform SVD and return the comp
 svd.fit(A)
 result = svd.transform(A)     # Transform to lower dimensions / 转换为低维数据
 
+# 打印输出 / Print output
 print("\nTransformed data (3x2 low-rank representation) =")
+# 打印输出 / Print output
 print(result)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", result.shape)
 ```
 
@@ -867,13 +979,16 @@ Below is the full annotated script in one block for quick reference after step-b
 
 # --- Import libraries / 导入渪 ---
 from numpy import array                          # NumPy 数组工具 / NumPy array utility
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import TruncatedSVD  # TruncatedSVD from scikit-learn
 
 # --- Define data matrix / 定义数据矩阵 ---
 A = array([[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
            [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
            [21, 22, 23, 24, 25, 26, 27, 28, 29, 30]])
+# 打印输出 / Print output
 print("A (original 3x10 matrix) =")
+# 打印输出 / Print output
 print(A)
 
 # --- Create and fit TruncatedSVD model / 创建和拓儗 TruncatedSVD 模式 ---
@@ -882,16 +997,20 @@ svd = TruncatedSVD(n_components=2)
 svd.fit(A)
 
 # --- Transform data to lower dimensions / 转换为低维表示 ---
+# 用已拟合的模型转换数据 / Transform data with fitted model
 result = svd.transform(A)
 
+# 打印输出 / Print output
 print("\nTransformed data (low-dimensional representation) =")
+# 打印输出 / Print output
 print(result)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Original shape: (3, 10) -> Transformed shape:", result.shape)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 17 Summary / 第17章总结：SVD (Singular Value Decomposition)
 

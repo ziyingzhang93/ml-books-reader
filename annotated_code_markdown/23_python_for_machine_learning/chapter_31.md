@@ -1,5 +1,17 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 31
+
+---
+
+### Timeit
+
+
+
+---
+
+### Randomsample
+
+
 
 ---
 
@@ -88,13 +100,25 @@ This script demonstrates **Train And Save**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  💾 保存结果 / Save Results
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入对象序列化模块 / Import object serialization module
 import pickle
 from regressor.train import train
 
 model = train()
+# 打开文件（自动关闭） / Open file (auto-close)
 with open("model.pickle", "wb") as fp:
     pickle.dump(model, fp)
 ```
@@ -119,10 +143,12 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入对象序列化模块 / Import object serialization module
 import pickle
 from regressor.train import train
 
 model = train()
+# 打开文件（自动关闭） / Open file (auto-close)
 with open("model.pickle", "wb") as fp:
     pickle.dump(model, fp)
 ```
@@ -159,11 +185,13 @@ This script demonstrates **Predict**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from regressor.predict import predict
 
 X = np.asarray([[0.186,0,8.3,0,0.62,6.2,58,1.96,6,400,18.1,410,11.5]])
 y = predict(X)
+# 打印输出 / Print output
 print(y[0])
 ```
 
@@ -194,17 +222,19 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from regressor.predict import predict
 
 X = np.asarray([[0.186,0,8.3,0,0.62,6.2,58,1.96,6,400,18.1,410,11.5]])
 y = predict(X)
+# 打印输出 / Print output
 print(y[0])
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 31 Summary / 第31章总结
 

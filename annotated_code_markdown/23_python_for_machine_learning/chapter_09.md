@@ -1,5 +1,11 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 09
+
+---
+
+### Pso
+
+
 
 ---
 
@@ -29,11 +35,14 @@ This script demonstrates **Simpleqt**.
 ## Step 1 — Step 1
 
 ```python
+# 导入系统相关功能 / Import system utilities
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 
 class Frame(QMainWindow):
+        # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
         def __init__(self):
+                # 调用父类初始化（必须） / Call parent class init (required)
                 super().__init__()
                 self.initUI()
         def initUI(self):
@@ -70,11 +79,14 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入系统相关功能 / Import system utilities
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 
 class Frame(QMainWindow):
+        # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
         def __init__(self):
+                # 调用父类初始化（必须） / Call parent class init (required)
                 super().__init__()
                 self.initUI()
         def initUI(self):
@@ -93,7 +105,7 @@ if __name__ == '__main__':
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 09 Summary / 第09章总结
 

@@ -18,10 +18,20 @@ This script demonstrates **Photo https://unsplash.com/photos/people-walking-on-s
 本脚本演示 **Photo https://unsplash.com/photos/people-walking-on-sidewalk-during-daytime-GBkAx9qUeus**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 演示核心概念和API用法 / Demonstrate core concepts and API usage
+
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入操作系统接口 / Import OS interface
 import os
+# 导入OpenCV计算机视觉库 / Import OpenCV computer vision library
 import cv2
 ```
 
@@ -99,7 +109,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入操作系统接口 / Import OS interface
 import os
+# 导入OpenCV计算机视觉库 / Import OpenCV computer vision library
 import cv2
 
 # Photo https://unsplash.com/photos/people-walking-on-sidewalk-during-daytime-GBkAx9qUeus
@@ -133,24 +145,6 @@ cv2.destroyAllWindows()
 
 ### Chapter Summary / 章节总结
 
-# Chapter 20 Summary / 第20章总结
 
-## Theme / 主题: Chapter 20 / Chapter 20
-
-This chapter contains **1 code files** demonstrating chapter 20.
-
-本章包含 **1 个代码文件**，演示Chapter 20。
-
----
-## Evolution / 演化路线
-
-  1. `04_haar_detect.ipynb` — Haar Detect
-
----
-## ML Relevance / ML 关联
-
-The techniques in this chapter (Chapter 20) are fundamental building blocks in machine learning pipelines.
-
-本章技术（Chapter 20）是机器学习流水线中的基础构建块。
 
 ---

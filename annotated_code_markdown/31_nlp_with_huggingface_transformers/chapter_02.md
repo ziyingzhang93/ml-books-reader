@@ -1,4 +1,4 @@
-# HF Transformers
+# HuggingFace Transformers NLP / NLP with HF Transformers
 ## Chapter 02
 
 ---
@@ -29,7 +29,9 @@ This script demonstrates **Verbose**.
 ## Step 1 — Step 1
 
 ```python
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 
 model_name = "KernAI/stock-news-distilbert"
@@ -38,6 +40,7 @@ model = DistilBertForSequenceClassification.from_pretrained(model_name)
 
 text = "Machine Learning Mastery is a nice website."
 inputs = tokenizer(text, return_tensors="pt")
+# 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
 with torch.no_grad():
     logits = model(**inputs).logits
 predicted_class_id = logits.argmax().item()
@@ -71,7 +74,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
+# 导入HuggingFace Transformers库 / Import HuggingFace Transformers library
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 
 model_name = "KernAI/stock-news-distilbert"
@@ -80,6 +85,7 @@ model = DistilBertForSequenceClassification.from_pretrained(model_name)
 
 text = "Machine Learning Mastery is a nice website."
 inputs = tokenizer(text, return_tensors="pt")
+# 禁用梯度计算（推理时节省内存） / Disable gradient computation (save memory during inference)
 with torch.no_grad():
     logits = model(**inputs).logits
 predicted_class_id = logits.argmax().item()
@@ -91,7 +97,37 @@ predicted_class_id = logits.argmax().item()
 
 ---
 
-### Chapter Summary
+### Othermodel
+
+
+
+---
+
+### Auto
+
+
+
+---
+
+### Tf
+
+
+
+---
+
+### Warning
+
+
+
+---
+
+### Pipeline
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 02 Summary / 第02章总结
 

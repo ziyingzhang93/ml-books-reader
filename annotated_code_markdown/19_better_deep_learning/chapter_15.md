@@ -1,4 +1,4 @@
-# 优化深度学习
+# 优化深度学习 / Better Deep Learning
 ## Chapter 15
 
 ---
@@ -27,11 +27,24 @@ This script demonstrates **scatter plot of moons dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
+---
 ## Step 1 — scatter plot of moons dataset
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_moons
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import where
 ```
 
@@ -46,6 +59,7 @@ X, y = make_moons(n_samples=100, noise=0.2, random_state=1)
 ## Step 3 — scatter plot for each class value
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for class_value in range(2):
 ```
 
@@ -99,12 +113,16 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # scatter plot of moons dataset
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_moons
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import where
 # generate 2d classification dataset
 X, y = make_moons(n_samples=100, noise=0.2, random_state=1)
 # scatter plot for each class value
+# 生成整数序列 / Generate integer sequence
 for class_value in range(2):
 	# select indices of points with the class label
 	row_ix = where(y == class_value)
@@ -167,9 +185,13 @@ This script demonstrates **mlp overfit on the moons dataset**.
 ## Step 1 — mlp overfit on the moons dataset
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_moons
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -193,9 +215,13 @@ trainy, testy = y[:n_train], y[n_train:]
 ## Step 4 — define model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(500, input_dim=2, activation='relu'))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(1, activation='sigmoid'))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 ```
 
@@ -203,6 +229,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 ## Step 5 — fit model
 
 ```python
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=4000, verbose=0)
 ```
 
@@ -210,8 +237,11 @@ history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=4000,
 ## Step 6 — evaluate the model
 
 ```python
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 ```
 
@@ -275,9 +305,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # mlp overfit on the moons dataset
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_moons
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # generate 2d classification dataset
 X, y = make_moons(n_samples=100, noise=0.2, random_state=1)
@@ -286,15 +320,23 @@ n_train = 30
 trainX, testX = X[:n_train, :], X[n_train:, :]
 trainy, testy = y[:n_train], y[n_train:]
 # define model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(500, input_dim=2, activation='relu'))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(1, activation='sigmoid'))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 # fit model
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=4000, verbose=0)
 # evaluate the model
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 # plot loss learning curves
 pyplot.subplot(211)
@@ -364,10 +406,15 @@ This script demonstrates **mlp overfit on the moons dataset with a unit norm con
 ## Step 1 — mlp overfit on the moons dataset with a unit norm constraint
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_moons
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.constraints import unit_norm
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -391,9 +438,13 @@ trainy, testy = y[:n_train], y[n_train:]
 ## Step 4 — define model
 
 ```python
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(500, input_dim=2, activation='relu', kernel_constraint=unit_norm()))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(1, activation='sigmoid'))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 ```
 
@@ -401,6 +452,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 ## Step 5 — fit model
 
 ```python
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=4000, verbose=0)
 ```
 
@@ -408,8 +460,11 @@ history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=4000,
 ## Step 6 — evaluate the model
 
 ```python
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 ```
 
@@ -473,10 +528,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # mlp overfit on the moons dataset with a unit norm constraint
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.datasets import make_moons
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Sequential
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.constraints import unit_norm
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # generate 2d classification dataset
 X, y = make_moons(n_samples=100, noise=0.2, random_state=1)
@@ -485,15 +545,23 @@ n_train = 30
 trainX, testX = X[:n_train, :], X[n_train:, :]
 trainy, testy = y[:n_train], y[n_train:]
 # define model
+# 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
 model = Sequential()
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(500, input_dim=2, activation='relu', kernel_constraint=unit_norm()))
+# 向模型添加一层 / Add a layer to the model
 model.add(Dense(1, activation='sigmoid'))
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 # fit model
+# 训练模型 / Train the model
 history = model.fit(trainX, trainy, validation_data=(testX, testy), epochs=4000, verbose=0)
 # evaluate the model
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, train_acc = model.evaluate(trainX, trainy, verbose=0)
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, test_acc = model.evaluate(testX, testy, verbose=0)
+# 打印输出 / Print output
 print('Train: %.3f, Test: %.3f' % (train_acc, test_acc))
 # plot loss learning curves
 pyplot.subplot(211)
@@ -509,5 +577,11 @@ pyplot.plot(history.history['val_accuracy'], label='test')
 pyplot.legend()
 pyplot.show()
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

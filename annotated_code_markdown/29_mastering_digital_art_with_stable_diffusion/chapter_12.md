@@ -1,4 +1,4 @@
-# Stable Diffusion
+# Stable Diffusion 数字艺术 / Digital Art with SD
 ## Chapter 12
 
 ---
@@ -30,6 +30,7 @@ This script demonstrates **Cuda**.
 
 ```python
 from diffusers import StableDiffusionPipeline, DDPMScheduler
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
 
 pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4",
@@ -64,6 +65,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from diffusers import StableDiffusionPipeline, DDPMScheduler
+# 导入PyTorch深度学习框架 / Import PyTorch deep learning framework
 import torch
 
 pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4",
@@ -317,7 +319,7 @@ image.save("cat.png")
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 12 Summary / 第12章总结
 

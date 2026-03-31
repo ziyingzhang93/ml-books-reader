@@ -1,9 +1,9 @@
-# XGBoost
+# Python XGBoost 实战 / XGBoost with Python
 ## Chapter 10
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 10 Summary / 第10章总结
 
@@ -26,5 +26,23 @@ This chapter contains **3 code files** demonstrating chapter 10.
 The techniques in this chapter (Chapter 10) are fundamental building blocks in machine learning pipelines.
 
 本章技术（Chapter 10）是机器学习流水线中的基础构建块。
+
+---
+
+### Early Stopping
+
+
+
+---
+
+### Evaluate Validation Set
+
+
+
+---
+
+### Learning Curves
+
+
 
 ---

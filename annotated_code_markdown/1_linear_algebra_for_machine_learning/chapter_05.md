@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 05
+
+---
+
+### Create 1D
+
+
 
 ---
 
@@ -33,11 +39,14 @@ We create a Python list of lists, where each inner list represents a row. This s
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建嵌套列表 / Create nested list (list of lists)
 data = [[11, 22], [33, 44], [55, 66]]
+# 打印输出 / Print output
 print("Python list of lists:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -50,7 +59,9 @@ We convert the nested list to a 2D NumPy array. This creates a matrix with 3 row
 ```python
 # 转换为2D NumPy数组 / Convert to 2D NumPy array
 data = array(data)
+# 打印输出 / Print output
 print("\nNumPy 2D array (matrix):")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -62,9 +73,13 @@ We verify that data is a 2D NumPy array and inspect its shape. The shape (3, 2) 
 
 ```python
 # 检查类型 / Check type
+# 打印输出 / Print output
 print("\nType:")
+# 打印输出 / Print output
 print(type(data))
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nShape:", data.shape)
+# 打印输出 / Print output
 print("Data type:", data.dtype)
 ```
 
@@ -90,21 +105,29 @@ print("Data type:", data.dtype)
 
 ```python
 # --- Create 2D Array / 创建二维数组 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create nested list / 创建嵌套列表
 data = [[11, 22], [33, 44], [55, 66]]
+# 打印输出 / Print output
 print("Python list of lists:")
+# 打印输出 / Print output
 print(data)
 
 # Convert to 2D NumPy array / 转换为二维NumPy数组
 data = array(data)
+# 打印输出 / Print output
 print("\nNumPy 2D array (matrix):")
+# 打印输出 / Print output
 print(data)
 
 # Check type and properties / 检查类型和属性
+# 打印输出 / Print output
 print("\nType:", type(data))
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
+# 打印输出 / Print output
 print("Data type:", data.dtype)
 ```
 
@@ -140,11 +163,14 @@ We create a 1D array with 5 elements. Array indices in NumPy are zero-based: fir
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建一维数组 / Create 1D array
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -156,7 +182,9 @@ We use index 0 to access the first element. In NumPy (and most programming langu
 
 ```python
 # 访问第一个元素（索引0） / Access first element (index 0)
+# 打印输出 / Print output
 print("\nFirst element (index 0):")
+# 打印输出 / Print output
 print(data[0])
 ```
 
@@ -168,7 +196,9 @@ We use index 4 to access the last element. Since the array has 5 elements, the l
 
 ```python
 # 访问最后一个元素（索引4） / Access last element (index 4)
+# 打印输出 / Print output
 print("\nLast element (index 4):")
+# 打印输出 / Print output
 print(data[4])
 ```
 
@@ -194,19 +224,26 @@ print(data[4])
 
 ```python
 # --- Index 1D Array / 索引一维数组 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 1D array / 创建一维数组
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
 
 # Access first element / 访问第一个元素
+# 打印输出 / Print output
 print("\nFirst element (index 0):")
+# 打印输出 / Print output
 print(data[0])
 
 # Access last element / 访问最后一个元素
+# 打印输出 / Print output
 print("\nLast element (index 4):")
+# 打印输出 / Print output
 print(data[4])
 ```
 
@@ -242,13 +279,18 @@ We create a 1D array with 5 elements (indices 0-4). Any index 5 or higher is out
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建一维数组 / Create 1D array
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 打印输出 / Print output
 print("Length:", len(data))
+# 打印输出 / Print output
 print("Valid indices: 0, 1, 2, 3, 4")
 ```
 
@@ -261,10 +303,14 @@ We attempt to access index 5, which doesn't exist. This raises an IndexError bec
 ```python
 # 尝试访问超出边界的索引 / Try to access out-of-bounds index
 try:
+    # 打印输出 / Print output
     print("\nAttempting to access index 5:")
+    # 打印输出 / Print output
     print(data[5])
 except IndexError as e:
+    # 打印输出 / Print output
     print(f"Error: {e}")
+    # 打印输出 / Print output
     print("Index 5 is out of bounds!")
 ```
 
@@ -290,20 +336,28 @@ except IndexError as e:
 
 ```python
 # --- Index Error Demonstration / 索引错误演示 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 1D array / 创建一维数组
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 打印输出 / Print output
 print("Length:", len(data))
 
 # Try to access out-of-bounds index / 尝试访问超出边界的索引
 try:
+    # 打印输出 / Print output
     print("\nAttempting to access index 5:")
+    # 打印输出 / Print output
     print(data[5])
 except IndexError as e:
+    # 打印输出 / Print output
     print(f"Error: {e}")
+    # 打印输出 / Print output
     print("Index 5 is out of bounds!")
 ```
 
@@ -339,14 +393,20 @@ We create a 1D array with 5 elements. In NumPy, negative indices count from the 
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建一维数组 / Create 1D array
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 打印输出 / Print output
 print("\nIndexing scheme:")
+# 打印输出 / Print output
 print("Positive: 0    1    2    3    4")
+# 打印输出 / Print output
 print("Negative: -5   -4   -3   -2   -1")
 ```
 
@@ -358,7 +418,9 @@ We use negative index -1 to access the last element (55). This is equivalent to 
 
 ```python
 # 使用负索引-1访问最后一个元素 / Access last element using -1
+# 打印输出 / Print output
 print("\nLast element (index -1):")
+# 打印输出 / Print output
 print(data[-1])
 ```
 
@@ -370,7 +432,9 @@ We use negative index -5 to access the first element (11). This is equivalent to
 
 ```python
 # 使用负索引-5访问第一个元素 / Access first element using -5
+# 打印输出 / Print output
 print("\nFirst element (index -5):")
+# 打印输出 / Print output
 print(data[-5])
 ```
 
@@ -396,22 +460,32 @@ print(data[-5])
 
 ```python
 # --- Negative Indexing / 负索引 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 1D array / 创建一维数组
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Array:")
+# 打印输出 / Print output
 print(data)
+# 打印输出 / Print output
 print("\nIndexing scheme:")
+# 打印输出 / Print output
 print("Positive: 0    1    2    3    4")
+# 打印输出 / Print output
 print("Negative: -5   -4   -3   -2   -1")
 
 # Access last element / 访问最后一个元素
+# 打印输出 / Print output
 print("\nLast element (index -1):")
+# 打印输出 / Print output
 print(data[-1])
 
 # Access first element / 访问第一个元素
+# 打印输出 / Print output
 print("\nFirst element (index -5):")
+# 打印输出 / Print output
 print(data[-5])
 ```
 
@@ -447,12 +521,16 @@ We create a 3x2 matrix (3 rows, 2 columns). Each element can be accessed using [
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建二维数组 / Create 2D array
 data = array([[11, 22], [33, 44], [55, 66]])
+# 打印输出 / Print output
 print("Matrix:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nShape:", data.shape)
 ```
 
@@ -464,7 +542,9 @@ We access the element at row 0, column 0 (the first row, first column), which is
 
 ```python
 # 访问第一行第一列的元素 / Access element at row 0, column 0
+# 打印输出 / Print output
 print("\nElement at row 0, column 0:")
+# 打印输出 / Print output
 print(data[0, 0])
 ```
 
@@ -490,18 +570,30 @@ print(data[0, 0])
 
 ```python
 # --- Index 2D Array / 索引二维数组 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 2D array / 创建二维数组
 data = array([[11, 22], [33, 44], [55, 66]])
+# 打印输出 / Print output
 print("Matrix:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
 
 # Access element at row 0, column 0 / 访问第0行第0列的元素
+# 打印输出 / Print output
 print("\nElement at row 0, column 0:")
+# 打印输出 / Print output
 print(data[0, 0])
 ```
+
+---
+
+### Index First Row 2D
+
+
 
 ---
 
@@ -535,11 +627,14 @@ We create a 1D array with 5 elements. Now we'll demonstrate slicing with [:], wh
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建一维数组 / Create 1D array
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Original array:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -551,7 +646,9 @@ We use [:] to select all elements. This is equivalent to copying the entire arra
 
 ```python
 # 使用[:]选择所有元素 / Select all elements using [:]
+# 打印输出 / Print output
 print("\nAll elements (using [:]):")
+# 打印输出 / Print output
 print(data[:])
 ```
 
@@ -577,17 +674,28 @@ print(data[:])
 
 ```python
 # --- Slice All Elements / 切片所有元素 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 1D array / 创建一维数组
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Original array:")
+# 打印输出 / Print output
 print(data)
 
 # Select all elements using [:] / 使用[:]选择所有元素
+# 打印输出 / Print output
 print("\nAll elements (using [:]):")
+# 打印输出 / Print output
 print(data[:])
 ```
+
+---
+
+### Slice Subset 1D
+
+
 
 ---
 
@@ -621,11 +729,14 @@ We create a 1D array with 5 elements. Now we'll extract the last 2 elements usin
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建一维数组 / Create 1D array
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Original array:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -637,7 +748,9 @@ We use [-2:] to extract the last 2 elements (44 and 55). This is equivalent to [
 
 ```python
 # 使用[-2:]切片最后两个元素 / Slice last 2 elements using [-2:]
+# 打印输出 / Print output
 print("\nLast 2 elements (using [-2:]):")
+# 打印输出 / Print output
 print(data[-2:])
 ```
 
@@ -663,17 +776,28 @@ print(data[-2:])
 
 ```python
 # --- Slice with Negative Indices / 使用负索引切片 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 1D array / 创建一维数组
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Original array:")
+# 打印输出 / Print output
 print(data)
 
 # Slice last 2 elements / 切片最后2个元素
+# 打印输出 / Print output
 print("\nLast 2 elements (using [-2:]):")
+# 打印输出 / Print output
 print(data[-2:])
 ```
+
+---
+
+### Seprate Input Output
+
+
 
 ---
 
@@ -707,11 +831,14 @@ We create a dataset with 3 samples and 3 columns (2 features + 1 label). We'll s
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建数据集 / Create dataset
 data = array([[11, 22, 33], [44, 55, 66], [77, 88, 99]])
+# 打印输出 / Print output
 print("Full dataset (3 samples, 3 columns):")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -724,6 +851,7 @@ We set split = 2, meaning the first 2 rows (indices 0-1) go to training, and rem
 ```python
 # 定义分割点 / Define split point
 split = 2
+# 打印输出 / Print output
 print("\nSplit point: first {} samples for training".format(split))
 ```
 
@@ -736,8 +864,11 @@ We extract rows 0 to split (0-1 inclusive), which gives us the first 2 samples f
 ```python
 # 分割训练数据 / Split training data
 train = data[:split, :]
+# 打印输出 / Print output
 print("\nTraining data (first {} samples):".format(split))
+# 打印输出 / Print output
 print(train)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", train.shape)
 ```
 
@@ -750,8 +881,11 @@ We extract rows from split onward, which gives us the remaining 1 sample for tes
 ```python
 # 分割测试数据 / Split test data
 test = data[split:, :]
+# 打印输出 / Print output
 print("\nTest data (remaining samples):")
+# 打印输出 / Print output
 print(test)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", test.shape)
 ```
 
@@ -778,25 +912,33 @@ print("Shape:", test.shape)
 
 ```python
 # --- Train-Test Split / 训练-测试分割 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create dataset / 创建数据集
 data = array([[11, 22, 33], [44, 55, 66], [77, 88, 99]])
+# 打印输出 / Print output
 print("Full dataset:")
+# 打印输出 / Print output
 print(data)
 
 # Define split point / 定义分割点
 split = 2
+# 打印输出 / Print output
 print("\nSplit point: first {} samples for training".format(split))
 
 # Split into training and test / 分割为训练和测试
 train = data[:split, :]  # First 2 rows / 前2行
 test = data[split:, :]   # Remaining rows / 剩余行
 
+# 打印输出 / Print output
 print("\nTraining data:")
+# 打印输出 / Print output
 print(train)
 
+# 打印输出 / Print output
 print("\nTest data:")
+# 打印输出 / Print output
 print(test)
 ```
 
@@ -832,11 +974,14 @@ We create a 1D array with 5 elements. The shape will reflect this dimensionality
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建一维数组 / Create 1D array
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("1D array:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -848,10 +993,15 @@ We use the .shape attribute to check the array's dimensions. For a 1D array with
 
 ```python
 # 检查形状 / Check shape
+# 打印输出 / Print output
 print("\nShape:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(data.shape)
+# 打印输出 / Print output
 print("\nType of shape:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(type(data.shape))
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nNumber of elements: {}".format(data.shape[0]))
 ```
 
@@ -877,18 +1027,30 @@ print("\nNumber of elements: {}".format(data.shape[0]))
 
 ```python
 # --- Inspect 1D Array Shape / 检查一维数组形状 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 1D array / 创建一维数组
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("1D array:")
+# 打印输出 / Print output
 print(data)
 
 # Check shape / 检查形状
+# 打印输出 / Print output
 print("\nShape:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(data.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\nNumber of elements: {}".format(data.shape[0]))
 ```
+
+---
+
+### Shape 2D
+
+
 
 ---
 
@@ -922,14 +1084,19 @@ We create a 3×2 matrix (3 rows, 2 columns) and will extract these dimensions se
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建二维数组 / Create 2D array
 data = [[11, 22], [33, 44], [55, 66]]
 data = array(data)
+# 打印输出 / Print output
 print("2D array:")
+# 打印输出 / Print output
 print(data)
+# 打印输出 / Print output
 print("\nShape:")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(data.shape)
 ```
 
@@ -941,7 +1108,9 @@ We access shape[0] to get the number of rows. For this matrix, shape[0] = 3.
 
 ```python
 # 获取行数 / Get number of rows
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 rows = data.shape[0]
+# 打印输出 / Print output
 print("\nNumber of rows (shape[0]): {}".format(rows))
 ```
 
@@ -953,7 +1122,9 @@ We access shape[1] to get the number of columns. For this matrix, shape[1] = 2.
 
 ```python
 # 获取列数 / Get number of columns
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 cols = data.shape[1]
+# 打印输出 / Print output
 print("Number of columns (shape[1]): {}".format(cols))
 ```
 
@@ -979,19 +1150,26 @@ print("Number of columns (shape[1]): {}".format(cols))
 
 ```python
 # --- Extract Rows and Columns from Shape / 从形状中提取行和列 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 2D array / 创建二维数组
 data = [[11, 22], [33, 44], [55, 66]]
 data = array(data)
+# 打印输出 / Print output
 print("2D array:")
+# 打印输出 / Print output
 print(data)
 
 # Extract rows and columns / 提取行和列
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 rows = data.shape[0]
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 cols = data.shape[1]
 
+# 打印输出 / Print output
 print("\nRows: {}".format(rows))
+# 打印输出 / Print output
 print("Cols: {}".format(cols))
 ```
 
@@ -1027,12 +1205,16 @@ We create a 1D array with 5 elements. We'll reshape it into a 5×1 column matrix
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建一维数组 / Create 1D array
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Original 1D array:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
 ```
 
@@ -1044,9 +1226,13 @@ We use .reshape() to convert the 1D array into a 2D array with shape (5, 1). Thi
 
 ```python
 # 重新整形为二维 / Reshape to 2D
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 data = data.reshape((data.shape[0], 1))
+# 打印输出 / Print output
 print("\nReshaped 2D array (column vector):")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
 ```
 
@@ -1072,24 +1258,38 @@ print("Shape:", data.shape)
 
 ```python
 # --- Reshape 1D to 2D / 从一维重新整形为二维 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 1D array / 创建一维数组
 data = array([11, 22, 33, 44, 55])
+# 打印输出 / Print output
 print("Original 1D array:")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
 
 # Reshape to 2D column vector / 重新整形为二维列向量
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 data = data.reshape((data.shape[0], 1))
+# 打印输出 / Print output
 print("\nReshaped 2D array (column vector):")
+# 打印输出 / Print output
 print(data)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Shape:", data.shape)
 ```
 
 ---
 
-### Chapter Summary
+### Reshape 2D To 3D
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 05 Summary / 第05章总结：Indexing, Slicing, and Reshaping
 

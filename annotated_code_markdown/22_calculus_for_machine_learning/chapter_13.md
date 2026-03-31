@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 13
 
 ---
@@ -35,11 +35,17 @@ from sympy.abc import x
 f = -x * sin(x)
 d1 = diff(f, x)
 d2 = diff(f, x, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("has first derivative")
+# 打印输出 / Print output
 pprint(d1)
+# 打印输出 / Print output
 print("and second derivative")
+# 打印输出 / Print output
 pprint(d2)
 ```
 
@@ -69,17 +75,23 @@ from sympy.abc import x
 f = -x * sin(x)
 d1 = diff(f, x)
 d2 = diff(f, x, x)
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("has first derivative")
+# 打印输出 / Print output
 pprint(d1)
+# 打印输出 / Print output
 print("and second derivative")
+# 打印输出 / Print output
 pprint(d2)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 13 Summary / 第13章总结
 

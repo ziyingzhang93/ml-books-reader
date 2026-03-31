@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 13
 
 ---
@@ -38,12 +38,19 @@ p = 0.8  # Probability / 概率
 # Calculate odds / 计算赔率
 odds = p / (1 - p)
 
+# 打印输出 / Print output
 print(f'Probability to Odds Conversion / 概率到赔率转换')
+# 打印输出 / Print output
 print(f'=' * 50)
+# 打印输出 / Print output
 print(f'Probability (p): {p}')
+# 打印输出 / Print output
 print(f'Odds: {odds:.4f}')
+# 打印输出 / Print output
 print(f'\nInterpretation / 解释:')
+# 打印输出 / Print output
 print(f'For every 1 unit of failure, there are {odds:.2f} units of success')
+# 打印输出 / Print output
 print(f'对于每1个失败单位，有{odds:.2f}个成功单位')
 ```
 
@@ -53,11 +60,17 @@ print(f'对于每1个失败单位，有{odds:.2f}个成功单位')
 # Convert odds back to probability / 将赔率转换回概率
 p_reconstructed = odds / (1 + odds)
 
+# 打印输出 / Print output
 print(f'\nOdds to Probability Conversion / 赔率到概率转换')
+# 打印输出 / Print output
 print(f'=' * 50)
+# 打印输出 / Print output
 print(f'Odds: {odds:.4f}')
+# 打印输出 / Print output
 print(f'Reconstructed Probability: {p_reconstructed:.4f}')
+# 打印输出 / Print output
 print(f'Original Probability: {p:.4f}')
+# 打印输出 / Print output
 print(f'Match: {abs(p - p_reconstructed) < 1e-10}')
 ```
 
@@ -65,18 +78,24 @@ print(f'Match: {abs(p - p_reconstructed) < 1e-10}')
 
 ```python
 # Create a table of probabilities and odds / 创建概率和赔率的表格
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 probabilities = [0.1, 0.25, 0.5, 0.75, 0.9, 0.99]
 
+# 打印输出 / Print output
 print(f'\nProbability to Odds Mapping / 概率到赔率映射')
+# 打印输出 / Print output
 print(f'=' * 70)
+# 打印输出 / Print output
 print(f'{"Probability":>12s} {"Odds":>15s} {"Interpretation":>40s}')
+# 打印输出 / Print output
 print('-' * 70)
 
 for prob in probabilities:
     o = prob / (1 - prob)
     interp = f'1:{(1-prob)/prob:.2f}'
+    # 打印输出 / Print output
     print(f'{prob:12.2f} {o:15.4f} {interp:>40s}')
 ```
 
@@ -125,7 +144,9 @@ $$\text{sigmoid}(z) = \frac{1}{1 + e^{-z}}$$
 ## Step 1 — Convert Probability to Log-Odds / 将概率转换为对数赔率
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # Convert probability to log-odds / 将概率转换为对数赔率
@@ -134,10 +155,15 @@ p = 0.8
 # Calculate log-odds / 计算对数赔率
 log_odds = np.log(p / (1 - p))
 
+# 打印输出 / Print output
 print(f'Probability to Log-Odds Conversion / 概率到对数赔率转换')
+# 打印输出 / Print output
 print(f'=' * 60)
+# 打印输出 / Print output
 print(f'Probability (p): {p}')
+# 打印输出 / Print output
 print(f'Odds: {p / (1 - p):.4f}')
+# 打印输出 / Print output
 print(f'Log-Odds (logit): {log_odds:.4f}')
 ```
 
@@ -151,11 +177,17 @@ def sigmoid(z):
 # Convert log-odds back to probability / 将对数赔率转换回概率
 p_reconstructed = sigmoid(log_odds)
 
+# 打印输出 / Print output
 print(f'\nLog-Odds to Probability Conversion / 对数赔率到概率转换')
+# 打印输出 / Print output
 print(f'=' * 60)
+# 打印输出 / Print output
 print(f'Log-Odds: {log_odds:.4f}')
+# 打印输出 / Print output
 print(f'Reconstructed Probability: {p_reconstructed:.4f}')
+# 打印输出 / Print output
 print(f'Original Probability: {p:.4f}')
+# 打印输出 / Print output
 print(f'Match: {abs(p - p_reconstructed) < 1e-10}')
 ```
 
@@ -166,6 +198,7 @@ print(f'Match: {abs(p - p_reconstructed) < 1e-10}')
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Plot logit: Probability to Log-Odds / 绘制logit：概率到对数赔率
+# 生成等间距数组 / Generate evenly spaced array
 p_vals = np.linspace(0.001, 0.999, 1000)
 logit_vals = np.log(p_vals / (1 - p_vals))
 
@@ -180,6 +213,7 @@ axes[0].legend()
 axes[0].grid(alpha=0.3)
 
 # Plot sigmoid: Log-Odds to Probability / 绘制sigmoid：对数赔率到概率
+# 生成等间距数组 / Generate evenly spaced array
 z_vals = np.linspace(-10, 10, 1000)
 sigmoid_vals = sigmoid(z_vals)
 
@@ -194,6 +228,7 @@ axes[1].legend()
 axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -245,7 +280,9 @@ $$\log L = y \log \hat{y} + (1-y) \log(1-\hat{y})$$
 ## Step 1 — Define Likelihood Function / 定义似然函数
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # Bernoulli likelihood function / 伯努利似然函数
@@ -275,7 +312,9 @@ def log_bernoulli_likelihood(y, y_hat):
     y_hat = np.clip(y_hat, epsilon, 1 - epsilon)
     return y * np.log(y_hat) + (1 - y) * np.log(1 - y_hat)
 
+# 打印输出 / Print output
 print('Bernoulli Likelihood Function / 伯努利似然函数')
+# 打印输出 / Print output
 print('=' * 60)
 ```
 
@@ -288,26 +327,34 @@ print('=' * 60)
 y_true = 1
 predictions = [0.1, 0.3, 0.5, 0.7, 0.9, 0.99]
 
+# 打印输出 / Print output
 print(f'\nWhen y (true label) = {y_true}:')
+# 打印输出 / Print output
 print(f'{"Prediction":>12s} {"Likelihood":>15s} {"Log-Likelihood":>15s} {"Quality":>15s}')
+# 打印输出 / Print output
 print('-' * 60)
 
 for y_hat in predictions:
     L = bernoulli_likelihood(y_true, y_hat)
     log_L = log_bernoulli_likelihood(y_true, y_hat)
     quality = "Good" if y_hat > 0.7 else ("OK" if y_hat > 0.3 else "Bad")
+    # 打印输出 / Print output
     print(f'{y_hat:12.2f} {L:15.6f} {log_L:15.6f} {quality:>15s}')
 
 # Example: y=0 (negative class) / 例子：y=0（负类）
 y_true = 0
+# 打印输出 / Print output
 print(f'\n\nWhen y (true label) = {y_true}:')
+# 打印输出 / Print output
 print(f'{"Prediction":>12s} {"Likelihood":>15s} {"Log-Likelihood":>15s} {"Quality":>15s}')
+# 打印输出 / Print output
 print('-' * 60)
 
 for y_hat in predictions:
     L = bernoulli_likelihood(y_true, y_hat)
     log_L = log_bernoulli_likelihood(y_true, y_hat)
     quality = "Good" if y_hat < 0.3 else ("OK" if y_hat < 0.7 else "Bad")
+    # 打印输出 / Print output
     print(f'{y_hat:12.2f} {L:15.6f} {log_L:15.6f} {quality:>15s}')
 ```
 
@@ -319,6 +366,7 @@ for y_hat in predictions:
 # Plot likelihood for y=0 and y=1 / 绘制y=0和y=1的似然
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
+# 生成等间距数组 / Generate evenly spaced array
 y_hat_vals = np.linspace(0.001, 0.999, 1000)
 
 # Likelihood for y=1 / y=1的似然
@@ -344,6 +392,7 @@ axes[1].grid(alpha=0.3)
 axes[1].axhline(0, color='k', linestyle='--', alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -366,5 +415,11 @@ plt.show()
 ## Chapter 13 Complete / 第13章完成
 
 This chapter covered fundamental probability concepts: odds, log-odds, and likelihood—all essential for understanding classification models.
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

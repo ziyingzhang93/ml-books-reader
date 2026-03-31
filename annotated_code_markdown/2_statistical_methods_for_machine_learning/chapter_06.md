@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 06
 
 ---
@@ -36,10 +36,13 @@ from random import random
 ```python
 # Set seed to value 1 / 将种子设置为值1
 # This initializes the pseudorandom generator to a known state / 这将伪随机生成器初始化为已知状态
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate three random numbers in [0, 1) / 在[0, 1)中生成三个随机数
+# 打印输出 / Print output
 print("First sequence with seed(1):")
+# 打印输出 / Print output
 print(random(), random(), random())
 ```
 
@@ -47,11 +50,14 @@ print(random(), random(), random())
 
 ```python
 # Reset the seed to the same value / 将种子重置为相同值
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate three random numbers again / 再次生成三个随机数
 # These will be identical to the first sequence / 这些将与第一个序列相同
+# 打印输出 / Print output
 print("\nSecond sequence with seed(1) again:")
+# 打印输出 / Print output
 print(random(), random(), random())
 
 # Expected output: Both calls produce the same three values / 预期输出：两次调用产生相同的三个值
@@ -74,18 +80,24 @@ from random import random
 
 # ===== Section 2: Generate First Random Sequence =====
 # Set seed to initialize generator / 设置种子以初始化生成器
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate three random floats / 生成三个随机浮点数
+# 打印输出 / Print output
 print("First sequence with seed(1):")
+# 打印输出 / Print output
 print(random(), random(), random())
 
 # ===== Section 3: Demonstrate Reproducibility =====
 # Reset seed to same value / 将种子重置为相同值
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate again - should be identical / 再次生成 - 应该相同
+# 打印输出 / Print output
 print("\nSecond sequence with seed(1) again:")
+# 打印输出 / Print output
 print(random(), random(), random())
 ```
 
@@ -123,6 +135,7 @@ from random import random
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -131,9 +144,12 @@ seed(1)
 ```python
 # Generate 10 random numbers in range [0, 1) / 生成10个[0, 1)范围内的随机数
 # Each call to random() returns a new random float / 每次调用random()返回一个新的随机浮点数
+# 打印输出 / Print output
 print("10 random floats from uniform distribution U[0,1):")
+# 生成整数序列 / Generate integer sequence
 for i in range(10):
     value = random()
+    # 打印输出 / Print output
     print(f"  {i+1}: {value:.6f}")
 ```
 
@@ -154,13 +170,17 @@ from random import random
 
 # ===== Section 2: Set Seed =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # ===== Section 3: Generate Random Floats =====
 # Generate 10 random floats in [0, 1) / 生成10个[0, 1)中的随机浮点数
+# 打印输出 / Print output
 print("10 random floats from uniform distribution U[0,1):")
+# 生成整数序列 / Generate integer sequence
 for i in range(10):
     value = random()
+    # 打印输出 / Print output
     print(f"  {i+1}: {value:.6f}")
 ```
 
@@ -198,6 +218,7 @@ from random import randint
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -206,9 +227,12 @@ seed(1)
 ```python
 # Generate 10 random integers from [0, 10] / 从[0, 10]生成10个随机整数
 # Note: randint(0, 10) includes both 0 and 10 / 注意：randint(0, 10)包括0和10
+# 打印输出 / Print output
 print("10 random integers from discrete uniform distribution U[0,10]:")
+# 生成整数序列 / Generate integer sequence
 for i in range(10):
     value = randint(0, 10)
+    # 打印输出 / Print output
     print(f"  {i+1}: {value}")
 ```
 
@@ -229,13 +253,17 @@ from random import randint
 
 # ===== Section 2: Set Seed =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # ===== Section 3: Generate Random Integers =====
 # Generate 10 random integers from [0, 10] / 从[0, 10]生成10个随机整数
+# 打印输出 / Print output
 print("10 random integers from discrete uniform distribution U[0,10]:")
+# 生成整数序列 / Generate integer sequence
 for i in range(10):
     value = randint(0, 10)
+    # 打印输出 / Print output
     print(f"  {i+1}: {value}")
 ```
 
@@ -276,6 +304,7 @@ from random import gauss
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -284,9 +313,12 @@ seed(1)
 ```python
 # Generate 10 random samples from N(0, 1) - standard normal distribution / 从N(0, 1)生成10个随机样本 - 标准正态分布
 # gauss(mu, sigma) returns samples from N(mu, sigma^2) / gauss(mu, sigma)返回来自N(mu, sigma^2)的样本
+# 打印输出 / Print output
 print("10 random values from Gaussian distribution N(0,1):")
+# 生成整数序列 / Generate integer sequence
 for i in range(10):
     value = gauss(0, 1)
+    # 打印输出 / Print output
     print(f"  {i+1}: {value:.6f}")
 ```
 
@@ -307,15 +339,25 @@ from random import gauss
 
 # ===== Section 2: Set Seed =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # ===== Section 3: Generate Gaussian Samples =====
 # Generate 10 random samples from standard normal N(0,1) / 从标准正态N(0,1)生成10个随机样本
+# 打印输出 / Print output
 print("10 random values from Gaussian distribution N(0,1):")
+# 生成整数序列 / Generate integer sequence
 for i in range(10):
     value = gauss(0, 1)
+    # 打印输出 / Print output
     print(f"  {i+1}: {value:.6f}")
 ```
+
+---
+
+### Python Choice
+
+
 
 ---
 
@@ -351,10 +393,13 @@ from random import sample
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Create a sequence of integers 0-19 / 创建0-19的整数序列
+# 生成整数序列 / Generate integer sequence
 sequence = [i for i in range(20)]
+# 打印输出 / Print output
 print(f"Original sequence: {sequence}")
 ```
 
@@ -365,6 +410,7 @@ print(f"Original sequence: {sequence}")
 # Each element can appear at most once in the sample / 样本中每个元素最多出现一次
 # This is equivalent to a fair random partition / 这相当于公平的随机分割
 subset = sample(sequence, 5)
+# 打印输出 / Print output
 print(f"\nRandom sample (size 5, no replacement): {subset}")
 ```
 
@@ -385,15 +431,19 @@ from random import sample
 
 # ===== Section 2: Create Sequence =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Create sequence of integers / 创建整数序列
+# 生成整数序列 / Generate integer sequence
 sequence = [i for i in range(20)]
+# 打印输出 / Print output
 print(f"Original sequence: {sequence}")
 
 # ===== Section 3: Sample Without Replacement =====
 # Draw 5 items without replacement / 无放回地抽取5个项目
 subset = sample(sequence, 5)
+# 打印输出 / Print output
 print(f"\nRandom sample (size 5, no replacement): {subset}")
 ```
 
@@ -431,10 +481,13 @@ from random import shuffle
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Create a sequence of integers 0-19 / 创建0-19的整数序列
+# 生成整数序列 / Generate integer sequence
 sequence = [i for i in range(20)]
+# 打印输出 / Print output
 print(f"Original sequence: {sequence}")
 ```
 
@@ -445,7 +498,9 @@ print(f"Original sequence: {sequence}")
 # shuffle() returns None and modifies the list directly / shuffle()返回None并直接修改列表
 shuffle(sequence)
 
+# 打印输出 / Print output
 print(f"Shuffled sequence:   {sequence}")
+# 打印输出 / Print output
 print(f"\nNote: shuffle() modifies the list in place. A different seed would produce a different permutation.")
 ```
 
@@ -466,19 +521,30 @@ from random import shuffle
 
 # ===== Section 2: Create Sequence =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Create sequence of integers / 创建整数序列
+# 生成整数序列 / Generate integer sequence
 sequence = [i for i in range(20)]
+# 打印输出 / Print output
 print(f"Original sequence: {sequence}")
 
 # ===== Section 3: Shuffle In Place =====
 # Shuffle the sequence (modifies in place) / 随机排列序列（原地修改）
 shuffle(sequence)
 
+# 打印输出 / Print output
 print(f"Shuffled sequence:   {sequence}")
+# 打印输出 / Print output
 print(f"\nNote: shuffle() modifies the list in place. A different seed would produce a different permutation.")
 ```
+
+---
+
+### Numpy Seed
+
+
 
 ---
 
@@ -506,7 +572,9 @@ print(f"\nNote: shuffle() modifies the list in place. A different seed would pro
 
 ```python
 # Import NumPy seed and random array functions / 导入NumPy种子和随机数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
 ```
 
@@ -514,6 +582,7 @@ from numpy.random import rand
 
 ```python
 # Set NumPy seed for reproducibility / 设置NumPy种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -524,9 +593,13 @@ seed(1)
 # numpy.random.rand() returns array of specified shape / numpy.random.rand()返回指定形状的数组
 values = rand(10)
 
+# 打印输出 / Print output
 print("10 random values from U[0,1) (NumPy array):")
+# 打印输出 / Print output
 print(values)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nArray shape: {values.shape}")
+# 打印输出 / Print output
 print(f"Data type: {values.dtype}")
 ```
 
@@ -548,26 +621,51 @@ print(f"Data type: {values.dtype}")
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import rand
 
 # ===== Section 2: Set Seed =====
 # Set NumPy seed for reproducibility / 设置NumPy种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # ===== Section 3: Generate Uniform Random Array =====
 # Generate 10 random floats from U[0,1) / 从U[0,1)生成10个随机浮点数
 values = rand(10)
 
+# 打印输出 / Print output
 print("10 random values from U[0,1) (NumPy array):")
+# 打印输出 / Print output
 print(values)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"\nArray shape: {values.shape}")
+# 打印输出 / Print output
 print(f"Data type: {values.dtype}")
 ```
 
 ---
 
-### Chapter Summary
+### Numpy Randint
+
+
+
+---
+
+### Numpy Randn
+
+
+
+---
+
+### Numpy Shuffle
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 6: Random Number Generation
 # 第6章：随机数生成

@@ -1,5 +1,11 @@
-# 时间序列预测
+# 时间序列预测 / Time Series Forecasting with Python
 ## Chapter 10
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -31,8 +37,11 @@ This script demonstrates **calculate and plot a white noise series**.
 ```python
 from random import gauss
 from random import seed
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import Series
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas.plotting import autocorrelation_plot
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -40,6 +49,7 @@ from matplotlib import pyplot
 ## Step 2 — seed random number generator
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -47,6 +57,7 @@ seed(1)
 ## Step 3 — create white noise series
 
 ```python
+# 生成整数序列 / Generate integer sequence
 series = [gauss(0.0, 1.0) for i in range(1000)]
 series = Series(series)
 ```
@@ -55,6 +66,7 @@ series = Series(series)
 ## Step 4 — summary stats
 
 ```python
+# 生成统计摘要（均值、标准差等） / Generate statistical summary (mean, std, etc.)
 print(series.describe())
 ```
 
@@ -113,15 +125,21 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # calculate and plot a white noise series
 from random import gauss
 from random import seed
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import Series
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas.plotting import autocorrelation_plot
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # seed random number generator
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 # create white noise series
+# 生成整数序列 / Generate integer sequence
 series = [gauss(0.0, 1.0) for i in range(1000)]
 series = Series(series)
 # summary stats
+# 生成统计摘要（均值、标准差等） / Generate statistical summary (mean, std, etc.)
 print(series.describe())
 # line plot
 series.plot()

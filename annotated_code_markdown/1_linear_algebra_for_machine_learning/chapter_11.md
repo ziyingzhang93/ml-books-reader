@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 11
+
+---
+
+### Triangular Matrix
+
+
 
 ---
 
@@ -35,10 +41,12 @@ We import the `array` function and the `diag` function from NumPy.
 ```python
 # Import array to create matrices
 # 导入 array 来创建矩阵
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Import diag to extract or create diagonal matrices
 # 导入 diag 来提取或创建对角矩阵
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import diag
 ```
 
@@ -53,6 +61,7 @@ M = array([[1, 2, 3],[1, 2, 3],[1, 2, 3]])
 
 # Print the original matrix
 # 打印原始矩阵
+# 打印输出 / Print output
 print(M)
 ```
 
@@ -69,6 +78,7 @@ d = diag(M)
 
 # Print the diagonal vector
 # 打印对角向量
+# 打印输出 / Print output
 print(d)
 ```
 
@@ -85,6 +95,7 @@ D = diag(d)
 
 # Print the diagonal matrix
 # 打印对角矩阵
+# 打印输出 / Print output
 print(D)
 ```
 
@@ -105,13 +116,18 @@ print(D)
 
 ```python
 # --- Diagonal Matrices / 对角矩阵 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import diag
 M = array([[1, 2, 3],[1, 2, 3],[1, 2, 3]])
+# 打印输出 / Print output
 print(M)
 d = diag(M)
+# 打印输出 / Print output
 print(d)
 D = diag(d)
+# 打印输出 / Print output
 print(D)
 ```
 
@@ -149,6 +165,7 @@ We import the `identity` function from NumPy.
 ```python
 # Import identity function to create identity matrices
 # 导入 identity 函数来创建单位矩阵
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import identity
 ```
 
@@ -165,6 +182,7 @@ I = identity(3)
 
 # Print the identity matrix
 # 打印单位矩阵
+# 打印输出 / Print output
 print(I)
 ```
 
@@ -185,8 +203,10 @@ print(I)
 
 ```python
 # --- Identity Matrix / 单位矩阵 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import identity
 I = identity(3)
+# 打印输出 / Print output
 print(I)
 ```
 
@@ -225,10 +245,12 @@ We import the `array` function and the `inv` function from `numpy.linalg`.
 ```python
 # Import array to create matrices
 # 导入 array 来创建矩阵
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Import inv to compute matrix inverse
 # 导入 inv 来计算矩阵逆
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import inv
 ```
 
@@ -245,6 +267,7 @@ Q = array([[1, 0],[0, -1]])
 
 # Print the orthogonal matrix
 # 打印正交矩阵
+# 打印输出 / Print output
 print(Q)
 ```
 
@@ -259,6 +282,7 @@ V = inv(Q)
 
 # Print the inverse
 # 打印逆矩阵
+# 打印输出 / Print output
 print(V)
 ```
 
@@ -271,6 +295,7 @@ We compute the transpose of Q using the `.T` attribute.
 # For orthogonal matrices, Q^T should equal Q^-1
 # 使用 .T 计算 Q 的转置
 # 对于正交矩阵，Q^T 应该等于 Q^-1
+# 打印输出 / Print output
 print(Q.T)
 ```
 
@@ -285,6 +310,7 @@ I = Q.dot(Q.T)
 
 # Print the result (should be identity matrix)
 # 打印结果（应该是单位矩阵）
+# 打印输出 / Print output
 print(I)
 ```
 
@@ -305,20 +331,26 @@ print(I)
 
 ```python
 # --- Orthogonal Matrix / 正交矩阵 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import inv
 Q = array([[1, 0],[0, -1]])
+# 打印输出 / Print output
 print(Q)
 V = inv(Q)
+# 打印输出 / Print output
 print(Q.T)
+# 打印输出 / Print output
 print(V)
 I = Q.dot(Q.T)
+# 打印输出 / Print output
 print(I)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 11 Summary / 第11章总结：Special Matrices
 

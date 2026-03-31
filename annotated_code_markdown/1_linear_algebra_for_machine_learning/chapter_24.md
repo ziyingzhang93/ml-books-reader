@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 24
 
 ---
@@ -52,11 +52,16 @@ Implement face recognition using eigenfaces (PCA-based approach). Demonstrates h
 # Import libraries for face recognition
 # 导入人脸识别库
 import zipfile
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from PIL import Image
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import PCA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import StandardScaler
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics.pairwise import euclidean_distances
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 ```
 
@@ -68,6 +73,7 @@ import matplotlib.pyplot as plt
 
 example_code = '''
 # Extract and load face images from ZIP archive
+# 将多个序列配对 / Pair multiple sequences
 def load_faces_from_zip(zip_path):
     """
     Load AT&T face database from ZIP file
@@ -92,23 +98,35 @@ def load_faces_from_zip(zip_path):
                     with zf.open(img_path) as f:
                         img = Image.open(f)
                         # Flatten to 1D vector
+                        # 展平为一维数组 / Flatten to 1D array
                         face_vector = np.array(img).flatten()
+                        # 添加元素到列表末尾 / Append element to list end
                         faces.append(face_vector)
+                        # 添加元素到列表末尾 / Append element to list end
                         labels.append(subject_id)
             subject_id += 1
     
+    # 创建NumPy数组 / Create NumPy array
     return np.array(faces), np.array(labels)
 
 # Load the data
+# 将多个序列配对 / Pair multiple sequences
 X, y = load_faces_from_zip('att_faces.zip')
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Face dataset shape: {X.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"  Samples: {X.shape[0]} face images")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"  Features: {X.shape[1]} pixels")
+# 找出唯一值 / Find unique values
 print(f"  Subjects: {len(np.unique(y))}")
 '''
 
+# 打印输出 / Print output
 print("Loading Face Data from ZIP:")
+# 打印输出 / Print output
 print("="*70)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -122,32 +140,46 @@ example_code = '''
 # Apply PCA to extract eigenfaces
 # Each eigenface is a direction of variation across all faces
 n_components = 50  # Number of eigenfaces to keep
+# 主成分分析：降维，保留最重要的特征 / PCA: reduce dimensions, keep key features
 pca = PCA(n_components=n_components)
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 faces_pca = pca.fit_transform(X)
 
+# 打印输出 / Print output
 print(f"Explained variance by eigenfaces:")
 cumsum = np.cumsum(pca.explained_variance_ratio_)
+# 打印输出 / Print output
 print(f"  First eigenface: {pca.explained_variance_ratio_[0]:.4f}")
+# 打印输出 / Print output
 print(f"  First 10 eigenfaces: {cumsum[9]:.4f}")
+# 打印输出 / Print output
 print(f"  First 50 eigenfaces: {cumsum[-1]:.4f}")
 
 # Visualize eigenfaces as images
 fig, axes = plt.subplots(2, 5, figsize=(12, 5))
+# 同时获取索引和值 / Get both index and value
 for i, ax in enumerate(axes.flat):
     # Reshape eigenface back to image
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     eigenface = pca.components_[i].reshape(46, 56)  # AT&T image size
     ax.imshow(eigenface, cmap='gray')
     ax.set_title(f'Eigenface {i+1}')
     ax.axis('off')
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
+# 打印输出 / Print output
 print(f"\nEigenfaces represent fundamental face patterns")
+# 打印输出 / Print output
 print(f"Any face can be reconstructed as: face ≈ mean_face + Σ(weight_i × eigenface_i)")
 '''
 
+# 打印输出 / Print output
 print("Extracting Eigenfaces (PCA):")
+# 打印输出 / Print output
 print("="*70)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -164,6 +196,7 @@ def recognize_face(test_face, training_faces_pca, training_labels, pca_model):
     通过在训练集中找到最接近的匹配来识别测试人脸
     """
     # Project test face to eigenface space
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     test_face_pca = pca_model.transform(test_face.reshape(1, -1))
     
     # Compute distances to all training faces
@@ -184,14 +217,21 @@ true_label = y[test_idx]
 # Recognize
 predicted_label, distance = recognize_face(test_face, faces_pca, y, pca)
 
+# 打印输出 / Print output
 print(f"Test face: Subject {true_label}")
+# 打印输出 / Print output
 print(f"Predicted: Subject {predicted_label}")
+# 打印输出 / Print output
 print(f"Eigenface distance: {distance:.4f}")
+# 打印输出 / Print output
 print(f"Correct prediction: {true_label == predicted_label}")
 '''
 
+# 打印输出 / Print output
 print("Face Recognition by Distance:")
+# 打印输出 / Print output
 print("="*70)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -203,35 +243,50 @@ print(example_code)
 
 example_code = '''
 # Evaluate on all test images
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import train_test_split
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 # Split data
+# 划分训练集和测试集 / Split into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.25, random_state=42
 )
 
 # Train PCA
+# 主成分分析：降维，保留最重要的特征 / PCA: reduce dimensions, keep key features
 pca = PCA(n_components=50)
+# 拟合并转换数据（一步完成） / Fit and transform data (one step)
 X_train_pca = pca.fit_transform(X_train)
+# 用已拟合的模型转换数据 / Transform data with fitted model
 X_test_pca = pca.transform(X_test)
 
 # Recognize all test faces
 predictions = []
 for test_face in X_test:
     pred_label, _ = recognize_face(test_face, X_train_pca, y_train, pca)
+    # 添加元素到列表末尾 / Append element to list end
     predictions.append(pred_label)
 
 # Evaluate
+# 计算准确率 = 正确预测数 / 总数 / Accuracy = correct predictions / total
 accuracy = accuracy_score(y_test, predictions)
+# 打印输出 / Print output
 print(f"Face Recognition Accuracy: {accuracy:.2%}")
+# 打印输出 / Print output
 print(f"\nConfusion matrix (subset):")
+# 生成混淆矩阵：展示预测对错分布 / Confusion matrix: show prediction error distribution
 cm = confusion_matrix(y_test, predictions)
+# 打印输出 / Print output
 print(cm[:5, :5])  # Show top-left corner
 '''
 
+# 打印输出 / Print output
 print("Evaluating Recognition Performance:")
+# 打印输出 / Print output
 print("="*70)
+# 打印输出 / Print output
 print(example_code)
 ```
 
@@ -274,11 +329,16 @@ print(example_code)
 ```python
 # --- Import Section / 导入部分 ---
 import zipfile
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from PIL import Image
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.decomposition import PCA
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import StandardScaler
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics.pairwise import euclidean_distances
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # --- Load Face Data from ZIP / 从ZIP加载人脸数据 ---
@@ -301,7 +361,7 @@ import matplotlib.pyplot as plt
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 24 Summary / 第24章总结：Eigenfaces for Face Recognition
 

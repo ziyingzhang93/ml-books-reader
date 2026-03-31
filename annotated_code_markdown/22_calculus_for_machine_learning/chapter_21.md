@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 21
 
 ---
@@ -48,6 +48,7 @@ variables = Matrix([x,y])
 ## Step 3 — Find and print the Jacobian
 
 ```python
+# 打印输出 / Print output
 pprint(f.jacobian(variables))
 ```
 
@@ -81,12 +82,13 @@ def sigmoid(x):
 f = Matrix([sigmoid(p*x+q*y), sigmoid(r*x+s*y), sigmoid(t*x+u*y)])
 variables = Matrix([x,y])
 # Find and print the Jacobian
+# 打印输出 / Print output
 pprint(f.jacobian(variables))
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 21 Summary / 第21章总结
 

@@ -1,5 +1,11 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 13
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -38,6 +44,7 @@ from math import sqrt
 ```python
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -60,6 +67,7 @@ dataset = [[2.7810836,2.550537003,0],
 row0 = dataset[0]
 for row in dataset:
 	distance = euclidean_distance(row0, row)
+ # 打印输出 / Print output
 	print(distance)
 ```
 
@@ -95,6 +103,7 @@ from math import sqrt
 # calculate the Euclidean distance between two vectors
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -113,6 +122,7 @@ dataset = [[2.7810836,2.550537003,0],
 row0 = dataset[0]
 for row in dataset:
 	distance = euclidean_distance(row0, row)
+ # 打印输出 / Print output
 	print(distance)
 ```
 
@@ -157,6 +167,7 @@ from math import sqrt
 ```python
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -170,10 +181,13 @@ def get_neighbors(train, test_row, num_neighbors):
 	distances = list()
 	for train_row in train:
 		dist = euclidean_distance(test_row, train_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((train_row, dist))
 	distances.sort(key=lambda tup: tup[1])
 	neighbors = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(num_neighbors):
+  # 添加元素到列表末尾 / Append element to list end
 		neighbors.append(distances[i][0])
 	return neighbors
 ```
@@ -194,6 +208,7 @@ dataset = [[2.7810836,2.550537003,0],
 	[7.673756466,3.508563011,1]]
 neighbors = get_neighbors(dataset, dataset[0], 3)
 for neighbor in neighbors:
+ # 打印输出 / Print output
 	print(neighbor)
 ```
 
@@ -229,6 +244,7 @@ from math import sqrt
 # calculate the Euclidean distance between two vectors
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -238,10 +254,13 @@ def get_neighbors(train, test_row, num_neighbors):
 	distances = list()
 	for train_row in train:
 		dist = euclidean_distance(test_row, train_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((train_row, dist))
 	distances.sort(key=lambda tup: tup[1])
 	neighbors = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(num_neighbors):
+  # 添加元素到列表末尾 / Append element to list end
 		neighbors.append(distances[i][0])
 	return neighbors
 
@@ -258,12 +277,25 @@ dataset = [[2.7810836,2.550537003,0],
 	[7.673756466,3.508563011,1]]
 neighbors = get_neighbors(dataset, dataset[0], 3)
 for neighbor in neighbors:
+ # 打印输出 / Print output
 	print(neighbor)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 3 of 5
+
+---
+
+### Knn Classification Abalone
+
+
+
+---
+
+### Knn Regression Abalone
+
+
 
 ---
 
@@ -302,6 +334,7 @@ from math import sqrt
 ```python
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -315,10 +348,13 @@ def get_neighbors(train, test_row, num_neighbors):
 	distances = list()
 	for train_row in train:
 		dist = euclidean_distance(test_row, train_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((train_row, dist))
 	distances.sort(key=lambda tup: tup[1])
 	neighbors = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(num_neighbors):
+  # 添加元素到列表末尾 / Append element to list end
 		neighbors.append(distances[i][0])
 	return neighbors
 ```
@@ -349,6 +385,7 @@ dataset = [[2.7810836,2.550537003,0],
 	[8.675418651,-0.242068655,1],
 	[7.673756466,3.508563011,1]]
 prediction = predict_classification(dataset, dataset[0], 3)
+# 打印输出 / Print output
 print('Expected %d, Got %d.' % (dataset[0][-1], prediction))
 ```
 
@@ -385,6 +422,7 @@ from math import sqrt
 # calculate the Euclidean distance between two vectors
 def euclidean_distance(row1, row2):
 	distance = 0.0
+ # 获取长度 / Get length
 	for i in range(len(row1)-1):
 		distance += (row1[i] - row2[i])**2
 	return sqrt(distance)
@@ -394,10 +432,13 @@ def get_neighbors(train, test_row, num_neighbors):
 	distances = list()
 	for train_row in train:
 		dist = euclidean_distance(test_row, train_row)
+  # 添加元素到列表末尾 / Append element to list end
 		distances.append((train_row, dist))
 	distances.sort(key=lambda tup: tup[1])
 	neighbors = list()
+ # 生成整数序列 / Generate integer sequence
 	for i in range(num_neighbors):
+  # 添加元素到列表末尾 / Append element to list end
 		neighbors.append(distances[i][0])
 	return neighbors
 
@@ -420,6 +461,7 @@ dataset = [[2.7810836,2.550537003,0],
 	[8.675418651,-0.242068655,1],
 	[7.673756466,3.508563011,1]]
 prediction = predict_classification(dataset, dataset[0], 3)
+# 打印输出 / Print output
 print('Expected %d, Got %d.' % (dataset[0][-1], prediction))
 ```
 

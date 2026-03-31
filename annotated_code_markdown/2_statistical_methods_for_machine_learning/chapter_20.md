@@ -15,17 +15,28 @@ A tolerance interval is a statistical range that contains a specified proportion
 
 容差区间是一个统计范围，它以给定的置信水平包含总体的指定比例。与置信区间（估计参数）和预测区间（估计单个未来值）不同，容差区间界定了其中总体比例p预计以置信水平(1-alpha)落在的范围。对于正态分布的数据，具有95%覆盖率和99%置信度，区间使用卡方和正态临界值。
 
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 可视化结果 / Visualize results
+
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import required libraries
 # 导入所需库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy import stats
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # Set random seed for reproducibility
 # 设置随机种子以保证可重复性
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 ```
 
@@ -38,19 +49,26 @@ mu = 100  # Mean / 均值
 sigma = 15  # Standard deviation / 标准差
 n = 50  # Sample size / 样本大小
 
+# 生成随机数 / Generate random numbers
 data = np.random.normal(mu, sigma, n)
 
 # Calculate sample statistics
 # 计算样本统计量
+# 计算均值 / Calculate mean
 sample_mean = np.mean(data)
 sample_std = np.std(data, ddof=1)  # Use unbiased estimator / 使用无偏估计
 
 # Display data properties
 # 显示数据属性
+# 打印输出 / Print output
 print(f"Sample size: {n}")
+# 打印输出 / Print output
 print(f"Sample mean: {sample_mean:.2f}")
+# 打印输出 / Print output
 print(f"Sample std: {sample_std:.2f}")
+# 求最小值 / Find minimum value
 print(f"Min value: {np.min(data):.2f}")
+# 求最大值 / Find maximum value
 print(f"Max value: {np.max(data):.2f}")
 ```
 
@@ -77,10 +95,15 @@ chi2_val = stats.chi2.ppf(1 - alpha, df=n-1)
 # k_factor: 组合两个值的修正因子
 k_factor = np.sqrt((n - 1) * (1 + 1/n) * chi2_val / stats.chi2.ppf(coverage, df=1))
 
+# 打印输出 / Print output
 print(f"Coverage: {coverage*100:.1f}%")
+# 打印输出 / Print output
 print(f"Confidence: {confidence*100:.1f}%")
+# 打印输出 / Print output
 print(f"z_coverage: {z_coverage:.4f}")
+# 打印输出 / Print output
 print(f"chi2_val: {chi2_val:.4f}")
+# 打印输出 / Print output
 print(f"k_factor: {k_factor:.4f}")
 ```
 
@@ -98,11 +121,17 @@ upper_bound = sample_mean + margin
 
 # Display tolerance interval
 # 显示容差区间
+# 打印输出 / Print output
 print(f"\nTolerance Interval:")
+# 打印输出 / Print output
 print(f"Lower bound: {lower_bound:.2f}")
+# 打印输出 / Print output
 print(f"Upper bound: {upper_bound:.2f}")
+# 打印输出 / Print output
 print(f"Interval width: {upper_bound - lower_bound:.2f}")
+# 打印输出 / Print output
 print(f"\nInterpretation: We are {confidence*100:.0f}% confident that ")
+# 打印输出 / Print output
 print(f"{coverage*100:.0f}% of the population lies between {lower_bound:.2f} and {upper_bound:.2f}")
 ```
 
@@ -119,6 +148,7 @@ axes[0].hist(data, bins=15, edgecolor='black', alpha=0.7, density=True)
 
 # Overlay normal distribution curve
 # 覆盖正态分布曲线
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(data.min() - 10, data.max() + 10, 100)
 axes[0].plot(x, stats.norm.pdf(x, sample_mean, sample_std), 'r-', linewidth=2, label='Normal fit')
 
@@ -147,6 +177,7 @@ axes[1].legend()
 axes[1].grid(True, alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -160,20 +191,38 @@ plt.show()
   
   **ML应用**: 容差区间在质量控制、制造过程监控和风险评估中至关重要。它们定义了生产系统中的规格限制，确保产品符合标准，并帮助识别流程何时超出可接受范围。对于在生产ML系统中设置操作阈值至关重要。
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `matplotlib` | 绑图库 | Plotting library |
+| `np.mean` | 计算均值 | Calculate mean |
+| `np.random` | 随机数生成 | Random number generation |
+| `np.std` | 计算标准差 | Calculate standard deviation |
+| `numpy` | 数值计算库 | Numerical computing library |
+| `plt.show` | 显示图表 | Display plot |
+| `plt.subplot` | 创建子图 | Create subplot |
+
 ➡️ **Next**: `02_tolerance_to_sample_size.ipynb`
 
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy import stats
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 mu, sigma, n = 100, 15, 50
+# 生成随机数 / Generate random numbers
 data = np.random.normal(mu, sigma, n)
 
+# 计算均值 / Calculate mean
 sample_mean = np.mean(data)
+# 计算标准差 / Calculate standard deviation
 sample_std = np.std(data, ddof=1)
 
 coverage, confidence = 0.95, 0.99
@@ -186,7 +235,9 @@ margin = z_coverage * sample_std * np.sqrt(1 + 1/n)
 lower_bound = sample_mean - margin
 upper_bound = sample_mean + margin
 
+# 打印输出 / Print output
 print(f"Tolerance Interval: [{lower_bound:.2f}, {upper_bound:.2f}]")
+# 打印输出 / Print output
 print(f"Width: {upper_bound - lower_bound:.2f}")
 ```
 
@@ -204,17 +255,28 @@ The width of a tolerance interval decreases as sample size increases, following 
 
 容差区间的宽度随着样本大小的增加而减小，遵循倒平方根关系。样本越大，估计不确定性越小，导致边界越紧。此笔记本演示了当样本大小从5到14个观察值变化时，容差区间宽度如何变化，显示了数据收集成本和所需精度之间的实际权衡。
 
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 可视化结果 / Visualize results
+
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import required libraries
 # 导入所需库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy import stats
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # Set random seed for reproducibility
 # 设置随机种子以保证可重复性
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 ```
 
@@ -240,9 +302,13 @@ z_coverage = stats.norm.ppf((1 + coverage) / 2)
 # 要测试的样本大小范围
 sample_sizes = np.arange(5, 15)  # n=5 to n=14 / n=5到n=14
 
+# 打印输出 / Print output
 print(f"Population mean: {mu}")
+# 打印输出 / Print output
 print(f"Population std: {sigma}")
+# 打印输出 / Print output
 print(f"Coverage: {coverage*100:.0f}%, Confidence: {confidence*100:.0f}%")
+# 打印输出 / Print output
 print(f"Sample sizes to evaluate: {sample_sizes}")
 ```
 
@@ -260,11 +326,14 @@ upper_bounds = []
 for n in sample_sizes:
     # Generate sample data
     # 生成样本数据
+    # 生成随机数 / Generate random numbers
     sample_data = np.random.normal(mu, sigma, n)
     
     # Calculate sample statistics
     # 计算样本统计量
+    # 计算均值 / Calculate mean
     sample_mean = np.mean(sample_data)
+    # 计算标准差 / Calculate standard deviation
     sample_std = np.std(sample_data, ddof=1)
     
     # Get chi-square critical value
@@ -284,18 +353,25 @@ for n in sample_sizes:
     
     # Store results
     # 存储结果
+    # 添加元素到列表末尾 / Append element to list end
     interval_widths.append(width)
+    # 添加元素到列表末尾 / Append element to list end
     lower_bounds.append(lower)
+    # 添加元素到列表末尾 / Append element to list end
     upper_bounds.append(upper)
     
+    # 打印输出 / Print output
     print(f"n={n:2d}: Width={width:.2f}, Bounds=[{lower:.2f}, {upper:.2f}]")
 ```
 
 ```python
 # Convert to arrays for plotting
 # 转换为数组以进行绘制
+# 创建NumPy数组 / Create NumPy array
 interval_widths = np.array(interval_widths)
+# 创建NumPy数组 / Create NumPy array
 lower_bounds = np.array(lower_bounds)
+# 创建NumPy数组 / Create NumPy array
 upper_bounds = np.array(upper_bounds)
 ```
 
@@ -355,29 +431,42 @@ axes[1, 1].set_xticks(sample_sizes)
 axes[1, 1].grid(True, alpha=0.3, axis='y')
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
 ```python
 # Summary statistics
 # 摘要统计
+# 打印输出 / Print output
 print(f"\nTolerance Interval Width Summary:")
+# 打印输出 / Print output
 print(f"At n=5:  Width = {interval_widths[0]:.2f}")
+# 打印输出 / Print output
 print(f"At n=14: Width = {interval_widths[-1]:.2f}")
+# 打印输出 / Print output
 print(f"Reduction: {interval_widths[0] - interval_widths[-1]:.2f} ({(1 - interval_widths[-1]/interval_widths[0])*100:.1f}% decrease)")
+# 打印输出 / Print output
 print(f"\nWidth reduction is proportional to 1/sqrt(n):")
+# 打印输出 / Print output
 print(f"sqrt(5) = {np.sqrt(5):.2f}, sqrt(14) = {np.sqrt(14):.2f}")
+# 打印输出 / Print output
 print(f"Ratio: {np.sqrt(5)/np.sqrt(14):.2f} ≈ {interval_widths[0]/interval_widths[-1]:.2f}")
 ```
 
 ```python
 # Create a table of values
 # 创建值表
+# 打印输出 / Print output
 print(f"\nDetailed Results Table:")
+# 打印输出 / Print output
 print(f"{'n':>3} | {'Width':>8} | {'Lower':>8} | {'Upper':>8} | {'% Reduction':>12}")
+# 打印输出 / Print output
 print("-" * 50)
+# 同时获取索引和值 / Get both index and value
 for i, n in enumerate(sample_sizes):
     reduction_pct = (1 - interval_widths[i]/interval_widths[0]) * 100
+    # 打印输出 / Print output
     print(f"{n:3d} | {interval_widths[i]:8.2f} | {lower_bounds[i]:8.2f} | {upper_bounds[i]:8.2f} | {reduction_pct:11.1f}%")
 ```
 
@@ -391,35 +480,61 @@ for i, n in enumerate(sample_sizes):
   
   **ML应用**: 样本大小规划在容差区间定义操作规格的生产系统中至关重要。理解宽度-样本大小权衡有助于优化质量控制、传感器校准和流程验证中的数据收集预算。较大的样本提供更紧的规格，但成本更高，需要仔细的成本效益分析。
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `matplotlib` | 绑图库 | Plotting library |
+| `np.array` | 创建NumPy数组 | Create NumPy array |
+| `np.mean` | 计算均值 | Calculate mean |
+| `np.ones` | 全一数组 | Array filled with ones |
+| `np.random` | 随机数生成 | Random number generation |
+| `np.std` | 计算标准差 | Calculate standard deviation |
+| `numpy` | 数值计算库 | Numerical computing library |
+| `plt.plot` | 绘制折线图 | Draw line plot |
+| `plt.show` | 显示图表 | Display plot |
+| `plt.subplot` | 创建子图 | Create subplot |
+
 ➡️ **Next**: `../chapter_21/01_confidence_interval_50.ipynb`
 
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy import stats
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 mu, sigma = 100, 15
 coverage, confidence = 0.95, 0.99
 alpha = 1 - confidence
 z_coverage = stats.norm.ppf((1 + coverage) / 2)
 
+# 生成等差数组 / Generate array with step
 sample_sizes = np.arange(5, 15)
 interval_widths = []
 
 for n in sample_sizes:
     margin = z_coverage * sigma * np.sqrt(1 + 1/n)
     width = 2 * margin
+    # 添加元素到列表末尾 / Append element to list end
     interval_widths.append(width)
+    # 打印输出 / Print output
     print(f"n={n}: Width={width:.2f}")
 
+# 绘制折线图 / Draw line plot
 plt.plot(sample_sizes, interval_widths, marker='o', linewidth=2)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('Sample Size (n)')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('Interval Width')
+# 设置图表标题 / Set chart title
 plt.title('Tolerance Interval Width vs. Sample Size')
 plt.grid(True, alpha=0.3)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -427,42 +542,6 @@ plt.show()
 
 ### Chapter Summary / 章节总结
 
-# Chapter 20: Tolerance Intervals
-# 第20章：容差区间
-
-## Theme | 主题
-Population-level prediction: what range contains a specified proportion of the population?
-总体水平预测：什么范围包含总体的指定比例？
-
-## Evolution Roadmap | 演变路线图
-```
-Sample Data (observed)
-└─ Tolerance Interval Computation
-   (e.g., 95% TI: 95% of population lies in this interval with 95% confidence)
-   └─ Effect of Sample Size on Interval Width
-      (larger n → narrower TI)
-```
-
-## Progression Logic | 进度逻辑
-
-### Stage 1: Motivation (动机)
-**English:** Unlike CI (about sample mean) and PI (about one future observation), TI is about the population distribution: where do most future values lie?
-**中文:** 与CI(关于样本均值)和PI(关于一个未来观察)不同，TI涉及总体分布：大多数未来值位于何处？
-
-### Stage 2: Tolerance Interval Formula (容差区间公式)
-**English:** For a normal distribution, TI = mean ± k * stdev, where k depends on sample size n, coverage (e.g., 95%), and confidence level (e.g., 95%).
-**中文:** 对于正态分布，TI = 均值 ± k * 标准差，其中k取决于样本量n、覆盖率(例如95%)和置信水平(例如95%)。
-
-### Stage 3: Sample Size Effect (样本量效应)
-**English:** Plot TI width vs. sample size. Larger n → k decreases → narrower TI (more precise knowledge of population).
-**中文:** 绘制TI宽度与样本量。较大的n → k减少 → TI较窄(更精确的总体知识)。
-
-## ML Relevance | ML相关性
-
-1. **Process Control (过程控制)**: TI defines acceptable range for manufacturing or quality metrics.
-2. **Prediction Bounds (预测界)**: TI differs from PI: PI predicts one future value; TI bounds future realizations of the population.
-3. **Risk Assessment (风险评估)**: TI quantifies coverage of extreme values, useful for financial and safety-critical applications.
-4. **Specification Limits (规格限)**: Compare TI with engineering specifications to assess process capability.
 
 
 ---

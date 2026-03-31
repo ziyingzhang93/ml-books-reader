@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 22
 
 ---
@@ -36,14 +36,21 @@ g = x**3 + 2*y**2 + 3*x*y**2
 variables = [x, y]
 h = hessian(g, variables)
 d = h.det()
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(g)
+# 打印输出 / Print output
 print("Hessian")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("Discriminant")
+# 打印输出 / Print output
 pprint(d)
 for xval,yval in [(0,0), (1,0), (0,1), (-1,0)]:
     val = d.subs([(x,xval),(y,yval)])
+    # 打印输出 / Print output
     print(f"Discriminant at ({xval},{yval}) = {val}")
 ```
 
@@ -74,20 +81,27 @@ g = x**3 + 2*y**2 + 3*x*y**2
 variables = [x, y]
 h = hessian(g, variables)
 d = h.det()
+# 打印输出 / Print output
 print("Function")
+# 打印输出 / Print output
 pprint(g)
+# 打印输出 / Print output
 print("Hessian")
+# 打印输出 / Print output
 pprint(h)
+# 打印输出 / Print output
 print("Discriminant")
+# 打印输出 / Print output
 pprint(d)
 for xval,yval in [(0,0), (1,0), (0,1), (-1,0)]:
     val = d.subs([(x,xval),(y,yval)])
+    # 打印输出 / Print output
     print(f"Discriminant at ({xval},{yval}) = {val}")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 22 Summary / 第22章总结
 

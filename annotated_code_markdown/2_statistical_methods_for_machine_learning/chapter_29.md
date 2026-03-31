@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 29
 
 ---
@@ -41,7 +41,9 @@ where $O$ is observed frequency and $E$ is expected frequency under independence
 table = [[10, 20, 30],
          [6,  9,  17]]
 
+# 打印输出 / Print output
 print('Observed Frequency Table / 观察频率表:')
+# 打印输出 / Print output
 print(table)
 ```
 
@@ -65,8 +67,11 @@ from scipy.stats import chi2
 # expected: 独立下的期望频率
 stat, p, dof, expected = chi2_contingency(table)
 
+# 打印输出 / Print output
 print('Degrees of freedom: %d' % dof)
+# 打印输出 / Print output
 print('\nExpected Frequency Table / 期望频率表:')
+# 打印输出 / Print output
 print(expected)
 ```
 
@@ -80,12 +85,16 @@ print(expected)
 prob = 0.95
 critical = chi2.ppf(prob, dof)
 
+# 打印输出 / Print output
 print('Critical Value Approach / 临界值方法:')
+# 打印输出 / Print output
 print('probability=%.3f, critical=%.3f, stat=%.3f' % (prob, critical, stat))
 
 if abs(stat) >= critical:
+    # 打印输出 / Print output
     print('Dependent (reject H0) - Variables are associated')
 else:
+    # 打印输出 / Print output
     print('Independent (fail to reject H0) - No association between variables')
 ```
 
@@ -100,12 +109,16 @@ else:
 # H1: 两个变量是相关的(关联的)
 alpha = 1.0 - prob  # alpha = 0.05
 
+# 打印输出 / Print output
 print('\nP-Value Approach / P值方法:')
+# 打印输出 / Print output
 print('significance=%.3f, p=%.3f' % (alpha, p))
 
 if p <= alpha:
+    # 打印输出 / Print output
     print('Dependent (reject H0) - Variables are associated')
 else:
+    # 打印输出 / Print output
     print('Independent (fail to reject H0) - No association between variables')
 ```
 
@@ -131,27 +144,41 @@ table = [[10, 20, 30],
 
 stat, p, dof, expected = chi2_contingency(table)
 
+# 打印输出 / Print output
 print('dof=%d' % dof)
+# 打印输出 / Print output
 print(expected)
 
 # Critical value approach
 prob = 0.95
 critical = chi2.ppf(prob, dof)
+# 打印输出 / Print output
 print('probability=%.3f, critical=%.3f, stat=%.3f' % (prob, critical, stat))
 
 if abs(stat) >= critical:
+    # 打印输出 / Print output
     print('Dependent (reject H0)')
 else:
+    # 打印输出 / Print output
     print('Independent (fail to reject H0)')
 
 # P-value approach
 alpha = 1.0 - prob
+# 打印输出 / Print output
 print('significance=%.3f, p=%.3f' % (alpha, p))
 
 if p <= alpha:
+    # 打印输出 / Print output
     print('Dependent (reject H0)')
 else:
+    # 打印输出 / Print output
     print('Independent (fail to reject H0)')
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

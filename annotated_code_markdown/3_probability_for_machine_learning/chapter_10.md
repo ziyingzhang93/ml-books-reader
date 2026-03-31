@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 10
 
 ---
@@ -28,11 +28,23 @@ $$\text{Density in bin } i = \frac{\text{Count in bin } i}{n \times \text{bin wi
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import necessary libraries / 导入必要的库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 ```
@@ -45,12 +57,18 @@ np.random.seed(42)  # For reproducibility / 用于可重现性
 mu = 50
 sigma = 5
 num_samples = 1000
+# 生成随机数 / Generate random numbers
 samples = np.random.normal(loc=mu, scale=sigma, size=num_samples)
 
+# 打印输出 / Print output
 print(f'Sample Data / 样本数据')
+# 打印输出 / Print output
 print(f'Distribution: N(μ={mu}, σ={sigma})')
+# 打印输出 / Print output
 print(f'Sample count / 样本数: {num_samples}')
+# 计算均值 / Calculate mean
 print(f'Mean / 均值: {np.mean(samples):.4f}')
+# 计算标准差 / Calculate standard deviation
 print(f'Std Dev / 标准差: {np.std(samples):.4f}')
 ```
 
@@ -65,6 +83,7 @@ n, bins, patches = ax.hist(samples, bins=10, density=True, alpha=0.7,
                             edgecolor='black', color='steelblue', linewidth=1.5)
 
 # Plot true normal distribution / 绘制真实正态分布
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
 true_pdf = norm.pdf(x, loc=mu, scale=sigma)
 ax.plot(x, true_pdf, 'r-', linewidth=2, label='True Normal PDF')
@@ -76,13 +95,19 @@ ax.legend()
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
 # Print bin information / 打印分箱信息
+# 打印输出 / Print output
 print(f'\nBin Information / 分箱信息:')
+# 打印输出 / Print output
 print(f'{"Bin":>5s} {"Lower":>10s} {"Upper":>10s} {"Count":>8s} {"Density":>10s}')
+# 打印输出 / Print output
 print('-' * 50)
+# 获取长度 / Get length
 for i in range(len(n)):
+    # 打印输出 / Print output
     print(f'{i:5d} {bins[i]:10.2f} {bins[i+1]:10.2f} {int(n[i]*num_samples/len(n)):8d} {n[i]:10.6f}')
 ```
 
@@ -99,14 +124,22 @@ histogram_density = n  # Already normalized
 true_density = norm.pdf(bin_centers, loc=mu, scale=sigma)
 
 # Calculate MSE / 计算MSE
+# 计算均值 / Calculate mean
 mse = np.mean((histogram_density - true_density)**2)
+# 打印输出 / Print output
 print(f'\nEstimation Quality / 估计质量:')
+# 打印输出 / Print output
 print(f'Mean Squared Error (MSE): {mse:.6f}')
+# 打印输出 / Print output
 print(f'\nBin Center Comparisons / 分箱中心比较:')
+# 打印输出 / Print output
 print(f'{"Center":>10s} {"Histogram":>15s} {"True PDF":>15s} {"Error":>15s}')
+# 打印输出 / Print output
 print('-' * 55)
+# 将多个序列配对 / Pair multiple sequences
 for center, hist_dens, true_dens in zip(bin_centers, histogram_density, true_density):
     error = abs(hist_dens - true_dens)
+    # 打印输出 / Print output
     print(f'{center:10.2f} {hist_dens:15.6f} {true_dens:15.6f} {error:15.6f}')
 ```
 
@@ -141,20 +174,28 @@ for center, hist_dens, true_dens in zip(bin_centers, histogram_density, true_den
 ```python
 # Complete Histogram Analysis with 10 Bins / 完整的10个分箱直方图分析
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 # Generate random samples / 生成随机样本
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 mu = 50
 sigma = 5
 num_samples = 1000
+# 生成随机数 / Generate random numbers
 samples = np.random.normal(loc=mu, scale=sigma, size=num_samples)
 
+# 打印输出 / Print output
 print(f'Sample Data')
+# 打印输出 / Print output
 print(f'Distribution: N(μ={mu}, σ={sigma})')
+# 计算均值 / Calculate mean
 print(f'Mean: {np.mean(samples):.4f}')
+# 计算标准差 / Calculate standard deviation
 print(f'Std Dev: {np.std(samples):.4f}')
 
 # Create histogram / 创建直方图
@@ -164,6 +205,7 @@ n, bins, patches = ax.hist(samples, bins=10, density=True, alpha=0.7,
                             edgecolor='black', color='steelblue', linewidth=1.5)
 
 # Plot true distribution / 绘制真实分布
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(mu - 4*sigma, mu + 4*sigma, 1000)
 true_pdf = norm.pdf(x, loc=mu, scale=sigma)
 ax.plot(x, true_pdf, 'r-', linewidth=2, label='True Normal PDF')
@@ -175,24 +217,45 @@ ax.legend()
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
 # Print bin information / 打印分箱信息
+# 打印输出 / Print output
 print(f'\nBin Information:')
+# 打印输出 / Print output
 print(f'{"Bin":>5s} {"Lower":>10s} {"Upper":>10s} {"Count":>8s} {"Density":>10s}')
+# 打印输出 / Print output
 print('-' * 50)
+# 获取长度 / Get length
 for i in range(len(n)):
+    # 打印输出 / Print output
     print(f'{i:5d} {bins[i]:10.2f} {bins[i+1]:10.2f} {int(n[i]*num_samples/len(n)):8d} {n[i]:10.6f}')
 
 # Analyze quality / 分析质量
 bin_centers = (bins[:-1] + bins[1:]) / 2
 histogram_density = n
 true_density = norm.pdf(bin_centers, loc=mu, scale=sigma)
+# 计算均值 / Calculate mean
 mse = np.mean((histogram_density - true_density)**2)
 
+# 打印输出 / Print output
 print(f'\nEstimation Quality:')
+# 打印输出 / Print output
 print(f'Mean Squared Error: {mse:.6f}')
 ```
+
+---
+
+### Histogram 3Bins
+
+
+
+---
+
+### Parametric Estimation
+
+
 
 ---
 
@@ -219,7 +282,9 @@ We create bimodal data by mixing samples from two Gaussian distributions: N(20,5
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 ```
@@ -228,23 +293,35 @@ from scipy.stats import norm
 
 ```python
 # Generate data from two normal distributions / 从两个正态分布生成数据
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 n1 = 500  # Samples from first distribution / 第一个分布的样本
 n2 = 500  # Samples from second distribution / 第二个分布的样本
 
+# 生成随机数 / Generate random numbers
 samples1 = np.random.normal(loc=20, scale=5, size=n1)
+# 生成随机数 / Generate random numbers
 samples2 = np.random.normal(loc=40, scale=5, size=n2)
 
 # Combine into bimodal data / 组合成双峰数据
+# 拼接数组 / Concatenate arrays
 bimodal_samples = np.concatenate([samples1, samples2])
 
+# 打印输出 / Print output
 print(f'Bimodal Data Generation / 双峰数据生成')
+# 打印输出 / Print output
 print(f'Component 1: N(20, 5), n={n1}')
+# 打印输出 / Print output
 print(f'Component 2: N(40, 5), n={n2}')
+# 打印输出 / Print output
 print(f'\nCombined Data Statistics / 组合数据统计:')
+# 计算均值 / Calculate mean
 print(f'Mean: {np.mean(bimodal_samples):.4f}')
+# 计算标准差 / Calculate standard deviation
 print(f'Std Dev: {np.std(bimodal_samples):.4f}')
+# 求最小值 / Find minimum value
 print(f'Min: {np.min(bimodal_samples):.4f}')
+# 求最大值 / Find maximum value
 print(f'Max: {np.max(bimodal_samples):.4f}')
 ```
 
@@ -260,6 +337,7 @@ ax.hist(bimodal_samples, bins=30, density=True, alpha=0.6,
         color='steelblue', edgecolor='black', label='Bimodal Data')
 
 # Individual components / 单个组件
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(0, 60, 1000)
 comp1_pdf = norm.pdf(x, loc=20, scale=5) * 0.5  # Weight by proportion / 按比例加权
 comp2_pdf = norm.pdf(x, loc=40, scale=5) * 0.5
@@ -275,6 +353,7 @@ ax.legend()
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -282,7 +361,9 @@ plt.show()
 
 ```python
 # Fit single normal to bimodal data / 将单一正态拟合到双峰数据
+# 计算均值 / Calculate mean
 mu_est = np.mean(bimodal_samples)
+# 计算标准差 / Calculate standard deviation
 sigma_est = np.std(bimodal_samples, ddof=1)
 
 fig, ax = plt.subplots(figsize=(12, 6))
@@ -290,6 +371,7 @@ fig, ax = plt.subplots(figsize=(12, 6))
 ax.hist(bimodal_samples, bins=30, density=True, alpha=0.6, 
         color='steelblue', edgecolor='black', label='Data')
 
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(0, 60, 1000)
 true_bimodal = (norm.pdf(x, loc=20, scale=5) + norm.pdf(x, loc=40, scale=5)) / 2
 ax.plot(x, true_bimodal, 'g-', linewidth=2.5, label='True Bimodal')
@@ -305,6 +387,7 @@ ax.legend()
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -376,9 +459,12 @@ where $K$ is the kernel and $h$ is the bandwidth
 ## Step 1 — Import Libraries / 导入库
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy.stats import norm
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.neighbors import KernelDensity
 ```
 
@@ -386,14 +472,21 @@ from sklearn.neighbors import KernelDensity
 
 ```python
 # Generate bimodal data / 生成双峰数据
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 生成随机数 / Generate random numbers
 samples1 = np.random.normal(loc=20, scale=5, size=500)
+# 生成随机数 / Generate random numbers
 samples2 = np.random.normal(loc=40, scale=5, size=500)
+# 拼接数组 / Concatenate arrays
 bimodal_samples = np.concatenate([samples1, samples2])
 bimodal_samples = bimodal_samples.reshape(-1, 1)  # Reshape for sklearn / 为sklearn重新整形
 
+# 打印输出 / Print output
 print(f'Kernel Density Estimation / 核密度估计')
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f'Sample shape: {bimodal_samples.shape}')
+# 打印输出 / Print output
 print(f'Data range: [{bimodal_samples.min():.2f}, {bimodal_samples.max():.2f}]')
 ```
 
@@ -404,10 +497,13 @@ print(f'Data range: [{bimodal_samples.min():.2f}, {bimodal_samples.max():.2f}]')
 bandwidths = [0.5, 1.0, 2.0, 5.0]
 
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+# 展平为一维数组 / Flatten to 1D array
 axes = axes.flatten()
 
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 x = np.linspace(0, 60, 1000).reshape(-1, 1)
 
+# 同时获取索引和值 / Get both index and value
 for idx, bw in enumerate(bandwidths):
     # Fit KDE / 拟合KDE
     kde = KernelDensity(bandwidth=bw, kernel='gaussian')
@@ -430,6 +526,7 @@ for idx, bw in enumerate(bandwidths):
     ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -444,6 +541,7 @@ ax.hist(bimodal_samples, bins=30, density=True, alpha=0.5,
         color='steelblue', edgecolor='black', label='Data')
 
 # True bimodal distribution / 真实双峰分布
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(0, 60, 1000)
 true_bimodal = (norm.pdf(x, loc=20, scale=5) + norm.pdf(x, loc=40, scale=5)) / 2
 ax.plot(x, true_bimodal, 'g-', linewidth=2.5, label='True Distribution')
@@ -457,6 +555,7 @@ ax.plot(x, norm.pdf(x, loc=mu, scale=sigma), 'orange', linestyle='--',
 # KDE / KDE
 kde = KernelDensity(bandwidth=1.5, kernel='gaussian')
 kde.fit(bimodal_samples)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 kde_density = np.exp(kde.score_samples(x.reshape(-1, 1)))
 ax.plot(x, kde_density, 'r-', linewidth=2.5, label='KDE (Bandwidth=1.5)')
 
@@ -467,6 +566,7 @@ ax.legend()
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -500,25 +600,36 @@ This chapter covered density estimation techniques from simple histograms to adv
 ```python
 # Complete KDE Analysis / 完整KDE分析
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy.stats import norm
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.neighbors import KernelDensity
 
 # Generate bimodal data / 生成双峰数据
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 生成随机数 / Generate random numbers
 samples1 = np.random.normal(loc=20, scale=5, size=500)
+# 生成随机数 / Generate random numbers
 samples2 = np.random.normal(loc=40, scale=5, size=500)
+# 拼接数组 / Concatenate arrays
 bimodal_samples = np.concatenate([samples1, samples2])
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 bimodal_samples_reshaped = bimodal_samples.reshape(-1, 1)
 
 # Fit KDE with different bandwidths / 用不同带宽拟合KDE
 bandwidths = [0.5, 1.0, 2.0, 5.0]
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+# 展平为一维数组 / Flatten to 1D array
 axes = axes.flatten()
 
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 x = np.linspace(0, 60, 1000).reshape(-1, 1)
 
+# 同时获取索引和值 / Get both index and value
 for idx, bw in enumerate(bandwidths):
     kde = KernelDensity(bandwidth=bw, kernel='gaussian')
     kde.fit(bimodal_samples_reshaped)
@@ -536,6 +647,7 @@ for idx, bw in enumerate(bandwidths):
     ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
 # Compare methods / 比较方法
@@ -544,6 +656,7 @@ fig, ax = plt.subplots(figsize=(12, 6))
 ax.hist(bimodal_samples, bins=30, density=True, alpha=0.5, 
         color='steelblue', edgecolor='black', label='Data')
 
+# 生成等间距数组 / Generate evenly spaced array
 x_1d = np.linspace(0, 60, 1000)
 true_bimodal = (norm.pdf(x_1d, loc=20, scale=5) + norm.pdf(x_1d, loc=40, scale=5)) / 2
 ax.plot(x_1d, true_bimodal, 'g-', linewidth=2.5, label='True Distribution')
@@ -555,6 +668,7 @@ ax.plot(x_1d, norm.pdf(x_1d, loc=mu, scale=sigma), 'orange', linestyle='--',
 
 kde = KernelDensity(bandwidth=1.5, kernel='gaussian')
 kde.fit(bimodal_samples_reshaped)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 kde_density = np.exp(kde.score_samples(x_1d.reshape(-1, 1)))
 ax.plot(x_1d, kde_density, 'r-', linewidth=2.5, label='KDE')
 
@@ -565,12 +679,13 @@ ax.legend()
 ax.grid(alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 10: Density Estimation
 

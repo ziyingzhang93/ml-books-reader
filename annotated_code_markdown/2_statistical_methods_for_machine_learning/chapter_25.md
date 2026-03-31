@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 25
 
 ---
@@ -28,15 +28,21 @@ Small sample sizes (n < 30) from a normal population may appear non-Gaussian vis
 ## Step 1 — Import and Generate Small Sample / 导入和生成小样本
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 n = 10
+# 生成随机数 / Generate random numbers
 data = np.random.normal(50, 15, n)
 
+# 打印输出 / Print output
 print(f"Small sample (n={n}): {data}")
+# 计算均值 / Calculate mean
 print(f"Mean: {np.mean(data):.2f}, Std: {np.std(data, ddof=1):.2f}")
 ```
 
@@ -47,6 +53,7 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Histogram
 axes[0].hist(data, bins=5, edgecolor='black', alpha=0.7, color='skyblue')
+# 计算均值 / Calculate mean
 axes[0].axvline(np.mean(data), color='red', linestyle='--', linewidth=2, label='Mean')
 axes[0].set_xlabel('Value')
 axes[0].set_ylabel('Frequency')
@@ -56,8 +63,11 @@ axes[0].grid(True, alpha=0.3)
 
 # Cumulative distribution
 sorted_data = np.sort(data)
+# 生成等差数组 / Generate array with step
 axes[1].plot(sorted_data, np.arange(1, n+1)/n, 'bo-', linewidth=2, markersize=6, label='Empirical')
+# 生成等间距数组 / Generate evenly spaced array
 x_line = np.linspace(sorted_data.min()-10, sorted_data.max()+10, 100)
+# 计算均值 / Calculate mean
 axes[1].plot(x_line, stats.norm.cdf(x_line, np.mean(data), np.std(data, ddof=1)), 'r-', linewidth=2, label='Normal fit')
 axes[1].set_xlabel('Value')
 axes[1].set_ylabel('Cumulative Probability')
@@ -66,11 +76,14 @@ axes[1].legend()
 axes[1].grid(True, alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
 # Tests
 stat, p = stats.shapiro(data)
+# 打印输出 / Print output
 print(f"\nShapiro-Wilk test: W={stat:.4f}, p={p:.4f}")
+# 打印输出 / Print output
 print(f"With small n, non-normality is hard to detect statistically")
 ```
 
@@ -103,19 +116,29 @@ print(f"With small n, non-normality is hard to detect statistically")
 | `plt.subplot` | 创建子图 | Create subplot |
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 生成随机数 / Generate random numbers
 data = np.random.normal(50, 15, 10)
 
+# 绘制直方图 / Draw histogram
 plt.hist(data, bins=5, edgecolor='black', alpha=0.7)
+# 计算均值 / Calculate mean
 plt.axvline(np.mean(data), color='red', linestyle='--', linewidth=2)
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('Value')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('Frequency')
+# 设置图表标题 / Set chart title
 plt.title('Small Sample Histogram (n=10)')
 plt.grid(True, alpha=0.3)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -144,18 +167,34 @@ With n=100 observations from the same normal population, the histogram shows a c
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Generate Large Sample / 生成大样本
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 n = 100
+# 生成随机数 / Generate random numbers
 data = np.random.normal(50, 15, n)
 
+# 打印输出 / Print output
 print(f"Large sample (n={n})")
+# 计算均值 / Calculate mean
 print(f"Mean: {np.mean(data):.2f}, Std: {np.std(data, ddof=1):.2f}")
 ```
 
@@ -166,8 +205,11 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 # Histogram with overlay
 axes[0].hist(data, bins=20, density=True, alpha=0.7, edgecolor='black', color='skyblue')
+# 生成等间距数组 / Generate evenly spaced array
 x = np.linspace(data.min()-20, data.max()+20, 100)
+# 计算均值 / Calculate mean
 axes[0].plot(x, stats.norm.pdf(x, np.mean(data), np.std(data, ddof=1)), 'r-', linewidth=2, label='Normal fit')
+# 计算均值 / Calculate mean
 axes[0].axvline(np.mean(data), color='green', linestyle='--', linewidth=2, label='Mean')
 axes[0].set_xlabel('Value')
 axes[0].set_ylabel('Density')
@@ -181,10 +223,13 @@ axes[1].set_title('Q-Q Plot')
 axes[1].grid(True, alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
 stat, p = stats.shapiro(data)
+# 打印输出 / Print output
 print(f"\nShapiro-Wilk: W={stat:.4f}, p={p:.4f}")
+# 打印输出 / Print output
 print(f"Result: {'Normal' if p > 0.05 else 'Non-normal'}")
 ```
 
@@ -218,17 +263,26 @@ print(f"Result: {'Normal' if p > 0.05 else 'Non-normal'}")
 | `predict` | 用训练好的模型做预测 | Make predictions with trained model |
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 生成随机数 / Generate random numbers
 data = np.random.normal(50, 15, 100)
 
+# 绘制直方图 / Draw histogram
 plt.hist(data, bins=20, alpha=0.7, edgecolor='black')
+# 设置X轴标签 / Set X-axis label
 plt.xlabel('Value')
+# 设置Y轴标签 / Set Y-axis label
 plt.ylabel('Frequency')
+# 设置图表标题 / Set chart title
 plt.title('Large Sample Histogram (n=100)')
 plt.grid(True, alpha=0.3)
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -257,17 +311,23 @@ Data rounding to integer values creates artificial clustering and discrete distr
 ## Step 1 — Generate and Round Data / 生成和四舍五入数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 # Generate continuous normal data
+# 生成随机数 / Generate random numbers
 data_continuous = np.random.normal(50, 15, 100)
 # Round to integers
 data_rounded = np.round(data_continuous)
 
+# 打印输出 / Print output
 print(f"Continuous sample: {data_continuous[:10]}")
+# 转换数据类型 / Convert data type
 print(f"Rounded sample: {data_rounded[:10].astype(int)}")
 ```
 
@@ -291,13 +351,16 @@ axes[1].set_title('Rounded to Integers')
 axes[1].grid(True, alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 
 # Test both
 stat1, p1 = stats.shapiro(data_continuous)
 stat2, p2 = stats.shapiro(data_rounded)
 
+# 打印输出 / Print output
 print(f"Shapiro-Wilk - Continuous: W={stat1:.4f}, p={p1:.4f}")
+# 打印输出 / Print output
 print(f"Shapiro-Wilk - Rounded: W={stat2:.4f}, p={p2:.4f}")
 ```
 
@@ -322,10 +385,14 @@ print(f"Shapiro-Wilk - Rounded: W={stat2:.4f}, p={p2:.4f}")
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 生成随机数 / Generate random numbers
 data_continuous = np.random.normal(50, 15, 100)
 data_rounded = np.round(data_continuous)
 
@@ -334,6 +401,7 @@ ax1.hist(data_continuous, bins=20, alpha=0.7)
 ax1.set_title('Continuous')
 ax2.hist(data_rounded, bins=20, alpha=0.7)
 ax2.set_title('Rounded to Integers')
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -360,12 +428,16 @@ Outliers and extreme values create heavy tails and positive kurtosis. Appending 
 ## Step 1 — Generate Data / 生成数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 # Generate data for this notebook
+# 打印输出 / Print output
 print("Data generation code here")
 ```
 
@@ -373,8 +445,11 @@ print("Data generation code here")
 
 ```python
 # Create histogram
+# 绘制直方图 / Draw histogram
 plt.hist([1,2,3], bins=5)
+# 设置图表标题 / Set chart title
 plt.title('Distribution')
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -425,12 +500,16 @@ Right-skewed or log-normal distributions have long right tails (values extending
 ## Step 1 — Generate Data / 生成数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 # Generate data for this notebook
+# 打印输出 / Print output
 print("Data generation code here")
 ```
 
@@ -438,8 +517,11 @@ print("Data generation code here")
 
 ```python
 # Create histogram
+# 绘制直方图 / Draw histogram
 plt.hist([1,2,3], bins=5)
+# 设置图表标题 / Set chart title
 plt.title('Distribution')
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -490,12 +572,16 @@ Truncating extreme values (removing values > threshold) transforms right-skewed 
 ## Step 1 — Generate Data / 生成数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 # Generate data for this notebook
+# 打印输出 / Print output
 print("Data generation code here")
 ```
 
@@ -503,8 +589,11 @@ print("Data generation code here")
 
 ```python
 # Create histogram
+# 绘制直方图 / Draw histogram
 plt.hist([1,2,3], bins=5)
+# 设置图表标题 / Set chart title
 plt.title('Distribution')
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -555,12 +644,16 @@ Exponential distribution (waiting times, lifetimes) is strongly right-skewed and
 ## Step 1 — Generate Data / 生成数据
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 from scipy import stats
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 # Generate data for this notebook
+# 打印输出 / Print output
 print("Data generation code here")
 ```
 
@@ -568,8 +661,11 @@ print("Data generation code here")
 
 ```python
 # Create histogram
+# 绘制直方图 / Draw histogram
 plt.hist([1,2,3], bins=5)
+# 设置图表标题 / Set chart title
 plt.title('Distribution')
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -596,5 +692,17 @@ plt.show()
 ```python
 # Complete code example here
 ```
+
+---
+
+### Boxcox
+
+
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

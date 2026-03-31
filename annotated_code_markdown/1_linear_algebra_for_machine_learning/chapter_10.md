@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 10
+
+---
+
+### Create Matrix
+
+
 
 ---
 
@@ -35,6 +41,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -65,6 +72,7 @@ C = A + B
 
 # Print the result
 # 打印结果
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -85,10 +93,12 @@ print(C)
 
 ```python
 # --- Matrix Addition / 矩阵加法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 A = array([[1, 2, 3],[4, 5, 6]])
 B = array([[1, 2, 3],[4, 5, 6]])
 C = A + B
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -126,6 +136,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -156,6 +167,7 @@ C = A - B
 
 # Print the result
 # 打印结果
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -176,10 +188,12 @@ print(C)
 
 ```python
 # --- Matrix Subtraction / 矩阵减法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 A = array([[1, 2, 3],[4, 5, 6]])
 B = array([[0.5, 0.5, 0.5],[0.5, 0.5, 0.5]])
 C = A - B
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -217,6 +231,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -247,6 +262,7 @@ C = A * B
 
 # Print the result (not the same as matrix multiplication)
 # 打印结果（与矩阵乘法不同）
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -268,10 +284,12 @@ print(C)
 
 ```python
 # --- Matrix Hadamard Product / 矩阵 Hadamard 积 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 A = array([[1, 2, 3],[4, 5, 6]])
 B = array([[1, 2, 3],[4, 5, 6]])
 C = A * B
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -309,6 +327,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -339,6 +358,7 @@ C = A / B
 
 # Print the result
 # 打印结果
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -359,10 +379,12 @@ print(C)
 
 ```python
 # --- Matrix Element-wise Division / 矩阵按元素除法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 A = array([[1, 2, 3],[4, 5, 6]])
 B = array([[1, 2, 3],[4, 5, 6]])
 C = A / B
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -400,6 +422,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -432,6 +455,7 @@ C = A.dot(B)
 
 # Print the result
 # 打印结果
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -446,6 +470,7 @@ D = A @ B
 
 # Print the result (same as C)
 # 打印结果（与 C 相同）
+# 打印输出 / Print output
 print(D)
 ```
 
@@ -466,6 +491,7 @@ print(D)
 
 ```python
 # --- Matrix Multiplication / 矩阵乘法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 A = array([[1, 2],[3, 4],[5, 6]])
 B = array([[1, 2],[3, 4]])
@@ -473,11 +499,13 @@ B = array([[1, 2],[3, 4]])
 # Using .dot() method
 # 使用 .dot() 方法
 C = A.dot(B)
+# 打印输出 / Print output
 print(C)
 
 # Using @ operator
 # 使用 @ 运算符
 D = A @ B
+# 打印输出 / Print output
 print(D)
 ```
 
@@ -515,6 +543,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -547,6 +576,7 @@ C = A.dot(B)
 
 # Print the result (vector with 3 elements)
 # 打印结果（包含 3 个元素的向量）
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -561,6 +591,7 @@ D = A @ B
 
 # Print the result (same as C)
 # 打印结果（与 C 相同）
+# 打印输出 / Print output
 print(D)
 ```
 
@@ -581,6 +612,7 @@ print(D)
 
 ```python
 # --- Matrix-Vector Multiplication / 矩阵向量乘法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 A = array([[1, 2],[3, 4],[5, 6]])
 B = array([0.5, 0.5])
@@ -588,11 +620,13 @@ B = array([0.5, 0.5])
 # Using .dot() method
 # 使用 .dot() 方法
 C = A.dot(B)
+# 打印输出 / Print output
 print(C)
 
 # Using @ operator
 # 使用 @ 运算符
 D = A @ B
+# 打印输出 / Print output
 print(D)
 ```
 
@@ -630,6 +664,7 @@ We import the array function from NumPy.
 ```python
 # Import the array function from NumPy
 # 从 NumPy 导入数组函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -660,6 +695,7 @@ C = A * b
 
 # Print the result (each element is scaled by b)
 # 打印结果（每个元素都被 b 缩放）
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -680,16 +716,18 @@ print(C)
 
 ```python
 # --- Matrix Scalar Multiplication / 矩阵标量乘法 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 A = array([[1, 2], [3, 4], [5, 6]])
 b = 0.5
 C = A * b
+# 打印输出 / Print output
 print(C)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 10 Summary / 第10章总结：Matrix Operations
 

@@ -1,5 +1,11 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 06
+
+---
+
+### Scalar 1D
+
+
 
 ---
 
@@ -33,15 +39,20 @@ We create a 2×3 matrix and a scalar value 2. The scalar will be added to every 
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建二维数组和标量 / Create 2D array and scalar
 A = array([[1, 2, 3], [1, 2, 3]])
 b = 2
 
+# 打印输出 / Print output
 print("Matrix A:")
+# 打印输出 / Print output
 print(A)
+# 打印输出 / Print output
 print("\nScalar b:")
+# 打印输出 / Print output
 print(b)
 ```
 
@@ -54,7 +65,9 @@ We add the scalar 2 to the entire matrix. NumPy broadcasts 2 to all 6 elements (
 ```python
 # 使用广播进行加法 / Add using broadcasting
 C = A + b
+# 打印输出 / Print output
 print("\nResult of A + b (scalar broadcast to all elements):")
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -80,19 +93,25 @@ print(C)
 
 ```python
 # --- Broadcasting Scalar to 2D Array / 标量广播到二维数组 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 2D array and scalar / 创建二维数组和标量
 A = array([[1, 2, 3], [1, 2, 3]])
 b = 2
 
+# 打印输出 / Print output
 print("Matrix A:")
+# 打印输出 / Print output
 print(A)
+# 打印输出 / Print output
 print("Scalar b: {}".format(b))
 
 # Add scalar to 2D array / 将标量添加到二维数组
 C = A + b
+# 打印输出 / Print output
 print("\nResult of A + b (scalar broadcast):")
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -128,15 +147,20 @@ We create a 2×3 matrix and a 1D array with 3 elements. The 1D array will be bro
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建二维数组和一维数组 / Create 2D and 1D arrays
 A = array([[1, 2, 3], [1, 2, 3]])
 b = array([1, 2, 3])
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Matrix A (shape {}):".format(A.shape))
+# 打印输出 / Print output
 print(A)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\n1D array b (shape {}):".format(b.shape))
+# 打印输出 / Print output
 print(b)
 ```
 
@@ -149,7 +173,9 @@ We add the 1D array [1, 2, 3] to the 2D matrix. NumPy broadcasts the vector to e
 ```python
 # 使用广播进行加法 / Add using broadcasting
 C = A + b
+# 打印输出 / Print output
 print("\nResult of A + b (1D array broadcast to each row):")
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -175,20 +201,27 @@ print(C)
 
 ```python
 # --- Broadcasting 1D to 2D Array / 将一维数组广播到二维数组 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create 2D and 1D arrays / 创建二维和一维数组
 A = array([[1, 2, 3], [1, 2, 3]])
 b = array([1, 2, 3])
 
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Matrix A (shape {}):".format(A.shape))
+# 打印输出 / Print output
 print(A)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\n1D array b (shape {}):".format(b.shape))
+# 打印输出 / Print output
 print(b)
 
 # Add 1D to 2D using broadcasting / 使用广播将一维添加到二维
 C = A + b
+# 打印输出 / Print output
 print("\nResult of A + b (1D broadcast to each row):")
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -224,16 +257,22 @@ We create a 2×3 matrix and a 1D array with 2 elements. These have incompatible 
 
 ```python
 # 导入array函数 / Import array function
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # 创建不兼容的数组 / Create incompatible arrays
 A = array([[1, 2, 3], [1, 2, 3]])
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Matrix A (shape {}):".format(A.shape))
+# 打印输出 / Print output
 print(A)
 
 b = array([1, 2])
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\n1D array b (shape {}):".format(b.shape))
+# 打印输出 / Print output
 print(b)
+# 打印输出 / Print output
 print("\nAttempting to add A + b...")
 ```
 
@@ -247,11 +286,16 @@ We try to add b (shape 2,) to A (shape 2, 3). This fails because 2 ≠ 3, and br
 # 尝试不兼容的广播 / Try incompatible broadcasting
 try:
     C = A + b
+    # 打印输出 / Print output
     print("Result:")
+    # 打印输出 / Print output
     print(C)
 except ValueError as e:
+    # 打印输出 / Print output
     print("Error caught!")
+    # 打印输出 / Print output
     print("ValueError: {}".format(e))
+    # 打印输出 / Print output
     print("\nReason: Shapes (2,3) and (2,) are incompatible for broadcasting")
 ```
 
@@ -277,25 +321,40 @@ except ValueError as e:
 
 ```python
 # --- Broadcasting Error Example / 广播错误示例 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Create incompatible arrays / 创建不兼容的数组
 A = array([[1, 2, 3], [1, 2, 3]])
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("Matrix A (shape {}):".format(A.shape))
+# 打印输出 / Print output
 print(A)
 
 b = array([1, 2])
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print("\n1D array b (shape {}):".format(b.shape))
+# 打印输出 / Print output
 print(b)
 
 # Try incompatible broadcasting / 尝试不兼容的广播
 try:
     C = A + b
+    # 打印输出 / Print output
     print("Result:")
+    # 打印输出 / Print output
     print(C)
 except ValueError as e:
+    # 打印输出 / Print output
     print("\nError: {}".format(e))
+    # 打印输出 / Print output
     print("Shapes (2, 3) and (2,) are incompatible for broadcasting!")
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

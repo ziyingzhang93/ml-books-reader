@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 20
 
 ---
@@ -28,12 +28,24 @@ $$\text{minimize } \sum_{i=1}^{n}(y_i - \hat{y}_i)^2$$
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import array operations and plotting
 # 导入数组操作和绘图
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -51,7 +63,9 @@ data = array([
     [0.42, 0.38],
     [0.5, 0.49]
 ])
+# 打印输出 / Print output
 print("Dataset:")
+# 打印输出 / Print output
 print(data)
 ```
 
@@ -63,7 +77,9 @@ print(data)
 # 从第一列提取X（特征）
 # 从第二列提取y（目标）
 X, y = data[:, 0], data[:, 1]
+# 打印输出 / Print output
 print(f"X (features): {X}")
+# 打印输出 / Print output
 print(f"y (target): {y}")
 ```
 
@@ -74,9 +90,13 @@ print(f"y (target): {y}")
 # Currently X is 1D, so reshape to (5, 1)
 # 线性回归算法期望X为2D数组
 # 当前X是1D，所以重塑为(5, 1)
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = X.reshape((len(X), 1))
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"X shape: {X.shape}")
+# 打印输出 / Print output
 print(f"X reshaped:")
+# 打印输出 / Print output
 print(X)
 ```
 
@@ -91,6 +111,7 @@ pyplot.ylabel('y')
 pyplot.title('Linear Regression Dataset')
 pyplot.show()
 
+# 打印输出 / Print output
 print("The data shows a clear positive linear relationship")
 ```
 
@@ -118,7 +139,9 @@ print("The data shows a clear positive linear relationship")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # --- Load and Prepare Data / 加载和准备数据 ---
@@ -128,12 +151,19 @@ data = array([[0.05, 0.12],
               [0.42, 0.38],
               [0.5, 0.49]])
 X, y = data[:, 0], data[:, 1]
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = X.reshape((len(X), 1))
 
 # --- Visualize / 可视化 ---
 pyplot.scatter(X, y)
 pyplot.show()
 ```
+
+---
+
+### Direct Solution
+
+
 
 ---
 
@@ -162,14 +192,28 @@ Solve linear regression using QR decomposition. This method is more numerically 
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import QR decomposition and matrix inversion
 # 导入QR分解和矩阵求逆
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import inv
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import qr
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -184,7 +228,9 @@ data = array([[0.05, 0.12],
               [0.42, 0.38],
               [0.5, 0.49]])
 X, y = data[:, 0], data[:, 1]
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = X.reshape((len(X), 1))
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"X shape: {X.shape}, y shape: {y.shape}")
 ```
 
@@ -198,9 +244,13 @@ print(f"X shape: {X.shape}, y shape: {y.shape}")
 # Q：正交矩阵 (Q^T Q = I)
 # R：上三角矩阵
 Q, R = qr(X)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Q shape: {Q.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"R shape: {R.shape}")
+# 打印输出 / Print output
 print(f"\nQ =\n{Q}")
+# 打印输出 / Print output
 print(f"\nR =\n{R}")
 ```
 
@@ -210,10 +260,15 @@ print(f"\nR =\n{R}")
 # Verify that Q*R = X
 # 验证 Q*R = X
 X_reconstructed = Q.dot(R)
+# 打印输出 / Print output
 print("Original X:")
+# 打印输出 / Print output
 print(X)
+# 打印输出 / Print output
 print("\nReconstructed X (Q*R):")
+# 打印输出 / Print output
 print(X_reconstructed)
+# 展平为一维数组 / Flatten to 1D array
 print(f"\nReconstruction error: {max((X - X_reconstructed).flatten())}")
 ```
 
@@ -225,11 +280,13 @@ print(f"\nReconstruction error: {max((X - X_reconstructed).flatten())}")
 # Multiply both sides by Q^T: R*b = Q^T*y
 # 使用QR求解
 QTy = Q.T.dot(y)
+# 打印输出 / Print output
 print(f"Q^T y = {QTy}")
 
 # Solve R*b = Q^T*y by inverting R
 # 通过对R求逆来求解
 b = inv(R).dot(QTy)
+# 打印输出 / Print output
 print(f"\nCoefficients b: {b}")
 ```
 
@@ -239,7 +296,9 @@ print(f"\nCoefficients b: {b}")
 # Compute predictions
 # 计算预测值
 yhat = X.dot(b)
+# 打印输出 / Print output
 print(f"Predictions: {yhat}")
+# 打印输出 / Print output
 print(f"Actual:      {y}")
 ```
 
@@ -282,9 +341,13 @@ pyplot.show()
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import inv
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import qr
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # --- Load Data / 加载数据 ---
@@ -294,11 +357,13 @@ data = array([[0.05, 0.12],
               [0.42, 0.38],
               [0.5, 0.49]])
 X, y = data[:, 0], data[:, 1]
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = X.reshape((len(X), 1))
 
 # --- QR Decomposition Solution / QR分解求解 ---
 Q, R = qr(X)
 b = inv(R).dot(Q.T).dot(y)
+# 打印输出 / Print output
 print(b)
 
 # --- Make Predictions and Plot / 进行预测和绘图 ---
@@ -307,6 +372,12 @@ pyplot.scatter(X, y)
 pyplot.plot(X, yhat, color='red')
 pyplot.show()
 ```
+
+---
+
+### Svd Solution
+
+
 
 ---
 
@@ -335,13 +406,26 @@ Use NumPy's `lstsq()` function for linear regression. This is the recommended pr
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import lstsq and plotting
 # 导入lstsq和绘图
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import lstsq
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -356,7 +440,9 @@ data = array([[0.05, 0.12],
               [0.42, 0.38],
               [0.5, 0.49]])
 X, y = data[:, 0], data[:, 1]
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = X.reshape((len(X), 1))
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"X shape: {X.shape}, y shape: {y.shape}")
 ```
 
@@ -372,6 +458,7 @@ print(f"X shape: {X.shape}, y shape: {y.shape}")
 # 调用lstsq求解 X*b = y
 # lstsq()返回包含4个元素的元组
 b, residuals, rank, s = lstsq(X, y)
+# 打印输出 / Print output
 print(f"Coefficients b: {b}")
 ```
 
@@ -380,17 +467,26 @@ print(f"Coefficients b: {b}")
 ```python
 # Analyze the diagnostic information returned by lstsq
 # 分析lstsq返回的诊断信息
+# 打印输出 / Print output
 print(f"\nRank of X: {rank}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Expected rank (features): {X.shape[1]}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Full rank: {rank == X.shape[1]}")
 
+# 打印输出 / Print output
 print(f"\nSingular values: {s}")
+# 打印输出 / Print output
 print(f"Condition number: {s[0] / s[-1]:.6f}")
+# 打印输出 / Print output
 print("(Condition number measures sensitivity to numerical errors)")
 
+# 打印输出 / Print output
 print(f"\nResidual sum of squares: {residuals}")
 if residuals.size > 0:
+    # 获取长度 / Get length
     mse = residuals[0] / len(y)
+    # 打印输出 / Print output
     print(f"Mean squared error: {mse:.6f}")
 ```
 
@@ -400,8 +496,11 @@ if residuals.size > 0:
 # Compute predictions using the fitted coefficients
 # 使用拟合的系数计算预测值
 yhat = X.dot(b)
+# 打印输出 / Print output
 print(f"Predictions: {yhat}")
+# 打印输出 / Print output
 print(f"Actual:      {y}")
+# 打印输出 / Print output
 print(f"\nResiduals (y - yhat): {y - yhat}")
 ```
 
@@ -424,6 +523,7 @@ pyplot.show()
 ```python
 # Compare with other methods for verification
 # 与其他方法比较以验证
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import inv, pinv, qr
 
 # Method 1: Normal equation
@@ -439,11 +539,17 @@ b3 = pinv(X).dot(y)
 # Method 4: lstsq
 b4 = b  # already computed
 
+# 打印输出 / Print output
 print("Comparison of methods:")
+# 打印输出 / Print output
 print(f"Normal equation:    {b1}")
+# 打印输出 / Print output
 print(f"QR decomposition:   {b2}")
+# 打印输出 / Print output
 print(f"SVD (pseudo-inv):   {b3}")
+# 打印输出 / Print output
 print(f"lstsq:              {b4}")
+# 打印输出 / Print output
 print("\nAll methods produce the same result (within numerical precision)")
 ```
 
@@ -472,8 +578,11 @@ print("\nAll methods produce the same result (within numerical precision)")
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import lstsq
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # --- Load Data / 加载数据 ---
@@ -483,10 +592,12 @@ data = array([[0.05, 0.12],
               [0.42, 0.38],
               [0.5, 0.49]])
 X, y = data[:, 0], data[:, 1]
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 X = X.reshape((len(X), 1))
 
 # --- Solve Using lstsq / 使用lstsq求解 ---
 b, residuals, rank, s = lstsq(X, y)
+# 打印输出 / Print output
 print(b)
 
 # --- Make Predictions and Plot / 进行预测和绘图 ---
@@ -498,7 +609,7 @@ pyplot.show()
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 20 Summary / 第20章总结：Linear Regression
 

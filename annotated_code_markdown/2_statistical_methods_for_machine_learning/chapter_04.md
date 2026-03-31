@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 04
 
 ---
@@ -32,7 +32,9 @@ where $\mu$ is the mean and $\sigma$ is the standard deviation.
 
 ```python
 # Import numerical and visualization libraries / 导入数值和可视化库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from scipy.stats import norm
 ```
@@ -41,6 +43,7 @@ from scipy.stats import norm
 
 ```python
 # Generate x-values from -3 to 3 with step size 0.001 / 生成-3到3的x值，步长为0.001
+# 生成整数序列 / Generate integer sequence
 x_axis = arange(-3, 3, 0.001)
 ```
 
@@ -83,12 +86,15 @@ pyplot.show()
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import arange
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 from scipy.stats import norm
 
 # ===== Section 2: Gaussian Distribution Visualization =====
 # Generate x-values from -3 to 3 with high resolution / 生成高分辨率的x值
+# 生成整数序列 / Generate integer sequence
 x_axis = arange(-3, 3, 0.001)
 
 # Calculate PDF for standard normal distribution N(0,1) / 计算标准正态分布的PDF
@@ -128,7 +134,9 @@ pyplot.show()
 
 ```python
 # Import random number generation and plotting libraries / 导入随机数生成和绘图库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -137,6 +145,7 @@ from matplotlib import pyplot
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
 # Using seed=1 ensures we get the same random numbers every time / 使用seed=1确保每次得到相同的随机数
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -179,11 +188,14 @@ pyplot.show()
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # ===== Section 2: Generate Gaussian Samples =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 10000 samples from N(50, 5) / 从N(50, 5)生成10000个样本
@@ -197,6 +209,12 @@ pyplot.ylabel('Frequency / 频数')
 pyplot.title('Histogram of Gaussian Sample N(50,5) / 高斯样本直方图 N(50,5)')
 pyplot.show()
 ```
+
+---
+
+### Dataset More Bins
+
+
 
 ---
 
@@ -227,7 +245,9 @@ $$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
 
 ```python
 # Import numerical operations and random generation / 导入数值运算和随机生成
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
 ```
 
@@ -235,6 +255,7 @@ from numpy.random import seed, randn
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 10000 samples from N(50, 5) / 从N(50, 5)生成10000个样本
@@ -249,6 +270,7 @@ data = 5 * randn(10000) + 50
 result = mean(data)
 
 # Print the result with 3 decimal places / 用3位小数打印结果
+# 打印输出 / Print output
 print('Mean: %.3f' % result)
 ```
 
@@ -270,11 +292,14 @@ print('Mean: %.3f' % result)
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
 
 # ===== Section 2: Generate Sample Data =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 10000 samples from N(50, 5) / 从N(50, 5)生成10000个样本
@@ -285,6 +310,7 @@ data = 5 * randn(10000) + 50
 result = mean(data)
 
 # Display the result / 显示结果
+# 打印输出 / Print output
 print('Mean: %.3f' % result)
 ```
 
@@ -314,7 +340,9 @@ print('Mean: %.3f' % result)
 
 ```python
 # Import median calculation and random generation / 导入中位数计算和随机生成
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import median
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
 ```
 
@@ -322,6 +350,7 @@ from numpy.random import seed, randn
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 10000 samples from N(50, 5) / 从N(50, 5)生成10000个样本
@@ -336,6 +365,7 @@ data = 5 * randn(10000) + 50
 result = median(data)
 
 # Print the result with 3 decimal places / 用3位小数打印结果
+# 打印输出 / Print output
 print('Median: %.3f' % result)
 ```
 
@@ -357,11 +387,14 @@ print('Median: %.3f' % result)
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import median
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
 
 # ===== Section 2: Generate Sample Data =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 10000 samples from N(50, 5) / 从N(50, 5)生成10000个样本
@@ -372,8 +405,15 @@ data = 5 * randn(10000) + 50
 result = median(data)
 
 # Display the result / 显示结果
+# 打印输出 / Print output
 print('Median: %.3f' % result)
 ```
+
+---
+
+### Variance Plots
+
+
 
 ---
 
@@ -404,7 +444,9 @@ $$s^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2$$
 
 ```python
 # Import variance calculation and random generation / 导入方差计算和随机生成
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import var
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
 ```
 
@@ -412,6 +454,7 @@ from numpy.random import seed, randn
 
 ```python
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 10000 samples from N(50, 5) / 从N(50, 5)生成10000个样本
@@ -427,6 +470,7 @@ data = 5 * randn(10000) + 50
 result = var(data)
 
 # Print the result with 3 decimal places / 用3位小数打印结果
+# 打印输出 / Print output
 print('Variance: %.3f' % result)
 ```
 
@@ -448,11 +492,14 @@ print('Variance: %.3f' % result)
 
 ```python
 # ===== Section 1: Imports =====
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import var
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import seed, randn
 
 # ===== Section 2: Generate Sample Data =====
 # Set seed for reproducibility / 设置种子以保证可重现性
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 
 # Generate 10000 samples from N(50, 5) / 从N(50, 5)生成10000个样本
@@ -463,12 +510,19 @@ data = 5 * randn(10000) + 50
 result = var(data)
 
 # Display the result / 显示结果
+# 打印输出 / Print output
 print('Variance: %.3f' % result)
 ```
 
 ---
 
-### Chapter Summary
+### Stdev
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 4: Gaussian Distribution & Descriptive Statistics
 # 第4章：高斯分布与描述性统计

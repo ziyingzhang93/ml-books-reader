@@ -1,4 +1,4 @@
-# GAN
+# 生成对抗网络 / Generative Adversarial Networks
 ## Chapter 17
 
 ---
@@ -29,6 +29,7 @@ This script demonstrates **example of loading the fashion_mnist dataset**.
 ## Step 1 — example of loading the fashion_mnist dataset
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.fashion_mnist import load_data
 ```
 
@@ -36,6 +37,7 @@ from keras.datasets.fashion_mnist import load_data
 ## Step 2 — load the images into memory
 
 ```python
+# 加载数据集 / Load dataset
 (trainX, trainy), (testX, testy) = load_data()
 ```
 
@@ -43,7 +45,9 @@ from keras.datasets.fashion_mnist import load_data
 ## Step 3 — summarize the shape of the dataset
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print('Train', trainX.shape, trainy.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print('Test', testX.shape, testy.shape)
 ```
 
@@ -74,11 +78,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of loading the fashion_mnist dataset
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.fashion_mnist import load_data
 # load the images into memory
+# 加载数据集 / Load dataset
 (trainX, trainy), (testX, testy) = load_data()
 # summarize the shape of the dataset
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print('Train', trainX.shape, trainy.shape)
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print('Test', testX.shape, testy.shape)
 ```
 
@@ -128,7 +136,9 @@ This script demonstrates **example of loading the fashion_mnist dataset**.
 ## Step 1 — example of loading the fashion_mnist dataset
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.fashion_mnist import load_data
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -136,6 +146,7 @@ from matplotlib import pyplot
 ## Step 2 — load the images into memory
 
 ```python
+# 加载数据集 / Load dataset
 (trainX, trainy), (testX, testy) = load_data()
 ```
 
@@ -143,6 +154,7 @@ from matplotlib import pyplot
 ## Step 3 — plot images from the training dataset
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(100):
 ```
 
@@ -196,11 +208,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of loading the fashion_mnist dataset
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.fashion_mnist import load_data
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 # load the images into memory
+# 加载数据集 / Load dataset
 (trainX, trainy), (testX, testy) = load_data()
 # plot images from the training dataset
+# 生成整数序列 / Generate integer sequence
 for i in range(100):
 	# define subplot
 	pyplot.subplot(10, 10, 1 + i)
@@ -214,6 +230,12 @@ pyplot.show()
 ---
 
 ➡️ **Next / 下一步**: File 3 of 6
+
+---
+
+### Train Unconditional Gan
+
+
 
 ---
 
@@ -257,8 +279,11 @@ This script demonstrates **example of loading the generator model and generating
 ## Step 1 — example of loading the generator model and generating images
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 ```
 
@@ -280,6 +305,7 @@ x_input = randn(latent_dim * n_samples)
 ## Step 4 — reshape into a batch of inputs for the network
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 x_input = x_input.reshape(n_samples, latent_dim)
 	return x_input
 ```
@@ -295,6 +321,7 @@ def show_plot(examples, n):
 ## Step 6 — plot images
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(n * n):
 ```
 
@@ -324,6 +351,7 @@ pyplot.imshow(examples[i, :, :, 0], cmap='gray_r')
 ## Step 10 — load model
 
 ```python
+# 从文件加载模型 / Load model from file
 model = load_model('generator.h5')
 ```
 
@@ -338,6 +366,7 @@ latent_points = generate_latent_points(100, 100)
 ## Step 12 — generate images
 
 ```python
+# 用模型做预测 / Make predictions with model
 X = model.predict(latent_points)
 ```
 
@@ -378,8 +407,11 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of loading the generator model and generating images
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 from matplotlib import pyplot
 
 # generate points in latent space as input for the generator
@@ -387,12 +419,14 @@ def generate_latent_points(latent_dim, n_samples):
 	# generate points in the latent space
 	x_input = randn(latent_dim * n_samples)
 	# reshape into a batch of inputs for the network
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	x_input = x_input.reshape(n_samples, latent_dim)
 	return x_input
 
 # create and save a plot of generated images (reversed grayscale)
 def show_plot(examples, n):
 	# plot images
+ # 生成整数序列 / Generate integer sequence
 	for i in range(n * n):
 		# define subplot
 		pyplot.subplot(n, n, 1 + i)
@@ -403,10 +437,12 @@ def show_plot(examples, n):
 	pyplot.show()
 
 # load model
+# 从文件加载模型 / Load model from file
 model = load_model('generator.h5')
 # generate images
 latent_points = generate_latent_points(100, 100)
 # generate images
+# 用模型做预测 / Make predictions with model
 X = model.predict(latent_points)
 # plot the result
 show_plot(X, 10)
@@ -460,23 +496,41 @@ This script demonstrates **example of training an conditional gan on the fashion
 ## Step 1 — example of training an conditional gan on the fashion mnist dataset
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import expand_dims
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randint
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.fashion_mnist import load_data
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import Adam
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Reshape
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LeakyReLU
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dropout
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Embedding
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Concatenate
 ```
 
@@ -506,6 +560,7 @@ li = Embedding(n_classes, 50)(in_label)
 
 ```python
 n_nodes = in_shape[0] * in_shape[1]
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	li = Dense(n_nodes)(li)
 ```
 
@@ -534,6 +589,7 @@ merge = Concatenate()([in_image, li])
 ## Step 9 — downsample
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 fe = Conv2D(128, (3,3), strides=(2,2), padding='same')(merge)
 	fe = LeakyReLU(alpha=0.2)(fe)
 ```
@@ -542,6 +598,7 @@ fe = Conv2D(128, (3,3), strides=(2,2), padding='same')(merge)
 ## Step 10 — downsample
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 fe = Conv2D(128, (3,3), strides=(2,2), padding='same')(fe)
 	fe = LeakyReLU(alpha=0.2)(fe)
 ```
@@ -550,6 +607,7 @@ fe = Conv2D(128, (3,3), strides=(2,2), padding='same')(fe)
 ## Step 11 — flatten feature maps
 
 ```python
+# 展平层：多维→一维 / Flatten: multi-dim → 1D
 fe = Flatten()(fe)
 ```
 
@@ -564,6 +622,7 @@ fe = Dropout(0.4)(fe)
 ## Step 13 — output
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 out_layer = Dense(1, activation='sigmoid')(fe)
 ```
 
@@ -579,6 +638,7 @@ model = Model([in_image, in_label], out_layer)
 
 ```python
 opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 	return model
 ```
@@ -609,6 +669,7 @@ li = Embedding(n_classes, 50)(in_label)
 
 ```python
 n_nodes = 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	li = Dense(n_nodes)(li)
 ```
 
@@ -631,6 +692,7 @@ in_lat = Input(shape=(latent_dim,))
 
 ```python
 n_nodes = 128 * 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	gen = Dense(n_nodes)(in_lat)
 	gen = LeakyReLU(alpha=0.2)(gen)
 	gen = Reshape((7, 7, 128))(gen)
@@ -663,6 +725,7 @@ gen = Conv2DTranspose(128, (4,4), strides=(2,2), padding='same')(gen)
 ## Step 26 — output
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 out_layer = Conv2D(1, (7,7), activation='tanh', padding='same')(gen)
 ```
 
@@ -721,6 +784,7 @@ model = Model([gen_noise, gen_label], gan_output)
 
 ```python
 opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer=opt)
 	return model
 ```
@@ -736,6 +800,7 @@ def load_real_samples():
 ## Step 36 — load dataset
 
 ```python
+# 加载数据集 / Load dataset
 (trainX, trainy), (_, _) = load_data()
 ```
 
@@ -750,6 +815,7 @@ X = expand_dims(trainX, axis=-1)
 ## Step 38 — convert from ints to floats
 
 ```python
+# 转换数据类型 / Convert data type
 X = X.astype('float32')
 ```
 
@@ -779,6 +845,7 @@ images, labels = dataset
 ## Step 42 — choose random instances
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 ix = randint(0, images.shape[0], n_samples)
 ```
 
@@ -815,6 +882,7 @@ x_input = randn(latent_dim * n_samples)
 ## Step 47 — reshape into a batch of inputs for the network
 
 ```python
+# 改变数组形状（不改变数据） / Reshape array (data unchanged)
 z_input = x_input.reshape(n_samples, latent_dim)
 ```
 
@@ -860,6 +928,7 @@ y = zeros((n_samples, 1))
 
 ```python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128):
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
 	half_batch = int(n_batch / 2)
 ```
@@ -868,6 +937,7 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batc
 ## Step 54 — manually enumerate epochs
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for i in range(n_epochs):
 ```
 
@@ -875,6 +945,7 @@ for i in range(n_epochs):
 ## Step 55 — enumerate batches over the training set
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for j in range(bat_per_epo):
 ```
 
@@ -931,6 +1002,7 @@ g_loss = gan_model.train_on_batch([z_input, labels_input], y_gan)
 ## Step 63 — summarize loss on this batch
 
 ```python
+# 打印输出 / Print output
 print('>%d, %d/%d, d1=%.3f, d2=%.3f g=%.3f' %
 				(i+1, j+1, bat_per_epo, d_loss1, d_loss2, g_loss))
 ```
@@ -939,6 +1011,7 @@ print('>%d, %d/%d, d1=%.3f, d2=%.3f g=%.3f' %
 ## Step 64 — save the generator model
 
 ```python
+# 保存模型到文件 / Save model to file
 g_model.save('cgan_generator.h5')
 ```
 
@@ -1023,23 +1096,41 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of training an conditional gan on the fashion mnist dataset
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import expand_dims
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import zeros
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import ones
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randn
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.random import randint
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.datasets.fashion_mnist import load_data
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.optimizers import Adam
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Reshape
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import LeakyReLU
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dropout
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Embedding
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Concatenate
 
 # define the standalone discriminator model
@@ -1050,6 +1141,7 @@ def define_discriminator(in_shape=(28,28,1), n_classes=10):
 	li = Embedding(n_classes, 50)(in_label)
 	# scale up to image dimensions with linear activation
 	n_nodes = in_shape[0] * in_shape[1]
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	li = Dense(n_nodes)(li)
 	# reshape to additional channel
 	li = Reshape((in_shape[0], in_shape[1], 1))(li)
@@ -1058,21 +1150,26 @@ def define_discriminator(in_shape=(28,28,1), n_classes=10):
 	# concat label as a channel
 	merge = Concatenate()([in_image, li])
 	# downsample
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	fe = Conv2D(128, (3,3), strides=(2,2), padding='same')(merge)
 	fe = LeakyReLU(alpha=0.2)(fe)
 	# downsample
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	fe = Conv2D(128, (3,3), strides=(2,2), padding='same')(fe)
 	fe = LeakyReLU(alpha=0.2)(fe)
 	# flatten feature maps
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	fe = Flatten()(fe)
 	# dropout
 	fe = Dropout(0.4)(fe)
 	# output
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	out_layer = Dense(1, activation='sigmoid')(fe)
 	# define model
 	model = Model([in_image, in_label], out_layer)
 	# compile model
 	opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 	return model
 
@@ -1084,6 +1181,7 @@ def define_generator(latent_dim, n_classes=10):
 	li = Embedding(n_classes, 50)(in_label)
 	# linear multiplication
 	n_nodes = 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	li = Dense(n_nodes)(li)
 	# reshape to additional channel
 	li = Reshape((7, 7, 1))(li)
@@ -1091,6 +1189,7 @@ def define_generator(latent_dim, n_classes=10):
 	in_lat = Input(shape=(latent_dim,))
 	# foundation for 7x7 image
 	n_nodes = 128 * 7 * 7
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	gen = Dense(n_nodes)(in_lat)
 	gen = LeakyReLU(alpha=0.2)(gen)
 	gen = Reshape((7, 7, 128))(gen)
@@ -1103,6 +1202,7 @@ def define_generator(latent_dim, n_classes=10):
 	gen = Conv2DTranspose(128, (4,4), strides=(2,2), padding='same')(gen)
 	gen = LeakyReLU(alpha=0.2)(gen)
 	# output
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	out_layer = Conv2D(1, (7,7), activation='tanh', padding='same')(gen)
 	# define model
 	model = Model([in_lat, in_label], out_layer)
@@ -1122,16 +1222,19 @@ def define_gan(g_model, d_model):
 	model = Model([gen_noise, gen_label], gan_output)
 	# compile model
 	opt = Adam(lr=0.0002, beta_1=0.5)
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer=opt)
 	return model
 
 # load fashion mnist images
 def load_real_samples():
 	# load dataset
+ # 加载数据集 / Load dataset
 	(trainX, trainy), (_, _) = load_data()
 	# expand to 3d, e.g. add channels
 	X = expand_dims(trainX, axis=-1)
 	# convert from ints to floats
+ # 转换数据类型 / Convert data type
 	X = X.astype('float32')
 	# scale from [0,255] to [-1,1]
 	X = (X - 127.5) / 127.5
@@ -1142,6 +1245,7 @@ def generate_real_samples(dataset, n_samples):
 	# split into images and labels
 	images, labels = dataset
 	# choose random instances
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	ix = randint(0, images.shape[0], n_samples)
 	# select images and labels
 	X, labels = images[ix], labels[ix]
@@ -1154,6 +1258,7 @@ def generate_latent_points(latent_dim, n_samples, n_classes=10):
 	# generate points in the latent space
 	x_input = randn(latent_dim * n_samples)
 	# reshape into a batch of inputs for the network
+ # 改变数组形状（不改变数据） / Reshape array (data unchanged)
 	z_input = x_input.reshape(n_samples, latent_dim)
 	# generate labels
 	labels = randint(0, n_classes, n_samples)
@@ -1171,11 +1276,14 @@ def generate_fake_samples(generator, latent_dim, n_samples):
 
 # train the generator and discriminator
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128):
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
 	half_batch = int(n_batch / 2)
 	# manually enumerate epochs
+ # 生成整数序列 / Generate integer sequence
 	for i in range(n_epochs):
 		# enumerate batches over the training set
+  # 生成整数序列 / Generate integer sequence
 		for j in range(bat_per_epo):
 			# get randomly selected 'real' samples
 			[X_real, labels_real], y_real = generate_real_samples(dataset, half_batch)
@@ -1192,9 +1300,11 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batc
 			# update the generator via the discriminator's error
 			g_loss = gan_model.train_on_batch([z_input, labels_input], y_gan)
 			# summarize loss on this batch
+   # 打印输出 / Print output
 			print('>%d, %d/%d, d1=%.3f, d2=%.3f g=%.3f' %
 				(i+1, j+1, bat_per_epo, d_loss1, d_loss2, g_loss))
 	# save the generator model
+ # 保存模型到文件 / Save model to file
 	g_model.save('cgan_generator.h5')
 
 # size of the latent space
@@ -1217,7 +1327,13 @@ train(g_model, d_model, gan_model, dataset, latent_dim)
 
 ---
 
-### Chapter Summary
+### Inference Conditional Gan
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 17 Summary / 第17章总结
 

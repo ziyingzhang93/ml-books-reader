@@ -1,4 +1,4 @@
-# Transformer
+# 注意力与Transformer / Transformer Models with Attention
 ## Chapter 09
 
 ---
@@ -29,7 +29,9 @@ This script demonstrates **Get the Fibonacci sequence**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
 
 def get_fib_seq(n, scale_data=True):
@@ -39,21 +41,27 @@ def get_fib_seq(n, scale_data=True):
 ## Step 2 — Get the Fibonacci sequence
 
 ```python
+# 创建全零数组 / Create array of zeros
 seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 fib_seq, _ = get_fib_seq(10, False)
+# 打印输出 / Print output
 print(fib_seq)
 ```
 
@@ -88,32 +96,46 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
 
 def get_fib_seq(n, scale_data=True):
     # Get the Fibonacci sequence
+    # 创建全零数组 / Create array of zeros
     seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 fib_seq, _ = get_fib_seq(10, False)
+# 打印输出 / Print output
 print(fib_seq)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 2 of 7
+
+---
+
+### Split
+
+
 
 ---
 
@@ -140,10 +162,22 @@ This script demonstrates **Set up parameters**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.models import Sequential
 ```
 
@@ -161,9 +195,13 @@ epochs = 30
 
 ```python
 def create_RNN(hidden_units, dense_units, input_shape, activation):
+    # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
     model = Sequential()
+    # 向模型添加一层 / Add a layer to the model
     model.add(SimpleRNN(hidden_units, input_shape=input_shape, activation=activation[0]))
+    # 向模型添加一层 / Add a layer to the model
     model.add(Dense(units=dense_units, activation=activation[1]))
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -204,7 +242,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.models import Sequential
 
 # Set up parameters
@@ -214,9 +254,13 @@ epochs = 30
 
 # Create a traditional RNN network
 def create_RNN(hidden_units, dense_units, input_shape, activation):
+    # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
     model = Sequential()
+    # 向模型添加一层 / Add a layer to the model
     model.add(SimpleRNN(hidden_units, input_shape=input_shape, activation=activation[0]))
+    # 向模型添加一层 / Add a layer to the model
     model.add(Dense(units=dense_units, activation=activation[1]))
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -273,9 +317,13 @@ This script demonstrates **Set up parameters**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.models import Sequential
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
 ```
 
@@ -294,26 +342,34 @@ def get_fib_seq(n, scale_data=True):
 ## Step 3 — Get the Fibonacci sequence
 
 ```python
+# 创建全零数组 / Create array of zeros
 seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     dat, scaler = get_fib_seq(total_fib_numbers, scale_data)
+    # 生成等差数组 / Generate array with step
     Y_ind = np.arange(time_steps, len(dat), 1)
     Y = dat[Y_ind]
+    # 获取长度 / Get length
     rows_x = len(Y)
     X = dat[0:rows_x]
+    # 生成整数序列 / Generate integer sequence
     for i in range(time_steps-1):
         temp = dat[i+1:rows_x+i+1]
         X = np.column_stack((X, temp))
@@ -323,6 +379,7 @@ def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
 ## Step 4 — random permutation with fixed seed
 
 ```python
+# 生成随机数 / Generate random numbers
 rand = np.random.RandomState(seed=13)
     idx = rand.permutation(rows_x)
     split = int(train_percent*rows_x)
@@ -332,7 +389,9 @@ rand = np.random.RandomState(seed=13)
     trainY = Y[train_ind]
     testX = X[test_ind]
     testY = Y[test_ind]
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     trainX = np.reshape(trainX, (len(trainX), time_steps, 1))
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     testX = np.reshape(testX, (len(testX), time_steps, 1))
     return trainX, trainY, testX, testY, scaler
 ```
@@ -342,9 +401,13 @@ rand = np.random.RandomState(seed=13)
 
 ```python
 def create_RNN(hidden_units, dense_units, input_shape, activation):
+    # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
     model = Sequential()
+    # 向模型添加一层 / Add a layer to the model
     model.add(SimpleRNN(hidden_units, input_shape=input_shape, activation=activation[0]))
+    # 向模型添加一层 / Add a layer to the model
     model.add(Dense(units=dense_units, activation=activation[1]))
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -373,7 +436,9 @@ test_mse = model_RNN.evaluate(testX, testY)
 ## Step 8 — Print error
 
 ```python
+# 打印输出 / Print output
 print("Train set MSE = ", train_mse)
+# 打印输出 / Print output
 print("Test set MSE = ", test_mse)
 ```
 
@@ -418,9 +483,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.models import Sequential
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
 
 # Set up parameters
@@ -430,30 +499,39 @@ epochs = 30
 
 def get_fib_seq(n, scale_data=True):
     # Get the Fibonacci sequence
+    # 创建全零数组 / Create array of zeros
     seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     dat, scaler = get_fib_seq(total_fib_numbers, scale_data)
+    # 生成等差数组 / Generate array with step
     Y_ind = np.arange(time_steps, len(dat), 1)
     Y = dat[Y_ind]
+    # 获取长度 / Get length
     rows_x = len(Y)
     X = dat[0:rows_x]
+    # 生成整数序列 / Generate integer sequence
     for i in range(time_steps-1):
         temp = dat[i+1:rows_x+i+1]
         X = np.column_stack((X, temp))
     # random permutation with fixed seed
+    # 生成随机数 / Generate random numbers
     rand = np.random.RandomState(seed=13)
     idx = rand.permutation(rows_x)
     split = int(train_percent*rows_x)
@@ -463,15 +541,21 @@ def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     trainY = Y[train_ind]
     testX = X[test_ind]
     testY = Y[test_ind]
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     trainX = np.reshape(trainX, (len(trainX), time_steps, 1))
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     testX = np.reshape(testX, (len(testX), time_steps, 1))
     return trainX, trainY, testX, testY, scaler
 
 # Create a traditional RNN network
 def create_RNN(hidden_units, dense_units, input_shape, activation):
+    # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
     model = Sequential()
+    # 向模型添加一层 / Add a layer to the model
     model.add(SimpleRNN(hidden_units, input_shape=input_shape, activation=activation[0]))
+    # 向模型添加一层 / Add a layer to the model
     model.add(Dense(units=dense_units, activation=activation[1]))
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -488,13 +572,21 @@ train_mse = model_RNN.evaluate(trainX, trainY)
 test_mse = model_RNN.evaluate(testX, testY)
 
 # Print error
+# 打印输出 / Print output
 print("Train set MSE = ", train_mse)
+# 打印输出 / Print output
 print("Test set MSE = ", test_mse)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 5 of 7
+
+---
+
+### Attention
+
+
 
 ---
 
@@ -540,11 +632,17 @@ This script demonstrates **Get the Fibonacci sequence**.
 ## Step 1 — Step 1
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras import Model
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Input, Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Layer
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow.keras.backend as K
 
 def get_fib_seq(n, scale_data=True):
@@ -554,26 +652,34 @@ def get_fib_seq(n, scale_data=True):
 ## Step 2 — Get the Fibonacci sequence
 
 ```python
+# 创建全零数组 / Create array of zeros
 seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     dat, scaler = get_fib_seq(total_fib_numbers, scale_data)
+    # 生成等差数组 / Generate array with step
     Y_ind = np.arange(time_steps, len(dat), 1)
     Y = dat[Y_ind]
+    # 获取长度 / Get length
     rows_x = len(Y)
     X = dat[0:rows_x]
+    # 生成整数序列 / Generate integer sequence
     for i in range(time_steps-1):
         temp = dat[i+1:rows_x+i+1]
         X = np.column_stack((X, temp))
@@ -583,6 +689,7 @@ def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
 ## Step 3 — random permutation with fixed seed
 
 ```python
+# 生成随机数 / Generate random numbers
 rand = np.random.RandomState(seed=13)
     idx = rand.permutation(rows_x)
     split = int(train_percent*rows_x)
@@ -592,7 +699,9 @@ rand = np.random.RandomState(seed=13)
     trainY = Y[train_ind]
     testX = X[test_ind]
     testY = Y[test_ind]
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     trainX = np.reshape(trainX, (len(trainX), time_steps, 1))
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     testX = np.reshape(testX, (len(testX), time_steps, 1))
     return trainX, trainY, testX, testY, scaler
 ```
@@ -613,6 +722,7 @@ epochs = 30
 trainX, trainY, testX, testY, scaler  = get_fib_XY(1200, time_steps, 0.7)
 
 class attention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
 
@@ -666,8 +776,10 @@ def create_RNN_with_attention(hidden_units, dense_units, input_shape, activation
     x = Input(shape=input_shape)
     RNN_layer = SimpleRNN(hidden_units, return_sequences=True, activation=activation)(x)
     attention_layer = attention()(RNN_layer)
+    # 全连接层（Keras） / Fully connected layer (Keras)
     outputs = Dense(dense_units, trainable=True, activation=activation)(attention_layer)
     model = Model(x,outputs)
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -688,7 +800,9 @@ test_mse_attn = model_attention.evaluate(testX, testY)
 ## Step 12 — Print error
 
 ```python
+# 打印输出 / Print output
 print("Train set MSE with attention = ", train_mse_attn)
+# 打印输出 / Print output
 print("Test set MSE with attention = ", test_mse_attn)
 ```
 
@@ -733,39 +847,54 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras import Model
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Input, Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Layer
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow.keras.backend as K
 
 def get_fib_seq(n, scale_data=True):
     # Get the Fibonacci sequence
+    # 创建全零数组 / Create array of zeros
     seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     dat, scaler = get_fib_seq(total_fib_numbers, scale_data)
+    # 生成等差数组 / Generate array with step
     Y_ind = np.arange(time_steps, len(dat), 1)
     Y = dat[Y_ind]
+    # 获取长度 / Get length
     rows_x = len(Y)
     X = dat[0:rows_x]
+    # 生成整数序列 / Generate integer sequence
     for i in range(time_steps-1):
         temp = dat[i+1:rows_x+i+1]
         X = np.column_stack((X, temp))
     # random permutation with fixed seed
+    # 生成随机数 / Generate random numbers
     rand = np.random.RandomState(seed=13)
     idx = rand.permutation(rows_x)
     split = int(train_percent*rows_x)
@@ -775,7 +904,9 @@ def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     trainY = Y[train_ind]
     testX = X[test_ind]
     testY = Y[test_ind]
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     trainX = np.reshape(trainX, (len(trainX), time_steps, 1))
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     testX = np.reshape(testX, (len(testX), time_steps, 1))
     return trainX, trainY, testX, testY, scaler
 
@@ -788,6 +919,7 @@ epochs = 30
 trainX, trainY, testX, testY, scaler  = get_fib_XY(1200, time_steps, 0.7)
 
 class attention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
 
@@ -816,8 +948,10 @@ def create_RNN_with_attention(hidden_units, dense_units, input_shape, activation
     x = Input(shape=input_shape)
     RNN_layer = SimpleRNN(hidden_units, return_sequences=True, activation=activation)(x)
     attention_layer = attention()(RNN_layer)
+    # 全连接层（Keras） / Fully connected layer (Keras)
     outputs = Dense(dense_units, trainable=True, activation=activation)(attention_layer)
     model = Model(x,outputs)
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -830,7 +964,9 @@ train_mse_attn = model_attention.evaluate(trainX, trainY)
 test_mse_attn = model_attention.evaluate(testX, testY)
 
 # Print error
+# 打印输出 / Print output
 print("Train set MSE with attention = ", train_mse_attn)
+# 打印输出 / Print output
 print("Test set MSE with attention = ", test_mse_attn)
 ```
 
@@ -888,14 +1024,23 @@ This script demonstrates **Prepare data**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras import Model
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Input, Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Layer
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.metrics import mean_squared_error
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.models import Sequential
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow.keras.backend as K
 ```
 
@@ -910,26 +1055,34 @@ def get_fib_seq(n, scale_data=True):
 ## Step 3 — Get the Fibonacci sequence
 
 ```python
+# 创建全零数组 / Create array of zeros
 seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     dat, scaler = get_fib_seq(total_fib_numbers, scale_data)
+    # 生成等差数组 / Generate array with step
     Y_ind = np.arange(time_steps, len(dat), 1)
     Y = dat[Y_ind]
+    # 获取长度 / Get length
     rows_x = len(Y)
     X = dat[0:rows_x]
+    # 生成整数序列 / Generate integer sequence
     for i in range(time_steps-1):
         temp = dat[i+1:rows_x+i+1]
         X = np.column_stack((X, temp))
@@ -939,6 +1092,7 @@ def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
 ## Step 4 — random permutation with fixed seed
 
 ```python
+# 生成随机数 / Generate random numbers
 rand = np.random.RandomState(seed=13)
     idx = rand.permutation(rows_x)
     split = int(train_percent*rows_x)
@@ -948,7 +1102,9 @@ rand = np.random.RandomState(seed=13)
     trainY = Y[train_ind]
     testX = X[test_ind]
     testY = Y[test_ind]
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     trainX = np.reshape(trainX, (len(trainX), time_steps, 1))
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     testX = np.reshape(testX, (len(testX), time_steps, 1))
     return trainX, trainY, testX, testY, scaler
 ```
@@ -967,9 +1123,13 @@ epochs = 30
 
 ```python
 def create_RNN(hidden_units, dense_units, input_shape, activation):
+    # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
     model = Sequential()
+    # 向模型添加一层 / Add a layer to the model
     model.add(SimpleRNN(hidden_units, input_shape=input_shape, activation=activation[0]))
+    # 向模型添加一层 / Add a layer to the model
     model.add(Dense(units=dense_units, activation=activation[1]))
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -1003,7 +1163,9 @@ test_mse = model_RNN.evaluate(testX, testY)
 ## Step 10 — Print error
 
 ```python
+# 打印输出 / Print output
 print("Train set MSE = ", train_mse)
+# 打印输出 / Print output
 print("Test set MSE = ", test_mse)
 ```
 
@@ -1012,6 +1174,7 @@ print("Test set MSE = ", test_mse)
 
 ```python
 class attention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
 
@@ -1065,8 +1228,10 @@ def create_RNN_with_attention(hidden_units, dense_units, input_shape, activation
     x = Input(shape=input_shape)
     RNN_layer = SimpleRNN(hidden_units, return_sequences=True, activation=activation)(x)
     attention_layer = attention()(RNN_layer)
+    # 全连接层（Keras） / Fully connected layer (Keras)
     outputs = Dense(dense_units, trainable=True, activation=activation)(attention_layer)
     model = Model(x,outputs)
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 ```
@@ -1093,7 +1258,9 @@ test_mse_attn = model_attention.evaluate(testX, testY)
 ## Step 19 — Print error
 
 ```python
+# 打印输出 / Print output
 print("Train set MSE with attention = ", train_mse_attn)
+# 打印输出 / Print output
 print("Test set MSE with attention = ", test_mse_attn)
 ```
 
@@ -1141,43 +1308,61 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.preprocessing import MinMaxScaler
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras import Model
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Input, Dense, SimpleRNN
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.layers import Layer
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.metrics import mean_squared_error
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 from tensorflow.keras.models import Sequential
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入TensorFlow深度学习框架 / Import TensorFlow framework
 import tensorflow.keras.backend as K
 
 # Prepare data
 def get_fib_seq(n, scale_data=True):
     # Get the Fibonacci sequence
+    # 创建全零数组 / Create array of zeros
     seq = np.zeros(n)
     fib_n1 = 0.0
     fib_n = 1.0
+    # 生成整数序列 / Generate integer sequence
     for i in range(n):
             seq[i] = fib_n1 + fib_n
             fib_n1 = fib_n
             fib_n = seq[i]
     scaler = []
     if scale_data:
+        # 归一化到[0,1]范围 / Normalize to [0,1] range
         scaler = MinMaxScaler(feature_range=(0, 1))
+        # 改变数组形状（不改变数据） / Reshape array (data unchanged)
         seq = np.reshape(seq, (n, 1))
+        # 展平为一维数组 / Flatten to 1D array
         seq = scaler.fit_transform(seq).flatten()
     return seq, scaler
 
 def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     dat, scaler = get_fib_seq(total_fib_numbers, scale_data)
+    # 生成等差数组 / Generate array with step
     Y_ind = np.arange(time_steps, len(dat), 1)
     Y = dat[Y_ind]
+    # 获取长度 / Get length
     rows_x = len(Y)
     X = dat[0:rows_x]
+    # 生成整数序列 / Generate integer sequence
     for i in range(time_steps-1):
         temp = dat[i+1:rows_x+i+1]
         X = np.column_stack((X, temp))
     # random permutation with fixed seed
+    # 生成随机数 / Generate random numbers
     rand = np.random.RandomState(seed=13)
     idx = rand.permutation(rows_x)
     split = int(train_percent*rows_x)
@@ -1187,7 +1372,9 @@ def get_fib_XY(total_fib_numbers, time_steps, train_percent, scale_data=True):
     trainY = Y[train_ind]
     testX = X[test_ind]
     testY = Y[test_ind]
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     trainX = np.reshape(trainX, (len(trainX), time_steps, 1))
+    # 改变数组形状（不改变数据） / Reshape array (data unchanged)
     testX = np.reshape(testX, (len(testX), time_steps, 1))
     return trainX, trainY, testX, testY, scaler
 
@@ -1198,9 +1385,13 @@ epochs = 30
 
 # Create a traditional RNN network
 def create_RNN(hidden_units, dense_units, input_shape, activation):
+    # 创建顺序模型：逐层堆叠 / Create Sequential model: stack layers
     model = Sequential()
+    # 向模型添加一层 / Add a layer to the model
     model.add(SimpleRNN(hidden_units, input_shape=input_shape, activation=activation[0]))
+    # 向模型添加一层 / Add a layer to the model
     model.add(Dense(units=dense_units, activation=activation[1]))
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -1217,11 +1408,14 @@ train_mse = model_RNN.evaluate(trainX, trainY)
 test_mse = model_RNN.evaluate(testX, testY)
 
 # Print error
+# 打印输出 / Print output
 print("Train set MSE = ", train_mse)
+# 打印输出 / Print output
 print("Test set MSE = ", test_mse)
 
 # Add attention layer to the deep learning network
 class attention(Layer):
+    # 初始化：定义模型的所有层和参数 / Init: define all layers and parameters
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
 
@@ -1250,8 +1444,10 @@ def create_RNN_with_attention(hidden_units, dense_units, input_shape, activation
     x = Input(shape=input_shape)
     RNN_layer = SimpleRNN(hidden_units, return_sequences=True, activation=activation)(x)
     attention_layer = attention()(RNN_layer)
+    # 全连接层（Keras） / Fully connected layer (Keras)
     outputs = Dense(dense_units, trainable=True, activation=activation)(attention_layer)
     model = Model(x,outputs)
+    # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
     model.compile(loss='mse', optimizer='adam')
     return model
 
@@ -1266,13 +1462,15 @@ train_mse_attn = model_attention.evaluate(trainX, trainY)
 test_mse_attn = model_attention.evaluate(testX, testY)
 
 # Print error
+# 打印输出 / Print output
 print("Train set MSE with attention = ", train_mse_attn)
+# 打印输出 / Print output
 print("Test set MSE with attention = ", test_mse_attn)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 09 Summary / 第09章总结
 

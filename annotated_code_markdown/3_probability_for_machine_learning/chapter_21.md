@@ -1,5 +1,11 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 21
+
+---
+
+### Coin Flip
+
+
 
 ---
 
@@ -40,6 +46,7 @@ from math import log2# probability of one event (fair die has 6 equally likely o
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 from math import log2p = 1.0 / 6.0h = -log2(p)print('p(x)=%.3f, information: %.3f bits' % (p, h))
 ```
 
@@ -130,6 +137,7 @@ from math import log2# the number of events (outcomes)n = 6# probability of one 
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 from math import log2n = 6p = 1.0 / nentropy = -sum([p * log2(p) for _ in range(n)])print('entropy: %.3f bits' % entropy)
 ```
 
@@ -172,6 +180,7 @@ from scipy.stats import entropy# discrete probabilities for a fair diep = [1/6, 
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 from scipy.stats import entropyp = [1/6, 1/6, 1/6, 1/6, 1/6, 1/6]e = entropy(p, base=2)print('entropy: %.3f bits' % e)
 ```
 
@@ -222,5 +231,11 @@ from math import log2from matplotlib import pyplot# calculate entropy (handle ed
 ```python
 from math import log2from matplotlib import pyplotdef entropy(events, ets=1e-15):    return -sum([p * log2(p + ets) for p in events])probs = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5]dists = [[p, 1.0 - p] for p in probs]ents = [entropy(d) for d in dists]pyplot.plot(probs, ents, marker='.')pyplot.title('Probability Distribution vs Entropy')pyplot.xticks(probs, [str(d) for d in dists])pyplot.xlabel('Probability Distribution')pyplot.ylabel('Entropy (bits)')pyplot.show()
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

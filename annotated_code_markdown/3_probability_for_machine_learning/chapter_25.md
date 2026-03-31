@@ -1,4 +1,4 @@
-# 概率论与机器学习
+# 概率论与机器学习 / Probability for Machine Learning
 ## Chapter 25
 
 ---
@@ -46,6 +46,7 @@ This notebook creates an imbalanced dataset with 25% class 0 and 75% class 1. Im
 ## Complete Code / 完整代码一览
 
 ```python
+# 打印输出 / Print output
 class0 = [0 for _ in range(25)]class1 = [1 for _ in range(75)]y = class0 + class1print('Class 0: %.3f' % (len(class0) / len(y) * 100))print('Class 1: %.3f' % (len(class1) / len(y) * 100))
 ```
 
@@ -74,6 +75,7 @@ This notebook implements a random 50/50 guesser classifier. Despite not learning
 ## Step 1 — Random 50/50 Guess Classifier / 随机50/50猜测分类器
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import meanfrom numpy.random import randomfrom sklearn.metrics import accuracy_score# guess random class: 50% chance of 0 or 1def random_guess():    if random() < 0.5:        return 0    return 1# define datasetclass0 = [0 for _ in range(25)]class1 = [1 for _ in range(75)]y = class0 + class1# average performance over many repeatsresults = list()for _ in range(1000):    yhat = [random_guess() for _ in range(len(y))]    acc = accuracy_score(y, yhat)    results.append(acc)print('Mean: %.3f' % mean(results))
 ```
 
@@ -96,7 +98,32 @@ from numpy import meanfrom numpy.random import randomfrom sklearn.metrics import
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import meanfrom numpy.random import randomfrom sklearn.metrics import accuracy_scoredef random_guess():    if random() < 0.5:        return 0    return 1class0 = [0 for _ in range(25)]class1 = [1 for _ in range(75)]y = class0 + class1results = list()for _ in range(1000):    yhat = [random_guess() for _ in range(len(y))]    acc = accuracy_score(y, yhat)    results.append(acc)print('Mean: %.3f' % mean(results))
 ```
+
+---
+
+### Randomly Selected Class
+
+
+
+---
+
+### Majority Class
+
+
+
+---
+
+### Majority Class Sklearn
+
+
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

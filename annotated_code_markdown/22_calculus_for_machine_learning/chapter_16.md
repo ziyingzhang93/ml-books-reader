@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 16
 
 ---
@@ -35,11 +35,17 @@ from sympy import diff, pprint
 f = x**2 + 2 * y**2
 dx = diff(f, x)
 dy = diff(f, y)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(dx)
+# 打印输出 / Print output
 print("and with respect to y is")
+# 打印输出 / Print output
 pprint(dy)
 ```
 
@@ -69,17 +75,23 @@ from sympy import diff, pprint
 f = x**2 + 2 * y**2
 dx = diff(f, x)
 dy = diff(f, y)
+# 打印输出 / Print output
 print("Derivative of")
+# 打印输出 / Print output
 pprint(f)
+# 打印输出 / Print output
 print("with respect to x is")
+# 打印输出 / Print output
 pprint(dx)
+# 打印输出 / Print output
 print("and with respect to y is")
+# 打印输出 / Print output
 pprint(dy)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 16 Summary / 第16章总结
 

@@ -1,5 +1,11 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 09
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -38,6 +44,7 @@ from math import exp
 ```python
 def predict(row, coefficients):
 	yhat = coefficients[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += coefficients[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
@@ -48,7 +55,9 @@ def predict(row, coefficients):
 
 ```python
 def coefficients_sgd(train, l_rate, n_epoch):
+ # 获取长度 / Get length
 	coef = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for epoch in range(n_epoch):
 		sum_error = 0
 		for row in train:
@@ -56,8 +65,10 @@ def coefficients_sgd(train, l_rate, n_epoch):
 			error = row[-1] - yhat
 			sum_error += error**2
 			coef[0] = coef[0] + l_rate * error * yhat * (1.0 - yhat)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				coef[i + 1] = coef[i + 1] + l_rate * error * yhat * (1.0 - yhat) * row[i]
+  # 打印输出 / Print output
 		print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
 	return coef
 ```
@@ -79,6 +90,7 @@ dataset = [[2.7810836,2.550537003,0],
 l_rate = 0.3
 n_epoch = 100
 coef = coefficients_sgd(dataset, l_rate, n_epoch)
+# 打印输出 / Print output
 print(coef)
 ```
 
@@ -118,13 +130,16 @@ from math import exp
 # Make a prediction with coefficients
 def predict(row, coefficients):
 	yhat = coefficients[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += coefficients[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
 
 # Estimate logistic regression coefficients using stochastic gradient descent
 def coefficients_sgd(train, l_rate, n_epoch):
+ # 获取长度 / Get length
 	coef = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for epoch in range(n_epoch):
 		sum_error = 0
 		for row in train:
@@ -132,8 +147,10 @@ def coefficients_sgd(train, l_rate, n_epoch):
 			error = row[-1] - yhat
 			sum_error += error**2
 			coef[0] = coef[0] + l_rate * error * yhat * (1.0 - yhat)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				coef[i + 1] = coef[i + 1] + l_rate * error * yhat * (1.0 - yhat) * row[i]
+  # 打印输出 / Print output
 		print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
 	return coef
 
@@ -151,6 +168,7 @@ dataset = [[2.7810836,2.550537003,0],
 l_rate = 0.3
 n_epoch = 100
 coef = coefficients_sgd(dataset, l_rate, n_epoch)
+# 打印输出 / Print output
 print(coef)
 ```
 
@@ -185,6 +203,25 @@ This script demonstrates **Logistic Regression on Diabetes Dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+       │
+       ▼
+  🏋️ 训练模型 / Train Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Logistic Regression on Diabetes Dataset
 
 ```python
@@ -200,11 +237,13 @@ from math import exp
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -224,10 +263,12 @@ def str_column_to_float(dataset, column):
 ```python
 def dataset_minmax(dataset):
 	minmax = list()
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
 		value_min = min(col_values)
 		value_max = max(col_values)
+  # 添加元素到列表末尾 / Append element to list end
 		minmax.append([value_min, value_max])
 	return minmax
 ```
@@ -238,6 +279,7 @@ def dataset_minmax(dataset):
 ```python
 def normalize_dataset(dataset, minmax):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)):
 			row[i] = (row[i] - minmax[i][0]) / (minmax[i][1] - minmax[i][0])
 ```
@@ -249,12 +291,18 @@ def normalize_dataset(dataset, minmax):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 ```
@@ -265,9 +313,11 @@ def cross_validation_split(dataset, n_folds):
 ```python
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 ```
 
@@ -285,11 +335,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 ```
@@ -300,6 +352,7 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 ```python
 def predict(row, coefficients):
 	yhat = coefficients[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += coefficients[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
@@ -310,12 +363,15 @@ def predict(row, coefficients):
 
 ```python
 def coefficients_sgd(train, l_rate, n_epoch):
+ # 获取长度 / Get length
 	coef = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			yhat = predict(row, coef)
 			error = row[-1] - yhat
 			coef[0] = coef[0] + l_rate * error * yhat * (1.0 - yhat)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				coef[i + 1] = coef[i + 1] + l_rate * error * yhat * (1.0 - yhat) * row[i]
 	return coef
@@ -331,6 +387,7 @@ def logistic_regression(train, test, l_rate, n_epoch):
 	for row in test:
 		yhat = predict(row, coef)
 		yhat = round(yhat)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 	return(predictions)
 ```
@@ -339,6 +396,7 @@ def logistic_regression(train, test, l_rate, n_epoch):
 ## Step 12 — Test the logistic regression algorithm on the diabetes dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -348,6 +406,7 @@ seed(1)
 ```python
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
 ```
@@ -368,7 +427,9 @@ n_folds = 5
 l_rate = 0.1
 n_epoch = 100
 scores = evaluate_algorithm(dataset, logistic_regression, n_folds, l_rate, n_epoch)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -411,11 +472,13 @@ from math import exp
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -427,16 +490,19 @@ def str_column_to_float(dataset, column):
 # Find the min and max values for each column
 def dataset_minmax(dataset):
 	minmax = list()
+ # 获取长度 / Get length
 	for i in range(len(dataset[0])):
 		col_values = [row[i] for row in dataset]
 		value_min = min(col_values)
 		value_max = max(col_values)
+  # 添加元素到列表末尾 / Append element to list end
 		minmax.append([value_min, value_max])
 	return minmax
 
 # Rescale dataset columns to the range 0-1
 def normalize_dataset(dataset, minmax):
 	for row in dataset:
+  # 获取长度 / Get length
 		for i in range(len(row)):
 			row[i] = (row[i] - minmax[i][0]) / (minmax[i][1] - minmax[i][0])
 
@@ -444,21 +510,29 @@ def normalize_dataset(dataset, minmax):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 
 # Evaluate an algorithm using a cross validation split
@@ -472,29 +546,35 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 
 # Make a prediction with coefficients
 def predict(row, coefficients):
 	yhat = coefficients[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += coefficients[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
 
 # Estimate logistic regression coefficients using stochastic gradient descent
 def coefficients_sgd(train, l_rate, n_epoch):
+ # 获取长度 / Get length
 	coef = [0.0 for i in range(len(train[0]))]
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_epoch):
 		for row in train:
 			yhat = predict(row, coef)
 			error = row[-1] - yhat
 			coef[0] = coef[0] + l_rate * error * yhat * (1.0 - yhat)
+   # 获取长度 / Get length
 			for i in range(len(row)-1):
 				coef[i + 1] = coef[i + 1] + l_rate * error * yhat * (1.0 - yhat) * row[i]
 	return coef
@@ -506,14 +586,17 @@ def logistic_regression(train, test, l_rate, n_epoch):
 	for row in test:
 		yhat = predict(row, coef)
 		yhat = round(yhat)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 	return(predictions)
 
 # Test the logistic regression algorithm on the diabetes dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 # load and prepare data
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
 # normalize
@@ -524,7 +607,9 @@ n_folds = 5
 l_rate = 0.1
 n_epoch = 100
 scores = evaluate_algorithm(dataset, logistic_regression, n_folds, l_rate, n_epoch)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -569,6 +654,7 @@ from math import exp
 ```python
 def predict(row, coefficients):
 	yhat = coefficients[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += coefficients[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
@@ -591,6 +677,7 @@ dataset = [[2.7810836,2.550537003,0],
 coef = [-0.406605464, 0.852573316, -1.104746259]
 for row in dataset:
 	yhat = predict(row, coef)
+ # 打印输出 / Print output
 	print("Expected=%.3f, Predicted=%.3f [%d]" % (row[-1], yhat, round(yhat)))
 ```
 
@@ -627,6 +714,7 @@ from math import exp
 # Make a prediction with coefficients
 def predict(row, coefficients):
 	yhat = coefficients[0]
+ # 获取长度 / Get length
 	for i in range(len(row)-1):
 		yhat += coefficients[i + 1] * row[i]
 	return 1.0 / (1.0 + exp(-yhat))
@@ -645,6 +733,7 @@ dataset = [[2.7810836,2.550537003,0],
 coef = [-0.406605464, 0.852573316, -1.104746259]
 for row in dataset:
 	yhat = predict(row, coef)
+ # 打印输出 / Print output
 	print("Expected=%.3f, Predicted=%.3f [%d]" % (row[-1], yhat, round(yhat)))
 ```
 

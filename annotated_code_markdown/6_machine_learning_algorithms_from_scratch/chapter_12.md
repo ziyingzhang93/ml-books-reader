@@ -1,9 +1,9 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 12
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 12 Summary / 第12章总结
 
@@ -32,6 +32,12 @@ The techniques in this chapter (Chapter 12) are fundamental building blocks in m
 
 ---
 
+### Gaussian Pdf
+
+
+
+---
+
 ### Naive Bayes Iris
 
 # 01 — Naive Bayes Iris / Naive Bayes Iris
@@ -56,6 +62,25 @@ This script demonstrates **Naive Bayes On The Iris Dataset**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
+---
 ## Step 1 — Naive Bayes On The Iris Dataset
 
 ```python
@@ -73,11 +98,13 @@ from math import pi
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -99,6 +126,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -113,12 +141,18 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 ```
@@ -129,9 +163,11 @@ def cross_validation_split(dataset, n_folds):
 ```python
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 ```
 
@@ -149,11 +185,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 ```
@@ -164,11 +202,13 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 ```python
 def separate_by_class(dataset):
 	separated = dict()
+ # 获取长度 / Get length
 	for i in range(len(dataset)):
 		vector = dataset[i]
 		class_value = vector[-1]
 		if (class_value not in separated):
 			separated[class_value] = list()
+  # 添加元素到列表末尾 / Append element to list end
 		separated[class_value].append(vector)
 	return separated
 ```
@@ -178,6 +218,7 @@ def separate_by_class(dataset):
 
 ```python
 def mean(numbers):
+ # 获取长度 / Get length
 	return sum(numbers)/float(len(numbers))
 ```
 
@@ -187,6 +228,7 @@ def mean(numbers):
 ```python
 def stdev(numbers):
 	avg = mean(numbers)
+ # 获取长度 / Get length
 	variance = sum([(x-avg)**2 for x in numbers]) / float(len(numbers)-1)
 	return sqrt(variance)
 ```
@@ -196,6 +238,7 @@ def stdev(numbers):
 
 ```python
 def summarize_dataset(dataset):
+ # 获取长度 / Get length
 	summaries = [(mean(column), stdev(column), len(column)) for column in zip(*dataset)]
 	del(summaries[-1])
 	return summaries
@@ -208,6 +251,7 @@ def summarize_dataset(dataset):
 def summarize_by_class(dataset):
 	separated = separate_by_class(dataset)
 	summaries = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, rows in separated.items():
 		summaries[class_value] = summarize_dataset(rows)
 	return summaries
@@ -229,8 +273,10 @@ def calculate_probability(x, mean, stdev):
 def calculate_class_probabilities(summaries, row):
 	total_rows = sum([summaries[label][0][2] for label in summaries])
 	probabilities = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, class_summaries in summaries.items():
 		probabilities[class_value] = summaries[class_value][0][2]/float(total_rows)
+  # 获取长度 / Get length
 		for i in range(len(class_summaries)):
 			mean, stdev, _ = class_summaries[i]
 			probabilities[class_value] *= calculate_probability(row[i], mean, stdev)
@@ -244,6 +290,7 @@ def calculate_class_probabilities(summaries, row):
 def predict(summaries, row):
 	probabilities = calculate_class_probabilities(summaries, row)
 	best_label, best_prob = None, -1
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, probability in probabilities.items():
 		if best_label is None or probability > best_prob:
 			best_prob = probability
@@ -260,6 +307,7 @@ def naive_bayes(train, test):
 	predictions = list()
 	for row in test:
 		output = predict(summarize, row)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(output)
 	return(predictions)
 ```
@@ -268,9 +316,11 @@ def naive_bayes(train, test):
 ## Step 17 — Test Naive Bayes on Iris Dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 filename = 'iris.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 ```
@@ -279,6 +329,7 @@ for i in range(len(dataset[0])-1):
 ## Step 18 — convert class column to integers
 
 ```python
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 ```
 
@@ -288,7 +339,9 @@ str_column_to_int(dataset, len(dataset[0])-1)
 ```python
 n_folds = 5
 scores = evaluate_algorithm(dataset, naive_bayes, n_folds)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -330,11 +383,13 @@ from math import pi
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -348,6 +403,7 @@ def str_column_to_int(dataset, column):
 	class_values = [row[column] for row in dataset]
 	unique = set(class_values)
 	lookup = dict()
+ # 同时获取索引和值 / Get both index and value
 	for i, value in enumerate(unique):
 		lookup[value] = i
 	for row in dataset:
@@ -358,21 +414,29 @@ def str_column_to_int(dataset, column):
 def cross_validation_split(dataset, n_folds):
 	dataset_split = list()
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	fold_size = int(len(dataset) / n_folds)
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_folds):
 		fold = list()
+  # 获取长度 / Get length
 		while len(fold) < fold_size:
+   # 获取长度 / Get length
 			index = randrange(len(dataset_copy))
+   # 添加元素到列表末尾 / Append element to list end
 			fold.append(dataset_copy.pop(index))
+  # 添加元素到列表末尾 / Append element to list end
 		dataset_split.append(fold)
 	return dataset_split
 
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
 	correct = 0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		if actual[i] == predicted[i]:
 			correct += 1
+ # 获取长度 / Get length
 	return correct / float(len(actual)) * 100.0
 
 # Evaluate an algorithm using a cross validation split
@@ -386,37 +450,44 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		test_set = list()
 		for row in fold:
 			row_copy = list(row)
+   # 添加元素到列表末尾 / Append element to list end
 			test_set.append(row_copy)
 			row_copy[-1] = None
 		predicted = algorithm(train_set, test_set, *args)
 		actual = [row[-1] for row in fold]
 		accuracy = accuracy_metric(actual, predicted)
+  # 添加元素到列表末尾 / Append element to list end
 		scores.append(accuracy)
 	return scores
 
 # Split the dataset by class values, returns a dictionary
 def separate_by_class(dataset):
 	separated = dict()
+ # 获取长度 / Get length
 	for i in range(len(dataset)):
 		vector = dataset[i]
 		class_value = vector[-1]
 		if (class_value not in separated):
 			separated[class_value] = list()
+  # 添加元素到列表末尾 / Append element to list end
 		separated[class_value].append(vector)
 	return separated
 
 # Calculate the mean of a list of numbers
 def mean(numbers):
+ # 获取长度 / Get length
 	return sum(numbers)/float(len(numbers))
 
 # Calculate the standard deviation of a list of numbers
 def stdev(numbers):
 	avg = mean(numbers)
+ # 获取长度 / Get length
 	variance = sum([(x-avg)**2 for x in numbers]) / float(len(numbers)-1)
 	return sqrt(variance)
 
 # Calculate the mean, stdev and count for each column in a dataset
 def summarize_dataset(dataset):
+ # 获取长度 / Get length
 	summaries = [(mean(column), stdev(column), len(column)) for column in zip(*dataset)]
 	del(summaries[-1])
 	return summaries
@@ -425,6 +496,7 @@ def summarize_dataset(dataset):
 def summarize_by_class(dataset):
 	separated = separate_by_class(dataset)
 	summaries = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, rows in separated.items():
 		summaries[class_value] = summarize_dataset(rows)
 	return summaries
@@ -438,8 +510,10 @@ def calculate_probability(x, mean, stdev):
 def calculate_class_probabilities(summaries, row):
 	total_rows = sum([summaries[label][0][2] for label in summaries])
 	probabilities = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, class_summaries in summaries.items():
 		probabilities[class_value] = summaries[class_value][0][2]/float(total_rows)
+  # 获取长度 / Get length
 		for i in range(len(class_summaries)):
 			mean, stdev, _ = class_summaries[i]
 			probabilities[class_value] *= calculate_probability(row[i], mean, stdev)
@@ -449,6 +523,7 @@ def calculate_class_probabilities(summaries, row):
 def predict(summaries, row):
 	probabilities = calculate_class_probabilities(summaries, row)
 	best_label, best_prob = None, -1
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, probability in probabilities.items():
 		if best_label is None or probability > best_prob:
 			best_prob = probability
@@ -461,21 +536,27 @@ def naive_bayes(train, test):
 	predictions = list()
 	for row in test:
 		output = predict(summarize, row)
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(output)
 	return(predictions)
 
 # Test Naive Bayes on Iris Dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 filename = 'iris.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])-1):
 	str_column_to_float(dataset, i)
 # convert class column to integers
+# 获取长度 / Get length
 str_column_to_int(dataset, len(dataset[0])-1)
 # evaluate algorithm
 n_folds = 5
 scores = evaluate_algorithm(dataset, naive_bayes, n_folds)
+# 打印输出 / Print output
 print('Scores: %s' % scores)
+# 打印输出 / Print output
 print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
 ```
 
@@ -522,11 +603,13 @@ from math import exp
 ```python
 def separate_by_class(dataset):
 	separated = dict()
+ # 获取长度 / Get length
 	for i in range(len(dataset)):
 		vector = dataset[i]
 		class_value = vector[-1]
 		if (class_value not in separated):
 			separated[class_value] = list()
+  # 添加元素到列表末尾 / Append element to list end
 		separated[class_value].append(vector)
 	return separated
 ```
@@ -536,6 +619,7 @@ def separate_by_class(dataset):
 
 ```python
 def mean(numbers):
+ # 获取长度 / Get length
 	return sum(numbers)/float(len(numbers))
 ```
 
@@ -545,6 +629,7 @@ def mean(numbers):
 ```python
 def stdev(numbers):
 	avg = mean(numbers)
+ # 获取长度 / Get length
 	variance = sum([(x-avg)**2 for x in numbers]) / float(len(numbers)-1)
 	return sqrt(variance)
 ```
@@ -554,6 +639,7 @@ def stdev(numbers):
 
 ```python
 def summarize_dataset(dataset):
+ # 获取长度 / Get length
 	summaries = [(mean(column), stdev(column), len(column)) for column in zip(*dataset)]
 	del(summaries[-1])
 	return summaries
@@ -566,6 +652,7 @@ def summarize_dataset(dataset):
 def summarize_by_class(dataset):
 	separated = separate_by_class(dataset)
 	summaries = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, rows in separated.items():
 		summaries[class_value] = summarize_dataset(rows)
 	return summaries
@@ -587,8 +674,10 @@ def calculate_probability(x, mean, stdev):
 def calculate_class_probabilities(summaries, row):
 	total_rows = sum([summaries[label][0][2] for label in summaries])
 	probabilities = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, class_summaries in summaries.items():
 		probabilities[class_value] = summaries[class_value][0][2]/float(total_rows)
+  # 获取长度 / Get length
 		for i in range(len(class_summaries)):
 			mean, stdev, _ = class_summaries[i]
 			probabilities[class_value] *= calculate_probability(row[i], mean, stdev)
@@ -611,6 +700,7 @@ dataset = [[3.393533211,2.331273381,0],
 	[7.939820817,0.791637231,1]]
 summaries = summarize_by_class(dataset)
 probabilities = calculate_class_probabilities(summaries, dataset[0])
+# 打印输出 / Print output
 print(probabilities)
 ```
 
@@ -649,26 +739,31 @@ from math import exp
 # Split the dataset by class values, returns a dictionary
 def separate_by_class(dataset):
 	separated = dict()
+ # 获取长度 / Get length
 	for i in range(len(dataset)):
 		vector = dataset[i]
 		class_value = vector[-1]
 		if (class_value not in separated):
 			separated[class_value] = list()
+  # 添加元素到列表末尾 / Append element to list end
 		separated[class_value].append(vector)
 	return separated
 
 # Calculate the mean of a list of numbers
 def mean(numbers):
+ # 获取长度 / Get length
 	return sum(numbers)/float(len(numbers))
 
 # Calculate the standard deviation of a list of numbers
 def stdev(numbers):
 	avg = mean(numbers)
+ # 获取长度 / Get length
 	variance = sum([(x-avg)**2 for x in numbers]) / float(len(numbers)-1)
 	return sqrt(variance)
 
 # Calculate the mean, stdev and count for each column in a dataset
 def summarize_dataset(dataset):
+ # 获取长度 / Get length
 	summaries = [(mean(column), stdev(column), len(column)) for column in zip(*dataset)]
 	del(summaries[-1])
 	return summaries
@@ -677,6 +772,7 @@ def summarize_dataset(dataset):
 def summarize_by_class(dataset):
 	separated = separate_by_class(dataset)
 	summaries = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, rows in separated.items():
 		summaries[class_value] = summarize_dataset(rows)
 	return summaries
@@ -690,8 +786,10 @@ def calculate_probability(x, mean, stdev):
 def calculate_class_probabilities(summaries, row):
 	total_rows = sum([summaries[label][0][2] for label in summaries])
 	probabilities = dict()
+ # 获取字典的键值对 / Get dict key-value pairs
 	for class_value, class_summaries in summaries.items():
 		probabilities[class_value] = summaries[class_value][0][2]/float(total_rows)
+  # 获取长度 / Get length
 		for i in range(len(class_summaries)):
 			mean, stdev, _ = class_summaries[i]
 			probabilities[class_value] *= calculate_probability(row[i], mean, stdev)
@@ -710,11 +808,30 @@ dataset = [[3.393533211,2.331273381,0],
 	[7.939820817,0.791637231,1]]
 summaries = summarize_by_class(dataset)
 probabilities = calculate_class_probabilities(summaries, dataset[0])
+# 打印输出 / Print output
 print(probabilities)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 4 of 6
+
+---
+
+### Separate By Class
+
+
+
+---
+
+### Summarize By Class
+
+
+
+---
+
+### Summarize Dataset
+
+
 
 ---

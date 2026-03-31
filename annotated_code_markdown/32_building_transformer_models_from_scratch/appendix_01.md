@@ -1,4 +1,4 @@
-# 从零构建Transformer
+# 从零构建Transformer / Building Transformers from Scratch
 ## Appendix 01
 
 ---
@@ -31,6 +31,7 @@ scipy
 
 ```python
 import scipy
+# 打印输出 / Print output
 print('scipy: %s' % scipy.__version__)
 ```
 
@@ -38,7 +39,9 @@ print('scipy: %s' % scipy.__version__)
 ## Step 2 — numpy
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
+# 打印输出 / Print output
 print('numpy: %s' % numpy.__version__)
 ```
 
@@ -46,7 +49,9 @@ print('numpy: %s' % numpy.__version__)
 ## Step 3 — matplotlib
 
 ```python
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 打印输出 / Print output
 print('matplotlib: %s' % matplotlib.__version__)
 ```
 
@@ -54,7 +59,9 @@ print('matplotlib: %s' % matplotlib.__version__)
 ## Step 4 — pandas
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas
+# 打印输出 / Print output
 print('pandas: %s' % pandas.__version__)
 ```
 
@@ -63,6 +70,7 @@ print('pandas: %s' % pandas.__version__)
 
 ```python
 import statsmodels
+# 打印输出 / Print output
 print('statsmodels: %s' % statsmodels.__version__)
 ```
 
@@ -70,7 +78,9 @@ print('statsmodels: %s' % statsmodels.__version__)
 ## Step 6 — scikit-learn
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
+# 打印输出 / Print output
 print('sklearn: %s' % sklearn.__version__)
 ```
 
@@ -105,27 +115,37 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # check library version numbers
 # scipy
 import scipy
+# 打印输出 / Print output
 print('scipy: %s' % scipy.__version__)
 # numpy
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
+# 打印输出 / Print output
 print('numpy: %s' % numpy.__version__)
 # matplotlib
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 打印输出 / Print output
 print('matplotlib: %s' % matplotlib.__version__)
 # pandas
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas
+# 打印输出 / Print output
 print('pandas: %s' % pandas.__version__)
 # statsmodels
 import statsmodels
+# 打印输出 / Print output
 print('statsmodels: %s' % statsmodels.__version__)
 # scikit-learn
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
+# 打印输出 / Print output
 print('sklearn: %s' % sklearn.__version__)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 01 Summary / 第01章总结
 

@@ -1,4 +1,4 @@
-# ML微积分
+# 机器学习微积分 / Calculus for Machine Learning
 ## Chapter 09
 
 ---
@@ -35,10 +35,15 @@ from sympy.abc import x
 expressions = [x**2, 3*x**5, 4*x**9]
 for expression in expressions:
     result = diff(expression, x)
+    # 打印输出 / Print output
     print("Derivative of")
+    # 打印输出 / Print output
     pprint(expression)
+    # 打印输出 / Print output
     print("with respect to x is")
+    # 打印输出 / Print output
     pprint(result)
+    # 打印输出 / Print output
     print()
 ```
 
@@ -68,10 +73,15 @@ from sympy.abc import x
 expressions = [x**2, 3*x**5, 4*x**9]
 for expression in expressions:
     result = diff(expression, x)
+    # 打印输出 / Print output
     print("Derivative of")
+    # 打印输出 / Print output
     pprint(expression)
+    # 打印输出 / Print output
     print("with respect to x is")
+    # 打印输出 / Print output
     pprint(result)
+    # 打印输出 / Print output
     print()
 ```
 
@@ -114,10 +124,15 @@ expressions = ["k*x**a", "x**0.2", "x**pi", "x**(-3/4)"]
 for expression in expressions:
     expression = simplify(expression)
     result = diff(expression, x)
+    # 打印输出 / Print output
     print("Derivative of")
+    # 打印输出 / Print output
     pprint(expression)
+    # 打印输出 / Print output
     print("with respect to x is")
+    # 打印输出 / Print output
     pprint(powsimp(result))
+    # 打印输出 / Print output
     print()
 ```
 
@@ -148,16 +163,21 @@ expressions = ["k*x**a", "x**0.2", "x**pi", "x**(-3/4)"]
 for expression in expressions:
     expression = simplify(expression)
     result = diff(expression, x)
+    # 打印输出 / Print output
     print("Derivative of")
+    # 打印输出 / Print output
     pprint(expression)
+    # 打印输出 / Print output
     print("with respect to x is")
+    # 打印输出 / Print output
     pprint(powsimp(result))
+    # 打印输出 / Print output
     print()
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 09 Summary / 第09章总结
 

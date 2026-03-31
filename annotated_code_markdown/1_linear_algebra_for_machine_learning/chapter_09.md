@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 09
 
 ---
@@ -35,10 +35,12 @@ We import the `array` function from NumPy and the `norm` function from `numpy.li
 ```python
 # Import array to create vectors
 # 导入 array 来创建向量
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Import norm function to compute vector norms
 # 导入 norm 函数来计算向量范数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import norm
 ```
 
@@ -65,6 +67,7 @@ l1 = norm(a, 1)
 
 # Print the L1 norm
 # 打印 L1 范数
+# 打印输出 / Print output
 print(l1)
 ```
 
@@ -85,10 +88,13 @@ print(l1)
 
 ```python
 # --- L1 Norm / L1 范数 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import norm
 a = array([1, 2, 3])
 l1 = norm(a, 1)
+# 打印输出 / Print output
 print(l1)
 ```
 
@@ -126,10 +132,12 @@ We import the `array` function from NumPy and the `norm` function from `numpy.li
 ```python
 # Import array to create vectors
 # 导入 array 来创建向量
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Import norm function to compute vector norms
 # 导入 norm 函数来计算向量范数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import norm
 ```
 
@@ -156,6 +164,7 @@ l2 = norm(a)
 
 # Print the L2 norm
 # 打印 L2 范数
+# 打印输出 / Print output
 print(l2)
 ```
 
@@ -176,10 +185,13 @@ print(l2)
 
 ```python
 # --- L2 Norm / L2 范数 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import norm
 a = array([1, 2, 3])
 l2 = norm(a)
+# 打印输出 / Print output
 print(l2)
 ```
 
@@ -217,14 +229,17 @@ We import the `array` function from NumPy, the `inf` constant, and the `norm` fu
 ```python
 # Import infinity constant for max norm
 # 导入用于最大范数的无穷常数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import inf
 
 # Import array to create vectors
 # 导入 array 来创建向量
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # Import norm function to compute vector norms
 # 导入 norm 函数来计算向量范数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import norm
 ```
 
@@ -251,6 +266,7 @@ maxnorm = norm(a, inf)
 
 # Print the max norm
 # 打印最大范数
+# 打印输出 / Print output
 print(maxnorm)
 ```
 
@@ -271,17 +287,21 @@ print(maxnorm)
 
 ```python
 # --- Max Norm / 最大范数 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import inf
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import norm
 a = array([1, 2, 3])
 maxnorm = norm(a, inf)
+# 打印输出 / Print output
 print(maxnorm)
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 09 Summary / 第09章总结：Vector Norms
 

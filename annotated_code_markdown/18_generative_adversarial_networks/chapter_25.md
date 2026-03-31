@@ -1,5 +1,11 @@
-# GAN
+# 生成对抗网络 / Generative Adversarial Networks
 ## Chapter 25
+
+---
+
+### Define Summarize Patchgan
+
+
 
 ---
 
@@ -29,14 +35,23 @@ This script demonstrates **example of an encoder-decoder generator for the cycle
 ## Step 1 — example of an encoder-decoder generator for the cyclegan
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.initializers import RandomNormal
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Concatenate
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras_contrib.layers.normalization.instancenormalization import InstanceNormalization
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 ```
 
@@ -58,6 +73,7 @@ init = RandomNormal(stddev=0.02)
 ## Step 4 — first layer convolutional layer
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 g = Conv2D(n_filters, (3,3), padding='same', kernel_initializer=init)(input_layer)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
@@ -67,6 +83,7 @@ g = Conv2D(n_filters, (3,3), padding='same', kernel_initializer=init)(input_laye
 ## Step 5 — second convolutional layer
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 g = Conv2D(n_filters, (3,3), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 ```
@@ -104,6 +121,7 @@ in_image = Input(shape=image_shape)
 ## Step 10 — c7s1-64
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 g = Conv2D(64, (7,7), padding='same', kernel_initializer=init)(in_image)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
@@ -113,6 +131,7 @@ g = Conv2D(64, (7,7), padding='same', kernel_initializer=init)(in_image)
 ## Step 11 — d128
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 g = Conv2D(128, (3,3), strides=(2,2), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
@@ -122,6 +141,7 @@ g = Conv2D(128, (3,3), strides=(2,2), padding='same', kernel_initializer=init)(g
 ## Step 12 — d256
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 g = Conv2D(256, (3,3), strides=(2,2), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
@@ -131,6 +151,7 @@ g = Conv2D(256, (3,3), strides=(2,2), padding='same', kernel_initializer=init)(g
 ## Step 13 — R256
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for _ in range(n_resnet):
 		g = resnet_block(256, g)
 ```
@@ -157,6 +178,7 @@ g = Conv2DTranspose(64, (3,3), strides=(2,2), padding='same', kernel_initializer
 ## Step 16 — c7s1-3
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 g = Conv2D(3, (7,7), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 	out_image = Activation('tanh')(g)
@@ -218,14 +240,23 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of an encoder-decoder generator for the cyclegan
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2DTranspose
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.initializers import RandomNormal
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Concatenate
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras_contrib.layers.normalization.instancenormalization import InstanceNormalization
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
 
 # generator a resnet block
@@ -233,10 +264,12 @@ def resnet_block(n_filters, input_layer):
 	# weight initialization
 	init = RandomNormal(stddev=0.02)
 	# first layer convolutional layer
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	g = Conv2D(n_filters, (3,3), padding='same', kernel_initializer=init)(input_layer)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
 	# second convolutional layer
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	g = Conv2D(n_filters, (3,3), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 	# concatenate merge channel-wise with input layer
@@ -250,18 +283,22 @@ def define_generator(image_shape=(256,256,3), n_resnet=9):
 	# image input
 	in_image = Input(shape=image_shape)
 	# c7s1-64
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	g = Conv2D(64, (7,7), padding='same', kernel_initializer=init)(in_image)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
 	# d128
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	g = Conv2D(128, (3,3), strides=(2,2), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
 	# d256
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	g = Conv2D(256, (3,3), strides=(2,2), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
 	# R256
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_resnet):
 		g = resnet_block(256, g)
 	# u128
@@ -273,6 +310,7 @@ def define_generator(image_shape=(256,256,3), n_resnet=9):
 	g = InstanceNormalization(axis=-1)(g)
 	g = Activation('relu')(g)
 	# c7s1-3
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	g = Conv2D(3, (7,7), padding='same', kernel_initializer=init)(g)
 	g = InstanceNormalization(axis=-1)(g)
 	out_image = Activation('tanh')(g)
@@ -294,7 +332,13 @@ plot_model(model, to_file='generator_model_plot.png', show_shapes=True, show_lay
 
 ---
 
-### Chapter Summary
+### Define Summarize Composite
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 25 Summary / 第25章总结
 

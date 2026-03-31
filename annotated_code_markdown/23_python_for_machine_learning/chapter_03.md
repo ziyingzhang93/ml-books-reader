@@ -1,4 +1,4 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 03
 
 ---
@@ -32,6 +32,7 @@ This script demonstrates **Lookup**.
 value = 0 # This is obtained from a model
 
 value_to_name = {0: "cat", 1: "dog"}
+# 打印输出 / Print output
 print("Result is %s" % value_to_name[value])
 ```
 
@@ -58,6 +59,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 value = 0 # This is obtained from a model
 
 value_to_name = {0: "cat", 1: "dog"}
+# 打印输出 / Print output
 print("Result is %s" % value_to_name[value])
 ```
 
@@ -100,6 +102,7 @@ for char in sentence:
         counter[char] = 0
     counter[char] += 1
 
+# 打印输出 / Print output
 print(counter)
 ```
 
@@ -130,6 +133,7 @@ for char in sentence:
         counter[char] = 0
     counter[char] += 1
 
+# 打印输出 / Print output
 print(counter)
 ```
 
@@ -167,6 +171,7 @@ This script demonstrates **Listconcat**.
 ```python
 A = [1, 2, "fizz", 4, "buzz", "fizz", 7]
 A += [8, "fizz", "buzz", 11, "fizz", 13, 14, "fizzbuzz"]
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -192,6 +197,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 A = [1, 2, "fizz", 4, "buzz", "fizz", 7]
 A += [8, "fizz", "buzz", 11, "fizz", 13, 14, "fizzbuzz"]
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -229,10 +235,13 @@ This script demonstrates **List Operations**.
 ```python
 A = [1, 2, "fizz", 4, "buzz", "fizz", 7]
 A += [8, "fizz", "buzz", 11, "fizz", 13, 14, "fizzbuzz"]
+# 打印输出 / Print output
 print(A)
 A[2:2] = [2.1, 2.2]
+# 打印输出 / Print output
 print(A)
 A[0:2] = []
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -258,10 +267,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 A = [1, 2, "fizz", 4, "buzz", "fizz", 7]
 A += [8, "fizz", "buzz", 11, "fizz", 13, 14, "fizzbuzz"]
+# 打印输出 / Print output
 print(A)
 A[2:2] = [2.1, 2.2]
+# 打印输出 / Print output
 print(A)
 A[0:2] = []
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -299,8 +311,10 @@ This script demonstrates **Swap**.
 ```python
 a = 42
 b = "foo"
+# 打印输出 / Print output
 print("a is %s; b is %s" % (a,b))
 a, b = b, a # swap
+# 打印输出 / Print output
 print("After swap, a is %s; b is %s" % (a,b))
 ```
 
@@ -326,8 +340,10 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 a = 42
 b = "foo"
+# 打印输出 / Print output
 print("a is %s; b is %s" % (a,b))
 a, b = b, a # swap
+# 打印输出 / Print output
 print("After swap, a is %s; b is %s" % (a,b))
 ```
 
@@ -366,6 +382,7 @@ This script demonstrates **Template**.
 template = "Square root of %d is %.3f"
 n = 10
 answer = template % (n, n**0.5)
+# 打印输出 / Print output
 print(answer)
 ```
 
@@ -392,6 +409,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 template = "Square root of %d is %.3f"
 n = 10
 answer = template % (n, n**0.5)
+# 打印输出 / Print output
 print(answer)
 ```
 
@@ -427,11 +445,14 @@ This script demonstrates **Dontcare**.
 ## Step 1 — Step 1
 
 ```python
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 A = pd.DataFrame([[11,12,13],[12,13,14],[13,14,15],[15,16,17]], columns=["x","y","z"])
+# 打印输出 / Print output
 print(A)
 
 for _, row in A.iterrows():
+    # 打印输出 / Print output
     print(row["z"])
 ```
 
@@ -462,11 +483,14 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # Complete Code / 完整代码
 # ===============================
 
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 A = pd.DataFrame([[11,12,13],[12,13,14],[13,14,15],[15,16,17]], columns=["x","y","z"])
+# 打印输出 / Print output
 print(A)
 
 for _, row in A.iterrows():
+    # 打印输出 / Print output
     print(row["z"])
 ```
 
@@ -505,7 +529,9 @@ This script demonstrates **Zip**.
 a = ["x", "y", "z"]
 b = [3, 5, 7, 9]
 c = [2.1, 2.5, 2.9]
+# 将多个序列配对 / Pair multiple sequences
 for x in zip(a, b, c):
+    # 打印输出 / Print output
     print(x)
 ```
 
@@ -532,7 +558,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 a = ["x", "y", "z"]
 b = [3, 5, 7, 9]
 c = [2.1, 2.5, 2.9]
+# 将多个序列配对 / Pair multiple sequences
 for x in zip(a, b, c):
+    # 打印输出 / Print output
     print(x)
 ```
 
@@ -569,9 +597,13 @@ This script demonstrates **Transpose**.
 
 ```python
 a = [['x', 3, 2.1], ['y', 5, 2.5], ['z', 7, 2.9]]
+# 将多个序列配对 / Pair multiple sequences
 p,q,r = zip(*a)
+# 打印输出 / Print output
 print(p)
+# 打印输出 / Print output
 print(q)
+# 打印输出 / Print output
 print(r)
 ```
 
@@ -596,9 +628,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 a = [['x', 3, 2.1], ['y', 5, 2.5], ['z', 7, 2.9]]
+# 将多个序列配对 / Pair multiple sequences
 p,q,r = zip(*a)
+# 打印输出 / Print output
 print(p)
+# 打印输出 / Print output
 print(q)
+# 打印输出 / Print output
 print(r)
 ```
 
@@ -635,7 +671,9 @@ This script demonstrates **Enumerate**.
 
 ```python
 a = ["quick", "brown", "fox", "jumps", "over"]
+# 同时获取索引和值 / Get both index and value
 for num, item in enumerate(a):
+    # 打印输出 / Print output
     print("item %d is %s" % (num, item))
 ```
 
@@ -660,7 +698,9 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 a = ["quick", "brown", "fox", "jumps", "over"]
+# 同时获取索引和值 / Get both index and value
 for num, item in enumerate(a):
+    # 打印输出 / Print output
     print("item %d is %s" % (num, item))
 ```
 
@@ -697,7 +737,9 @@ This script demonstrates **No Enumerate**.
 
 ```python
 a = ["quick", "brown", "fox", "jumps", "over"]
+# 获取长度 / Get length
 for num in range(len(a)):
+    # 打印输出 / Print output
     print("item %d is %s" % (num, a[num]))
 ```
 
@@ -722,13 +764,15 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 a = ["quick", "brown", "fox", "jumps", "over"]
+# 获取长度 / Get length
 for num in range(len(a)):
+    # 打印输出 / Print output
     print("item %d is %s" % (num, a[num]))
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 03 Summary / 第03章总结
 

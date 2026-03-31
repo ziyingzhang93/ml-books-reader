@@ -5,47 +5,7 @@
 
 ### Plot Domain
 
-# 19 — Bayesian Optimization / 贝叶斯优化
 
-**Chapter 19 — File 1 of 4**
-
-## Summary / 汇总
-
-This notebook plots the test objective function f(x) = x² * sin(5πx)⁶ with and without noise. This is a challenging 1D optimization problem used to demonstrate Bayesian optimization.
-
-本笔记本绘制测试目标函数f(x) = x² * sin(5πx)⁶，带噪声和不带噪声。这是一个用于演示贝叶斯优化的具有挑战性的一维优化问题。
-
-## Step 1 — Define Objective Function / 定义目标函数
-
-```python
-from math import sin, pifrom numpy import arange, argmaxfrom numpy.random import normalfrom matplotlib import pyplot# objective function with optional noisedef objective(x, noise=0.1):    # Add Gaussian noise if specified (noise parameter controls std dev)    noise = normal(loc=0, scale=noise)    # Return objective function value with noise    return (x**2 * sin(5 * pi * x)**6.0) + noise
-```
-
-## Step 2 — Sample Domain and Find Optimum / 采样域并找到最优值
-
-```python
-# grid-based sample of the domain [0,1]X = arange(0, 1, 0.01)# sample the domain without noise to find true optimumy = [objective(x, 0) for x in X]# sample the domain with noise for realistic observationynoise = [objective(x) for x in X]# find best resultix = argmax(y)print('Optima: x=%.3f, y=%.3f' % (X[ix], y[ix]))
-```
-
-## Step 3 — Plot Results / 绘制结果
-
-```python
-# plot the noisy observations (what we observe)pyplot.scatter(X, ynoise)# plot the true underlying function (what we want to optimize)pyplot.plot(X, y)# show the plotpyplot.show()
-```
-
-## Learning Notes / 学习笔记
-
-- **Concept**: The objective function is expensive to evaluate and has multiple local optima, making it challenging for gradient-based optimization. The sine term creates oscillations that complicate optimization. **概念**: 目标函数的评估成本很高，并且具有多个局部最优值，这使基于梯度的优化变得困难。正弦项创建了使优化变得复杂的振荡。
-
-- **ML Application**: Bayesian optimization will learn a surrogate model of this function and intelligently select new points to evaluate based on acquisition functions, efficiently finding the optimum despite the noisy observations. **机器学习应用**: 贝叶斯优化将学习该函数的代理模型，并基于采集函数智能地选择要评估的新点，尽管有噪声观测但仍有效地找到最优值。
-
-➡️ **Next**: `02_surrogate_function.ipynb`
-
-## Complete Code / 完整代码一览
-
-```python
-# example of the test problemfrom math import sinfrom math import pifrom numpy import arangefrom numpy import argmaxfrom numpy.random import normalfrom matplotlib import pyplot# objective functiondef objective(x, noise=0.1):    noise = normal(loc=0, scale=noise)    return (x**2 * sin(5 * pi * x)**6.0) + noise# grid-based sample of the domain [0,1]X = arange(0, 1, 0.01)# sample the domain without noisey = [objective(x, 0) for x in X]# sample the domain with noiseynoise = [objective(x) for x in X]# find best resultix = argmax(y)print('Optima: x=%.3f, y=%.3f' % (X[ix], y[ix]))# plot the points with noisepyplot.scatter(X, ynoise)# plot the points without noisepyplot.plot(X, y)# show the plotpyplot.show()
-```
 
 ---
 
@@ -61,9 +21,38 @@ This notebook fits a Gaussian Process as a surrogate model to approximate the ob
 
 本笔记本将高斯过程作为代理模型拟合以近似目标函数。代理从稀疏观测学习并提供不确定性估计。
 
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 训练模型 / Train the model
+- 评估模型效果 / Evaluate model performance
+- 可视化结果 / Visualize results
+
+## Code Flow / 代码流程
+
+```
+   
+┌──────────────────────┐
+│  训练模型 Train Model  │
+└──────────────────────┘
+  │
+  ▼
+┌───────────────────────────┐
+│  评估结果 Evaluate Results  │
+└───────────────────────────┘
+  │
+  ▼
+┌───────────────────┐
+│  可视化 Visualize  │
+└───────────────────┘
+```
+
 ## Step 1 — Import and Define Helper Functions / 导入并定义辅助函数
 
 ```python
+# 用模型做预测 / Make predictions with model
 from math import sin, pifrom numpy import arange, asarrayfrom numpy.random import normal, randomfrom matplotlib import pyplotfrom warnings import catch_warnings, simplefilterfrom sklearn.gaussian_process import GaussianProcessRegressor# objective functiondef objective(x, noise=0.1):    noise = normal(loc=0, scale=noise)    return (x**2 * sin(5 * pi * x)**6.0) + noise# surrogate or approximation for the objective functiondef surrogate(model, X):    # catch any warning generated when making a prediction    with catch_warnings():        # ignore generated warnings        simplefilter("ignore")        # Return mean predictions and standard deviation (uncertainty)        return model.predict(X, return_std=True)
 ```
 
@@ -87,6 +76,16 @@ from math import sin, pifrom numpy import arange, asarrayfrom numpy.random impor
 
 ➡️ **Next**: `03_bayes_opt_scratch.ipynb`
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `matplotlib` | 绑图库 | Plotting library |
+| `model.fit` | 训练模型 | Train the model |
+| `model.predict` | 模型预测 | Model prediction |
+| `numpy` | 数值计算库 | Numerical computing library |
+| `predict` | 用训练好的模型做预测 | Make predictions with trained model |
+
 ## Complete Code / 完整代码一览
 
 ```python
@@ -107,6 +106,34 @@ This notebook implements the complete Bayesian optimization loop from scratch. I
 
 本笔记本从头实现完整的贝叶斯优化循环。它将代理模型与概率改进(PoI)采集函数结合起来以迭代地选择点。
 
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 训练模型 / Train the model
+- 评估模型效果 / Evaluate model performance
+- 可视化结果 / Visualize results
+
+## Code Flow / 代码流程
+
+```
+   
+┌──────────────────────┐
+│  训练模型 Train Model  │
+└──────────────────────┘
+  │
+  ▼
+┌───────────────────────────┐
+│  评估结果 Evaluate Results  │
+└───────────────────────────┘
+  │
+  ▼
+┌───────────────────┐
+│  可视化 Visualize  │
+└───────────────────┘
+```
+
 ## Step 1 — Define Acquisition Function / 定义采集函数
 
 ```python
@@ -122,6 +149,7 @@ from scipy.stats import norm# probability of improvement acquisition functiondef
 ## Step 3 — Main Bayesian Optimization Loop / 主贝叶斯优化循环
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import vstack# sample the domain sparsely with noiseX = random(100)y = asarray([objective(x) for x in X])# reshape into rows and colsX = X.reshape(len(X), 1)y = y.reshape(len(y), 1)# define the modelmodel = GaussianProcessRegressor()# fit the modelmodel.fit(X, y)# perform the optimization processfor i in range(100):    # select the next point to sample using acquisition function    x = opt_acquisition(X, y, model)    # sample the point (expensive objective function call)    actual = objective(x)    # summarize the finding    est, _ = surrogate(model, [[x]])    print('>x=%.3f, f()=%3f, actual=%.3f' % (x, est, actual))    # add the data to the dataset    X = vstack((X, [[x]]))    y = vstack((y, [[actual]]))    # update the model with new data    model.fit(X, y)# plot all samples and the final surrogate functionplot(X, y, model)# best resultix = argmax(y)print('Best Result: x=%.3f, y=%.3f' % (X[ix], y[ix]))
 ```
 
@@ -132,6 +160,17 @@ from numpy import vstack# sample the domain sparsely with noiseX = random(100)y 
 - **ML Application**: This loop iteratively refines the surrogate model while efficiently exploring the function space. By 100 iterations, the algorithm typically finds near-optimal solutions with far fewer function evaluations than grid search. **机器学习应用**: 此循环在有效探索函数空间的同时迭代地优化代理模型。经过100次迭代后，该算法通常比网格搜索少调用许多次函数即可找到接近最优的解。
 
 ➡️ **Next**: `04_bayes_opt_hyperparam.ipynb`
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dataset` | 数据集基类，定义数据读取方式 | Base class defining how to read data |
+| `matplotlib` | 绑图库 | Plotting library |
+| `model.fit` | 训练模型 | Train the model |
+| `model.predict` | 模型预测 | Model prediction |
+| `numpy` | 数值计算库 | Numerical computing library |
+| `predict` | 用训练好的模型做预测 | Make predictions with trained model |
 
 ## Complete Code / 完整代码一览
 
@@ -153,9 +192,31 @@ This notebook uses scikit-optimize's gp_minimize for Bayesian hyperparameter tun
 
 本笔记本使用scikit-optimize的gp_minimize进行KNN分类器的贝叶斯超参数调优。它演示了机器学习模型优化的实际应用。
 
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 评估模型效果 / Evaluate model performance
+
+
+---
+## Code Flow / 代码流程
+
+```
+  ✂️ 划分数据集 / Split Dataset
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
 ## Step 1 — Setup Dataset and Model / 设置数据集和模型
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import meanfrom sklearn.datasets import make_blobsfrom sklearn.model_selection import cross_val_scorefrom sklearn.neighbors import KNeighborsClassifierfrom skopt.space import Integerfrom skopt.utils import use_named_argsfrom skopt import gp_minimize# generate 2d classification datasetX, y = make_blobs(n_samples=500, centers=3, n_features=2)# define the modelmodel = KNeighborsClassifier()# define the space of hyperparameters to searchsearch_space = [Integer(1, 5, name='n_neighbors'), Integer(1, 2, name='p')]
 ```
 
@@ -179,6 +240,15 @@ from numpy import meanfrom sklearn.datasets import make_blobsfrom sklearn.model_
 
 ➡️ **Next**: `../chapter_21/01_coin_flip.ipynb`
 
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dataset` | 数据集基类，定义数据读取方式 | Base class defining how to read data |
+| `cross_val_score` | 交叉验证评估模型 | Cross-validation model evaluation |
+| `loss` | 损失函数：衡量预测与真实值的差距 | Loss: measures gap between prediction and truth |
+| `numpy` | 数值计算库 | Numerical computing library |
+
 ## Complete Code / 完整代码一览
 
 ```python
@@ -189,136 +259,6 @@ from numpy import meanfrom sklearn.datasets import make_blobsfrom sklearn.model_
 
 ### Chapter Summary / 章节总结
 
-# Chapter 19: Bayesian Optimization
 
-## Overview
-This chapter explores **Bayesian Optimization**, a method for finding optimal hyperparameters without exhaustive search. The journey progresses from visualizing the problem to implementing a complete optimization pipeline.
-
-## Key Concepts
-- **Objective Function**: Black-box function we want to maximize (e.g., model accuracy)
-- **Surrogate Model**: Probabilistic approximation of objective function
-- **Acquisition Function**: Strategy for choosing next points to evaluate
-- **Bayesian Update**: Refine surrogate model as we observe new points
-- **Hyperparameter Tuning**: Finding optimal ML model configuration
-
-## Evolution of Examples
-
-### From Visualization to Application
-1. **01_plot_objective.py**: Visualize the objective function
-2. **02_surrogate_gaussian_process.py**: Fit Gaussian Process surrogate model
-3. **03_bayesian_optimization_from_scratch.py**: Implement full BO algorithm
-4. **04_hyperparameter_tuning.py**: Apply BO to model hyperparameter optimization
-
-## The Bayesian Optimization Loop
-
-### Problem Statement
-Find x* = argmax_x f(x) where:
-- f is expensive to evaluate
-- No gradient information available
-- Evaluation is noisy or deterministic but unknown
-
-### The Loop
-1. **Initialize**: Evaluate f at random starting points
-2. **Build surrogate**: Fit probabilistic model (GP) to observations
-3. **Acquisition**: Use surrogate uncertainty to select promising next point
-4. **Evaluate**: Run f at selected point
-5. **Update**: Add observation to dataset
-6. **Repeat**: Return to step 2 until budget exhausted
-
-## Surrogate Model: Gaussian Process
-
-### Why GP?
-- Provides mean (prediction) AND variance (uncertainty)
-- Flexible: can fit complex functions
-- Principled: Bayesian update when adding new data
-
-### GP Properties
-```
-f(x) ~ GP(m(x), k(x, x'))
-```
-- Any finite set of points: multivariate Gaussian
-- Parameterized by mean function m and kernel k
-- Posterior after observing data: Updated GP
-
-### Posterior Prediction
-After observing (x₁, y₁), ..., (xₙ, yₙ):
-```
-P(f(x*) | D) = N(μ(x*), σ²(x*))
-```
-- μ(x*): mean prediction
-- σ²(x*): uncertainty (high if x* is far from training points)
-
-## Acquisition Functions
-
-### Expected Improvement (EI)
-```
-EI(x) = E[max(0, f(x) - f(x_best))] | surrogate]
-```
-- Balance exploitation: try high-mean regions
-- Balance exploration: try uncertain regions
-- Closed form available for Gaussian surrogate
-
-### Upper Confidence Bound (UCB)
-```
-UCB(x) = μ(x) + κ × σ(x)
-```
-- μ(x): predicted value
-- σ(x): uncertainty
-- κ: exploration weight
-- Higher κ: more exploration
-
-### Thompson Sampling
-```
-x* = argmax_x f_sample(x)
-```
-Sample function from posterior, optimize sample
-
-## Comparison to Alternatives
-
-| Method | Cost per Eval | Hyperparameters | When to Use |
-|--------|---------------|-----------------|-------------|
-| **Grid Search** | High | Fixed | Few hyperparams |
-| **Random Search** | High | None | Baseline |
-| **Bayesian Opt** | Moderate | Few (κ) | Expensive objective |
-| **Evolutionary** | High | Many | Large search space |
-
-## Advantages
-1. **Sample efficient**: Minimizes function evaluations
-2. **Handles multiple objectives**: With extensions
-3. **Probabilistic**: Quantifies uncertainty
-4. **No gradient required**: Black-box optimization
-5. **Sequential**: Can incorporate feedback
-
-## Limitations
-1. **Surrogate modeling cost**: Building GP is O(n³) for n points
-2. **High dimensions**: Curse of dimensionality (20+ dims difficult)
-3. **Discrete hyperparameters**: BO works on continuous spaces
-4. **Many local optima**: BO finds good optima, not necessarily global
-5. **Requires objective estimation**: Each evaluation is expensive
-
-## Practical Example: Hyperparameter Tuning
-
-### Setup
-- Objective: Maximize cross-validation accuracy
-- Search space: Learning rate ∈ [0.001, 0.1], regularization ∈ [0.0001, 10]
-- Budget: 20 function evaluations
-
-### Process
-1. Evaluate model with random hyperparameters (5 evals)
-2. Fit GP surrogate
-3. Use acquisition function to select promising hyperparams
-4. Evaluate model, add result to training data
-5. Repeat steps 2-4 until budget exhausted
-
-### Result
-Typically finds better hyperparameters with fewer evaluations than grid/random search.
-
-## Key Takeaways
-1. Bayesian Optimization balances exploration and exploitation
-2. Gaussian Process surrogate provides uncertainty quantification
-3. Acquisition functions guide the search
-4. Excellent for expensive-to-evaluate black-box functions
-5. Foundation for AutoML and neural architecture search
-6. Most effective with 3-20 continuous hyperparameters
 
 ---

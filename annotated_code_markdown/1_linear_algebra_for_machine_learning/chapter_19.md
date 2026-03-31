@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Chapter 19
 
 ---
@@ -35,9 +35,13 @@ Implement PCA from scratch using NumPy. PCA finds the principal directions of ma
 ```python
 # Import NumPy linear algebra functions
 # 导入NumPy线性代数函数
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import cov
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import eig
 ```
 
@@ -49,7 +53,9 @@ from numpy.linalg import eig
 A = array([[1, 2],
            [3, 4],
            [5, 6]])
+# 打印输出 / Print output
 print("Original data A:")
+# 打印输出 / Print output
 print(A)
 ```
 
@@ -59,12 +65,15 @@ print(A)
 # Compute mean of each feature (along features dimension)
 # 计算每个特征的均值
 M = mean(A.T, axis=1)
+# 打印输出 / Print output
 print(f"Mean of each feature: {M}")
 
 # Center the data by subtracting the mean
 # 通过减去均值来中心化数据
 C = A - M
+# 打印输出 / Print output
 print(f"\nCentered data C:")
+# 打印输出 / Print output
 print(C)
 ```
 
@@ -74,7 +83,9 @@ print(C)
 # Compute covariance matrix from centered data
 # 从中心化数据计算协方差矩阵
 V = cov(C.T)
+# 打印输出 / Print output
 print("Covariance matrix V:")
+# 打印输出 / Print output
 print(V)
 ```
 
@@ -86,9 +97,13 @@ print(V)
 # 执行特征分解
 # eig()返回（特征值，特征向量）
 values, vectors = eig(V)
+# 打印输出 / Print output
 print("Eigenvalues (variance explained by each PC):")
+# 打印输出 / Print output
 print(values)
+# 打印输出 / Print output
 print("\nEigenvectors (principal component directions):")
+# 打印输出 / Print output
 print(vectors)
 ```
 
@@ -99,7 +114,9 @@ print(vectors)
 # P = vectors^T * C^T (project observations onto PCs)
 # 将中心化数据投影到主成分上
 P = vectors.T.dot(C.T)
+# 打印输出 / Print output
 print("Projected data (PCs):")
+# 打印输出 / Print output
 print(P.T)  # Transpose back to show as (observations, components)
 ```
 
@@ -127,15 +144,20 @@ print(P.T)  # Transpose back to show as (observations, components)
 
 ```python
 # --- Import Section / 导入部分 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import mean
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import cov
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy.linalg import eig
 
 # --- Manual PCA Implementation / 手动PCA实现 ---
 A = array([[1, 2],
            [3, 4],
            [5, 6]])
+# 打印输出 / Print output
 print(A)
 
 # --- Step 1: Center Data / 步骤1：中心化数据 ---
@@ -147,12 +169,27 @@ V = cov(C.T)
 
 # --- Step 3: Eigendecomposition / 步骤3：特征分解 ---
 values, vectors = eig(V)
+# 打印输出 / Print output
 print(vectors)
+# 打印输出 / Print output
 print(values)
 
 # --- Step 4: Project Data / 步骤4：投影数据 ---
 P = vectors.T.dot(C.T)
+# 打印输出 / Print output
 print(P.T)
 ```
+
+---
+
+### Pca Scikit Learn
+
+
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

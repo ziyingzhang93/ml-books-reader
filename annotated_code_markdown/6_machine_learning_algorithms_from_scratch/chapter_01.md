@@ -45,6 +45,14 @@ This script demonstrates **Example of converting string variables to float**.
 本脚本演示 **Example of converting string variables to float**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 演示核心概念和API用法 / Demonstrate core concepts and API usage
+
+
+---
 ## Step 1 — Example of converting string variables to float
 
 ```python
@@ -57,11 +65,13 @@ from csv import reader
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -81,7 +91,9 @@ def str_column_to_float(dataset, column):
 ```python
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
+# 打印输出 / Print output
 print(dataset[0])
 ```
 
@@ -89,8 +101,10 @@ print(dataset[0])
 ## Step 5 — convert string columns to float
 
 ```python
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
+# 打印输出 / Print output
 print(dataset[0])
 ```
 
@@ -102,6 +116,12 @@ print(dataset[0])
 
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dataset` | 数据集基类，定义数据读取方式 | Base class defining how to read data |
 
 ---
 ## Complete Code / 完整代码一览
@@ -120,11 +140,13 @@ from csv import reader
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -136,11 +158,15 @@ def str_column_to_float(dataset, column):
 # Load pima-indians-diabetes dataset
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
+# 打印输出 / Print output
 print(dataset[0])
 # convert string columns to float
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
+# 打印输出 / Print output
 print(dataset[0])
 ```
 
@@ -152,158 +178,7 @@ print(dataset[0])
 
 ### Convert String To Int
 
-# 01 — Convert String To Int / Convert String To Int
 
-**Chapter 01 — File 2 of 4 / 第01章 — 第2个文件（共4个）**
-
----
-
-## Summary / 总结
-
-This script demonstrates **Example of integer encoding string class values**.
-
-本脚本演示 **Example of integer encoding string class values**。
-
----
-## Step 1 — Example of integer encoding string class values
-
-```python
-from csv import reader
-```
-
----
-## Step 2 — Load a CSV file
-
-```python
-def load_csv(filename):
-	dataset = list()
-	with open(filename, 'r') as file:
-		csv_reader = reader(file)
-		for row in csv_reader:
-			if not row:
-				continue
-			dataset.append(row)
-	return dataset
-```
-
----
-## Step 3 — Convert string column to float
-
-```python
-def str_column_to_float(dataset, column):
-	for row in dataset:
-		row[column] = float(row[column].strip())
-```
-
----
-## Step 4 — Convert string column to integer
-
-```python
-def str_column_to_int(dataset, column):
-	class_values = [row[column] for row in dataset]
-	unique = set(class_values)
-	lookup = dict()
-	for i, value in enumerate(unique):
-		lookup[value] = i
-	for row in dataset:
-		row[column] = lookup[row[column]]
-	return lookup
-```
-
----
-## Step 5 — Load iris dataset
-
-```python
-filename = 'iris.csv'
-dataset = load_csv(filename)
-print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
-print(dataset[0])
-```
-
----
-## Step 6 — convert string columns to float
-
-```python
-for i in range(4):
-	str_column_to_float(dataset, i)
-```
-
----
-## Step 7 — convert class column to int
-
-```python
-lookup = str_column_to_int(dataset, 4)
-print(dataset[0])
-print(lookup)
-```
-
----
-## Learning Notes / 学习笔记
-
-- **概念**: Example of integer encoding string class values 是机器学习中的常用技术。  
-  *Example of integer encoding string class values is a common technique in machine learning.*
-
-- **ML 应用**: 本示例展示了如何在实践中应用该技术。  
-  *This example shows how to apply the technique in practice.*
-
----
-## Complete Code / 完整代码一览
-
-Below is the full code for quick reference. / 以下是完整代码，供快速参考。
-
-```python
-# ===============================
-# Convert String To Int / Convert String To Int
-# Complete Code / 完整代码
-# ===============================
-
-# Example of integer encoding string class values
-from csv import reader
-
-# Load a CSV file
-def load_csv(filename):
-	dataset = list()
-	with open(filename, 'r') as file:
-		csv_reader = reader(file)
-		for row in csv_reader:
-			if not row:
-				continue
-			dataset.append(row)
-	return dataset
-
-# Convert string column to float
-def str_column_to_float(dataset, column):
-	for row in dataset:
-		row[column] = float(row[column].strip())
-
-# Convert string column to integer
-def str_column_to_int(dataset, column):
-	class_values = [row[column] for row in dataset]
-	unique = set(class_values)
-	lookup = dict()
-	for i, value in enumerate(unique):
-		lookup[value] = i
-	for row in dataset:
-		row[column] = lookup[row[column]]
-	return lookup
-
-# Load iris dataset
-filename = 'iris.csv'
-dataset = load_csv(filename)
-print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
-print(dataset[0])
-# convert string columns to float
-for i in range(4):
-	str_column_to_float(dataset, i)
-# convert class column to int
-lookup = str_column_to_int(dataset, 4)
-print(dataset[0])
-print(lookup)
-```
-
----
-
-➡️ **Next / 下一步**: File 3 of 4
 
 ---
 
@@ -320,6 +195,14 @@ print(lookup)
 This script demonstrates **Example of loading Pima Indians CSV dataset**.
 
 本脚本演示 **Example of loading Pima Indians CSV dataset**。
+
+---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 演示核心概念和API用法 / Demonstrate core concepts and API usage
+
 
 ---
 ## Step 1 — Example of loading Pima Indians CSV dataset
@@ -345,6 +228,7 @@ def load_csv(filename):
 ```python
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
 ```
 
@@ -356,6 +240,12 @@ print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(
 
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dataset` | 数据集基类，定义数据读取方式 | Base class defining how to read data |
 
 ---
 ## Complete Code / 完整代码一览
@@ -381,6 +271,7 @@ def load_csv(filename):
 # Load dataset
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
 ```
 
@@ -405,6 +296,14 @@ This script demonstrates **Example of loading Pima Indians CSV dataset**.
 本脚本演示 **Example of loading Pima Indians CSV dataset**。
 
 ---
+## Background / 背景导读
+
+**本文件主要内容 / What this file covers:**
+
+- 演示核心概念和API用法 / Demonstrate core concepts and API usage
+
+
+---
 ## Step 1 — Example of loading Pima Indians CSV dataset
 
 ```python
@@ -417,11 +316,13 @@ from csv import reader
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -432,6 +333,7 @@ def load_csv(filename):
 ```python
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
 ```
 
@@ -443,6 +345,12 @@ print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(
 
 - **ML 应用**: 本示例展示了如何在实践中应用该技术。  
   *This example shows how to apply the technique in practice.*
+
+### Glossary / 术语速查
+
+| 术语 Term | 中文解释 | English |
+|-----------|---------|---------|
+| `Dataset` | 数据集基类，定义数据读取方式 | Base class defining how to read data |
 
 ---
 ## Complete Code / 完整代码一览
@@ -461,17 +369,20 @@ from csv import reader
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
 # Load dataset
 filename = 'pima-indians-diabetes.csv'
 dataset = load_csv(filename)
+# 打印输出 / Print output
 print('Loaded data file {0} with {1} rows and {2} columns'.format(filename, len(dataset), len(dataset[0])))
 ```
 

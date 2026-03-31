@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 18
 
 ---
@@ -24,16 +24,32 @@ Cross-validation partitions the dataset into k folds for systematic evaluation o
 - 评估模型效果 / Evaluate model performance
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  🏗️ 定义模型 / Define Model
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import required libraries
 # 导入所需库
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import KFold
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
 # Set random seed for reproducibility
 # 设置随机种子以保证可重复性
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 ```
 
@@ -42,15 +58,22 @@ np.random.seed(42)
 ```python
 # Generate synthetic dataset
 # 生成合成数据集
+# 创建NumPy数组 / Create NumPy array
 X = np.array([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]])
+# 创建NumPy数组 / Create NumPy array
 y = np.array([0, 1, 0, 1, 0, 1])
 
 # Display dataset
 # 显示数据集
+# 打印输出 / Print output
 print(f"Dataset size: {len(X)}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Features shape: {X.shape}")
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 print(f"Target shape: {y.shape}")
+# 打印输出 / Print output
 print(f"\nFeatures:\n{X}")
+# 打印输出 / Print output
 print(f"\nTarget: {y}")
 ```
 
@@ -63,8 +86,11 @@ kf = KFold(n_splits=3, shuffle=True, random_state=42)
 
 # Display KFold configuration
 # 显示KFold配置
+# 打印输出 / Print output
 print(f"KFold configuration:")
+# 打印输出 / Print output
 print(f"  Number of splits: {kf.n_splits}")
+# 打印输出 / Print output
 print(f"  Shuffle: {kf.shuffle}")
 ```
 
@@ -83,20 +109,29 @@ for train_index, test_index in kf.split(X):
     
     # Print fold information
     # 打印折信息
+    # 打印输出 / Print output
     print(f"\nFold {fold_count}:")
+    # 打印输出 / Print output
     print(f"  Train indices: {train_index}")
+    # 打印输出 / Print output
     print(f"  Test indices: {test_index}")
+    # 打印输出 / Print output
     print(f"  Train set size: {len(X_train)}")
+    # 打印输出 / Print output
     print(f"  Test set size: {len(X_test)}")
     
     # Display training data
     # 显示训练数据
+    # 打印输出 / Print output
     print(f"  X_train:\n{X_train}")
+    # 打印输出 / Print output
     print(f"  y_train: {y_train}")
     
     # Display test data
     # 显示测试数据
+    # 打印输出 / Print output
     print(f"  X_test:\n{X_test}")
+    # 打印输出 / Print output
     print(f"  y_test: {y_test}")
     
     fold_count += 1
@@ -120,24 +155,32 @@ for train_index, test_index in kf.split(X):
     
     # Simple model: predict class 1 if sum > threshold, else 0
     # 简单模型：如果和>阈值，预测类1，否则预测0
+    # 计算均值 / Calculate mean
     threshold = np.mean(X_train.sum(axis=1))
     
     # Make predictions on test set
     # 在测试集上进行预测
+    # 转换数据类型 / Convert data type
     y_pred = (X_test.sum(axis=1) > threshold).astype(int)
     
     # Calculate accuracy
     # 计算准确性
+    # 计算均值 / Calculate mean
     accuracy = np.mean(y_pred == y_test)
+    # 添加元素到列表末尾 / Append element to list end
     fold_accuracies.append(accuracy)
     
+    # 打印输出 / Print output
     print(f"Fold {fold_number} - Accuracy: {accuracy:.2f}")
     fold_number += 1
 
 # Calculate cross-validation metrics
 # 计算交叉验证指标
+# 打印输出 / Print output
 print(f"\nCross-Validation Results:")
+# 计算均值 / Calculate mean
 print(f"Mean CV Accuracy: {np.mean(fold_accuracies):.2f}")
+# 计算标准差 / Calculate standard deviation
 print(f"Std CV Accuracy: {np.std(fold_accuracies):.2f}")
 ```
 
@@ -166,11 +209,16 @@ print(f"Std CV Accuracy: {np.std(fold_accuracies):.2f}")
 ## Complete Code / 完整代码一览
 
 ```python
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.model_selection import KFold
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 创建NumPy数组 / Create NumPy array
 X = np.array([[1, 2], [3, 4], [5, 6], [7, 8], [9, 10], [11, 12]])
+# 创建NumPy数组 / Create NumPy array
 y = np.array([0, 1, 0, 1, 0, 1])
 
 kf = KFold(n_splits=3, shuffle=True, random_state=42)
@@ -180,15 +228,28 @@ for train_index, test_index in kf.split(X):
     X_train, X_test = X[train_index], X[test_index]
     y_train, y_test = y[train_index], y[test_index]
     
+    # 计算均值 / Calculate mean
     threshold = np.mean(X_train.sum(axis=1))
+    # 转换数据类型 / Convert data type
     y_pred = (X_test.sum(axis=1) > threshold).astype(int)
     
+    # 计算均值 / Calculate mean
     accuracy = np.mean(y_pred == y_test)
+    # 添加元素到列表末尾 / Append element to list end
     fold_accuracies.append(accuracy)
+    # 打印输出 / Print output
     print(f"Fold Accuracy: {accuracy:.2f}")
 
+# 计算均值 / Calculate mean
 print(f"Mean CV Accuracy: {np.mean(fold_accuracies):.2f}")
+# 计算标准差 / Calculate standard deviation
 print(f"Std CV Accuracy: {np.std(fold_accuracies):.2f}")
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

@@ -1,4 +1,4 @@
-# 线性代数与机器学习
+# 线性代数与机器学习 / Linear Algebra for Machine Learning
 ## Appendix 02
 
 ---
@@ -32,44 +32,80 @@ Display the versions of all major libraries used in this course. Version informa
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Print Core Libraries / 打印核心库
 
 ```python
 # Import all major libraries and display versions
 # 导入所有主要库并显示版本
 
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
 import scipy
+# 导入系统相关功能 / Import system utilities
 import sys
 
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print("LINEAR ALGEBRA FOR MACHINE LEARNING - LIBRARY VERSIONS")
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print()
 
 # Python version
+# 打印输出 / Print output
 print(f"Python Version")
+# 打印输出 / Print output
 print(f"  {sys.version}")
+# 打印输出 / Print output
 print()
 
 # Core scientific computing
+# 打印输出 / Print output
 print("Core Scientific Computing Libraries")
+# 打印输出 / Print output
 print(f"  NumPy:       {numpy.__version__}")
+# 打印输出 / Print output
 print(f"  SciPy:       {scipy.__version__}")
+# 打印输出 / Print output
 print(f"  Pandas:      {pandas.__version__}")
+# 打印输出 / Print output
 print()
 
 # Machine Learning
+# 打印输出 / Print output
 print("Machine Learning Libraries")
+# 打印输出 / Print output
 print(f"  scikit-learn: {sklearn.__version__}")
+# 打印输出 / Print output
 print()
 
 # Visualization
+# 打印输出 / Print output
 print("Visualization Libraries")
+# 打印输出 / Print output
 print(f"  Matplotlib:  {matplotlib.__version__}")
+# 打印输出 / Print output
 print()
 ```
 
@@ -88,14 +124,18 @@ optional_libs = [
     'requests',  # HTTP library
 ]
 
+# 打印输出 / Print output
 print("Optional Libraries (for extended functionality)")
 for lib_name in optional_libs:
     try:
         lib = __import__(lib_name)
         version = lib.__version__ if hasattr(lib, '__version__') else 'installed'
+        # 打印输出 / Print output
         print(f"  {lib_name:15} {version}")
     except ImportError:
+        # 打印输出 / Print output
         print(f"  {lib_name:15} [not installed]")
+# 打印输出 / Print output
 print()
 ```
 
@@ -105,39 +145,68 @@ print()
 # Display detailed information about each library
 # 显示每个库的详细信息
 
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print("DETAILED LIBRARY INFORMATION")
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print()
 
+# 打印输出 / Print output
 print("NumPy (Numerical Computing)")
+# 打印输出 / Print output
 print(f"  Version: {numpy.__version__}")
+# 打印输出 / Print output
 print(f"  Purpose: Array operations, linear algebra")
+# 打印输出 / Print output
 print(f"  Used for: Core mathematical operations in course")
+# 打印输出 / Print output
 print()
 
+# 打印输出 / Print output
 print("Pandas (Data Manipulation)")
+# 打印输出 / Print output
 print(f"  Version: {pandas.__version__}")
+# 打印输出 / Print output
 print(f"  Purpose: Data structures and analysis")
+# 打印输出 / Print output
 print(f"  Used for: Working with World Bank and other tabular data")
+# 打印输出 / Print output
 print()
 
+# 打印输出 / Print output
 print("scikit-learn (Machine Learning)")
+# 打印输出 / Print output
 print(f"  Version: {sklearn.__version__}")
+# 打印输出 / Print output
 print(f"  Purpose: Machine learning algorithms and tools")
+# 打印输出 / Print output
 print(f"  Used for: PCA, SVM, preprocessing, distance metrics")
+# 打印输出 / Print output
 print()
 
+# 打印输出 / Print output
 print("Matplotlib (Visualization)")
+# 打印输出 / Print output
 print(f"  Version: {matplotlib.__version__}")
+# 打印输出 / Print output
 print(f"  Purpose: Static and interactive plotting")
+# 打印输出 / Print output
 print(f"  Used for: Data visualization throughout course")
+# 打印输出 / Print output
 print()
 
+# 打印输出 / Print output
 print("SciPy (Scientific Computing)")
+# 打印输出 / Print output
 print(f"  Version: {scipy.__version__}")
+# 打印输出 / Print output
 print(f"  Purpose: Advanced mathematical functions")
+# 打印输出 / Print output
 print(f"  Used for: Eigendecomposition, distance metrics")
+# 打印输出 / Print output
 print()
 ```
 
@@ -149,19 +218,30 @@ print()
 
 import platform
 
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print("SYSTEM INFORMATION")
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print()
 
+# 打印输出 / Print output
 print(f"Operating System: {platform.system()} {platform.release()}")
+# 打印输出 / Print output
 print(f"Machine Type:     {platform.machine()}")
+# 打印输出 / Print output
 print(f"Processor:        {platform.processor()}")
+# 打印输出 / Print output
 print()
 
 # Check Python implementation
+# 打印输出 / Print output
 print(f"Python Implementation: {platform.python_implementation()}")
+# 打印输出 / Print output
 print(f"Python Compiler:       {platform.python_compiler()}")
+# 打印输出 / Print output
 print()
 ```
 
@@ -193,13 +273,21 @@ pandas-datareader>=0.10.0  # World Bank data download
 requests>=2.25.0           # HTTP library
 '''
 
+# 打印输出 / Print output
 print("Example requirements.txt (for reproducibility):")
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print(example_code)
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("To create your environment:")
+# 打印输出 / Print output
 print("  1. Save above as 'requirements.txt'")
+# 打印输出 / Print output
 print("  2. Run: pip install -r requirements.txt")
+# 打印输出 / Print output
 print("  3. Share requirements.txt with others for reproducibility")
 ```
 
@@ -211,9 +299,13 @@ print("  3. Share requirements.txt with others for reproducibility")
 # Check for known version compatibility issues
 # 检查已知的版本兼容性问题
 
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print("VERSION COMPATIBILITY CHECK")
+# 打印输出 / Print output
 print("=" * 70)
+# 打印输出 / Print output
 print()
 
 def check_version(module, min_version, name):
@@ -223,6 +315,7 @@ def check_version(module, min_version, name):
     """
     version = module.__version__
     min_parts = tuple(map(int, min_version.split('.')))
+    # 获取长度 / Get length
     version_parts = tuple(map(int, version.split('.')[:len(min_parts)]))
     
     if version_parts >= min_parts:
@@ -230,15 +323,19 @@ def check_version(module, min_version, name):
     else:
         status = "⚠ UPDATE RECOMMENDED"
     
+    # 打印输出 / Print output
     print(f"{name:20} Current: {version:15} Minimum: {min_version:10} {status}")
 
+# 打印输出 / Print output
 print("Recommended minimum versions:")
 check_version(numpy, '1.20.0', 'NumPy')
 check_version(pandas, '1.3.0', 'Pandas')
 check_version(sklearn, '0.24.0', 'scikit-learn')
 check_version(matplotlib, '3.3.0', 'Matplotlib')
 check_version(scipy, '1.5.0', 'SciPy')
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Note: If any show ⚠, consider updating for better compatibility")
 ```
 
@@ -269,32 +366,50 @@ print("Note: If any show ⚠, consider updating for better compatibility")
 
 ```python
 # --- Import and Display All Versions / 导入并显示所有版本 ---
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 import sklearn
 import scipy
+# 导入系统相关功能 / Import system utilities
 import sys
 import platform
 
+# 打印输出 / Print output
 print("Python Version:")
+# 打印输出 / Print output
 print(f"  {sys.version}")
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("Core Libraries:")
+# 打印输出 / Print output
 print(f"  NumPy:        {np.__version__}")
+# 打印输出 / Print output
 print(f"  Pandas:       {pd.__version__}")
+# 打印输出 / Print output
 print(f"  SciPy:        {scipy.__version__}")
+# 打印输出 / Print output
 print(f"  Matplotlib:   {matplotlib.__version__}")
+# 打印输出 / Print output
 print(f"  scikit-learn: {sklearn.__version__}")
+# 打印输出 / Print output
 print()
+# 打印输出 / Print output
 print("System:")
+# 打印输出 / Print output
 print(f"  OS:           {platform.system()} {platform.release()}")
+# 打印输出 / Print output
 print(f"  Machine:      {platform.machine()}")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Appendix 02 Summary / 附录02总结：Library Versions
 

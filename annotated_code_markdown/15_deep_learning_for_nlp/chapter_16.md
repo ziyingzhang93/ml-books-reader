@@ -1,4 +1,4 @@
-# NLP深度学习
+# NLP 深度学习 / Deep Learning for NLP
 ## Chapter 16
 
 ---
@@ -26,11 +26,25 @@ This script demonstrates **load doc into memory**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 from nltk.corpus import stopwords
 import string
+# 导入正则表达式模块 / Import regex module
 import re
 ```
 
@@ -110,6 +124,7 @@ stop_words = set(stopwords.words('english'))
 ## Step 12 — filter out short tokens
 
 ```python
+# 获取长度 / Get length
 tokens = [word for word in tokens if len(word) > 1]
 	return tokens
 ```
@@ -121,6 +136,7 @@ tokens = [word for word in tokens if len(word) > 1]
 filename = 'txt_sentoken/pos/cv000_29590.txt'
 text = load_doc(filename)
 tokens = clean_doc(text)
+# 打印输出 / Print output
 print(tokens)
 ```
 
@@ -146,6 +162,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 from nltk.corpus import stopwords
 import string
+# 导入正则表达式模块 / Import regex module
 import re
 
 # load doc into memory
@@ -172,6 +189,7 @@ def clean_doc(doc):
 	stop_words = set(stopwords.words('english'))
 	tokens = [w for w in tokens if not w in stop_words]
 	# filter out short tokens
+ # 获取长度 / Get length
 	tokens = [word for word in tokens if len(word) > 1]
 	return tokens
 
@@ -179,6 +197,7 @@ def clean_doc(doc):
 filename = 'txt_sentoken/pos/cv000_29590.txt'
 text = load_doc(filename)
 tokens = clean_doc(text)
+# 打印输出 / Print output
 print(tokens)
 ```
 
@@ -211,10 +230,27 @@ This script demonstrates **load doc into memory**.
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ⚙️ 配置训练 / Configure Training
+       │
+       ▼
+  💾 保存结果 / Save Results
+```
+
+---
 ## Step 1 — Step 1
 
 ```python
 import string
+# 导入正则表达式模块 / Import regex module
 import re
 from os import listdir
 from nltk.corpus import stopwords
@@ -297,6 +333,7 @@ stop_words = set(stopwords.words('english'))
 ## Step 12 — filter out short tokens
 
 ```python
+# 获取长度 / Get length
 tokens = [word for word in tokens if len(word) > 1]
 	tokens = ' '.join(tokens)
 	return tokens
@@ -352,6 +389,7 @@ tokens = clean_doc(doc)
 ## Step 19 — add to list
 
 ```python
+# 添加元素到列表末尾 / Append element to list end
 documents.append(tokens)
 	return documents
 ```
@@ -376,6 +414,7 @@ neg = process_docs('txt_sentoken/neg', is_train)
 ## Step 22 — prepare labels
 
 ```python
+# 获取长度 / Get length
 labels = [0 for _ in range(len(neg))] + [1 for _ in range(len(pos))]
 	return docs, labels
 ```
@@ -386,6 +425,7 @@ labels = [0 for _ in range(len(neg))] + [1 for _ in range(len(pos))]
 ```python
 def save_dataset(dataset, filename):
 	dump(dataset, open(filename, 'wb'))
+ # 打印输出 / Print output
 	print('Saved: %s' % filename)
 ```
 
@@ -432,6 +472,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import string
+# 导入正则表达式模块 / Import regex module
 import re
 from os import listdir
 from nltk.corpus import stopwords
@@ -461,6 +502,7 @@ def clean_doc(doc):
 	stop_words = set(stopwords.words('english'))
 	tokens = [w for w in tokens if not w in stop_words]
 	# filter out short tokens
+ # 获取长度 / Get length
 	tokens = [word for word in tokens if len(word) > 1]
 	tokens = ' '.join(tokens)
 	return tokens
@@ -482,6 +524,7 @@ def process_docs(directory, is_train):
 		# clean doc
 		tokens = clean_doc(doc)
 		# add to list
+  # 添加元素到列表末尾 / Append element to list end
 		documents.append(tokens)
 	return documents
 
@@ -492,12 +535,14 @@ def load_clean_dataset(is_train):
 	pos = process_docs('txt_sentoken/pos', is_train)
 	docs = neg + pos
 	# prepare labels
+ # 获取长度 / Get length
 	labels = [0 for _ in range(len(neg))] + [1 for _ in range(len(pos))]
 	return docs, labels
 
 # save a dataset to file
 def save_dataset(dataset, filename):
 	dump(dataset, open(filename, 'wb'))
+ # 打印输出 / Print output
 	print('Saved: %s' % filename)
 
 # load and clean all reviews
@@ -557,18 +602,31 @@ This script demonstrates **load a clean dataset**.
 
 ```python
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dropout
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Embedding
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.convolutional import Conv1D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.convolutional import MaxPooling1D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.merge import concatenate
 ```
 
@@ -595,6 +653,7 @@ def create_tokenizer(lines):
 
 ```python
 def max_length(lines):
+ # 获取长度 / Get length
 	return max([len(s.split()) for s in lines])
 ```
 
@@ -636,6 +695,7 @@ inputs1 = Input(shape=(length,))
 	conv1 = Conv1D(32, 4, activation='relu')(embedding1)
 	drop1 = Dropout(0.5)(conv1)
 	pool1 = MaxPooling1D()(drop1)
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	flat1 = Flatten()(pool1)
 ```
 
@@ -648,6 +708,7 @@ inputs2 = Input(shape=(length,))
 	conv2 = Conv1D(32, 6, activation='relu')(embedding2)
 	drop2 = Dropout(0.5)(conv2)
 	pool2 = MaxPooling1D()(drop2)
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	flat2 = Flatten()(pool2)
 ```
 
@@ -660,6 +721,7 @@ inputs3 = Input(shape=(length,))
 	conv3 = Conv1D(32, 8, activation='relu')(embedding3)
 	drop3 = Dropout(0.5)(conv3)
 	pool3 = MaxPooling1D()(drop3)
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	flat3 = Flatten()(pool3)
 ```
 
@@ -674,7 +736,9 @@ merged = concatenate([flat1, flat2, flat3])
 ## Step 13 — interpretation
 
 ```python
+# 全连接层（Keras） / Fully connected layer (Keras)
 dense1 = Dense(10, activation='relu')(merged)
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	outputs = Dense(1, activation='sigmoid')(dense1)
 	model = Model(inputs=[inputs1, inputs2, inputs3], outputs=outputs)
 ```
@@ -683,6 +747,7 @@ dense1 = Dense(10, activation='relu')(merged)
 ## Step 14 — compile
 
 ```python
+# 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 ```
 
@@ -714,6 +779,7 @@ tokenizer = create_tokenizer(trainLines)
 
 ```python
 length = max_length(trainLines)
+# 打印输出 / Print output
 print('Max document length: %d' % length)
 ```
 
@@ -721,7 +787,9 @@ print('Max document length: %d' % length)
 ## Step 19 — calculate vocabulary size
 
 ```python
+# 获取长度 / Get length
 vocab_size = len(tokenizer.word_index) + 1
+# 打印输出 / Print output
 print('Vocabulary size: %d' % vocab_size)
 ```
 
@@ -743,6 +811,7 @@ model = define_model(length, vocab_size)
 ## Step 22 — fit model
 
 ```python
+# 训练模型 / Train the model
 model.fit([trainX,trainX,trainX], array(trainLabels), epochs=7, batch_size=16)
 ```
 
@@ -750,6 +819,7 @@ model.fit([trainX,trainX,trainX], array(trainLabels), epochs=7, batch_size=16)
 ## Step 23 — save the model
 
 ```python
+# 保存模型到文件 / Save model to file
 model.save('model.h5')
 ```
 
@@ -793,18 +863,31 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils.vis_utils import plot_model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dense
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Flatten
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Dropout
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Embedding
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.convolutional import Conv1D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.convolutional import MaxPooling1D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.merge import concatenate
 
 # load a clean dataset
@@ -819,6 +902,7 @@ def create_tokenizer(lines):
 
 # calculate the maximum document length
 def max_length(lines):
+ # 获取长度 / Get length
 	return max([len(s.split()) for s in lines])
 
 # encode a list of lines
@@ -837,6 +921,7 @@ def define_model(length, vocab_size):
 	conv1 = Conv1D(32, 4, activation='relu')(embedding1)
 	drop1 = Dropout(0.5)(conv1)
 	pool1 = MaxPooling1D()(drop1)
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	flat1 = Flatten()(pool1)
 	# channel 2
 	inputs2 = Input(shape=(length,))
@@ -844,6 +929,7 @@ def define_model(length, vocab_size):
 	conv2 = Conv1D(32, 6, activation='relu')(embedding2)
 	drop2 = Dropout(0.5)(conv2)
 	pool2 = MaxPooling1D()(drop2)
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	flat2 = Flatten()(pool2)
 	# channel 3
 	inputs3 = Input(shape=(length,))
@@ -851,14 +937,18 @@ def define_model(length, vocab_size):
 	conv3 = Conv1D(32, 8, activation='relu')(embedding3)
 	drop3 = Dropout(0.5)(conv3)
 	pool3 = MaxPooling1D()(drop3)
+ # 展平层：多维→一维 / Flatten: multi-dim → 1D
 	flat3 = Flatten()(pool3)
 	# merge
 	merged = concatenate([flat1, flat2, flat3])
 	# interpretation
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	dense1 = Dense(10, activation='relu')(merged)
+ # 全连接层（Keras） / Fully connected layer (Keras)
 	outputs = Dense(1, activation='sigmoid')(dense1)
 	model = Model(inputs=[inputs1, inputs2, inputs3], outputs=outputs)
 	# compile
+ # 编译模型：设置优化器和损失函数 / Compile: set optimizer and loss function
 	model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 	# summarize
 	model.summary()
@@ -871,17 +961,22 @@ trainLines, trainLabels = load_dataset('train.pkl')
 tokenizer = create_tokenizer(trainLines)
 # calculate max document length
 length = max_length(trainLines)
+# 打印输出 / Print output
 print('Max document length: %d' % length)
 # calculate vocabulary size
+# 获取长度 / Get length
 vocab_size = len(tokenizer.word_index) + 1
+# 打印输出 / Print output
 print('Vocabulary size: %d' % vocab_size)
 # encode data
 trainX = encode_text(tokenizer, trainLines, length)
 # define model
 model = define_model(length, vocab_size)
 # fit model
+# 训练模型 / Train the model
 model.fit([trainX,trainX,trainX], array(trainLabels), epochs=7, batch_size=16)
 # save the model
+# 保存模型到文件 / Save model to file
 model.save('model.h5')
 ```
 
@@ -932,9 +1027,13 @@ This script demonstrates **load a clean dataset**.
 
 ```python
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
 ```
 
@@ -961,6 +1060,7 @@ def create_tokenizer(lines):
 
 ```python
 def max_length(lines):
+ # 获取长度 / Get length
 	return max([len(s.split()) for s in lines])
 ```
 
@@ -1006,6 +1106,7 @@ tokenizer = create_tokenizer(trainLines)
 
 ```python
 length = max_length(trainLines)
+# 打印输出 / Print output
 print('Max document length: %d' % length)
 ```
 
@@ -1013,7 +1114,9 @@ print('Max document length: %d' % length)
 ## Step 11 — calculate vocabulary size
 
 ```python
+# 获取长度 / Get length
 vocab_size = len(tokenizer.word_index) + 1
+# 打印输出 / Print output
 print('Vocabulary size: %d' % vocab_size)
 ```
 
@@ -1029,6 +1132,7 @@ testX = encode_text(tokenizer, testLines, length)
 ## Step 13 — load the model
 
 ```python
+# 从文件加载模型 / Load model from file
 model = load_model('model.h5')
 ```
 
@@ -1036,7 +1140,9 @@ model = load_model('model.h5')
 ## Step 14 — evaluate model on training dataset
 
 ```python
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, acc = model.evaluate([trainX,trainX,trainX], array(trainLabels), verbose=0)
+# 打印输出 / Print output
 print('Train Accuracy: %.2f' % (acc*100))
 ```
 
@@ -1044,7 +1150,9 @@ print('Train Accuracy: %.2f' % (acc*100))
 ## Step 15 — evaluate model on test dataset dataset
 
 ```python
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, acc = model.evaluate([testX,testX,testX], array(testLabels), verbose=0)
+# 打印输出 / Print output
 print('Test Accuracy: %.2f' % (acc*100))
 ```
 
@@ -1078,9 +1186,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 from pickle import load
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.text import Tokenizer
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.preprocessing.sequence import pad_sequences
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import load_model
 
 # load a clean dataset
@@ -1095,6 +1207,7 @@ def create_tokenizer(lines):
 
 # calculate the maximum document length
 def max_length(lines):
+ # 获取长度 / Get length
 	return max([len(s.split()) for s in lines])
 
 # encode a list of lines
@@ -1112,21 +1225,35 @@ testLines, testLabels = load_dataset('test.pkl')
 tokenizer = create_tokenizer(trainLines)
 # calculate max document length
 length = max_length(trainLines)
+# 打印输出 / Print output
 print('Max document length: %d' % length)
 # calculate vocabulary size
+# 获取长度 / Get length
 vocab_size = len(tokenizer.word_index) + 1
+# 打印输出 / Print output
 print('Vocabulary size: %d' % vocab_size)
 # encode data
 trainX = encode_text(tokenizer, trainLines, length)
 testX = encode_text(tokenizer, testLines, length)
 # load the model
+# 从文件加载模型 / Load model from file
 model = load_model('model.h5')
 # evaluate model on training dataset
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, acc = model.evaluate([trainX,trainX,trainX], array(trainLabels), verbose=0)
+# 打印输出 / Print output
 print('Train Accuracy: %.2f' % (acc*100))
 # evaluate model on test dataset dataset
+# 评估模型在测试集上的表现 / Evaluate model on test set
 _, acc = model.evaluate([testX,testX,testX], array(testLabels), verbose=0)
+# 打印输出 / Print output
 print('Test Accuracy: %.2f' % (acc*100))
 ```
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

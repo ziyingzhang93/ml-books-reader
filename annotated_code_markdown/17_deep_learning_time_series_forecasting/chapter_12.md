@@ -1,4 +1,4 @@
-# DL时间序列
+# 深度学习时间序列预测 / DL Time Series Forecasting
 ## Chapter 12
 
 ---
@@ -56,7 +56,9 @@ from joblib import delayed
 from warnings import catch_warnings
 from warnings import filterwarnings
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -80,6 +82,7 @@ history = array(history)
 ## Step 4 — fit model
 
 ```python
+# 训练模型 / Train the model
 model_fit = model.fit(optimized=True, use_boxcox=b, remove_bias=r)
 ```
 
@@ -87,6 +90,7 @@ model_fit = model.fit(optimized=True, use_boxcox=b, remove_bias=r)
 ## Step 5 — make one step forecast
 
 ```python
+# 获取长度 / Get length
 yhat = model_fit.predict(len(history), len(history))
 	return yhat[0]
 ```
@@ -96,6 +100,7 @@ yhat = model_fit.predict(len(history), len(history))
 
 ```python
 def measure_rmse(actual, predicted):
+ # 计算均方误差 / Calculate Mean Squared Error
 	return sqrt(mean_squared_error(actual, predicted))
 ```
 
@@ -103,6 +108,7 @@ def measure_rmse(actual, predicted):
 ## Step 7 — split a univariate dataset into train/test sets
 
 ```python
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(data, n_test):
 	return data[:-n_test], data[-n_test:]
 ```
@@ -119,6 +125,7 @@ def walk_forward_validation(data, n_test, cfg):
 ## Step 9 — split dataset
 
 ```python
+# 划分训练集和测试集 / Split into train and test sets
 train, test = train_test_split(data, n_test)
 ```
 
@@ -133,6 +140,7 @@ history = [x for x in train]
 ## Step 11 — step over each time-step in the test set
 
 ```python
+# 获取长度 / Get length
 for i in range(len(test)):
 ```
 
@@ -147,6 +155,7 @@ yhat = exp_smoothing_forecast(history, cfg)
 ## Step 13 — store forecast in list of predictions
 
 ```python
+# 添加元素到列表末尾 / Append element to list end
 predictions.append(yhat)
 ```
 
@@ -154,6 +163,7 @@ predictions.append(yhat)
 ## Step 14 — add actual observation to history for the next loop
 
 ```python
+# 添加元素到列表末尾 / Append element to list end
 history.append(test[i])
 ```
 
@@ -212,6 +222,7 @@ with catch_warnings():
 
 ```python
 if result is not None:
+  # 打印输出 / Print output
 		print(' > Model[%s] %.3f' % (key, result))
 	return (key, result)
 ```
@@ -282,6 +293,7 @@ for t in t_params:
 					for b in b_params:
 						for r in r_params:
 							cfg = [t,d,s,p,b,r]
+       # 添加元素到列表末尾 / Append element to list end
 							models.append(cfg)
 	return models
 
@@ -293,6 +305,7 @@ if __name__ == '__main__':
 
 ```python
 data = [10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]
+ # 打印输出 / Print output
 	print(data)
 ```
 
@@ -315,6 +328,7 @@ cfg_list = exp_smoothing_configs()
 
 ```python
 scores = grid_search(data, cfg_list, n_test)
+ # 打印输出 / Print output
 	print('done')
 ```
 
@@ -323,6 +337,7 @@ scores = grid_search(data, cfg_list, n_test)
 
 ```python
 for cfg, error in scores[:3]:
+  # 打印输出 / Print output
 		print(cfg, error)
 ```
 
@@ -364,7 +379,9 @@ from joblib import delayed
 from warnings import catch_warnings
 from warnings import filterwarnings
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # one-step Holt Winter’s Exponential Smoothing forecast
@@ -374,16 +391,20 @@ def exp_smoothing_forecast(history, config):
 	history = array(history)
 	model = ExponentialSmoothing(history, trend=t, damped=d, seasonal=s, seasonal_periods=p)
 	# fit model
+ # 训练模型 / Train the model
 	model_fit = model.fit(optimized=True, use_boxcox=b, remove_bias=r)
 	# make one step forecast
+ # 获取长度 / Get length
 	yhat = model_fit.predict(len(history), len(history))
 	return yhat[0]
 
 # root mean squared error or rmse
 def measure_rmse(actual, predicted):
+ # 计算均方误差 / Calculate Mean Squared Error
 	return sqrt(mean_squared_error(actual, predicted))
 
 # split a univariate dataset into train/test sets
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(data, n_test):
 	return data[:-n_test], data[-n_test:]
 
@@ -391,16 +412,20 @@ def train_test_split(data, n_test):
 def walk_forward_validation(data, n_test, cfg):
 	predictions = list()
 	# split dataset
+ # 划分训练集和测试集 / Split into train and test sets
 	train, test = train_test_split(data, n_test)
 	# seed history with training dataset
 	history = [x for x in train]
 	# step over each time-step in the test set
+ # 获取长度 / Get length
 	for i in range(len(test)):
 		# fit model and make forecast for history
 		yhat = exp_smoothing_forecast(history, cfg)
 		# store forecast in list of predictions
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 		# add actual observation to history for the next loop
+  # 添加元素到列表末尾 / Append element to list end
 		history.append(test[i])
 	# estimate prediction error
 	error = measure_rmse(test, predictions)
@@ -425,6 +450,7 @@ def score_model(data, n_test, cfg, debug=False):
 			error = None
 	# check for an interesting result
 	if result is not None:
+  # 打印输出 / Print output
 		print(' > Model[%s] %.3f' % (key, result))
 	return (key, result)
 
@@ -462,12 +488,14 @@ def exp_smoothing_configs(seasonal=[None]):
 					for b in b_params:
 						for r in r_params:
 							cfg = [t,d,s,p,b,r]
+       # 添加元素到列表末尾 / Append element to list end
 							models.append(cfg)
 	return models
 
 if __name__ == '__main__':
 	# define dataset
 	data = [10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0]
+ # 打印输出 / Print output
 	print(data)
 	# data split
 	n_test = 4
@@ -475,15 +503,29 @@ if __name__ == '__main__':
 	cfg_list = exp_smoothing_configs()
 	# grid search
 	scores = grid_search(data, cfg_list, n_test)
+ # 打印输出 / Print output
 	print('done')
 	# list top 3 configs
 	for cfg, error in scores[:3]:
+  # 打印输出 / Print output
 		print(cfg, error)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 2 of 5
+
+---
+
+### Grid Search Daily Births
+
+
+
+---
+
+### Grid Search Monthly Shampoo Sales
+
+
 
 ---
 
@@ -546,8 +588,11 @@ from joblib import delayed
 from warnings import catch_warnings
 from warnings import filterwarnings
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 ```
 
@@ -571,6 +616,7 @@ history = array(history)
 ## Step 4 — fit model
 
 ```python
+# 训练模型 / Train the model
 model_fit = model.fit(optimized=True, use_boxcox=b, remove_bias=r)
 ```
 
@@ -578,6 +624,7 @@ model_fit = model.fit(optimized=True, use_boxcox=b, remove_bias=r)
 ## Step 5 — make one step forecast
 
 ```python
+# 获取长度 / Get length
 yhat = model_fit.predict(len(history), len(history))
 	return yhat[0]
 ```
@@ -587,6 +634,7 @@ yhat = model_fit.predict(len(history), len(history))
 
 ```python
 def measure_rmse(actual, predicted):
+ # 计算均方误差 / Calculate Mean Squared Error
 	return sqrt(mean_squared_error(actual, predicted))
 ```
 
@@ -594,6 +642,7 @@ def measure_rmse(actual, predicted):
 ## Step 7 — split a univariate dataset into train/test sets
 
 ```python
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(data, n_test):
 	return data[:-n_test], data[-n_test:]
 ```
@@ -610,6 +659,7 @@ def walk_forward_validation(data, n_test, cfg):
 ## Step 9 — split dataset
 
 ```python
+# 划分训练集和测试集 / Split into train and test sets
 train, test = train_test_split(data, n_test)
 ```
 
@@ -624,6 +674,7 @@ history = [x for x in train]
 ## Step 11 — step over each time-step in the test set
 
 ```python
+# 获取长度 / Get length
 for i in range(len(test)):
 ```
 
@@ -638,6 +689,7 @@ yhat = exp_smoothing_forecast(history, cfg)
 ## Step 13 — store forecast in list of predictions
 
 ```python
+# 添加元素到列表末尾 / Append element to list end
 predictions.append(yhat)
 ```
 
@@ -645,6 +697,7 @@ predictions.append(yhat)
 ## Step 14 — add actual observation to history for the next loop
 
 ```python
+# 添加元素到列表末尾 / Append element to list end
 history.append(test[i])
 ```
 
@@ -703,6 +756,7 @@ with catch_warnings():
 
 ```python
 if result is not None:
+  # 打印输出 / Print output
 		print(' > Model[%s] %.3f' % (key, result))
 	return (key, result)
 ```
@@ -773,6 +827,7 @@ for t in t_params:
 					for b in b_params:
 						for r in r_params:
 							cfg = [t,d,s,p,b,r]
+       # 添加元素到列表末尾 / Append element to list end
 							models.append(cfg)
 	return models
 
@@ -783,7 +838,9 @@ if __name__ == '__main__':
 ## Step 29 — load dataset
 
 ```python
+# 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 series = read_csv('monthly-mean-temp.csv', header=0, index_col=0)
+ # 转换为NumPy数组 / Convert to NumPy array
 	data = series.values
 ```
 
@@ -813,6 +870,7 @@ cfg_list = exp_smoothing_configs(seasonal=[0,12])
 
 ```python
 scores = grid_search(data[:,0], cfg_list, n_test)
+ # 打印输出 / Print output
 	print('done')
 ```
 
@@ -821,6 +879,7 @@ scores = grid_search(data[:,0], cfg_list, n_test)
 
 ```python
 for cfg, error in scores[:3]:
+  # 打印输出 / Print output
 		print(cfg, error)
 ```
 
@@ -864,8 +923,11 @@ from joblib import delayed
 from warnings import catch_warnings
 from warnings import filterwarnings
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
+# 导入Scikit-learn机器学习库 / Import Scikit-learn ML library
 from sklearn.metrics import mean_squared_error
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 from pandas import read_csv
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 from numpy import array
 
 # one-step Holt Winter’s Exponential Smoothing forecast
@@ -875,16 +937,20 @@ def exp_smoothing_forecast(history, config):
 	history = array(history)
 	model = ExponentialSmoothing(history, trend=t, damped=d, seasonal=s, seasonal_periods=p)
 	# fit model
+ # 训练模型 / Train the model
 	model_fit = model.fit(optimized=True, use_boxcox=b, remove_bias=r)
 	# make one step forecast
+ # 获取长度 / Get length
 	yhat = model_fit.predict(len(history), len(history))
 	return yhat[0]
 
 # root mean squared error or rmse
 def measure_rmse(actual, predicted):
+ # 计算均方误差 / Calculate Mean Squared Error
 	return sqrt(mean_squared_error(actual, predicted))
 
 # split a univariate dataset into train/test sets
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(data, n_test):
 	return data[:-n_test], data[-n_test:]
 
@@ -892,16 +958,20 @@ def train_test_split(data, n_test):
 def walk_forward_validation(data, n_test, cfg):
 	predictions = list()
 	# split dataset
+ # 划分训练集和测试集 / Split into train and test sets
 	train, test = train_test_split(data, n_test)
 	# seed history with training dataset
 	history = [x for x in train]
 	# step over each time-step in the test set
+ # 获取长度 / Get length
 	for i in range(len(test)):
 		# fit model and make forecast for history
 		yhat = exp_smoothing_forecast(history, cfg)
 		# store forecast in list of predictions
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 		# add actual observation to history for the next loop
+  # 添加元素到列表末尾 / Append element to list end
 		history.append(test[i])
 	# estimate prediction error
 	error = measure_rmse(test, predictions)
@@ -926,6 +996,7 @@ def score_model(data, n_test, cfg, debug=False):
 			error = None
 	# check for an interesting result
 	if result is not None:
+  # 打印输出 / Print output
 		print(' > Model[%s] %.3f' % (key, result))
 	return (key, result)
 
@@ -963,12 +1034,15 @@ def exp_smoothing_configs(seasonal=[None]):
 					for b in b_params:
 						for r in r_params:
 							cfg = [t,d,s,p,b,r]
+       # 添加元素到列表末尾 / Append element to list end
 							models.append(cfg)
 	return models
 
 if __name__ == '__main__':
 	# load dataset
+ # 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
 	series = read_csv('monthly-mean-temp.csv', header=0, index_col=0)
+ # 转换为NumPy数组 / Convert to NumPy array
 	data = series.values
 	# trim dataset to 5 years
 	data = data[-(5*12):]
@@ -978,14 +1052,28 @@ if __name__ == '__main__':
 	cfg_list = exp_smoothing_configs(seasonal=[0,12])
 	# grid search
 	scores = grid_search(data[:,0], cfg_list, n_test)
+ # 打印输出 / Print output
 	print('done')
 	# list top 3 configs
 	for cfg, error in scores[:3]:
+  # 打印输出 / Print output
 		print(cfg, error)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 5 of 5
+
+---
+
+### Grid Search Monthly Car Sales
+
+
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---

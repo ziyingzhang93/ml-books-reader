@@ -1,4 +1,4 @@
-# 统计方法与机器学习
+# 统计方法与机器学习 / Statistical Methods for Machine Learning
 ## Chapter 23
 
 ---
@@ -25,17 +25,33 @@ Data ranking converts numerical values into their ordinal positions, fundamental
 - 可视化结果 / Visualize results
 
 
+---
+## Code Flow / 代码流程
+
+```
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  📊 评估模型 / Evaluate Model
+       │
+       ▼
+  📈 可视化结果 / Visualize Results
+```
+
 ## Step 1 — Import Libraries / 导入库
 
 ```python
 # Import required libraries
 # 导入所需库
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy.stats import rankdata
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
 # Set random seed for reproducibility
 # 设置随机种子以保证可重复性
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
 ```
 
@@ -44,23 +60,32 @@ np.random.seed(42)
 ```python
 # Generate random data with some ties
 # 生成有一些平局的随机数据
+# 创建NumPy数组 / Create NumPy array
 data = np.array([23, 15, 8, 42, 15, 30, 8, 45, 28, 15, 35, 22, 38])
 
 # Display original data
 # 显示原始数据
+# 打印输出 / Print output
 print(f"Original data: {data}")
+# 打印输出 / Print output
 print(f"Data length: {len(data)}")
+# 打印输出 / Print output
 print(f"Data range: [{data.min()}, {data.max()}]")
 
 # Identify unique values and ties
 # 识别唯一值和平局
+# 找出唯一值 / Find unique values
 unique_vals, counts = np.unique(data, return_counts=True)
 ties = unique_vals[counts > 1]
 
+# 打印输出 / Print output
 print(f"\nUnique values: {len(unique_vals)}")
+# 打印输出 / Print output
 print(f"Values with ties: {ties}")
+# 获取长度 / Get length
 if len(ties) > 0:
     for val in ties:
+        # 求和 / Calculate sum
         print(f"  Value {val}: appears {np.sum(data == val)} times")
 ```
 
@@ -81,10 +106,15 @@ ranks_dense = rankdata(data, method='dense')  # Dense ranking (no gaps) / 密集
 
 # Display ranking results
 # 显示排名结果
+# 打印输出 / Print output
 print(f"\nRanking Methods Comparison:")
+# 打印输出 / Print output
 print(f"{'Value':>6} | {'Average':>8} | {'Ordinal':>8} | {'Min':>5} | {'Max':>5} | {'Dense':>6}")
+# 打印输出 / Print output
 print("-" * 50)
+# 同时获取索引和值 / Get both index and value
 for i, val in enumerate(data):
+    # 打印输出 / Print output
     print(f"{val:6d} | {ranks_average[i]:8.1f} | {ranks_ordinal[i]:8d} | {ranks_min[i]:5d} | {ranks_max[i]:5d} | {ranks_dense[i]:6d}")
 ```
 
@@ -93,17 +123,26 @@ for i, val in enumerate(data):
 ```python
 # Ranking statistics (using average method)
 # 排名统计（使用平均方法）
+# 打印输出 / Print output
 print(f"\nRanking Statistics (Average Method):")
+# 打印输出 / Print output
 print(f"  Number of observations: {len(data)}")
+# 打印输出 / Print output
 print(f"  Expected rank range: [1, {len(data)}]")
+# 打印输出 / Print output
 print(f"  Actual rank range: [{ranks_average.min():.1f}, {ranks_average.max():.1f}]")
+# 打印输出 / Print output
 print(f"  Mean rank: {ranks_average.mean():.2f} (expected: {(len(data)+1)/2:.2f})")
+# 打印输出 / Print output
 print(f"  Std of ranks: {ranks_average.std():.2f}")
 
 # Verify all ranks are assigned
 # 验证所有排名都已分配
+# 打印输出 / Print output
 print(f"\nRank assignment verification:")
+# 打印输出 / Print output
 print(f"  All ranks between 1 and n: {(ranks_average.min() >= 1) and (ranks_average.max() <= len(data))}")
+# 打印输出 / Print output
 print(f"  Ranks sum to n(n+1)/2: {ranks_average.sum()} = {len(data)*(len(data)+1)//2}")
 ```
 
@@ -116,6 +155,7 @@ fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 
 # Plot 1: Original data
 # 图1: 原始数据
+# 生成等差数组 / Generate array with step
 indices = np.arange(len(data))
 colors = plt.cm.viridis(data / data.max())
 axes[0, 0].bar(indices, data, color=colors, edgecolor='black', alpha=0.7)
@@ -125,6 +165,7 @@ axes[0, 0].set_title('Original Data')
 axes[0, 0].grid(True, alpha=0.3, axis='y')
 
 # Add value labels
+# 同时获取索引和值 / Get both index and value
 for i, v in enumerate(data):
     axes[0, 0].text(i, v + 1, str(v), ha='center', fontsize=9)
 
@@ -134,10 +175,12 @@ axes[0, 1].bar(indices, ranks_average, color=colors, edgecolor='black', alpha=0.
 axes[0, 1].set_xlabel('Index')
 axes[0, 1].set_ylabel('Rank')
 axes[0, 1].set_title('Ranks (Average Method for Ties)')
+# 获取长度 / Get length
 axes[0, 1].set_ylim([0, len(data) + 1])
 axes[0, 1].grid(True, alpha=0.3, axis='y')
 
 # Add rank labels
+# 同时获取索引和值 / Get both index and value
 for i, r in enumerate(ranks_average):
     axes[0, 1].text(i, r + 0.2, f'{r:.1f}', ha='center', fontsize=9)
 
@@ -175,6 +218,7 @@ axes[1, 1].legend(fontsize=10)
 axes[1, 1].grid(True, alpha=0.3)
 
 plt.tight_layout()
+# 显示图表 / Display the plot
 plt.show()
 ```
 
@@ -208,27 +252,36 @@ plt.show()
 | `plt.subplot` | 创建子图 | Create subplot |
 
 ```python
+# 导入NumPy数值计算库 / Import NumPy numerical computing library
 import numpy as np
 from scipy.stats import rankdata
+# 导入Matplotlib绑图库 / Import Matplotlib plotting library
 import matplotlib.pyplot as plt
 
+# 生成随机数 / Generate random numbers
 np.random.seed(42)
+# 创建NumPy数组 / Create NumPy array
 data = np.array([23, 15, 8, 42, 15, 30, 8, 45, 28, 15, 35, 22, 38])
 
 ranks = rankdata(data, method='average')
 
+# 打印输出 / Print output
 print(f"Data: {data}")
+# 打印输出 / Print output
 print(f"Ranks: {ranks}")
+# 打印输出 / Print output
 print(f"Mean rank: {ranks.mean():.2f}")
+# 打印输出 / Print output
 print(f"Expected: {(len(data)+1)/2:.2f}")
 
 # Verify properties
+# 打印输出 / Print output
 print(f"Sum of ranks: {ranks.sum()} (expected: {len(data)*(len(data)+1)//2})")
 ```
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 23: Data Ranking
 # 第23章：数据排名

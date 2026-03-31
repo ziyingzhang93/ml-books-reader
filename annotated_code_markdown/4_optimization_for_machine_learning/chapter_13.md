@@ -1,9 +1,21 @@
-# 机器学习优化方法
+# 机器学习优化方法 / Optimization for Machine Learning
 ## Chapter 13
 
 ---
 
-### Chapter Summary
+### Bfgs
+
+
+
+---
+
+### Lbfgsb
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 13 Summary / 第13章总结
 

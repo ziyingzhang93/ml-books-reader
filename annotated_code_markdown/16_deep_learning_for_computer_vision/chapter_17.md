@@ -1,4 +1,4 @@
-# CV深度学习
+# 计算机视觉深度学习 / Deep Learning for Computer Vision
 ## Chapter 17
 
 ---
@@ -29,10 +29,15 @@ This script demonstrates **Example of creating a CNN model with a VGG block**.
 ## Step 1 — Example of creating a CNN model with a VGG block
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 ```
 
@@ -47,7 +52,9 @@ def vgg_block(layer_in, n_filters, n_conv):
 ## Step 3 — add convolutional layers
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for _ in range(n_conv):
+  # 二维卷积层（Keras） / 2D convolution layer (Keras)
 		layer_in = Conv2D(n_filters, (3,3), padding='same', activation='relu')(layer_in)
 ```
 
@@ -55,6 +62,7 @@ for _ in range(n_conv):
 ## Step 4 — add max pooling layer
 
 ```python
+# 最大池化层（Keras） / Max pooling layer (Keras)
 layer_in = MaxPooling2D((2,2), strides=(2,2))(layer_in)
 	return layer_in
 ```
@@ -122,18 +130,26 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # Example of creating a CNN model with a VGG block
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 
 # function for creating a vgg block
 def vgg_block(layer_in, n_filters, n_conv):
 	# add convolutional layers
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_conv):
+  # 二维卷积层（Keras） / 2D convolution layer (Keras)
 		layer_in = Conv2D(n_filters, (3,3), padding='same', activation='relu')(layer_in)
 	# add max pooling layer
+ # 最大池化层（Keras） / Max pooling layer (Keras)
 	layer_in = MaxPooling2D((2,2), strides=(2,2))(layer_in)
 	return layer_in
 
@@ -181,10 +197,15 @@ This script demonstrates **Example of creating a CNN model with many VGG blocks*
 ## Step 1 — Example of creating a CNN model with many VGG blocks
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 ```
 
@@ -199,7 +220,9 @@ def vgg_block(layer_in, n_filters, n_conv):
 ## Step 3 — add convolutional layers
 
 ```python
+# 生成整数序列 / Generate integer sequence
 for _ in range(n_conv):
+  # 二维卷积层（Keras） / 2D convolution layer (Keras)
 		layer_in = Conv2D(n_filters, (3,3), padding='same', activation='relu')(layer_in)
 ```
 
@@ -207,6 +230,7 @@ for _ in range(n_conv):
 ## Step 4 — add max pooling layer
 
 ```python
+# 最大池化层（Keras） / Max pooling layer (Keras)
 layer_in = MaxPooling2D((2,2), strides=(2,2))(layer_in)
 	return layer_in
 ```
@@ -288,18 +312,26 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # Example of creating a CNN model with many VGG blocks
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 
 # function for creating a vgg block
 def vgg_block(layer_in, n_filters, n_conv):
 	# add convolutional layers
+ # 生成整数序列 / Generate integer sequence
 	for _ in range(n_conv):
+  # 二维卷积层（Keras） / 2D convolution layer (Keras)
 		layer_in = Conv2D(n_filters, (3,3), padding='same', activation='relu')(layer_in)
 	# add max pooling layer
+ # 最大池化层（Keras） / Max pooling layer (Keras)
 	layer_in = MaxPooling2D((2,2), strides=(2,2))(layer_in)
 	return layer_in
 
@@ -351,11 +383,17 @@ This script demonstrates **example of creating a CNN with an inception module**.
 ## Step 1 — example of creating a CNN with an inception module
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.merge import concatenate
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 ```
 
@@ -370,6 +408,7 @@ def naive_inception_module(layer_in, f1, f2, f3):
 ## Step 3 — 1x1 conv
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv1 = Conv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
 ```
 
@@ -377,6 +416,7 @@ conv1 = Conv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
 ## Step 4 — 3x3 conv
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv3 = Conv2D(f2, (3,3), padding='same', activation='relu')(layer_in)
 ```
 
@@ -384,6 +424,7 @@ conv3 = Conv2D(f2, (3,3), padding='same', activation='relu')(layer_in)
 ## Step 5 — 5x5 conv
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv5 = Conv2D(f3, (5,5), padding='same', activation='relu')(layer_in)
 ```
 
@@ -391,6 +432,7 @@ conv5 = Conv2D(f3, (5,5), padding='same', activation='relu')(layer_in)
 ## Step 6 — 3x3 max pooling
 
 ```python
+# 最大池化层（Keras） / Max pooling layer (Keras)
 pool = MaxPooling2D((3,3), strides=(1,1), padding='same')(layer_in)
 ```
 
@@ -465,22 +507,32 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of creating a CNN with an inception module
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.merge import concatenate
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 
 # function for creating a naive inception block
 def naive_inception_module(layer_in, f1, f2, f3):
 	# 1x1 conv
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv1 = Conv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
 	# 3x3 conv
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv3 = Conv2D(f2, (3,3), padding='same', activation='relu')(layer_in)
 	# 5x5 conv
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv5 = Conv2D(f3, (5,5), padding='same', activation='relu')(layer_in)
 	# 3x3 max pooling
+ # 最大池化层（Keras） / Max pooling layer (Keras)
 	pool = MaxPooling2D((3,3), strides=(1,1), padding='same')(layer_in)
 	# concatenate filters, assumes filters/channels last
 	layer_out = concatenate([conv1, conv3, conv5, pool], axis=-1)
@@ -530,11 +582,17 @@ This script demonstrates **example of creating a CNN with an efficient inception
 ## Step 1 — example of creating a CNN with an efficient inception module
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.merge import concatenate
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 ```
 
@@ -549,6 +607,7 @@ def inception_module(layer_in, f1, f2_in, f2_out, f3_in, f3_out, f4_out):
 ## Step 3 — 1x1 conv
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv1 = Conv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
 ```
 
@@ -556,7 +615,9 @@ conv1 = Conv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
 ## Step 4 — 3x3 conv
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv3 = Conv2D(f2_in, (1,1), padding='same', activation='relu')(layer_in)
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv3 = Conv2D(f2_out, (3,3), padding='same', activation='relu')(conv3)
 ```
 
@@ -564,7 +625,9 @@ conv3 = Conv2D(f2_in, (1,1), padding='same', activation='relu')(layer_in)
 ## Step 5 — 5x5 conv
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv5 = Conv2D(f3_in, (1,1), padding='same', activation='relu')(layer_in)
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv5 = Conv2D(f3_out, (5,5), padding='same', activation='relu')(conv5)
 ```
 
@@ -572,7 +635,9 @@ conv5 = Conv2D(f3_in, (1,1), padding='same', activation='relu')(layer_in)
 ## Step 6 — 3x3 max pooling
 
 ```python
+# 最大池化层（Keras） / Max pooling layer (Keras)
 pool = MaxPooling2D((3,3), strides=(1,1), padding='same')(layer_in)
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	pool = Conv2D(f4_out, (1,1), padding='same', activation='relu')(pool)
 ```
 
@@ -654,25 +719,38 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of creating a CNN with an efficient inception module
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import MaxPooling2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers.merge import concatenate
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 
 # function for creating a projected inception module
 def inception_module(layer_in, f1, f2_in, f2_out, f3_in, f3_out, f4_out):
 	# 1x1 conv
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv1 = Conv2D(f1, (1,1), padding='same', activation='relu')(layer_in)
 	# 3x3 conv
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv3 = Conv2D(f2_in, (1,1), padding='same', activation='relu')(layer_in)
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv3 = Conv2D(f2_out, (3,3), padding='same', activation='relu')(conv3)
 	# 5x5 conv
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv5 = Conv2D(f3_in, (1,1), padding='same', activation='relu')(layer_in)
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv5 = Conv2D(f3_out, (5,5), padding='same', activation='relu')(conv5)
 	# 3x3 max pooling
+ # 最大池化层（Keras） / Max pooling layer (Keras)
 	pool = MaxPooling2D((3,3), strides=(1,1), padding='same')(layer_in)
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	pool = Conv2D(f4_out, (1,1), padding='same', activation='relu')(pool)
 	# concatenate filters, assumes filters/channels last
 	layer_out = concatenate([conv1, conv3, conv5, pool], axis=-1)
@@ -724,11 +802,17 @@ This script demonstrates **example of a CNN model with an identity or projection
 ## Step 1 — example of a CNN model with an identity or projection residual module
 
 ```python
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import add
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 ```
 
@@ -744,7 +828,9 @@ def residual_module(layer_in, n_filters):
 ## Step 3 — check if the number of filters needs to be increase, assumes channels last format
 
 ```python
+# 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 if layer_in.shape[-1] != n_filters:
+  # 二维卷积层（Keras） / 2D convolution layer (Keras)
 		merge_input = Conv2D(n_filters, (1,1), padding='same', activation='relu', kernel_initializer='he_normal')(layer_in)
 ```
 
@@ -752,6 +838,7 @@ if layer_in.shape[-1] != n_filters:
 ## Step 4 — conv1
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv1 = Conv2D(n_filters, (3,3), padding='same', activation='relu', kernel_initializer='he_normal')(layer_in)
 ```
 
@@ -759,6 +846,7 @@ conv1 = Conv2D(n_filters, (3,3), padding='same', activation='relu', kernel_initi
 ## Step 5 — conv2
 
 ```python
+# 二维卷积层（Keras） / 2D convolution layer (Keras)
 conv2 = Conv2D(n_filters, (3,3), padding='same', activation='linear', kernel_initializer='he_normal')(conv1)
 ```
 
@@ -839,22 +927,32 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 # example of a CNN model with an identity or projection residual module
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.models import Model
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Input
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Activation
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import Conv2D
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.layers import add
+# 导入Keras高级神经网络API / Import Keras high-level neural network API
 from keras.utils import plot_model
 
 # function for creating an identity or projection residual module
 def residual_module(layer_in, n_filters):
 	merge_input = layer_in
 	# check if the number of filters needs to be increase, assumes channels last format
+ # 查看数据形状（行数, 列数） / Check data shape (rows, columns)
 	if layer_in.shape[-1] != n_filters:
+  # 二维卷积层（Keras） / 2D convolution layer (Keras)
 		merge_input = Conv2D(n_filters, (1,1), padding='same', activation='relu', kernel_initializer='he_normal')(layer_in)
 	# conv1
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv1 = Conv2D(n_filters, (3,3), padding='same', activation='relu', kernel_initializer='he_normal')(layer_in)
 	# conv2
+ # 二维卷积层（Keras） / 2D convolution layer (Keras)
 	conv2 = Conv2D(n_filters, (3,3), padding='same', activation='linear', kernel_initializer='he_normal')(conv1)
 	# add filters, assumes filters/channels last
 	layer_out = add([conv2, merge_input])
@@ -876,7 +974,7 @@ plot_model(model, show_shapes=True, to_file='residual_module.png')
 
 ---
 
-### Chapter Summary
+### Chapter Summary / 章节总结
 
 # Chapter 17 Summary / 第17章总结
 

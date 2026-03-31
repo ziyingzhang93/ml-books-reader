@@ -1,4 +1,4 @@
-# Python ML
+# Python 机器学习 / Python for Machine Learning
 ## Chapter 22
 
 ---
@@ -38,7 +38,9 @@ import requests
 ```python
 URL = "https://weather.com/weather/today/l/40.75,-73.98"
 resp = requests.get(URL)
+# 打印输出 / Print output
 print(resp.status_code)
+# 打印输出 / Print output
 print(resp.text)
 ```
 
@@ -67,7 +69,9 @@ import requests
 # The numbers are lat-lon of New York
 URL = "https://weather.com/weather/today/l/40.75,-73.98"
 resp = requests.get(URL)
+# 打印输出 / Print output
 print(resp.status_code)
+# 打印输出 / Print output
 print(resp.text)
 ```
 
@@ -104,6 +108,7 @@ This script demonstrates **Fred**.
 
 ```python
 import io
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 import requests
 
@@ -112,7 +117,9 @@ resp = requests.get(URL)
 if resp.status_code == 200:
    csvtext = resp.text
    csvbuffer = io.StringIO(csvtext)
+   # 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
    df = pd.read_csv(csvbuffer)
+   # 打印输出 / Print output
    print(df)
 ```
 
@@ -144,6 +151,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 # ===============================
 
 import io
+# 导入Pandas数据分析库 / Import Pandas data analysis library
 import pandas as pd
 import requests
 
@@ -152,13 +160,39 @@ resp = requests.get(URL)
 if resp.status_code == 200:
    csvtext = resp.text
    csvbuffer = io.StringIO(csvtext)
+   # 从CSV文件读取数据为DataFrame / Read CSV file into DataFrame
    df = pd.read_csv(csvbuffer)
+   # 打印输出 / Print output
    print(df)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 3 of 10
+
+---
+
+### Github
+
+
+
+---
+
+### Wikipedia
+
+
+
+---
+
+### Xpath
+
+
+
+---
+
+### Beautifulsoup
+
+
 
 ---
 
@@ -210,6 +244,7 @@ if resp.status_code == 200:
 dom = etree.HTML(resp.text)
     elements = dom.xpath("//span[@data-testid='TemperatureValue' and " \
                                    "contains(@class,'CurrentConditions')]")
+    # 打印输出 / Print output
     print(elements[0].text)
 ```
 
@@ -220,6 +255,7 @@ dom = etree.HTML(resp.text)
 soup = BeautifulSoup(resp.text, "lxml")
     elements = soup.select('span[data-testid="TemperatureValue"]' \
                                '[class^="CurrentConditions"]')
+    # 打印输出 / Print output
     print(elements[0].text)
 ```
 
@@ -256,18 +292,26 @@ if resp.status_code == 200:
     dom = etree.HTML(resp.text)
     elements = dom.xpath("//span[@data-testid='TemperatureValue' and " \
                                    "contains(@class,'CurrentConditions')]")
+    # 打印输出 / Print output
     print(elements[0].text)
 
     # Using BeautifulSoup
     soup = BeautifulSoup(resp.text, "lxml")
     elements = soup.select('span[data-testid="TemperatureValue"]' \
                                '[class^="CurrentConditions"]')
+    # 打印输出 / Print output
     print(elements[0].text)
 ```
 
 ---
 
 ➡️ **Next / 下一步**: File 8 of 10
+
+---
+
+### Pandas
+
+
 
 ---
 
@@ -316,6 +360,7 @@ dom = etree.HTML(resp.text)
 ```python
 elements = dom.xpath("//h3/a[u[@class='StretchedBox']]")
 for elem in elements:
+    # 打印输出 / Print output
     print(etree.tostring(elem, method="text", encoding="unicode"))
 ```
 
@@ -350,6 +395,7 @@ dom = etree.HTML(resp.text)
 # Print news headlines
 elements = dom.xpath("//h3/a[u[@class='StretchedBox']]")
 for elem in elements:
+    # 打印输出 / Print output
     print(etree.tostring(elem, method="text", encoding="unicode"))
 ```
 
@@ -359,7 +405,13 @@ for elem in elements:
 
 ---
 
-### Chapter Summary
+### Selenium
+
+
+
+---
+
+### Chapter Summary / 章节总结
 
 # Chapter 22 Summary / 第22章总结
 

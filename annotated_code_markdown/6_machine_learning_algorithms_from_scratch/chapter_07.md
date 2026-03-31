@@ -1,5 +1,11 @@
-# 从零实现ML算法
+# 从零实现机器学习算法 / ML Algorithms from Scratch
 ## Chapter 07
+
+---
+
+### Chapter Summary / 章节总结
+
+
 
 ---
 
@@ -31,6 +37,7 @@ Calculate the mean value of a list of numbers
 
 ```python
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 ```
 
@@ -40,6 +47,7 @@ def mean(values):
 ```python
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -72,6 +80,7 @@ def coefficients(dataset):
 ```python
 dataset = [[1, 1], [2, 3], [4, 3], [3, 2], [5, 5]]
 b0, b1 = coefficients(dataset)
+# 打印输出 / Print output
 print('Coefficients: B0=%.3f, B1=%.3f' % (b0, b1))
 ```
 
@@ -105,11 +114,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # Calculate the mean value of a list of numbers
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 
 # Calculate covariance between x and y
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -130,6 +141,7 @@ def coefficients(dataset):
 # calculate coefficients
 dataset = [[1, 1], [2, 3], [4, 3], [3, 2], [5, 5]]
 b0, b1 = coefficients(dataset)
+# 打印输出 / Print output
 print('Coefficients: B0=%.3f, B1=%.3f' % (b0, b1))
 ```
 
@@ -167,6 +179,7 @@ Calculate the mean value of a list of numbers
 
 ```python
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 ```
 
@@ -176,6 +189,7 @@ def mean(values):
 ```python
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -190,6 +204,7 @@ x = [row[0] for row in dataset]
 y = [row[1] for row in dataset]
 mean_x, mean_y = mean(x), mean(y)
 covar = covariance(x, mean_x, y, mean_y)
+# 打印输出 / Print output
 print('Covariance: %.3f' % (covar))
 ```
 
@@ -223,11 +238,13 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # Calculate the mean value of a list of numbers
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 
 # Calculate covariance between x and y
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -238,6 +255,7 @@ x = [row[0] for row in dataset]
 y = [row[1] for row in dataset]
 mean_x, mean_y = mean(x), mean(y)
 covar = covariance(x, mean_x, y, mean_y)
+# 打印输出 / Print output
 print('Covariance: %.3f' % (covar))
 ```
 
@@ -275,6 +293,7 @@ Calculate the mean value of a list of numbers
 
 ```python
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 ```
 
@@ -295,7 +314,9 @@ x = [row[0] for row in dataset]
 y = [row[1] for row in dataset]
 mean_x, mean_y = mean(x), mean(y)
 var_x, var_y = variance(x, mean_x), variance(y, mean_y)
+# 打印输出 / Print output
 print('x stats: mean=%.3f variance=%.3f' % (mean_x, var_x))
+# 打印输出 / Print output
 print('y stats: mean=%.3f variance=%.3f' % (mean_y, var_y))
 ```
 
@@ -329,6 +350,7 @@ Below is the full code for quick reference. / 以下是完整代码，供快速�
 
 # Calculate the mean value of a list of numbers
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 
 # Calculate the variance of a list of numbers
@@ -341,7 +363,9 @@ x = [row[0] for row in dataset]
 y = [row[1] for row in dataset]
 mean_x, mean_y = mean(x), mean(y)
 var_x, var_y = variance(x, mean_x), variance(y, mean_y)
+# 打印输出 / Print output
 print('x stats: mean=%.3f variance=%.3f' % (mean_x, var_x))
+# 打印输出 / Print output
 print('y stats: mean=%.3f variance=%.3f' % (mean_y, var_y))
 ```
 
@@ -386,9 +410,11 @@ from math import sqrt
 ```python
 def rmse_metric(actual, predicted):
 	sum_error = 0.0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		prediction_error = predicted[i] - actual[i]
 		sum_error += (prediction_error ** 2)
+ # 获取长度 / Get length
 	mean_error = sum_error / float(len(actual))
 	return sqrt(mean_error)
 ```
@@ -402,8 +428,10 @@ def evaluate_algorithm(dataset, algorithm):
 	for row in dataset:
 		row_copy = list(row)
 		row_copy[-1] = None
+  # 添加元素到列表末尾 / Append element to list end
 		test_set.append(row_copy)
 	predicted = algorithm(dataset, test_set)
+ # 打印输出 / Print output
 	print(predicted)
 	actual = [row[-1] for row in dataset]
 	rmse = rmse_metric(actual, predicted)
@@ -415,6 +443,7 @@ def evaluate_algorithm(dataset, algorithm):
 
 ```python
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 ```
 
@@ -424,6 +453,7 @@ def mean(values):
 ```python
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -459,6 +489,7 @@ def simple_linear_regression(train, test):
 	b0, b1 = coefficients(train)
 	for row in test:
 		yhat = b0 + b1 * row[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 	return predictions
 ```
@@ -469,6 +500,7 @@ def simple_linear_regression(train, test):
 ```python
 dataset = [[1, 1], [2, 3], [4, 3], [3, 2], [5, 5]]
 rmse = evaluate_algorithm(dataset, simple_linear_regression)
+# 打印输出 / Print output
 print('RMSE: %.3f' % (rmse))
 ```
 
@@ -505,9 +537,11 @@ from math import sqrt
 # Calculate root mean squared error
 def rmse_metric(actual, predicted):
 	sum_error = 0.0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		prediction_error = predicted[i] - actual[i]
 		sum_error += (prediction_error ** 2)
+ # 获取长度 / Get length
 	mean_error = sum_error / float(len(actual))
 	return sqrt(mean_error)
 
@@ -517,8 +551,10 @@ def evaluate_algorithm(dataset, algorithm):
 	for row in dataset:
 		row_copy = list(row)
 		row_copy[-1] = None
+  # 添加元素到列表末尾 / Append element to list end
 		test_set.append(row_copy)
 	predicted = algorithm(dataset, test_set)
+ # 打印输出 / Print output
 	print(predicted)
 	actual = [row[-1] for row in dataset]
 	rmse = rmse_metric(actual, predicted)
@@ -526,11 +562,13 @@ def evaluate_algorithm(dataset, algorithm):
 
 # Calculate the mean value of a list of numbers
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 
 # Calculate covariance between x and y
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -554,12 +592,14 @@ def simple_linear_regression(train, test):
 	b0, b1 = coefficients(train)
 	for row in test:
 		yhat = b0 + b1 * row[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 	return predictions
 
 # Test simple linear regression
 dataset = [[1, 1], [2, 3], [4, 3], [3, 2], [5, 5]]
 rmse = evaluate_algorithm(dataset, simple_linear_regression)
+# 打印输出 / Print output
 print('RMSE: %.3f' % (rmse))
 ```
 
@@ -592,6 +632,19 @@ This script demonstrates **Example of Simple Linear Regression on the Swedish In
 
 
 ---
+## Code Flow / 代码流程
+
+```
+  📂 加载数据 / Load Data
+       │
+       ▼
+  🔧 数据预处理 / Preprocess Data
+       │
+       ▼
+  ✂️ 划分数据集 / Split Dataset
+```
+
+---
 ## Step 1 — Example of Simple Linear Regression on the Swedish Insurance Dataset
 
 ```python
@@ -607,11 +660,13 @@ from math import sqrt
 ```python
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 ```
@@ -629,12 +684,17 @@ def str_column_to_float(dataset, column):
 ## Step 4 — Split a dataset into a train and test set
 
 ```python
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(dataset, split):
 	train = list()
+ # 获取长度 / Get length
 	train_size = split * len(dataset)
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	while len(train) < train_size:
+  # 获取长度 / Get length
 		index = randrange(len(dataset_copy))
+  # 添加元素到列表末尾 / Append element to list end
 		train.append(dataset_copy.pop(index))
 	return train, dataset_copy
 ```
@@ -645,9 +705,11 @@ def train_test_split(dataset, split):
 ```python
 def rmse_metric(actual, predicted):
 	sum_error = 0.0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		prediction_error = predicted[i] - actual[i]
 		sum_error += (prediction_error ** 2)
+ # 获取长度 / Get length
 	mean_error = sum_error / float(len(actual))
 	return sqrt(mean_error)
 ```
@@ -657,11 +719,13 @@ def rmse_metric(actual, predicted):
 
 ```python
 def evaluate_algorithm(dataset, algorithm, split, *args):
+ # 划分训练集和测试集 / Split into train and test sets
 	train, test = train_test_split(dataset, split)
 	test_set = list()
 	for row in test:
 		row_copy = list(row)
 		row_copy[-1] = None
+  # 添加元素到列表末尾 / Append element to list end
 		test_set.append(row_copy)
 	predicted = algorithm(train, test_set, *args)
 	actual = [row[-1] for row in test]
@@ -674,6 +738,7 @@ def evaluate_algorithm(dataset, algorithm, split, *args):
 
 ```python
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 ```
 
@@ -683,6 +748,7 @@ def mean(values):
 ```python
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -718,6 +784,7 @@ def simple_linear_regression(train, test):
 	b0, b1 = coefficients(train)
 	for row in test:
 		yhat = b0 + b1 * row[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 	return predictions
 ```
@@ -726,6 +793,7 @@ def simple_linear_regression(train, test):
 ## Step 12 — Simple linear regression on insurance dataset
 
 ```python
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 ```
 
@@ -735,6 +803,7 @@ seed(1)
 ```python
 filename = 'insurance.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
 ```
@@ -745,6 +814,7 @@ for i in range(len(dataset[0])):
 ```python
 split = 0.6
 rmse = evaluate_algorithm(dataset, simple_linear_regression, split)
+# 打印输出 / Print output
 print('RMSE: %.3f' % (rmse))
 ```
 
@@ -785,11 +855,13 @@ from math import sqrt
 # Load a CSV file
 def load_csv(filename):
 	dataset = list()
+ # 打开文件（自动关闭） / Open file (auto-close)
 	with open(filename, 'r') as file:
 		csv_reader = reader(file)
 		for row in csv_reader:
 			if not row:
 				continue
+   # 添加元素到列表末尾 / Append element to list end
 			dataset.append(row)
 	return dataset
 
@@ -799,31 +871,40 @@ def str_column_to_float(dataset, column):
 		row[column] = float(row[column].strip())
 
 # Split a dataset into a train and test set
+# 划分训练集和测试集 / Split into train and test sets
 def train_test_split(dataset, split):
 	train = list()
+ # 获取长度 / Get length
 	train_size = split * len(dataset)
 	dataset_copy = list(dataset)
+ # 获取长度 / Get length
 	while len(train) < train_size:
+  # 获取长度 / Get length
 		index = randrange(len(dataset_copy))
+  # 添加元素到列表末尾 / Append element to list end
 		train.append(dataset_copy.pop(index))
 	return train, dataset_copy
 
 # Calculate root mean squared error
 def rmse_metric(actual, predicted):
 	sum_error = 0.0
+ # 获取长度 / Get length
 	for i in range(len(actual)):
 		prediction_error = predicted[i] - actual[i]
 		sum_error += (prediction_error ** 2)
+ # 获取长度 / Get length
 	mean_error = sum_error / float(len(actual))
 	return sqrt(mean_error)
 
 # Evaluate an algorithm using a train/test split
 def evaluate_algorithm(dataset, algorithm, split, *args):
+ # 划分训练集和测试集 / Split into train and test sets
 	train, test = train_test_split(dataset, split)
 	test_set = list()
 	for row in test:
 		row_copy = list(row)
 		row_copy[-1] = None
+  # 添加元素到列表末尾 / Append element to list end
 		test_set.append(row_copy)
 	predicted = algorithm(train, test_set, *args)
 	actual = [row[-1] for row in test]
@@ -832,11 +913,13 @@ def evaluate_algorithm(dataset, algorithm, split, *args):
 
 # Calculate the mean value of a list of numbers
 def mean(values):
+ # 获取长度 / Get length
 	return sum(values) / float(len(values))
 
 # Calculate covariance between x and y
 def covariance(x, mean_x, y, mean_y):
 	covar = 0.0
+ # 获取长度 / Get length
 	for i in range(len(x)):
 		covar += (x[i] - mean_x) * (y[i] - mean_y)
 	return covar
@@ -860,19 +943,23 @@ def simple_linear_regression(train, test):
 	b0, b1 = coefficients(train)
 	for row in test:
 		yhat = b0 + b1 * row[0]
+  # 添加元素到列表末尾 / Append element to list end
 		predictions.append(yhat)
 	return predictions
 
 # Simple linear regression on insurance dataset
+# 设置随机种子（保证可重复） / Set random seed (ensure reproducibility)
 seed(1)
 # load and prepare data
 filename = 'insurance.csv'
 dataset = load_csv(filename)
+# 获取长度 / Get length
 for i in range(len(dataset[0])):
 	str_column_to_float(dataset, i)
 # evaluate algorithm
 split = 0.6
 rmse = evaluate_algorithm(dataset, simple_linear_regression, split)
+# 打印输出 / Print output
 print('RMSE: %.3f' % (rmse))
 ```
 
